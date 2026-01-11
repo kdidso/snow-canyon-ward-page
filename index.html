@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Snow Canyon YSA Ward (26-35) - Unit Page</title>
+  <meta name="description" content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, and map." />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="Snow Canyon YSA Ward (26-35) - Unit Page" />
+  <meta property="og:description" content="Meeting times, address, and map for Snow Canyon YSA Ward (26-35)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80" />
+
+  <!-- Favicon (simple) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E">
+
+  <!-- Leaflet (map) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <style>
+    :root{
+      --brand: #157493;           /* teal-ish like the original buttons */
+      --brand-dark: #0f5f76;
+      --text: #1f2937;            /* slate-ish */
+      --muted: #6b7280;
+      --panel: #f3f4f6;           /* light gray panel */
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0,0,0,0.12);
+      --maxw: 952px;
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body { margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--maxw); margin: 0 auto; }
+
+    /* HERO */
+    .hero{
+      position: relative;
+      width: 100%;
+      height: 212px;
+      overflow: hidden;
+      background: #111;
+    }
+    @media (min-width: 640px){
+      .hero{ height: 452px; }
+    }
+    @media (min-width: 1024px){
+      .hero{ height: 519px; }
+    }
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      display:block;
+      filter: saturate(1.05);
+    }
+    .hero .overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0) 72%);
+      pointer-events:none;
+    }
+
+    /* Hero actions (Share / More) */
+    .hero-actions{
+      position:absolute;
+      right: 14px;
+      bottom: 14px;
+      display:flex;
+      gap:10px;
+      z-index: 3;
+    }
+    @media (min-width: 640px){
+      .hero-actions{ right: 24px; bottom: 24px; }
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: var(--white);
+      color: var(--brand);
+      height: 40px;
+      padding: 0 12px;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:focus{ outline: 3px solid rgba(21,116,147,0.28); outline-offset: 2px; }
+    .btn.icon-only{ width: 40px; justify-content:center; padding:0; }
+    .btn .label{ display:none; font-size:14px; }
+    @media (min-width: 1024px){
+      .btn .label{ display:inline; }
+    }
+    .btn svg{ width:18px; height:18px; fill: var(--brand); }
+
+    /* Title block (bottom-left) */
+    .hero-title{
+      position:absolute;
+      left: 14px;
+      bottom: 14px;
+      width: 75%;
+      z-index: 3;
+      color:#fff;
+      text-shadow: 0 6px 22px rgba(0,0,0,0.55);
+    }
+    @media (min-width: 640px){
+      .hero-title{ left: 36px; bottom: 24px; width: 66%; }
+    }
+    .hero-title h1{
+      margin:0 0 6px 0;
+      font-weight: 700;
+      line-height: 1.06;
+      font-size: 28px;
+    }
+    @media (min-width: 640px){
+      .hero-title h1{ font-size: 44px; }
+    }
+    .hero-title .sub{
+      font-weight: 300;
+      opacity: 0.98;
+      font-size: 18px;
+    }
+    @media (min-width: 640px){
+      .hero-title .sub{ font-size: 22px; }
+    }
+
+    /* Page content */
+    .page{
+      padding: 18px 14px 36px;
+    }
+    @media (min-width: 640px){
+      .page{ padding: 28px 18px 50px; }
+    }
+
+    .section-title{
+      margin: 0 0 12px 0;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .welcome{
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+      margin: 0 0 22px 0;
+      color: var(--text);
+    }
+
+    /* Info + Map panel */
+    .panel{
+      background: var(--panel);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      box-shadow: var(--shadow);
+    }
+    @media (min-width: 640px){
+      .panel{
+        grid-template-columns: 1.15fr 1fr;
+        min-height: 320px;
+      }
+    }
+
+    .panel-left{
+      padding: 18px 16px;
+    }
+    @media (min-width: 768px){
+      .panel-left{ padding: 22px 22px; }
+    }
+
+    .meeting-line{
+      margin: 0 0 10px 0;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .address{
+      margin-top: 14px;
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--text);
+    }
+    .address .muted{ color: var(--muted); font-weight: 400; }
+
+    .directions{
+      margin-top: 14px;
+      display: inline-flex;
+      align-items:center;
+      gap:10px;
+      color: var(--brand);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .directions:hover{ text-decoration: underline; }
+    .directions svg{ width:18px; height:18px; fill: var(--brand); }
+
+    .panel-right{
+      position: relative;
+      min-height: 180px;
+    }
+    @media (min-width: 640px){
+      .panel-right{ min-height: auto; }
+    }
+    #map{
+      width:100%;
+      height: 180px;
+      background: #e5e7eb;
+    }
+    @media (min-width: 640px){
+      #map{ height: 100%; min-height: 320px; }
+    }
+
+    /* Dropdown */
+    .dropdown{
+      position: absolute;
+      right: 0;
+      bottom: 52px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      min-width: 210px;
+      overflow: hidden;
+      display:none;
+      z-index: 50;
+    }
+    .dropdown.open{ display:block; }
+    .dropdown a, .dropdown button{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px;
+      font-size: 14px;
+      border:0;
+      background: transparent;
+      cursor:pointer;
+      text-align:left;
+      color: var(--text);
+    }
+    .dropdown a:hover, .dropdown button:hover{
+      background: rgba(21,116,147,0.08);
+    }
+    .dropdown .small{
+      font-size: 12px;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(17,24,39,0.95);
+      color:#fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity 160ms ease;
+      z-index: 999;
+    }
+    .toast.show{ opacity: 1; }
+
+    /* Footer-ish disclaimer */
+    .disclaimer{
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <!-- Replace this image with one you have rights to use -->
+    <img
+      src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1600&q=80"
+      alt="Hero image"
+      loading="eager"
+    />
+    <div class="overlay"></div>
+
+    <!-- Title bottom-left -->
+    <div class="hero-title">
+      <h1 id="unitName">Snow Canyon YSA Ward (26-35)</h1>
+      <div class="sub" id="unitCity">St. George UT</div>
+    </div>
+
+    <!-- Buttons bottom-right -->
+    <div class="hero-actions">
+      <div style="position:relative;">
+        <button class="btn" id="shareBtn" type="button" aria-label="Share this page">
+          <!-- share icon -->
+          <svg viewBox="0 0 17 20" aria-hidden="true">
+            <path d="M4.18231 11.85C3.82397 12.1759 3.37868 12.3907 2.90056 12.4683C2.42244 12.5458 1.93208 12.4828 1.4891 12.2869C1.04611 12.091 0.669579 11.7706 0.405266 11.3647C0.140953 10.9588 0.000244141 10.4849 0.000244141 10.0005C0.000244141 9.51616 0.140953 9.04222 0.405266 8.63632C0.669579 8.23042 1.04611 7.91005 1.4891 7.71414C1.93208 7.51823 2.42244 7.45523 2.90056 7.53279C3.37868 7.61035 3.82397 7.82513 4.18231 8.15103L12.0623 3.55403C11.9297 2.97162 12.0101 2.36098 12.2888 1.83267C12.5675 1.30436 13.0261 0.893298 13.5817 0.673899C14.1372 0.454499 14.753 0.441265 15.3175 0.636592C15.8819 0.831918 16.3578 1.2229 16.659 1.73874C16.9601 2.25459 17.0666 2.86121 16.9592 3.44878C16.8518 4.03636 16.5375 4.56605 16.0733 4.94197C15.6091 5.31788 15.0257 5.51517 14.4286 5.49813C13.8315 5.48108 13.2603 5.25082 12.8183 4.84903L4.93831 9.44603C5.02092 9.81075 5.02092 10.1893 4.93831 10.554L12.8183 15.151C13.2603 14.7492 13.8315 14.519 14.4286 14.5019C15.0257 14.4849 15.6091 14.6822 16.0733 15.0581C16.5375 15.434 16.8518 15.9637 16.9592 16.5513C17.0666 17.1389 16.9601 17.7455 16.659 18.2613C16.3578 18.7772 15.8819 19.1681 15.3175 19.3635C14.753 19.5588 14.1372 19.5456 13.5817 19.3262C13.0261 19.1068 12.5675 18.6957 12.2888 18.1674C12.0101 17.6391 11.9297 17.0284 12.0623 16.446L4.18231 11.849V11.85Z"></path>
+          </svg>
+          <span class="label">Share</span>
+        </button>
+
+        <div class="dropdown" id="shareMenu" role="menu" aria-label="Share menu">
+          <button type="button" id="copyLinkBtn" role="menuitem">Copy link</button>
+          <a id="smsLink" href="#" role="menuitem">Text</a>
+          <a id="emailLink" href="#" role="menuitem">Email</a>
+          <div class="small">Tip: On mobile, “Share” may open your device share sheet.</div>
+        </div>
+      </div>
+
+      <div style="position:relative;">
+        <button class="btn icon-only" id="moreBtn" type="button" aria-label="More options">
+          <!-- kebab icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16C10.9 16 10 16.9 10 18ZM10 6C10 7.1 10.9 8 12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6ZM10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12Z"></path>
+          </svg>
+        </button>
+
+        <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
+          <a href="#welcome" role="menuitem">Jump to Welcome</a>
+          <a href="#meeting" role="menuitem">Jump to Meeting Info</a>
+          <button type="button" id="printBtn" role="menuitem">Print</button>
+          <div class="small">These are simple local actions for your GitHub Pages version.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="page">
+    <div class="container">
+      <h2 class="section-title" id="welcome">Welcome</h2>
+      <p class="welcome" id="welcomeText">
+        The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities.
+        This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.
+      </p>
+
+      <section class="panel" id="meeting" aria-label="Meeting info and map">
+        <div class="panel-left">
+          <div class="meeting-line"><span id="serviceTitle1">Sunday Service</span> <span id="serviceTime1">10:30 AM</span></div>
+          <div class="meeting-line"><span id="serviceTitle2">Gospel Study</span> <span id="serviceTime2">11:30 AM</span></div>
+
+          <div class="address" aria-label="Address">
+            <div id="addrLine1">943 East 400 South</div>
+            <div><span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span> <span id="addrZip">84770</span></div>
+          </div>
+
+          <a class="directions" id="directionsLink" href="#" target="_blank" rel="noopener" aria-label="Directions in Google Maps">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"></path>
+            </svg>
+            <span>Directions</span>
+          </a>
+        </div>
+
+        <div class="panel-right">
+          <a id="mapClickCover" href="#" target="_blank" rel="noopener" aria-label="Open directions (map link)"
+             style="position:absolute; inset:0; z-index: 10;"></a>
+          <div id="map" aria-label="Map"></div>
+        </div>
+      </section>
+
+      <div class="disclaimer">
+        <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page” design.
+        It is not an official Church website and should not use official trademarks/logos without permission.
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ----------------------------
+    // CONFIG (edit these)
+    // ----------------------------
+    const CONFIG = {
+      unitName: "Snow Canyon YSA Ward (26-35)",
+      unitCityLine: "St. George UT",
+      welcomeText: "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
+      service1: { title: "Sunday Service", time: "10:30 AM" },
+      service2: { title: "Gospel Study",  time: "11:30 AM" },
+
+      address: {
+        line1: "943 East 400 South",
+        city: "St. George",
+        state: "UT",
+        zip: "84770"
+      },
+
+      // Coordinates for the building (close to the official locator listing)
+      // If you want to change this, update these two values:
+      lat: 37.101707,
+      lng: -113.563324,
+
+      // Map zoom
+      zoom: 16
+    };
+
+    // ----------------------------
+    // Helpers
+    // ----------------------------
+    function $(id){ return document.getElementById(id); }
+
+    function buildGoogleMapsQuery(addressObj){
+      const q = `${addressObj.line1}, ${addressObj.city}, ${addressObj.state} ${addressObj.zip}, US`;
+      return `https://maps.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+    }
+
+    function showToast(message){
+      const el = $("toast");
+      el.textContent = message;
+      el.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove("show"), 1400);
+    }
+
+    function closeAllMenus(){
+      $("shareMenu").classList.remove("open");
+      $("moreMenu").classList.remove("open");
+    }
+
+    // ----------------------------
+    // Populate UI
+    // ----------------------------
+    $("unitName").textContent = CONFIG.unitName;
+    $("unitCity").textContent = CONFIG.unitCityLine;
+    $("welcomeText").textContent = CONFIG.welcomeText;
+
+    $("serviceTitle1").textContent = CONFIG.service1.title;
+    $("serviceTime1").textContent  = CONFIG.service1.time;
+    $("serviceTitle2").textContent = CONFIG.service2.title;
+    $("serviceTime2").textContent  = CONFIG.service2.time;
+
+    $("addrLine1").textContent = CONFIG.address.line1;
+    $("addrCity").textContent  = CONFIG.address.city;
+    $("addrState").textContent = CONFIG.address.state;
+    $("addrZip").textContent   = CONFIG.address.zip;
+
+    const mapsUrl = buildGoogleMapsQuery(CONFIG.address);
+    $("directionsLink").href = mapsUrl;
+    $("mapClickCover").href = mapsUrl;
+
+    // Social share fallback links
+    const pageUrl = window.location.href;
+    const shareText = `Check out ${CONFIG.unitName}`;
+    $("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
+    $("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
+
+    // ----------------------------
+    // Map (Leaflet + OSM)
+    // ----------------------------
+    const map = L.map("map", { scrollWheelZoom: false, dragging: true, tap: true }).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const marker = L.marker([CONFIG.lat, CONFIG.lng]).addTo(map);
+    marker.bindPopup(`<strong>${CONFIG.unitName}</strong><br>${CONFIG.address.line1}<br>${CONFIG.address.city}, ${CONFIG.address.state} ${CONFIG.address.zip}`);
+
+    // ----------------------------
+    // Share button logic
+    // ----------------------------
+    $("shareBtn").addEventListener("click", async (e) => {
+      e.stopPropagation();
+
+      // Try native share first (mostly mobile)
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: CONFIG.unitName,
+            text: shareText,
+            url: pageUrl
+          });
+          return;
+        } catch (err) {
+          // If user cancels, do nothing. Otherwise fall back.
+        }
+      }
+
+      // Desktop fallback: open small menu (copy link / email / text)
+      const menu = $("shareMenu");
+      const willOpen = !menu.classList.contains("open");
+      closeAllMenus();
+      if (willOpen) menu.classList.add("open");
+    });
+
+    $("copyLinkBtn").addEventListener("click", async (e) => {
+      e.stopPropagation();
+      try{
+        await navigator.clipboard.writeText(pageUrl);
+        showToast("Copied link");
+      }catch{
+        // Older browsers fallback
+        const ta = document.createElement("textarea");
+        ta.value = pageUrl;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Copied link");
+      }
+      closeAllMenus();
+    });
+
+    // ----------------------------
+    // More options menu
+    // ----------------------------
+    $("moreBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      const menu = $("moreMenu");
+      const willOpen = !menu.classList.contains("open");
+      closeAllMenus();
+      if (willOpen) menu.classList.add("open");
+    });
+
+    $("printBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeAllMenus();
+      window.print();
+    });
+
+    // Close menus on outside click / escape
+    document.addEventListener("click", () => closeAllMenus());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllMenus();
+    });
+
+    // Prevent menu clicks from closing immediately
+    $("shareMenu").addEventListener("click", (e) => e.stopPropagation());
+    $("moreMenu").addEventListener("click", (e) => e.stopPropagation());
+  </script>
+</body>
+</html>
