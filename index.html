@@ -506,12 +506,12 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
     const boundaryLayer = L.geoJSON(geojson, {
       interactive: false, // <-- makes it NOT selectable/clickable
       style: () => ({
-        color: "#157493",  // outline color (matches your brand)
-        weight: 3,
-        opacity: 0.9,
-        fillColor: "#157493",
-        fillOpacity: 0.10
-      })
+  color: "#157493",   // boundary outline color
+  weight: 3,
+  opacity: 0.95,
+  fill: false         // <-- THIS removes the interior fill
+})
+
     }).addTo(map);
 
     // Optional: zoom the map to show the whole boundary nicely
