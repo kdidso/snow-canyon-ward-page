@@ -313,24 +313,30 @@
       color: var(--muted);
       font-weight: 600;
     }
+
+    /* UPDATED: fixed height (300px) + scrollable */
     .events-body{
       background: #fff;
-      height: 300px;               /* tuned to show ~5 upcoming items in Agenda view */
-      overflow: hidden;            /* "up to 5" effect (prevents long scroll) */
+      height: 300px;               /* keep a fixed height */
+      overflow: auto;              /* allow scrolling inside widget */
+      -webkit-overflow-scrolling: touch;
       position: relative;
     }
+
+    /* UPDATED: allow interaction/scroll inside iframe */
     .events-iframe{
       width: 100%;
       height: 100%;
       border: 0;
       display:block;
-      pointer-events: none;        /* whole widget click opens full calendar */
+      pointer-events: auto;
     }
+
+    /* UPDATED: disable click-through overlay so scrolling works */
     .events-overlay-link{
-      position:absolute;
-      inset:0;
-      z-index: 5;
+      display: none;
     }
+
     .events-footer{
       padding: 10px 16px;
       font-size: 12px;
@@ -346,72 +352,73 @@
       color: var(--muted);
       line-height: 1.4;
     }
+
     /* Come Follow Me widget */
-.cfm-card{
-  margin-top: 22px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
+    .cfm-card{
+      margin-top: 22px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-.cfm-head{
-  display: flex;
-  gap: 14px;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 16px 16px 10px;
-}
+    .cfm-head{
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 16px 10px;
+    }
 
-.cfm-title{
-  margin: 0 0 8px 0;
-  font-size: 18px;
-  font-weight: 800;
-}
+    .cfm-title{
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
 
-.cfm-sub{
-  margin: 0 0 6px 0;
-  font-size: 13px;
-  font-weight: 700;
-  color: #b45309; /* warm accent similar to the site’s small heading */
-}
+    .cfm-sub{
+      margin: 0 0 6px 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: #b45309; /* warm accent similar to the site’s small heading */
+    }
 
-.cfm-big{
-  margin: 0;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--brand);
-  line-height: 1.2;
-}
+    .cfm-big{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--brand);
+      line-height: 1.2;
+    }
 
-.cfm-link{
-  white-space: nowrap;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--brand);
-  padding: 8px 10px;
-  border-radius: 8px;
-}
-.cfm-link:hover{ text-decoration: underline; }
+    .cfm-link{
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+    .cfm-link:hover{ text-decoration: underline; }
 
-.cfm-imageWrap{
-  display: block;
-  padding: 0 16px 16px;
-}
+    .cfm-imageWrap{
+      display: block;
+      padding: 0 16px 16px;
+    }
 
-#cfmImg{
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #e5e7eb;
-  display: block;
-}
+    #cfmImg{
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #e5e7eb;
+      display: block;
+    }
 
-@media (min-width: 640px){
-  #cfmImg{ height: 300px; }
-}
+    @media (min-width: 640px){
+      #cfmImg{ height: 300px; }
+    }
   </style>
 </head>
 
@@ -428,7 +435,7 @@
     <!-- Title bottom-left -->
     <div class="hero-title">
       <h1 id="unitName">Snow Canyon YSA Ward (26-35)</h1>
-      <div class="sub" id="unitCity">St. George UT</div>
+      <div class="sub" id="unitCity">Events & Meeting Times</div>
     </div>
 
     <!-- Buttons bottom-right -->
@@ -456,33 +463,31 @@
           </svg>
         </button>
 
-        <!-- UPDATED menu: official ward page + print -->
-       <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
+        <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
+          <a
+            href="https://docs.google.com/document/d/1-yZTVTa_TsHkZfCy6rNLFnZhErk0HeQ9QPoO3urSoW8/edit?usp=drive_link"
+            target="_blank"
+            rel="noopener"
+            role="menuitem"
+          >
+            Ward Bulletin
+          </a>
 
-  <a
-    href="https://docs.google.com/document/d/1-yZTVTa_TsHkZfCy6rNLFnZhErk0HeQ9QPoO3urSoW8/edit?usp=drive_link"
-    target="_blank"
-    rel="noopener"
-    role="menuitem"
-  >
-    Ward Bulletin
-  </a>
+          <a
+            href="https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global"
+            target="_blank"
+            rel="noopener"
+            role="menuitem"
+          >
+            Visit official ward page
+          </a>
 
-  <a
-    href="https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global"
-    target="_blank"
-    rel="noopener"
-    role="menuitem"
-  >
-    Visit official ward page
-  </a>
+          <button type="button" id="printBtn" role="menuitem">Print</button>
 
-  <button type="button" id="printBtn" role="menuitem">Print</button>
-
-  <div class="small">
-    These are simple local actions for your GitHub Pages version.
-  </div>
-</div>
+          <div class="small">
+            These are simple local actions for your GitHub Pages version.
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -490,6 +495,34 @@
   <!-- CONTENT -->
   <main class="page">
     <div class="container">
+
+      <!-- UPCOMING EVENTS WIDGET -->
+      <div class="events-wrap" aria-label="Upcoming events">
+        <div class="events-card">
+          <div class="events-head">
+            <h3>Upcoming events</h3>
+            <div class="hint">Scroll to see more • <a id="openCalendarHeaderLink" href="#" target="_blank" rel="noopener" style="color:var(--brand); text-decoration:underline;">Open full calendar</a></div>
+          </div>
+
+          <div class="events-body">
+            <iframe
+              id="eventsIframe"
+              class="events-iframe"
+              title="Ward events (week view)"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src=""
+            ></iframe>
+          </div>
+
+          <div class="events-footer">
+            Tip: This is a scrollable preview. Use “Open full calendar” for details and RSVPs.
+          </div>
+        </div>
+      </div>
+
+      <span style="display: flex; height:20px;"></span>
+
       <h2 class="section-title" id="welcome">Welcome</h2>
       <p class="welcome" id="welcomeText">
         The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities.
@@ -515,69 +548,35 @@
         </div>
 
         <div class="panel-right">
-  <div id="map" aria-label="Map"></div>
-</div>
-      </section>
-<!-- THIS WEEK'S COME FOLLOW ME STUDY -->
-<section class="cfm-card" aria-label="This week's Come Follow Me study">
-  <div class="cfm-head">
-    <div>
-      <h2 class="cfm-title">This Week’s Come Follow Me Study</h2>
-      <p class="cfm-sub" id="cfmSmallHeading"></p>
-      <p class="cfm-big" id="cfmBigHeading"></p>
-    </div>
-
-    <a class="cfm-link" id="cfmOpenLink" href="#" target="_blank" rel="noopener">
-      View full lesson →
-    </a>
-  </div>
-
-  <a
-    class="cfm-imageWrap"
-    id="cfmImageLink"
-    href="#"
-    target="_blank"
-    rel="noopener"
-    aria-label="Open lesson page"
-  >
-    <img id="cfmImg" alt="Come Follow Me image" loading="lazy" />
-  </a>
-</section>
-
-      <!-- UPCOMING EVENTS WIDGET -->
-      <div class="events-wrap" aria-label="Upcoming events">
-        <div class="events-card">
-          <div class="events-head">
-            <h3>Upcoming events</h3>
-            <div class="hint">Click to view full calendar</div>
-          </div>
-
-          <div class="events-body">
-            <a
-              class="events-overlay-link"
-              id="fullCalendarOverlay"
-              href="#"
-              target="_blank"
-              rel="noopener"
-              aria-label="Open the full ward calendar in a new tab"
-              title="Open full calendar"
-            ></a>
-
-            <iframe
-              id="eventsIframe"
-              class="events-iframe"
-              title="Upcoming ward events (agenda view)"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src=""
-            ></iframe>
-          </div>
-
-          <div class="events-footer">
-            Note: This preview shows the next few events. For full details and RSVP/updates, open the calendar.
-          </div>
+          <div id="map" aria-label="Map"></div>
         </div>
-      </div>
+      </section>
+
+      <!-- THIS WEEK'S COME FOLLOW ME STUDY -->
+      <section class="cfm-card" aria-label="This week's Come Follow Me study">
+        <div class="cfm-head">
+          <div>
+            <h2 class="cfm-title">This Week’s Come Follow Me Study</h2>
+            <p class="cfm-sub" id="cfmSmallHeading"></p>
+            <p class="cfm-big" id="cfmBigHeading"></p>
+          </div>
+
+          <a class="cfm-link" id="cfmOpenLink" href="#" target="_blank" rel="noopener">
+            View full lesson →
+          </a>
+        </div>
+
+        <a
+          class="cfm-imageWrap"
+          id="cfmImageLink"
+          href="#"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open lesson page"
+        >
+          <img id="cfmImg" alt="Come Follow Me image" loading="lazy" />
+        </a>
+      </section>
 
       <div class="disclaimer">
         <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page” design.
@@ -594,7 +593,7 @@
     // ----------------------------
     const CONFIG = {
       unitName: "Snow Canyon YSA Ward (26-35)",
-      unitCityLine: "St. George UT",
+      unitCityLine: "Events & Meeting Times",
       welcomeText: "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
       service1: { title: "Sunday Service", time: "10:30 AM" },
       service2: { title: "Gospel Study",  time: "11:30 AM" },
@@ -642,9 +641,8 @@
       $("moreMenu").classList.remove("open");
     }
 
-    function buildAgendaEmbedFromFullEmbed(fullEmbedUrl){
-      // Turn the normal embed URL into an Agenda-style embed with minimal chrome.
-      // We keep the same src + ctz query params and add agenda/minimal flags.
+    function buildWeekEmbedFromFullEmbed(fullEmbedUrl){
+      // Force WEEK view with minimal chrome.
       const u = new URL(fullEmbedUrl);
       u.searchParams.set("mode", "AGENDA");
       u.searchParams.set("showTitle", "0");
@@ -684,62 +682,58 @@
     $("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
     $("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
 
-    // Upcoming events embed + click-through to full calendar
-    const agendaUrl = buildAgendaEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
-    $("eventsIframe").src = agendaUrl;
-    $("fullCalendarOverlay").href = CONFIG.calendarFullEmbedUrl;
+    // Events embed (WEEK view) + header link to full calendar
+    const weekUrl = buildWeekEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
+    $("eventsIframe").src = weekUrl;
+    $("openCalendarHeaderLink").href = CONFIG.calendarFullEmbedUrl;
 
     // ----------------------------
     // Map (Leaflet + OSM)
     // ----------------------------
     const map = L.map("map", {
-  scrollWheelZoom: true,   // mouse wheel zoom (desktop)
-  touchZoom: true,         // pinch zoom (mobile)
-  dragging: true,
-  tap: true
-}).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
+      scrollWheelZoom: true,
+      touchZoom: true,
+      dragging: true,
+      tap: true
+    }).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
 
-// smoother zoom on trackpads
-map.options.wheelPxPerZoomLevel = 120;
+    map.options.wheelPxPerZoomLevel = 120;
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-// ----------------------------
-// Ward boundary overlay (GeoJSON)
-// ----------------------------
-const WARD_BOUNDARY_GEOJSON_URL = "https://kdidso.github.io/snow-canyon-map/ward_boundaries_JSO.geojson";
-
-fetch(WARD_BOUNDARY_GEOJSON_URL)
-  .then((r) => {
-    if (!r.ok) throw new Error(`Failed to load boundary GeoJSON (${r.status})`);
-    return r.json();
-  })
-  .then((geojson) => {
-    const boundaryLayer = L.geoJSON(geojson, {
-      interactive: false,
-      style: () => ({
-        color: "#157493",
-        weight: 3,
-        opacity: 0.95,
-        fill: false
-      })
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Center/zoom the map to the ward boundary by default
-    map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
-  })
-  .catch((err) => console.error(err));
+    // Ward boundary overlay (GeoJSON)
+    const WARD_BOUNDARY_GEOJSON_URL = "https://kdidso.github.io/snow-canyon-map/ward_boundaries_JSO.geojson";
+
+    fetch(WARD_BOUNDARY_GEOJSON_URL)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to load boundary GeoJSON (${r.status})`);
+        return r.json();
+      })
+      .then((geojson) => {
+        const boundaryLayer = L.geoJSON(geojson, {
+          interactive: false,
+          style: () => ({
+            color: "#157493",
+            weight: 3,
+            opacity: 0.95,
+            fill: false
+          })
+        }).addTo(map);
+
+        map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
+      })
+      .catch((err) => console.error(err));
 
     const marker = L.marker([CONFIG.lat, CONFIG.lng]).addTo(map);
     marker.bindPopup(`
-  <strong>${CONFIG.unitName}</strong><br>
-  ${CONFIG.address.line1}<br>
-  ${CONFIG.address.city}, ${CONFIG.address.state} ${CONFIG.address.zip}<br><br>
-  <a href="${mapsUrl}" target="_blank" rel="noopener">Open directions</a>
-`);
-
+      <strong>${CONFIG.unitName}</strong><br>
+      ${CONFIG.address.line1}<br>
+      ${CONFIG.address.city}, ${CONFIG.address.state} ${CONFIG.address.zip}<br><br>
+      <a href="${mapsUrl}" target="_blank" rel="noopener">Open directions</a>
+    `);
 
     // ----------------------------
     // Share button logic
@@ -747,7 +741,6 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
     $("shareBtn").addEventListener("click", async (e) => {
       e.stopPropagation();
 
-      // Try native share first (mostly mobile)
       if (navigator.share) {
         try {
           await navigator.share({
@@ -756,12 +749,9 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
             url: pageUrl
           });
           return;
-        } catch (err) {
-          // If user cancels, do nothing. Otherwise fall back.
-        }
+        } catch (err) {}
       }
 
-      // Desktop fallback: open small menu (copy link / email / text)
       const menu = $("shareMenu");
       const willOpen = !menu.classList.contains("open");
       closeAllMenus();
@@ -811,41 +801,42 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
     // Prevent menu clicks from closing immediately
     $("shareMenu").addEventListener("click", (e) => e.stopPropagation());
     $("moreMenu").addEventListener("click", (e) => e.stopPropagation());
+
     // ----------------------------
-// Come Follow Me widget (loads local JSON produced by GitHub Action)
-// ----------------------------
-async function loadComeFollowMeWidget() {
-  const jsonUrl = "./data/come_follow_me_this_week.json";
+    // Come Follow Me widget (loads local JSON produced by GitHub Action)
+    // ----------------------------
+    async function loadComeFollowMeWidget() {
+      const jsonUrl = "./data/come_follow_me_this_week.json";
 
-  try {
-    const res = await fetch(jsonUrl, { cache: "no-store" });
-    if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
-    const data = await res.json();
+      try {
+        const res = await fetch(jsonUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
+        const data = await res.json();
 
-    const small = document.getElementById("cfmSmallHeading");
-    const big = document.getElementById("cfmBigHeading");
-    const img = document.getElementById("cfmImg");
-    const open = document.getElementById("cfmOpenLink");
-    const imgLink = document.getElementById("cfmImageLink");
+        const small = document.getElementById("cfmSmallHeading");
+        const big = document.getElementById("cfmBigHeading");
+        const img = document.getElementById("cfmImg");
+        const open = document.getElementById("cfmOpenLink");
+        const imgLink = document.getElementById("cfmImageLink");
 
-    if (small) small.textContent = data.small_heading || "";
-    if (big) big.textContent = data.big_heading || "";
-    if (img) {
-      img.src = data.image_url || "";
-      img.alt = (data.big_heading ? `Come Follow Me: ${data.big_heading}` : "Come Follow Me image");
+        if (small) small.textContent = data.small_heading || "";
+        if (big) big.textContent = data.big_heading || "";
+        if (img) {
+          img.src = data.image_url || "";
+          img.alt = (data.big_heading ? `Come Follow Me: ${data.big_heading}` : "Come Follow Me image");
+        }
+
+        const lessonUrl = data.source_url || "#";
+        if (open) open.href = lessonUrl;
+        if (imgLink) imgLink.href = lessonUrl;
+      } catch (err) {
+        console.error(err);
+        const big = document.getElementById("cfmBigHeading");
+        if (big) big.textContent = "Unable to load this week’s lesson right now.";
+      }
     }
 
-    const lessonUrl = data.source_url || "#";
-    if (open) open.href = lessonUrl;
-    if (imgLink) imgLink.href = lessonUrl;
-  } catch (err) {
-    console.error(err);
-    const big = document.getElementById("cfmBigHeading");
-    if (big) big.textContent = "Unable to load this week’s lesson right now.";
-  }
-}
-
-loadComeFollowMeWidget();
+    loadComeFollowMeWidget();
   </script>
 </body>
 </html>
