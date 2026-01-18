@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
   <title>Snow Canyon YSA Ward (26-35) - Unit Page</title>
-  <meta name="description" content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, and map." />
+  <meta name="description" content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, map, and upcoming events." />
 
   <!-- Social preview -->
   <meta property="og:title" content="Snow Canyon YSA Ward (26-35) - Unit Page" />
-  <meta property="og:description" content="Meeting times, address, and map for Snow Canyon YSA Ward (26-35)." />
+  <meta property="og:description" content="Meeting times, address, map, and upcoming ward events." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80" />
@@ -31,11 +31,11 @@
 
   <style>
     :root{
-      --brand: #157493;           /* teal-ish like the original buttons */
+      --brand: #157493;
       --brand-dark: #0f5f76;
-      --text: #1f2937;            /* slate-ish */
+      --text: #1f2937;
       --muted: #6b7280;
-      --panel: #f3f4f6;           /* light gray panel */
+      --panel: #f3f4f6;
       --white: #ffffff;
       --shadow: 0 10px 25px rgba(0,0,0,0.12);
       --maxw: 952px;
@@ -238,7 +238,7 @@
       border: 1px solid rgba(0,0,0,0.10);
       border-radius: 10px;
       box-shadow: var(--shadow);
-      min-width: 210px;
+      min-width: 240px;
       overflow: hidden;
       display:none;
       z-index: 50;
@@ -286,6 +286,59 @@
     }
     .toast.show{ opacity: 1; }
 
+    /* Events widget */
+    .events-wrap{ margin-top: 22px; }
+    .events-card{
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .events-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.55);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .events-head h3{
+      margin:0;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .events-head .hint{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .events-body{
+      background: #fff;
+      height: 300px;               /* tuned to show ~5 upcoming items in Agenda view */
+      overflow: hidden;            /* "up to 5" effect (prevents long scroll) */
+      position: relative;
+    }
+    .events-iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display:block;
+      pointer-events: none;        /* whole widget click opens full calendar */
+    }
+    .events-overlay-link{
+      position:absolute;
+      inset:0;
+      z-index: 5;
+    }
+    .events-footer{
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.55);
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
     /* Footer-ish disclaimer */
     .disclaimer{
       margin-top: 18px;
@@ -293,31 +346,95 @@
       color: var(--muted);
       line-height: 1.4;
     }
+    /* Come Follow Me widget */
+.cfm-card{
+  margin-top: 22px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.cfm-head{
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 16px 10px;
+}
+
+.cfm-title{
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cfm-sub{
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b45309; /* warm accent similar to the site’s small heading */
+}
+
+.cfm-big{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1.2;
+}
+
+.cfm-link{
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.cfm-link:hover{ text-decoration: underline; }
+
+.cfm-imageWrap{
+  display: block;
+  padding: 0 16px 16px;
+}
+
+#cfmImg{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #e5e7eb;
+  display: block;
+}
+
+@media (min-width: 640px){
+  #cfmImg{ height: 300px; }
+}
   </style>
 </head>
 
 <body>
   <!-- HERO -->
   <header class="hero">
-    <!-- Replace this image with one you have rights to use -->
     <img
-      src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1600&q=80"
-      alt="Hero image"
+      src="https://brightspotcdn.byu.edu/dims4/default/4e9a448/2147483647/strip/true/crop/6000x4000+0+0/resize/840x560!/quality/90/?url=https%3A%2F%2Fbrigham-young-brightspot-us-east-2.s3.us-east-2.amazonaws.com%2Feb%2F24%2Fdaa9ccbc527807e884b8bedd86cd%2F01-north-elevation-annex-rendering-1.jpg"
+      alt="St. George Utah Temple"
       loading="eager"
     />
     <div class="overlay"></div>
 
     <!-- Title bottom-left -->
     <div class="hero-title">
-      <h1 id="unitName">Snow Canyonyon YSA Ward (26-35)</h1>
-      <div class="sub" id="unitCity">St. George UT (Tom was here)</div>
+      <h1 id="unitName">Snow Canyon YSA Ward (26-35)</h1>
+      <div class="sub" id="unitCity">St. George UT</div>
     </div>
 
     <!-- Buttons bottom-right -->
     <div class="hero-actions">
       <div style="position:relative;">
         <button class="btn" id="shareBtn" type="button" aria-label="Share this page">
-          <!-- share icon -->
           <svg viewBox="0 0 17 20" aria-hidden="true">
             <path d="M4.18231 11.85C3.82397 12.1759 3.37868 12.3907 2.90056 12.4683C2.42244 12.5458 1.93208 12.4828 1.4891 12.2869C1.04611 12.091 0.669579 11.7706 0.405266 11.3647C0.140953 10.9588 0.000244141 10.4849 0.000244141 10.0005C0.000244141 9.51616 0.140953 9.04222 0.405266 8.63632C0.669579 8.23042 1.04611 7.91005 1.4891 7.71414C1.93208 7.51823 2.42244 7.45523 2.90056 7.53279C3.37868 7.61035 3.82397 7.82513 4.18231 8.15103L12.0623 3.55403C11.9297 2.97162 12.0101 2.36098 12.2888 1.83267C12.5675 1.30436 13.0261 0.893298 13.5817 0.673899C14.1372 0.454499 14.753 0.441265 15.3175 0.636592C15.8819 0.831918 16.3578 1.2229 16.659 1.73874C16.9601 2.25459 17.0666 2.86121 16.9592 3.44878C16.8518 4.03636 16.5375 4.56605 16.0733 4.94197C15.6091 5.31788 15.0257 5.51517 14.4286 5.49813C13.8315 5.48108 13.2603 5.25082 12.8183 4.84903L4.93831 9.44603C5.02092 9.81075 5.02092 10.1893 4.93831 10.554L12.8183 15.151C13.2603 14.7492 13.8315 14.519 14.4286 14.5019C15.0257 14.4849 15.6091 14.6822 16.0733 15.0581C16.5375 15.434 16.8518 15.9637 16.9592 16.5513C17.0666 17.1389 16.9601 17.7455 16.659 18.2613C16.3578 18.7772 15.8819 19.1681 15.3175 19.3635C14.753 19.5588 14.1372 19.5456 13.5817 19.3262C13.0261 19.1068 12.5675 18.6957 12.2888 18.1674C12.0101 17.6391 11.9297 17.0284 12.0623 16.446L4.18231 11.849V11.85Z"></path>
           </svg>
@@ -334,13 +451,13 @@
 
       <div style="position:relative;">
         <button class="btn icon-only" id="moreBtn" type="button" aria-label="More options">
-          <!-- kebab icon -->
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16C10.9 16 10 16.9 10 18ZM10 6C10 7.1 10.9 8 12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6ZM10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12Z"></path>
           </svg>
         </button>
 
-        <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
+        <!-- UPDATED menu: official ward page + print -->
+       <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
 
   <a
     href="https://docs.google.com/document/d/1-yZTVTa_TsHkZfCy6rNLFnZhErk0HeQ9QPoO3urSoW8/edit?usp=drive_link"
@@ -401,6 +518,66 @@
   <div id="map" aria-label="Map"></div>
 </div>
       </section>
+<!-- THIS WEEK'S COME FOLLOW ME STUDY -->
+<section class="cfm-card" aria-label="This week's Come Follow Me study">
+  <div class="cfm-head">
+    <div>
+      <h2 class="cfm-title">This Week’s Come Follow Me Study</h2>
+      <p class="cfm-sub" id="cfmSmallHeading"></p>
+      <p class="cfm-big" id="cfmBigHeading"></p>
+    </div>
+
+    <a class="cfm-link" id="cfmOpenLink" href="#" target="_blank" rel="noopener">
+      View full lesson →
+    </a>
+  </div>
+
+  <a
+    class="cfm-imageWrap"
+    id="cfmImageLink"
+    href="#"
+    target="_blank"
+    rel="noopener"
+    aria-label="Open lesson page"
+  >
+    <img id="cfmImg" alt="Come Follow Me image" loading="lazy" />
+  </a>
+</section>
+
+      <!-- UPCOMING EVENTS WIDGET -->
+      <div class="events-wrap" aria-label="Upcoming events">
+        <div class="events-card">
+          <div class="events-head">
+            <h3>Upcoming events</h3>
+            <div class="hint">Click to view full calendar</div>
+          </div>
+
+          <div class="events-body">
+            <a
+              class="events-overlay-link"
+              id="fullCalendarOverlay"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open the full ward calendar in a new tab"
+              title="Open full calendar"
+            ></a>
+
+            <iframe
+              id="eventsIframe"
+              class="events-iframe"
+              title="Upcoming ward events (agenda view)"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src=""
+            ></iframe>
+          </div>
+
+          <div class="events-footer">
+            Note: This preview shows the next few events. For full details and RSVP/updates, open the calendar.
+          </div>
+        </div>
+      </div>
 
       <div class="disclaimer">
         <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page” design.
@@ -429,13 +606,17 @@
         zip: "84770"
       },
 
-      // Coordinates for the building (close to the official locator listing)
-      // If you want to change this, update these two values:
+      // Coordinates for the building
       lat: 37.101707,
       lng: -113.563324,
 
-      // Map zoom
-      zoom: 16
+      zoom: 16,
+
+      // Official ward page (More menu)
+      officialWardUrl: "https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global",
+
+      // Public Google Calendar embed you provided (full calendar)
+      calendarFullEmbedUrl: "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver"
     };
 
     // ----------------------------
@@ -459,6 +640,22 @@
     function closeAllMenus(){
       $("shareMenu").classList.remove("open");
       $("moreMenu").classList.remove("open");
+    }
+
+    function buildAgendaEmbedFromFullEmbed(fullEmbedUrl){
+      // Turn the normal embed URL into an Agenda-style embed with minimal chrome.
+      // We keep the same src + ctz query params and add agenda/minimal flags.
+      const u = new URL(fullEmbedUrl);
+      u.searchParams.set("mode", "AGENDA");
+      u.searchParams.set("showTitle", "0");
+      u.searchParams.set("showNav", "0");
+      u.searchParams.set("showDate", "0");
+      u.searchParams.set("showPrint", "0");
+      u.searchParams.set("showTabs", "0");
+      u.searchParams.set("showCalendars", "0");
+      u.searchParams.set("showTz", "0");
+      u.searchParams.set("wkst", "1");
+      return u.toString();
     }
 
     // ----------------------------
@@ -487,15 +684,20 @@
     $("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
     $("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(shareText + "\n\n" + pageUrl)}`;
 
+    // Upcoming events embed + click-through to full calendar
+    const agendaUrl = buildAgendaEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
+    $("eventsIframe").src = agendaUrl;
+    $("fullCalendarOverlay").href = CONFIG.calendarFullEmbedUrl;
+
     // ----------------------------
     // Map (Leaflet + OSM)
     // ----------------------------
     const map = L.map("map", {
-  scrollWheelZoom: true,
-  touchZoom: true,
+  scrollWheelZoom: true,   // mouse wheel zoom (desktop)
+  touchZoom: true,         // pinch zoom (mobile)
   dragging: true,
   tap: true
-});
+}).setView([CONFIG.lat, CONFIG.lng], CONFIG.zoom);
 
 // smoother zoom on trackpads
 map.options.wheelPxPerZoomLevel = 120;
@@ -538,6 +740,7 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
   <a href="${mapsUrl}" target="_blank" rel="noopener">Open directions</a>
 `);
 
+
     // ----------------------------
     // Share button logic
     // ----------------------------
@@ -571,7 +774,6 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
         await navigator.clipboard.writeText(pageUrl);
         showToast("Copied link");
       }catch{
-        // Older browsers fallback
         const ta = document.createElement("textarea");
         ta.value = pageUrl;
         document.body.appendChild(ta);
@@ -609,6 +811,41 @@ fetch(WARD_BOUNDARY_GEOJSON_URL)
     // Prevent menu clicks from closing immediately
     $("shareMenu").addEventListener("click", (e) => e.stopPropagation());
     $("moreMenu").addEventListener("click", (e) => e.stopPropagation());
+    // ----------------------------
+// Come Follow Me widget (loads local JSON produced by GitHub Action)
+// ----------------------------
+async function loadComeFollowMeWidget() {
+  const jsonUrl = "./data/come_follow_me_this_week.json";
+
+  try {
+    const res = await fetch(jsonUrl, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
+    const data = await res.json();
+
+    const small = document.getElementById("cfmSmallHeading");
+    const big = document.getElementById("cfmBigHeading");
+    const img = document.getElementById("cfmImg");
+    const open = document.getElementById("cfmOpenLink");
+    const imgLink = document.getElementById("cfmImageLink");
+
+    if (small) small.textContent = data.small_heading || "";
+    if (big) big.textContent = data.big_heading || "";
+    if (img) {
+      img.src = data.image_url || "";
+      img.alt = (data.big_heading ? `Come Follow Me: ${data.big_heading}` : "Come Follow Me image");
+    }
+
+    const lessonUrl = data.source_url || "#";
+    if (open) open.href = lessonUrl;
+    if (imgLink) imgLink.href = lessonUrl;
+  } catch (err) {
+    console.error(err);
+    const big = document.getElementById("cfmBigHeading");
+    if (big) big.textContent = "Unable to load this week’s lesson right now.";
+  }
+}
+
+loadComeFollowMeWidget();
   </script>
 </body>
 </html>
