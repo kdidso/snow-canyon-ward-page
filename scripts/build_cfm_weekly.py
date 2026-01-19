@@ -58,39 +58,138 @@ def pick_best_image_from_tag(img_tag) -> str:
     """
     if not img_tag:
         return ""
-    srcset = img_tag.get("srcset", "")
+
+    # Prefer srcset
+    srcset = img_tag.get("srcset", "") or img_tag.get("data-srcset", "") or ""
     best = _largest_from_srcset(srcset)
     if best:
         return absolute_url(best)
-    src = img_tag.get("src", "")
-    if src:
-        return absolute_url(src)
+
+    # Then src-like attributes
+    for attr in ("src", "data-src", "data-lazy-src", "data-original"):
+        src = img_tag.get(attr, "")
+        if src:
+            return absolute_url(src)
+
     return ""
 
 
-def pick_first_image(soup: BeautifulSoup) -> str:
+def _looks_like_bad_image(url: str) -> bool:
     """
-    Prefer the header hero image (img#img1).
-    If missing, fall back to first <figure> image, then any <img>.
-    Always prefer the LARGEST srcset candidate when available.
+    Filter out icons/logos/sprites/spacers/etc.
+    This is conservative but helps avoid picking header icons.
     """
-    # 1) Desired header image
-    img = soup.select_one("img#img1")
-    best = pick_best_image_from_tag(img)
-    if best:
-        return best
+    u = (url or "").strip().lower()
+    if not u:
+        return True
 
-    # 2) Fallback: first figure image
-    fig_img = soup.select_one("figure img")
-    best = pick_best_image_from_tag(fig_img)
-    if best:
-        return best
+    # Ignore inline data images and SVGs (often icons)
+    if u.startswith("data:image"):
+        return True
+    if u.endswith(".svg") or ".svg?" in u:
+        return True
 
-    # 3) Fallback: any image
-    any_img = soup.find("img")
-    best = pick_best_image_from_tag(any_img)
-    if best:
-        return best
+    bad_substrings = [
+        "sprite", "icon", "icons", "logo", "favicon", "spinner", "loading",
+        "placeholder", "transparent", "blank", "1x1", "pixel"
+    ]
+    if any(s in u for s in bad_substrings):
+        return True
+
+    return False
+
+
+def _pick_from_picture_tag(picture_tag) -> str:
+    """
+    Given a <picture>, prefer the largest candidate from the first <source srcset>
+    in DOM order; fall back to its <img>.
+    """
+    if not picture_tag:
+        return ""
+
+    # Prefer <source srcset> (often contains the real responsive image)
+    for src in picture_tag.find_all("source"):
+        ss = (src.get("srcset", "") or "").strip()
+        if ss:
+            best = _largest_from_srcset(ss)
+            if best:
+                return absolute_url(best)
+
+            # If no width descriptors, take first URL in srcset list
+            first = ss.split(",")[0].strip().split(" ")[0].strip()
+            if first:
+                return absolute_url(first)
+
+    # Fallback: <img> inside picture
+    img = picture_tag.find("img")
+    return pick_best_image_from_tag(img)
+
+
+def pick_top_image(soup: BeautifulSoup) -> str:
+    """
+    Find the image that is highest up on the page (DOM order),
+    but skip "junk" images (icons/logos/svgs/etc.).
+    Prefer images within main/article first.
+
+    This is much more reliable than fixed IDs since the site changes.
+    """
+    # Prefer searching within main/article content first
+    containers = soup.select("main, article")
+    search_roots = containers if containers else [soup]
+
+    seen = set()
+
+    # Scan DOM order: picture first, then figure img, then any img
+    selectors = ["picture", "figure img", "img"]
+
+    for root in search_roots:
+        for sel in selectors:
+            for el in root.select(sel):
+                if el.name == "picture":
+                    url = _pick_from_picture_tag(el)
+                elif el.name == "img":
+                    url = pick_best_image_from_tag(el)
+                else:
+                    # In case BeautifulSoup returns other tags unexpectedly
+                    url = ""
+
+                url = (url or "").strip()
+                if not url:
+                    continue
+
+                url = absolute_url(url)
+                if not url or url in seen:
+                    continue
+                seen.add(url)
+
+                if _looks_like_bad_image(url):
+                    continue
+
+                return url
+
+    # If nothing found in main/article, try whole document (as last resort)
+    for sel in selectors:
+        for el in soup.select(sel):
+            if el.name == "picture":
+                url = _pick_from_picture_tag(el)
+            elif el.name == "img":
+                url = pick_best_image_from_tag(el)
+            else:
+                url = ""
+
+            url = (url or "").strip()
+            if not url:
+                continue
+
+            url = absolute_url(url)
+            if not url or url in seen:
+                continue
+            seen.add(url)
+
+            if _looks_like_bad_image(url):
+                continue
+
+            return url
 
     return ""
 
@@ -120,7 +219,8 @@ def scrape_week(week: int) -> dict:
     small_heading = get_text_or_empty(small_heading_el)
     big_heading = get_text_or_empty(big_heading_el)
 
-    image_url = pick_first_image(soup)
+    # Updated: choose the highest-up meaningful image on the page
+    image_url = pick_top_image(soup)
 
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
