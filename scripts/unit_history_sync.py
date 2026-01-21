@@ -109,12 +109,36 @@ def scroll_to_load(page, max_scrolls=18, pause_ms=350):
     page.wait_for_timeout(250)
 
 
-def is_login_page(url: str) -> bool:
-    u = (url or "").lower()
-    return (
-        ("signin" in u) or ("login" in u) or ("okta" in u) or
-        ("auth" in u and "churchofjesuschrist.org" in u)
-    )
+def _has_any(page, selector: str) -> bool:
+    try:
+        return page.locator(selector).count() > 0
+    except Exception:
+        return False
+
+
+def is_login_page(page) -> bool:
+    """
+    LDS auth flows sometimes land back on START_URL while still unauthenticated.
+    So: treat as 'login page' if the login inputs exist, OR the URL looks like auth.
+    """
+    u = (getattr(page, "url", "") or "").lower()
+    if "signin" in u or "login" in u or "okta" in u:
+        return True
+    if ("auth" in u and "churchofjesuschrist.org" in u):
+        return True
+
+    # DOM-based detection (more reliable than URL alone)
+    if _has_any(page, "#username-input") or _has_any(page, "#password-input"):
+        return True
+
+    # Sometimes an interstitial challenge doesn't show those IDs; look for common sign-in headings
+    try:
+        if page.locator("text=Sign In").count() > 0 and page.locator("input[type='password']").count() > 0:
+            return True
+    except Exception:
+        pass
+
+    return False
 
 
 def file_ext_from_url(url: str) -> str:
@@ -170,7 +194,7 @@ def zip_folder(root: pathlib.Path, zip_name: str):
 
 
 # ---------------------------
-# Auth helpers (UPDATED to use your exact input IDs)
+# Auth helpers (UPDATED)
 # ---------------------------
 def _click_first_that_exists(page, selectors, timeout_ms=10_000) -> bool:
     for sel in selectors:
@@ -184,13 +208,32 @@ def _click_first_that_exists(page, selectors, timeout_ms=10_000) -> bool:
     return False
 
 
-def attempt_headless_login(page):
+def _fill_like_human(page, selector: str, value: str, timeout_ms: int = 60_000):
+    """
+    Some auth forms don't enable the button unless real input events fire.
+    Playwright's fill() usually works, but type() is more "human".
+    We'll do: click -> fill -> small type tweak (or type directly if needed).
+    """
+    page.wait_for_selector(selector, timeout=timeout_ms)
+    loc = page.locator(selector).first
+    loc.click(timeout=10_000)
+    try:
+        loc.fill(value, timeout=10_000)
+        # Ensure input event chain
+        page.wait_for_timeout(100)
+    except Exception:
+        # fallback to typing
+        loc.type(value, delay=35, timeout=20_000)
+
+
+def attempt_headless_login(page, story_selector: str = STORY_CARD_SELECTOR):
     """
     Headless login using your confirmed elements:
       - input#username-input
-      - button Next
+      - button#button-primary  (Next / Continue)
       - input#password-input
-      - button Sign In
+      - button#button-primary  (Sign In)
+    Determine success by presence of story grid, not URL.
     """
     if not LDS_USERNAME or not LDS_PASSWORD:
         raise RuntimeError("LDS_USERNAME/LDS_PASSWORD are not set (GitHub Secrets).")
@@ -200,73 +243,92 @@ def attempt_headless_login(page):
     page.goto(START_URL, wait_until="domcontentloaded", timeout=120_000)
     page.wait_for_timeout(1200)
 
-    # If we aren't redirected to a login page, we might already be authenticated
-    if not is_login_page(page.url):
-        print("✅ Not on a login page; likely already authenticated.")
-        return
+    # If already authenticated, the grid should be reachable
+    try:
+        if page.locator(story_selector).count() > 0:
+            print("✅ Story grid already visible; authenticated.")
+            return
+    except Exception:
+        pass
+
+    # If no login indicators, try navigating once more
+    if not is_login_page(page):
+        page.goto(START_URL, wait_until="networkidle", timeout=120_000)
+        page.wait_for_timeout(1200)
+
+    # If still not a login page and still can't see story selector, we may have a loading issue
+    if not is_login_page(page) and page.locator(story_selector).count() == 0:
+        save_debug(page, tag="login_unknown_state")
+        raise RuntimeError("Could not determine login state (not on login UI, but story grid not present).")
 
     # --- Step 1: username (your exact selector) ---
     try:
         page.wait_for_selector("#username-input", timeout=60_000)
     except PWTimeoutError:
+        # Sometimes an interstitial loads first; dump debug
         save_debug(page, tag="login_no_username_input")
-        raise RuntimeError("Could not find #username-input on login page.")
+        raise RuntimeError("Could not find #username-input on login page (possible interstitial/challenge).")
 
-    page.locator("#username-input").first.fill(LDS_USERNAME, timeout=10_000)
+    _fill_like_human(page, "#username-input", LDS_USERNAME)
 
-    # Click Next (or submit)
-    next_clicked = _click_first_that_exists(page, [
-        "button:has-text('Next')",
-        "button[type='submit']",
-        "input[type='submit']",
-    ])
-
-    if not next_clicked:
-        # fallback: press Enter in username
+    # Click primary button (this is what your Selenium used)
+    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20_000):
+        # fallback
         try:
             page.locator("#username-input").first.press("Enter", timeout=5_000)
         except Exception:
             save_debug(page, tag="login_cant_submit_username")
-            raise RuntimeError("Could not submit username (no Next button found and Enter failed).")
+            raise RuntimeError("Could not submit username (no #button-primary and Enter failed).")
 
-    # --- Step 2: password (your exact selector) ---
+    # --- Step 2: password ---
     try:
         page.wait_for_selector("#password-input", timeout=60_000)
     except PWTimeoutError:
-        # Sometimes there's an intermediate screen/challenge.
         save_debug(page, tag="login_no_password_input_after_next")
-        raise RuntimeError("After clicking Next, could not find #password-input (possible interstitial/MFA/challenge).")
+        raise RuntimeError(
+            "After clicking Next, could not find #password-input. "
+            "This is usually a verification/challenge/interstitial in GitHub Actions."
+        )
 
-    page.locator("#password-input").first.fill(LDS_PASSWORD, timeout=10_000)
+    _fill_like_human(page, "#password-input", LDS_PASSWORD)
 
-    # Click Sign In (or submit)
-    sign_in_clicked = _click_first_that_exists(page, [
-        "button:has-text('Sign In')",
-        "button:has-text('Sign in')",
-        "button[type='submit']",
-        "input[type='submit']",
-    ])
-
-    if not sign_in_clicked:
-        # fallback: press Enter in password
+    # Click primary button again (Sign In)
+    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20_000):
         try:
             page.locator("#password-input").first.press("Enter", timeout=5_000)
         except Exception:
             save_debug(page, tag="login_cant_submit_password")
-            raise RuntimeError("Could not submit password (no Sign In button found and Enter failed).")
+            raise RuntimeError("Could not submit password (no #button-primary and Enter failed).")
 
-    # Give time for redirect
-    page.wait_for_timeout(2500)
+    # Wait for either: story grid (success) OR login inputs/challenge (fail)
+    # Give the redirect time to happen.
+    page.wait_for_timeout(1500)
 
-    # If still on login-ish URL, capture debug — likely MFA/verification challenge.
-    if is_login_page(page.url):
-        save_debug(page, tag="login_still_on_login_page")
+    success = False
+    try:
+        page.wait_for_selector(story_selector, timeout=90_000)
+        success = True
+    except Exception:
+        success = False
+
+    if success:
+        print("✅ Headless login appears successful (story grid detected).")
+        return
+
+    # If we didn't get the grid, see if we're still in login/challenge state
+    if is_login_page(page):
+        save_debug(page, tag="login_still_required_or_challenge")
         raise RuntimeError(
-            "Login still appears required after submitting password. "
-            "This is usually MFA/verification or a challenge screen triggered in GitHub Actions."
+            "Login still appears required after submitting password (story grid not detected). "
+            "In GitHub Actions this is commonly a verification/challenge screen or bot-detection."
         )
 
-    print("✅ Headless login appears successful.")
+    # Not login UI, but still no grid
+    save_debug(page, tag="login_post_submit_no_grid")
+    raise RuntimeError(
+        "After submitting password, we did not detect the story grid and did not detect the login UI. "
+        "Page may be stuck, blocked, or loading differently in GitHub Actions."
+    )
 
 
 # ---------------------------
@@ -277,7 +339,7 @@ def open_story_grid(page):
     page.goto(START_URL, wait_until="domcontentloaded", timeout=120_000)
     page.wait_for_timeout(1200)
 
-    if is_login_page(page.url):
+    if is_login_page(page):
         save_debug(page, tag="redirected_to_login")
         raise RuntimeError("Redirected to login. Authentication was not valid.")
 
@@ -708,9 +770,9 @@ def main():
                 print("❌ Could not click card; skipping.")
                 continue
 
-            if is_login_page(page.url):
+            if is_login_page(page):
                 save_debug(page, tag=f"login_bounce_story_{i+1}")
-                raise RuntimeError("Bounced to login mid-run. Auth is not valid (or challenge/MFA triggered).")
+                raise RuntimeError("Bounced to login mid-run. Auth is not valid (or challenge/verification triggered).")
 
             meta = download_current_story(page, context, out_root)
             meta["grid_title_guess"] = card_title
