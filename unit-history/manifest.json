@@ -1,0 +1,2076 @@
+{
+  "exported_at_utc": "2026-01-21 04:02:33",
+  "base": "https://unithistory.churchofjesuschrist.org",
+  "start_url": "https://unithistory.churchofjesuschrist.org/",
+  "headless": true,
+  "skip_existing_folders": true,
+  "story_count_found_on_grid": 9,
+  "story_count_downloaded_new": 9,
+  "story_count_skipped_existing": 0,
+  "stories": [
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/9add62f5-2af0-f011-8406-000d3a5a7081?page=home_page",
+      "title": "Paint night",
+      "date_text": "Jan 12, 2026",
+      "folder": "unit-history/events/Paint night - Jan 12, 2026",
+      "image_count_found": 18,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4466.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4467.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4468.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4469.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4470.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4471.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4472.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4473.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4474.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4475.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4476.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4477.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4478.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4479.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4480.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4481.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4482.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/9add62f5-2af0-f011-8406-000d3a5a7081/IMG_4483.jpeg?sv=2025-01-05&st=2026-01-21T03%3A50%3A46Z&se=2026-01-21T04%3A05%3A46Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=jyIyRCE2mqBIFMRORwPVwmqm1Zlnrce4qFxt0Hmvduw%3D",
+          "file": "unit-history/events/Paint night - Jan 12, 2026/018.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/173cb172-b3ea-f011-8544-0022480a6776?page=home_page",
+      "title": "Bear paw cafe - pancake FHE",
+      "date_text": "Jan 5, 2026",
+      "folder": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026",
+      "image_count_found": 13,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4410.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4411.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4412.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4414.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4415.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4416.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4417.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4418.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4419.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4420.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4421.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4422.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/173cb172-b3ea-f011-8544-0022480a6776/IMG_4423.jpeg?sv=2025-01-05&st=2026-01-21T03%3A51%3A10Z&se=2026-01-21T04%3A06%3A10Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=5JD0UK%2FmS7w6GqqSXVaEODqiQU3csaS5k9IUJMcUsM8%3D",
+          "file": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026/013.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/e01ced66-2bef-f011-8407-6045bd00c1c3?page=home_page",
+      "title": "Special Needs Prom part 2",
+      "date_text": "Nov 6, 2025",
+      "folder": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025",
+      "image_count_found": 61,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182717.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/001.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182720.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/002.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182726.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/003.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182739.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/004.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182741.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/005.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182747.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/006.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182817.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/007.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182820.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/008.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182821.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/009.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182829.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/010.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182834.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/011.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182855.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/012.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182858.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/013.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182859.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/014.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182901.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/015.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182904.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/016.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182915.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/017.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182917.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/018.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_182924.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/019.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183124.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/020.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183218.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/021.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183222.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/022.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183237.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/023.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183248.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/024.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183404.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/025.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183407.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/026.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183821.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/027.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183825.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/028.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183858.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/029.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_183859.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/030.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191008.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/031.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191011.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/032.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191013.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/033.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 34,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191016.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/034.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 35,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191019.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/035.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 36,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191021.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/036.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 37,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191024.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/037.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 38,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_191342.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/038.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 39,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_195629.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/039.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 40,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201020.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/040.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 41,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201025.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/041.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 42,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201027.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/042.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 43,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201030.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/043.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 44,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201031.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/044.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 45,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201033.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/045.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 46,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201035.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/046.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 47,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201103.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/047.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 48,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201105.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/048.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 49,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201111.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/049.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 50,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201119.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/050.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 51,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201751.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/051.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 52,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201758.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/052.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 53,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201806.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/053.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 54,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201807.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/054.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 55,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201810.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/055.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 56,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201811.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/056.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 57,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201832.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/057.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 58,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_201834.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/058.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 59,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_202758.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/059.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 60,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_202800.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/060.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 61,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e01ced66-2bef-f011-8407-6045bd00c1c3/20251106_202802.jpg?sv=2025-01-05&st=2026-01-21T03%3A51%3A47Z&se=2026-01-21T04%3A06%3A47Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lgipmdJTrcRrjg2jI%2BX3OAg7ukxC9aoguwqI39LOOKY%3D",
+          "file": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025/061.jpg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/44f14923-30da-f011-8544-000d3a597022?page=home_page",
+      "title": "FHE gingerbread house making",
+      "date_text": "Dec 15, 2025",
+      "folder": "unit-history/events/FHE gingerbread house making - Dec 15, 2025",
+      "image_count_found": 33,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4110.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4111.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4112.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4113.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4114.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4115.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4116.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4117.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4118.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4119.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4120.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4121.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4122.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4123.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4124.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4125.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4126.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4127.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/018.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4128.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/019.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4129.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/020.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4130.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/021.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4131.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/022.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4132.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/023.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4133.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/024.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4134.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/025.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4135.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/026.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4136.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/027.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4137.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/028.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4138.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/029.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4139.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/030.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4140.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/031.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4141.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/032.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/44f14923-30da-f011-8544-000d3a597022/IMG_4142.jpeg?sv=2025-01-05&st=2026-01-21T03%3A53%3A15Z&se=2026-01-21T04%3A08%3A15Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=6wd7%2FJC7iD%2FgQGqfEFTMOrnqaNNLj9fulJq2JywYe54%3D",
+          "file": "unit-history/events/FHE gingerbread house making - Dec 15, 2025/033.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/e131ed9c-b4d4-f011-8544-0022480a7055?page=home_page",
+      "title": "Ward Christmas Dinner",
+      "date_text": "Dec 8, 2025",
+      "folder": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025",
+      "image_count_found": 71,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3947.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3948.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3949.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3950.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3951.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3952.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3953.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3954.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3955.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3956.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3957.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3958.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3959.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3960.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3961.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3962.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3963.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3964.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/018.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3965.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/019.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3966.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/020.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3967.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/021.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3968.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/022.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3969.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/023.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3970.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/024.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3971.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/025.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3972.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/026.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3973.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/027.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3974.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/028.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3975.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/029.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3976.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/030.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3977.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/031.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3978.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/032.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3979.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/033.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 34,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3980.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/034.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 35,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3981.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/035.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 36,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3982.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/036.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 37,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3983.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/037.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 38,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3984.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/038.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 39,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3985.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/039.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 40,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3986.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/040.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 41,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3987.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/041.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 42,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3989.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/042.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 43,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3990.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/043.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 44,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3991.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/044.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 45,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3996.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/045.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 46,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3997.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/046.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 47,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3998.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/047.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 48,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_3999.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/048.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 49,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4001.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/049.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 50,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4002.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/050.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 51,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4003.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/051.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 52,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4004.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/052.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 53,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4005.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/053.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 54,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4006.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/054.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 55,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4007.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/055.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 56,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4008.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/056.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 57,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4009.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/057.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 58,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4010.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/058.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 59,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4011.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/059.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 60,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4012.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/060.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 61,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4013.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/061.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 62,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4014.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/062.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 63,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4015.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/063.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 64,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4016.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/064.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 65,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4017.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/065.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 66,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4018.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/066.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 67,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4019.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/067.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 68,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4020.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/068.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 69,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4021.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/069.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 70,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4022.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/070.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 71,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/e131ed9c-b4d4-f011-8544-0022480a7055/IMG_4023.jpeg?sv=2025-01-05&st=2026-01-21T03%3A54%3A27Z&se=2026-01-21T04%3A09%3A27Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=4Pfk85QUZFYEBnh5Z7AhHQ%2BWxmVdfrG3Jm8k%2BJuZTk8%3D",
+          "file": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025/071.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/f86370f3-94bd-f011-bbd3-6045bd030b91?page=home_page",
+      "title": "Special Needs Prom - service project",
+      "date_text": "Nov 6, 2025",
+      "folder": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025",
+      "image_count_found": 49,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_1528.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_1529.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_1530.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_1531.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_1532.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3433.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3434.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3437.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3438.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3439.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3440.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3441.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3442.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3443.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3444.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3445.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3446.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3447.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/018.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3449.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/019.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3450.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/020.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3451.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/021.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3453.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/022.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3454.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/023.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3455.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/024.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3456.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/025.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3457.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/026.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3458.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/027.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3460.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/028.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3461.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/029.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3462.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/030.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3463.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/031.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3464.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/032.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3465.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/033.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 34,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3466.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/034.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 35,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3467.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/035.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 36,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3468.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/036.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 37,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3469.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/037.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 38,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3470.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/038.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 39,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3471.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/039.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 40,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3472.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/040.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 41,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3473.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/041.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 42,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3474.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/042.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 43,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3477.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/043.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 44,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3478.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/044.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 45,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3479.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/045.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 46,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3480.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/046.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 47,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3481.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/047.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 48,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3482.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/048.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 49,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/f86370f3-94bd-f011-bbd3-6045bd030b91/IMG_3484.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A34Z&se=2026-01-21T04%3A11%3A34Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=lXwxbTu5K8QEa4I63Nzz7s0maQW%2BnLFEl%2FmQgbzupTo%3D",
+          "file": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025/049.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/fcaf25e8-abbe-f011-bbd3-6045bd05b362?page=home_page",
+      "title": "Fall scavenger hunt FHE",
+      "date_text": "Nov 10, 2025",
+      "folder": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025",
+      "image_count_found": 64,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1561.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1563.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1564.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1565.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1566.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1567.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1568.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1569.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1570.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1571.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1572.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1573.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1574.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1575.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1576.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1577.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1578.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1579.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/018.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1581.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/019.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1582.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/020.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1583.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/021.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1585.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/022.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1587.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/023.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1588.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/024.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1590.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/025.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1591.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/026.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1592.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/027.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1594.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/028.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1595.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/029.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1597.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/030.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1598.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/031.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1599.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/032.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1600.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/033.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 34,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1601.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/034.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 35,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1602.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/035.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 36,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1603.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/036.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 37,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1604.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/037.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 38,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1605.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/038.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 39,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1606.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/039.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 40,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1608.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/040.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 41,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1610.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/041.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 42,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_1613.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/042.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 43,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3531.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/043.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 44,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3532.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/044.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 45,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3533.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/045.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 46,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3534.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/046.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 47,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3535.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/047.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 48,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3536.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/048.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 49,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3537.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/049.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 50,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3538.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/050.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 51,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3539.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/051.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 52,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_3618.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/052.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 53,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_4695.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/053.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 54,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_4705.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/054.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 55,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_4710.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/055.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 56,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6481.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/056.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 57,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6489.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/057.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 58,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6490.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/058.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 59,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6491.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/059.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 60,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6493.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/060.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 61,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6494.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/061.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 62,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6496.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/062.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 63,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6498.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/063.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 64,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/fcaf25e8-abbe-f011-bbd3-6045bd05b362/IMG_6499.jpeg?sv=2025-01-05&st=2026-01-21T03%3A56%3A49Z&se=2026-01-21T04%3A11%3A49Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=R8PC2WTnkx9UjYVYvzVbyiip1W64LaAdkHO2nJbh5Qw%3D",
+          "file": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025/064.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/c82c67af-90bd-f011-bbd3-002248084b93?page=home_page",
+      "title": "Fall gathering",
+      "date_text": "Oct 18, 2025",
+      "folder": "unit-history/events/Fall gathering - Oct 18, 2025",
+      "image_count_found": 19,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3187.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/001.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3188.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/002.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3190.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/003.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3191.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/004.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3192.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/005.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3193.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/006.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3194.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/007.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3195.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/008.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3196.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3197.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3198.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/011.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3199.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/012.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3200.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/013.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3204.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/014.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3208.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/015.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3209.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/016.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3210.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/017.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3211.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/018.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/c82c67af-90bd-f011-bbd3-002248084b93/IMG_3214.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A07Z&se=2026-01-21T04%3A12%3A07Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=O9JjvAUmd2kfPh35gt5zcV2lz6wUvzQ4iRC6J8uK3Sg%3D",
+          "file": "unit-history/events/Fall gathering - Oct 18, 2025/019.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/08afcdbc-080d-f011-9988-000d3a3ac227?page=home_page",
+      "title": "March stake conference Saturday evening",
+      "date_text": "March stake conference Saturday evening",
+      "folder": "unit-history/events/March stake conference Saturday evening - March stake conference Saturday evening",
+      "image_count_found": 1,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://uhsacontentprod.blob.core.windows.net/unithistorythumbnails/08afcdbc-080d-f011-9988-000d3a3ac227/IMG_2570.jpeg?sv=2025-01-05&st=2026-01-21T03%3A57%3A23Z&se=2026-01-21T04%3A12%3A23Z&sr=c&sp=racwdxltfi&rsct=image%2Fjpeg&sig=2zo71%2FlD0j5XksVOPvXEljj%2BnDCmfq2hUJVbWSQJ91w%3D",
+          "file": "unit-history/events/March stake conference Saturday evening - March stake conference Saturday evening/001.jpeg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    }
+  ]
+}
