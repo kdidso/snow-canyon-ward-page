@@ -35,8 +35,7 @@ jobs:
 
       - name: Sync Unit History into repo
         env:
-          # Auth options (either storage_state_b64 OR username/password)
-          UNIT_HISTORY_STORAGE_STATE_B64: ${{ secrets.UNIT_HISTORY_STORAGE_STATE_B64 }}
+          # Auth options (username/password)
           LDS_USERNAME: ${{ secrets.LDS_USERNAME }}
           LDS_PASSWORD: ${{ secrets.LDS_PASSWORD }}
 
@@ -45,6 +44,7 @@ jobs:
           SKIP_EXISTING_FOLDERS: "1"
           OUT_DIR: "unit-history/events"
           ZIP_NAME: "unit-history/unit_history_export.zip"
+          MANIFEST_PATH: "unit-history/manifest.json"
         run: |
           python scripts/unit_history_sync.py
 
