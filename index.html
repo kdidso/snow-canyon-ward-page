@@ -695,37 +695,37 @@
       fill: var(--text);
     }
 
-    .modal-body{
-  background: #111827;
-  display: grid;
-  grid-template-columns: 56px 1fr 56px;
-  align-items: center;
-  gap: 8px;
-  padding: 10px;
-  min-height: 220px;
-  position: relative; /* NEW */
-}
+    .modal-body {
+      background: #111827;
+      display: grid;
+      grid-template-columns: 56px 1fr 56px;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      min-height: 220px;
+    }
 
-.modal-mainimg-wrap{
-  position: relative; /* NEW */
-  z-index: 1;         /* NEW */
-}
+    @media (max-width: 640px) {
+      .modal-body {
+        grid-template-columns: 44px 1fr 44px;
+      }
+    }
 
-.nav-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  position: relative;
-  z-index: 20;
-}
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      position: relative;
+      z-index: 5;
+    }
 
     .nav-btn:hover {
       background: rgba(255, 255, 255, 0.14);
@@ -755,13 +755,11 @@
     }
 
     .modal-mainimg {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: center center; /* NEW */
-  display: block;
-  margin: auto; /* NEW - helps in odd layout edge-cases */
-}
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
 
     .modal-foot {
       padding: 10px 12px 12px;
@@ -1649,12 +1647,13 @@ function bestImageUrlForPath(filePath) {
 
         const images = (Array.isArray(children) ? children : [])
   .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
-  .map((ch) => ({
-  name: ch.name,
-  path: ch.path, // full repo path from GitHub API (IMPORTANT)
-  raw_url: stableRawUrlForPath(ch.path),
-  html_url: ch.html_url || ""
-}));
+  .map(ch => ({
+    name: ch.name,
+    path: ch.path,                // IMPORTANT: store full repo path
+    url: bestImageUrlForPath(ch.path),
+    raw_fallback_url: rawUrlForPath(ch.path),
+    html_url: ch.html_url || ""
+  }));
 
         out.push({
           name: f.name,
@@ -1687,8 +1686,7 @@ function bestImageUrlForPath(filePath) {
         const { title, subtitle } = splitFolderName(f.name);
         const dateLine = prettyDateFromPrefix(f.name);
 
-        const thumb = f.images && f.images.length ? f.images[0].raw_url : "";
-
+        const thumb = (f.images && f.images.length ? f.images[0].url : "");
         const count = f.images && f.images.length ? f.images.length : 0;
 
         const card = document.createElement("div");
@@ -1796,7 +1794,7 @@ function bestImageUrlForPath(filePath) {
         const t = document.createElement("div");
         t.className = "thumb";
         t.dataset.thumbIndex = String(i);
-        t.innerHTML = `<img src="${escapeHtml(img.raw_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
+        t.innerHTML = `<img src="${escapeHtml(img.url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
 
         t.addEventListener("click", () => {
           HISTORY.activeImageIndex = i;
@@ -1823,26 +1821,28 @@ function bestImageUrlForPath(filePath) {
 imgEl.removeAttribute("src");
 imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
 
-// Always center (some browsers behave better when explicit)
-imgEl.style.objectFit = "contain";
-imgEl.style.objectPosition = "center center";
+// Try CDN first
+imgEl.src = imgObj.url;
 
-// Try stable raw first
-const base = imgObj.raw_url;
-imgEl.src = base;
-
-// If it fails, retry once with a cache-buster
+// If CDN fails, fall back to raw.githubusercontent.com (no cache-buster needed, but ok if present)
 imgEl.onerror = () => {
+  // Avoid infinite loops
   imgEl.onerror = null;
-  imgEl.src = `${base}?v=${Date.now()}`;
-};
 
+  // Try raw fallback
+  imgEl.src = imgObj.raw_fallback_url;
+
+  // If raw also fails, try one last time with an explicit cache buster
+  imgEl.onerror = () => {
+    imgEl.onerror = null;
+    imgEl.src = `${imgObj.raw_fallback_url}?v=${Date.now()}`;
+  };
 };
 
       $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
 
       // Link opens the raw image (download_url) which is perfect for share/save
-      $("modalOpenRawLink").href = imgObj.raw_url || (imgObj.html_url || f.html_url || historyRepoUrl);
+      $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
 
       // Highlight active thumb
       const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
