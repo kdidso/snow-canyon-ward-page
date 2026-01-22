@@ -1300,380 +1300,468 @@ function withCacheBuster(url) {
     loadComeFollowMeWidget();
 
     // ----------------------------
-    // Unit history widget (loads folders + thumbnails from GitHub)
-    // Uses GitHub Contents API (no directory listing needed)
-    // ----------------------------
-    const HISTORY = {
-      folderItems: [], // [{name, path, html_url, images:[{name, path, display_url, raw_url, html_url}]}]
-      activeFolderIndex: -1,
-      activeImageIndex: 0
+  // Unit history widget (folders via GitHub API, images via RAW URL pattern)
+  // ----------------------------
+  const HISTORY = {
+    folderItems: [], // [{name, path, html_url, images:[{name, raw_url}]}]
+    activeFolderIndex: -1,
+    activeImageIndex: 0
+  };
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function splitFolderName(folderName) {
+    const raw = String(folderName || "").trim();
+    const idx = raw.indexOf("-");
+    if (idx === -1) return { title: raw, subtitle: "" };
+    const left = raw.slice(0, idx).trim();
+    const right = raw.slice(idx + 1).trim();
+    return { title: left || raw, subtitle: right || "" };
+  }
+
+  function prettyDateFromPrefix(s) {
+    const raw = String(s || "").trim();
+    const m = raw.match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
+    if (!m) return "";
+    const y = Number(m[1]);
+    const mo = Number(m[2]);
+    const d = Number(m[3]);
+    if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return "";
+    const dt = new Date(Date.UTC(y, mo - 1, d));
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC"
+    });
+    return fmt.format(dt);
+  }
+
+  function setHistoryStatus(text) {
+    const el = $("historyStatus");
+    if (!el) return;
+    el.textContent = text;
+    el.style.display = text ? "block" : "none";
+  }
+
+  function clearHistoryGrid() {
+    const grid = $("historyGrid");
+    if (grid) grid.innerHTML = "";
+  }
+
+  function sortFoldersSmart(folders) {
+    const toKey = (name) => {
+      const m = String(name || "").trim().match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
+      if (!m) return null;
+      const y = Number(m[1]), mo = Number(m[2]), d = Number(m[3]);
+      if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+      return Date.UTC(y, mo - 1, d);
     };
 
-    function ghApiBase() {
-      const { owner, repo } = CONFIG.unitHistory;
-      return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+    return folders.slice().sort((a, b) => {
+      const ka = toKey(a.name);
+      const kb = toKey(b.name);
+      if (ka !== null && kb !== null) return kb - ka; // newest first
+      if (ka !== null && kb === null) return -1;
+      if (ka === null && kb !== null) return 1;
+      return String(b.name).localeCompare(String(a.name));
+    });
+  }
+
+  function ghApiBase() {
+    const { owner, repo } = CONFIG.unitHistory;
+    return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  }
+
+  function ghRepoWebBase() {
+    const { owner, repo } = CONFIG.unitHistory;
+    return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  }
+
+  function encodePathPreserveSlashes(p) {
+    return String(p || "")
+      .split("/")
+      .map((seg) => encodeURIComponent(seg))
+      .join("/");
+  }
+
+  function rawRoot() {
+    const { owner, repo, branch } = CONFIG.unitHistory;
+    return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/`;
+  }
+
+  function folderRawBase(folderRepoPath) {
+    // folderRepoPath like "unit-history/events/Special Needs ... - Nov 6, 2025"
+    return rawRoot() + encodePathPreserveSlashes(folderRepoPath) + "/";
+  }
+
+  function withCacheBuster(url) {
+    try {
+      const u = new URL(url, window.location.href);
+      u.searchParams.set("v", String(Date.now()));
+      return u.toString();
+    } catch {
+      return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
     }
+  }
 
-    function ghRepoWebBase() {
-      const { owner, repo } = CONFIG.unitHistory;
-      return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  async function ghFetchJson(url) {
+    const res = await fetch(url, {
+      headers: { Accept: "application/vnd.github+json" },
+      cache: "no-store"
+    });
+    if (!res.ok) {
+      const txt = await res.text().catch(() => "");
+      throw new Error(`GitHub request failed (${res.status}). ${txt ? txt.slice(0, 140) : ""}`.trim());
     }
+    return res.json();
+  }
 
-    function setHistoryStatus(text) {
-      const el = $("historyStatus");
-      if (!el) return;
-      el.textContent = text;
-      el.style.display = text ? "block" : "none";
-    }
+  function probeImageUrl(url) {
+    // Try loading as an image (works even when HEAD is blocked)
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url;
+    });
+  }
 
-    function clearHistoryGrid() {
-      const grid = $("historyGrid");
-      if (grid) grid.innerHTML = "";
-    }
+  function pad3(n) {
+    return String(n).padStart(3, "0");
+  }
 
-    function sortFoldersSmart(folders) {
-      const toKey = (name) => {
-        const m = String(name || "").trim().match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
-        if (!m) return null;
-        const y = Number(m[1]),
-          mo = Number(m[2]),
-          d = Number(m[3]);
-        if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
-        return Date.UTC(y, mo - 1, d);
-      };
+  async function discoverImagesForFolder(folderRepoPath, statusLabel) {
+    // Your naming convention: 001.jpg / 001.jpeg / 001.png ...
+    // We stop after enough consecutive misses to avoid endless scanning.
+    const exts = ["jpg", "jpeg", "png", "webp", "gif"];
+    const base = folderRawBase(folderRepoPath);
 
-      return folders.slice().sort((a, b) => {
-        const ka = toKey(a.name);
-        const kb = toKey(b.name);
-        if (ka !== null && kb !== null) return kb - ka;
-        if (ka !== null && kb === null) return -1;
-        if (ka === null && kb !== null) return 1;
-        return String(b.name).localeCompare(String(a.name));
-      });
-    }
+    const results = [];
+    let foundAny = false;
+    let consecutiveMisses = 0;
 
-    async function ghFetchJson(url) {
-      const res = await fetch(url, {
-        headers: { Accept: "application/vnd.github+json" },
-        cache: "no-store"
-      });
+    // Safety caps: adjust if you ever exceed these
+    const MAX_INDEX = 400;        // up to 400 images
+    const STOP_MISSES = 18;       // stop after 18 missing indices in a row (after we’ve found at least one)
 
-      if (!res.ok) {
-        const txt = await res.text().catch(() => "");
-        const msg = `GitHub request failed (${res.status}). ${txt ? txt.slice(0, 120) : ""}`.trim();
-        throw new Error(msg);
+    for (let i = 1; i <= MAX_INDEX; i++) {
+      if (statusLabel) setHistoryStatus(`${statusLabel} (${i}/${MAX_INDEX})`);
+
+      const num = pad3(i);
+      let foundThisIndex = false;
+
+      for (const ext of exts) {
+        const url = `${base}${num}.${ext}`;
+        // Don’t bust cache on first probe; we want normal caching to help.
+        // If GitHub raw has it, this will load.
+        // If not, it will error.
+        // (We’ll still use cache-buster for the *main display* retry.)
+        const ok = await probeImageUrl(url);
+        if (ok) {
+          foundThisIndex = true;
+          foundAny = true;
+          consecutiveMisses = 0;
+
+          results.push({
+            name: `${num}.${ext}`,
+            raw_url: url
+          });
+          break;
+        }
       }
 
-      return res.json();
+      if (!foundThisIndex) {
+        consecutiveMisses++;
+        if (foundAny && consecutiveMisses >= STOP_MISSES) break;
+      }
     }
 
-    async function loadUnitHistoryWidget() {
-      setHistoryStatus("Loading folders…");
-      clearHistoryGrid();
+    return results;
+  }
 
-      const { path, branch } = CONFIG.unitHistory;
+  async function loadUnitHistoryWidget() {
+    setHistoryStatus("Loading folders…");
+    clearHistoryGrid();
 
-      // IMPORTANT: preserve slashes when encoding a path in the URL.
-      const listUrl = `${ghApiBase()}/contents/${encodePathPreserveSlashes(path)}?ref=${encodeURIComponent(branch)}`;
+    const { path, branch } = CONFIG.unitHistory;
 
-      let items;
+    const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+
+    let items;
+    try {
+      items = await ghFetchJson(listUrl);
+    } catch (err) {
+      console.error(err);
+      setHistoryStatus(
+        "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
+      );
+      return;
+    }
+
+    if (!Array.isArray(items)) {
+      setHistoryStatus("No folders found (unexpected GitHub response).");
+      return;
+    }
+
+    const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
+    if (!folders.length) {
+      setHistoryStatus("No event photo folders found yet.");
+      return;
+    }
+
+    // Build folder objects WITHOUT loading images yet (fast initial render)
+    HISTORY.folderItems = folders.map((f) => ({
+      name: f.name,
+      path: f.path, // full repo path to the folder
+      html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
+      images: null  // lazy-loaded when opening modal
+    }));
+
+    renderHistoryGrid();
+    setHistoryStatus("");
+  }
+
+  function renderHistoryGrid() {
+    const grid = $("historyGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    const folders = HISTORY.folderItems || [];
+    if (!folders.length) {
+      setHistoryStatus("No folders to show.");
+      return;
+    }
+
+    const frag = document.createDocumentFragment();
+
+    for (let i = 0; i < folders.length; i++) {
+      const f = folders[i];
+      const { title, subtitle } = splitFolderName(f.name);
+      const dateLine = prettyDateFromPrefix(f.name);
+
+      const card = document.createElement("div");
+      card.className = "folder-card";
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", `Open folder ${f.name}`);
+      card.dataset.folderIndex = String(i);
+
+      // If images not loaded yet, show placeholder; first open will load and then re-render (optional)
+      const thumbHtml = `
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:12px;">
+          Click to load photos
+        </div>
+      `;
+
+      card.innerHTML = `
+        <div class="folder-thumb">${thumbHtml}</div>
+        <div class="folder-meta">
+          ${
+            subtitle
+              ? `<p class="folder-subtitle">${escapeHtml(subtitle)}</p>`
+              : `<p class="folder-subtitle" style="visibility:hidden;">&nbsp;</p>`
+          }
+          <p class="folder-title">${escapeHtml(title)}</p>
+          ${
+            dateLine
+              ? `<div class="folder-date">${escapeHtml(dateLine)}</div>`
+              : `<div class="folder-date" style="visibility:hidden;">&nbsp;</div>`
+          }
+          <div class="folder-count">—</div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => openFolderModal(i));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openFolderModal(i);
+        }
+      });
+
+      frag.appendChild(card);
+    }
+
+    grid.appendChild(frag);
+  }
+
+  // ----------------------------
+  // Modal / gallery logic
+  // ----------------------------
+  async function openFolderModal(folderIndex) {
+    const folders = HISTORY.folderItems || [];
+    const f = folders[folderIndex];
+    if (!f) return;
+
+    HISTORY.activeFolderIndex = folderIndex;
+    HISTORY.activeImageIndex = 0;
+
+    const { title, subtitle } = splitFolderName(f.name);
+    $("modalTitle").textContent = title || f.name;
+    $("modalSubtitle").textContent = subtitle || "";
+
+    // Lazy-load images using your raw URL pattern
+    if (!Array.isArray(f.images)) {
+      setHistoryStatus(`Loading photos for “${f.name}”…`);
       try {
-        items = await ghFetchJson(listUrl);
+        f.images = await discoverImagesForFolder(
+          f.path,
+          `Searching ${f.name} for 001…`
+        );
       } catch (err) {
         console.error(err);
-        setHistoryStatus(
-          "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
-        );
-        return;
+        f.images = [];
       }
-
-      if (!Array.isArray(items)) {
-        setHistoryStatus("No folders found (unexpected GitHub response).");
-        return;
-      }
-
-      const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
-      if (folders.length === 0) {
-        setHistoryStatus("No event photo folders found yet.");
-        return;
-      }
-
-      const out = [];
-
-      for (let i = 0; i < folders.length; i++) {
-        const f = folders[i];
-        setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
-
-        const folderApiUrl = `${ghApiBase()}/contents/${encodePathPreserveSlashes(f.path)}?ref=${encodeURIComponent(
-          branch
-        )}`;
-
-        let children = [];
-        try {
-          children = await ghFetchJson(folderApiUrl);
-        } catch (err) {
-          console.error(err);
-          out.push({
-            name: f.name,
-            path: f.path,
-            html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-            images: []
-          });
-          continue;
-        }
-
-        const images = (Array.isArray(children) ? children : [])
-  .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
-  .map((ch) => ({
-    name: ch.name,
-    path: ch.path,
-    // THIS is the key: GitHub gives you a working URL already.
-    display_url: ch.download_url || "",
-    raw_url: ch.download_url || "",
-    html_url: ch.html_url || ""
-  }));
-
-        out.push({
-          name: f.name,
-          path: f.path,
-          html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-          images
-        });
-      }
-
-      HISTORY.folderItems = out;
-      renderHistoryGrid();
       setHistoryStatus("");
     }
 
-    function renderHistoryGrid() {
-      const grid = $("historyGrid");
-      if (!grid) return;
-      grid.innerHTML = "";
-
-      const folders = HISTORY.folderItems || [];
-      if (!folders.length) {
-        setHistoryStatus("No folders to show.");
-        return;
-      }
-
-      const frag = document.createDocumentFragment();
-
-      for (let i = 0; i < folders.length; i++) {
-        const f = folders[i];
-        const { title, subtitle } = splitFolderName(f.name);
-        const dateLine = prettyDateFromPrefix(f.name);
-
-        const thumb = f.images && f.images.length ? f.images[0].display_url : "";
-        const count = f.images && f.images.length ? f.images.length : 0;
-
-        const card = document.createElement("div");
-        card.className = "folder-card";
-        card.setAttribute("role", "button");
-        card.setAttribute("tabindex", "0");
-        card.setAttribute("aria-label", `Open folder ${f.name}`);
-        card.dataset.folderIndex = String(i);
-
-        const thumbHtml = thumb
-          ? `<img src="${escapeHtml(thumb)}" alt="${escapeHtml(f.name)} thumbnail" loading="lazy">`
-          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:12px;">No image</div>`;
-
-        card.innerHTML = `
-          <div class="folder-thumb">${thumbHtml}</div>
-          <div class="folder-meta">
-            ${
-              subtitle
-                ? `<p class="folder-subtitle">${escapeHtml(subtitle)}</p>`
-                : `<p class="folder-subtitle" style="visibility:hidden;">&nbsp;</p>`
-            }
-            <p class="folder-title">${escapeHtml(title)}</p>
-            ${
-              dateLine
-                ? `<div class="folder-date">${escapeHtml(dateLine)}</div>`
-                : `<div class="folder-date" style="visibility:hidden;">&nbsp;</div>`
-            }
-            <div class="folder-count">${
-              count ? `${count} photo${count === 1 ? "" : "s"}` : "No photos found"
-            }</div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => openFolderModal(i));
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openFolderModal(i);
-          }
-        });
-
-        frag.appendChild(card);
-      }
-
-      grid.appendChild(frag);
-    }
-
-    // ----------------------------
-    // Modal / gallery logic
-    // ----------------------------
-    function openFolderModal(folderIndex) {
-      const folders = HISTORY.folderItems || [];
-      const f = folders[folderIndex];
-      if (!f) return;
-
-      HISTORY.activeFolderIndex = folderIndex;
-      HISTORY.activeImageIndex = 0;
-
-      const { title, subtitle } = splitFolderName(f.name);
-      $("modalTitle").textContent = title || f.name;
-      $("modalSubtitle").textContent = subtitle || "";
-
-      if (!f.images || f.images.length === 0) {
-        $("modalMainImg").src = "";
-        $("modalMainImg").alt = "No photos available";
-        $("modalMainImg").style.display = "none";
-        $("modalCounter").textContent = "No photos in this folder.";
-        $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
-        $("modalOpenRawLink").textContent = "Open folder";
-        $("modalThumbStrip").innerHTML = "";
-        $("historyModal").classList.add("open");
-        document.body.style.overflow = "hidden";
-        return;
-      }
-
-      $("modalMainImg").style.display = "block";
-      $("modalOpenRawLink").textContent = "Open image";
-
-      buildThumbStrip();
-      showActiveImage();
-
+    // Empty folder handling
+    if (!f.images || f.images.length === 0) {
+      $("modalMainImg").src = "";
+      $("modalMainImg").alt = "No photos available";
+      $("modalMainImg").style.display = "none";
+      $("modalCounter").textContent = "No photos found in this folder (expected 001.jpg, 002.jpg, …).";
+      $("modalOpenRawLink").href = f.html_url || "#";
+      $("modalOpenRawLink").textContent = "Open folder";
+      $("modalThumbStrip").innerHTML = "";
       $("historyModal").classList.add("open");
       document.body.style.overflow = "hidden";
+      return;
     }
 
-    function closeFolderModal() {
-      $("historyModal").classList.remove("open");
-      document.body.style.overflow = "";
-      HISTORY.activeFolderIndex = -1;
-      HISTORY.activeImageIndex = 0;
-    }
+    $("modalMainImg").style.display = "block";
+    $("modalOpenRawLink").textContent = "Open image";
 
-    function buildThumbStrip() {
-      const strip = $("modalThumbStrip");
-      strip.innerHTML = "";
+    buildThumbStrip();
+    showActiveImage();
 
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
+    $("historyModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
 
-      const frag = document.createDocumentFragment();
+  function closeFolderModal() {
+    $("historyModal").classList.remove("open");
+    document.body.style.overflow = "";
+    HISTORY.activeFolderIndex = -1;
+    HISTORY.activeImageIndex = 0;
+  }
 
-      for (let i = 0; i < f.images.length; i++) {
-        const img = f.images[i];
-        const t = document.createElement("div");
-        t.className = "thumb";
-        t.dataset.thumbIndex = String(i);
-        t.innerHTML = `<img src="${escapeHtml(img.display_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
+  function buildThumbStrip() {
+    const strip = $("modalThumbStrip");
+    strip.innerHTML = "";
 
-        t.addEventListener("click", () => {
-          HISTORY.activeImageIndex = i;
-          showActiveImage();
-        });
+    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+    if (!f || !f.images || !f.images.length) return;
 
-        frag.appendChild(t);
-      }
+    const frag = document.createDocumentFragment();
 
-      strip.appendChild(frag);
-    }
+    for (let i = 0; i < f.images.length; i++) {
+      const img = f.images[i];
+      const t = document.createElement("div");
+      t.className = "thumb";
+      t.dataset.thumbIndex = String(i);
 
-    function showActiveImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
+      // thumbs: use the raw URL directly (no jsDelivr)
+      t.innerHTML = `<img src="${escapeHtml(img.raw_url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
 
-      const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
-      HISTORY.activeImageIndex = idx;
-
-      const imgObj = f.images[idx];
-      const imgEl = $("modalMainImg");
-
-      // Reset image then set new src
-      imgEl.removeAttribute("src");
-      imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
-      imgEl.style.objectFit = "contain";
-      imgEl.style.objectPosition = "center center";
-
-const base = imgObj.raw_url;
-
-// reset handlers first so old ones don’t interfere
-imgEl.onload = null;
-imgEl.onerror = null;
-
-// clear then set
-imgEl.removeAttribute("src");
-imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
-imgEl.style.objectFit = "contain";
-imgEl.style.objectPosition = "center center";
-
-// first attempt
-imgEl.src = base;
-
-// one clean retry that DOES NOT double-? the URL
-imgEl.onerror = () => {
-  imgEl.onerror = null;
-  imgEl.src = withCacheBuster(base);
-};
-
-      $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
-
-      // Open should point to raw (best for sharing/saving)
-      $("modalOpenRawLink").href = imgObj.raw_url || imgObj.html_url || f.html_url || historyRepoUrl;
-
-      // Highlight active thumb
-      const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
-      thumbs.forEach((t, i) => {
-        if (i === idx) t.classList.add("active");
-        else t.classList.remove("active");
+      t.addEventListener("click", () => {
+        HISTORY.activeImageIndex = i;
+        showActiveImage();
       });
 
-      // Ensure active thumb is visible
-      const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
-      }
+      frag.appendChild(t);
     }
 
-    function nextImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
-      HISTORY.activeImageIndex = (HISTORY.activeImageIndex + 1) % f.images.length;
-      showActiveImage();
-    }
+    strip.appendChild(frag);
+  }
 
-    function prevImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
-      HISTORY.activeImageIndex = (HISTORY.activeImageIndex - 1 + f.images.length) % f.images.length;
-      showActiveImage();
-    }
+  function showActiveImage() {
+    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+    if (!f || !f.images || !f.images.length) return;
 
-    // Modal event hooks
-    $("modalCloseBtn").addEventListener("click", closeFolderModal);
-    $("modalNextBtn").addEventListener("click", nextImage);
-    $("modalPrevBtn").addEventListener("click", prevImage);
+    const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
+    HISTORY.activeImageIndex = idx;
 
-    // Close modal when clicking backdrop
-    $("historyModal").addEventListener("click", (e) => {
-      if (e.target === $("historyModal")) closeFolderModal();
+    const imgObj = f.images[idx];
+    const imgEl = $("modalMainImg");
+
+    imgEl.onload = null;
+    imgEl.onerror = null;
+
+    imgEl.removeAttribute("src");
+    imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+
+    imgEl.style.objectFit = "contain";
+    imgEl.style.objectPosition = "center center";
+
+    const base = imgObj.raw_url;
+    imgEl.src = base;
+
+    // One safe retry that won’t break querystrings
+    imgEl.onerror = () => {
+      imgEl.onerror = null;
+      imgEl.src = withCacheBuster(base);
+    };
+
+    $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
+    $("modalOpenRawLink").href = imgObj.raw_url || f.html_url || "#";
+
+    const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
+    thumbs.forEach((t, i) => {
+      if (i === idx) t.classList.add("active");
+      else t.classList.remove("active");
     });
 
-    // Keyboard controls (only when modal is open)
-    document.addEventListener("keydown", (e) => {
-      if (!$("historyModal").classList.contains("open")) return;
-      if (e.key === "Escape") closeFolderModal();
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-    });
+    const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
+    if (activeThumb) {
+      activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    }
+  }
 
-    // Kick it off
-    loadUnitHistoryWidget();
+  function nextImage() {
+    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+    if (!f || !f.images || !f.images.length) return;
+    HISTORY.activeImageIndex = (HISTORY.activeImageIndex + 1) % f.images.length;
+    showActiveImage();
+  }
+
+  function prevImage() {
+    const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+    if (!f || !f.images || !f.images.length) return;
+    HISTORY.activeImageIndex = (HISTORY.activeImageIndex - 1 + f.images.length) % f.images.length;
+    showActiveImage();
+  }
+
+  // Modal event hooks
+  $("modalCloseBtn").addEventListener("click", closeFolderModal);
+  $("modalNextBtn").addEventListener("click", nextImage);
+  $("modalPrevBtn").addEventListener("click", prevImage);
+
+  $("historyModal").addEventListener("click", (e) => {
+    if (e.target === $("historyModal")) closeFolderModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!$("historyModal").classList.contains("open")) return;
+    if (e.key === "Escape") closeFolderModal();
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
+  });
+
+  // Kick it off
+  loadUnitHistoryWidget();
   </script>
 </body>
 </html>
