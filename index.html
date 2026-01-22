@@ -1093,7 +1093,16 @@
         .map((seg) => encodeURIComponent(seg))
         .join("/");
     }
-
+function withCacheBuster(url) {
+  try {
+    const u = new URL(url, window.location.href);
+    u.searchParams.set("v", String(Date.now()));
+    return u.toString();
+  } catch {
+    // fallback: if url is weird, do a safe append
+    return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
+  }
+}
     // ----------------------------
     // Populate UI
     // ----------------------------
@@ -1591,15 +1600,26 @@
       imgEl.style.objectFit = "contain";
       imgEl.style.objectPosition = "center center";
 
-      const baseDisplay = imgObj.display_url || imgObj.raw_url || "";
-      imgEl.src = baseDisplay;
+const base = imgObj.raw_url;
 
-      // If CDN display fails, fall back to raw once
-      imgEl.onerror = () => {
-        imgEl.onerror = null;
-        const fallback = imgObj.raw_url || baseDisplay;
-        imgEl.src = `${fallback}?v=${Date.now()}`;
-      };
+// reset handlers first so old ones don’t interfere
+imgEl.onload = null;
+imgEl.onerror = null;
+
+// clear then set
+imgEl.removeAttribute("src");
+imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+imgEl.style.objectFit = "contain";
+imgEl.style.objectPosition = "center center";
+
+// first attempt
+imgEl.src = base;
+
+// one clean retry that DOES NOT double-? the URL
+imgEl.onerror = () => {
+  imgEl.onerror = null;
+  imgEl.src = withCacheBuster(base);
+};
 
       $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
 
