@@ -1683,21 +1683,24 @@ function bestImageUrlForPath(filePath) {
 
         const images = (Array.isArray(children) ? children : [])
   .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
-  .map(ch => ({
-    name: ch.name,
-    path: ch.path,                // IMPORTANT: store full repo path
-    url: bestImageUrlForPath(ch.path),
-    raw_fallback_url: rawUrlForPath(ch.path),
-    html_url: ch.html_url || ""
-  }));
+  .map(ch => {
+    // GitHub gives us a perfectly encoded raw URL:
+    // e.g. https://raw.githubusercontent.com/.../folder%20name/001.jpeg
+    const download = ch.download_url || "";
+    const sha = ch.sha || "";
 
-        out.push({
-          name: f.name,
-          path: f.path,
-          html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-          images
-        });
-      }
+    // Use download_url as primary. Only use jsDelivr as an *optional* backup.
+    const primary = download || rawUrlForPath(ch.path);
+
+    return {
+      name: ch.name,
+      path: ch.path,
+      sha,
+      url: primary,                          // PRIMARY (reliable)
+      cdn_fallback_url: cdnUrlForPath(ch.path), // optional fallback
+      html_url: ch.html_url || ""
+    };
+  });
 
       HISTORY.folderItems = out;
       renderHistoryGrid();
@@ -1801,6 +1804,8 @@ function bestImageUrlForPath(filePath) {
 
       $("modalMainImg").style.display = "block";
       $("modalOpenRawLink").textContent = "Open image";
+      $("modalPrevBtn").style.display = "inline-flex";
+      $("modalNextBtn").style.display = "inline-flex";
       
       updateNavButtons();
       buildThumbStrip();
@@ -1915,9 +1920,17 @@ function bestImageUrlForPath(filePath) {
 
   // Build candidate URLs (CDN first, then raw, then raw with cache-buster)
   const candidates = [];
-  if (imgObj.url) candidates.push(imgObj.url);
-  if (imgObj.raw_fallback_url) candidates.push(imgObj.raw_fallback_url);
-  if (imgObj.raw_fallback_url) candidates.push(`${imgObj.raw_fallback_url}?v=${Date.now()}`);
+
+// Primary (GitHub download_url / raw)
+if (imgObj.url) candidates.push(imgObj.url);
+
+// Optional: jsDelivr fallback (sometimes faster, but less reliable)
+if (imgObj.cdn_fallback_url) candidates.push(imgObj.cdn_fallback_url);
+
+// Cache-busted final attempt using sha (stable, not Date.now)
+const bust = imgObj.sha ? imgObj.sha : String(Date.now());
+if (imgObj.url) candidates.push(`${imgObj.url}?v=${encodeURIComponent(bust)}`);
+if (imgObj.cdn_fallback_url) candidates.push(`${imgObj.cdn_fallback_url}?v=${encodeURIComponent(bust)}`);
 
   let attempt = 0;
 
