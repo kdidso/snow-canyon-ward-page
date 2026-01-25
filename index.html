@@ -1626,86 +1626,89 @@ function bestImageUrlForPath(filePath) {
     }
 
     async function loadUnitHistoryWidget() {
-      setHistoryStatus("Loading folders…");
-      clearHistoryGrid();
+  setHistoryStatus("Loading folders…");
+  clearHistoryGrid();
 
-      const { path, branch } = CONFIG.unitHistory;
+  const { path, branch } = CONFIG.unitHistory;
 
-      // List folder entries under unit-history/events
-      // NOTE: per_page is not supported on this endpoint; it returns all children for a directory (usually OK).
-      const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+  // List folder entries under unit-history/events
+  const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
 
-      let items;
-      try {
-        items = await ghFetchJson(listUrl);
-      } catch (err) {
-        console.error(err);
-        setHistoryStatus(
-          "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
-        );
-        return;
-      }
+  let items;
+  try {
+    items = await ghFetchJson(listUrl);
+  } catch (err) {
+    console.error(err);
+    setHistoryStatus(
+      "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
+    );
+    return;
+  }
 
-      if (!Array.isArray(items)) {
-        setHistoryStatus("No folders found (unexpected GitHub response).");
-        return;
-      }
+  if (!Array.isArray(items)) {
+    setHistoryStatus("No folders found (unexpected GitHub response).");
+    return;
+  }
 
-      const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
-      if (folders.length === 0) {
-        setHistoryStatus("No event photo folders found yet.");
-        return;
-      }
+  const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
+  if (folders.length === 0) {
+    setHistoryStatus("No event photo folders found yet.");
+    return;
+  }
 
-      // Load images for each folder (sequential to be nicer to GitHub API)
-      const out = [];
+  // Load images for each folder (sequential)
+  const out = [];
 
-      for (let i = 0; i < folders.length; i++) {
-        const f = folders[i];
-        setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
+  for (let i = 0; i < folders.length; i++) {
+    const f = folders[i];
+    setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
 
-        const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
+    const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
 
-        let children = [];
-        try {
-          children = await ghFetchJson(folderApiUrl);
-        } catch (err) {
-          console.error(err);
-          // Keep folder, but mark as empty
-          out.push({
-            name: f.name,
-            path: f.path,
-            html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-            images: []
-          });
-          continue;
-        }
-
-        const images = (Array.isArray(children) ? children : [])
-  .filter(ch => ch && ch.type === "file" && isImageFile(ch.name))
-  .map(ch => {
-    // GitHub gives us a perfectly encoded raw URL:
-    // e.g. https://raw.githubusercontent.com/.../folder%20name/001.jpeg
-    const download = ch.download_url || "";
-    const sha = ch.sha || "";
-
-    // Use download_url as primary. Only use jsDelivr as an *optional* backup.
-    const primary = download || rawUrlForPath(ch.path);
-
-    return {
-      name: ch.name,
-      path: ch.path,
-      sha,
-      url: primary,                          // PRIMARY (reliable)
-      cdn_fallback_url: cdnUrlForPath(ch.path), // optional fallback
-      html_url: ch.html_url || ""
-    };
-  });
-
-      HISTORY.folderItems = out;
-      renderHistoryGrid();
-      setHistoryStatus("");
+    let children = [];
+    try {
+      children = await ghFetchJson(folderApiUrl);
+    } catch (err) {
+      console.error(err);
+      out.push({
+        name: f.name,
+        path: f.path,
+        html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
+        images: []
+      });
+      continue;
     }
+
+    const images = (Array.isArray(children) ? children : [])
+      .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
+      .map((ch) => {
+        const download = ch.download_url || "";
+        const sha = ch.sha || "";
+        const primary = download || rawUrlForPath(ch.path);
+
+        return {
+          name: ch.name,
+          path: ch.path,
+          sha,
+          url: primary,
+          cdn_fallback_url: cdnUrlForPath(ch.path),
+          html_url: ch.html_url || ""
+        };
+      });
+
+    // ✅ THIS was missing before (and it also closes the loop correctly)
+    out.push({
+      name: f.name,
+      path: f.path,
+      html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
+      images
+    });
+  }
+
+  HISTORY.folderItems = out;
+  renderHistoryGrid();
+  setHistoryStatus("");
+}
 
     function renderHistoryGrid() {
       const grid = $("historyGrid");
