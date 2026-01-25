@@ -647,66 +647,6 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       background: rgba(243, 244, 246, 0.55);
     }
-    /* --- Facebook-like URL bar in modal header --- */
-.modal-linkbar {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.modal-linklabel {
-  font-size: 12px;
-  font-weight: 900;
-  color: #374151;
-  opacity: 0.95;
-  white-space: nowrap;
-}
-
-.modal-linkbox {
-  flex: 1 1 360px;
-  min-width: 180px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 10px;
-  padding: 8px 10px;
-}
-
-.modal-linktext {
-  flex: 1 1 auto;
-  font-size: 12px;
-  font-weight: 700;
-  color: #111827;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.modal-linkbtn {
-  flex: 0 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  background: #fff;
-  color: var(--brand);
-  font-weight: 900;
-  font-size: 12px;
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-}
-
-.modal-linkbtn:hover {
-  background: rgba(21, 116, 147, 0.08);
-}
-
-.modal-linkbtn:focus {
-  outline: 3px solid rgba(21, 116, 147, 0.28);
-  outline-offset: 2px;
-}
-
 
     .modal-titles {
       min-width: 0;
@@ -1202,22 +1142,12 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- Unit history modal -->
-    <!-- Unit history modal -->
-  <div class="modal" id="historyModal" aria-hidden="true">
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="modal" id="historyModal" role="dialog" aria-modal="true" aria-label="Photo folder viewer">
+    <div class="modal-panel">
       <div class="modal-head">
         <div class="modal-titles">
           <p class="modal-subtitle" id="modalSubtitle"></p>
           <h3 class="modal-title" id="modalTitle"></h3>
-
-          <!-- Facebook-like URL bar -->
-          <div class="modal-linkbar" aria-label="Photo link">
-            <div class="modal-linklabel">Link</div>
-            <div class="modal-linkbox">
-              <div class="modal-linktext" id="modalLinkText">—</div>
-              <button class="modal-linkbtn" id="modalCopyLinkBtn" type="button">Copy</button>
-            </div>
-          </div>
         </div>
 
         <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close">
@@ -1245,6 +1175,8 @@
             referrerpolicy="no-referrer"
           />
         </div>
+  
+
 
         <button class="nav-btn" id="modalNextBtn" type="button" aria-label="Next photo">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1395,112 +1327,6 @@
       });
       return fmt.format(dt);
     }
-    // ----------------------------
-// Facebook-like deep linking for modal
-// Uses hash: #photo=<folderPath>&img=<imageName>
-// ----------------------------
-function makePhotoHash(folderPath, imageName) {
-  const p = encodeURIComponent(String(folderPath || ""));
-  const i = encodeURIComponent(String(imageName || ""));
-  return `#photo=${p}&img=${i}`;
-}
-
-function parsePhotoHash() {
-  const h = (window.location.hash || "").replace(/^#/, "");
-  if (!h) return null;
-
-  // Accept both "photo=...&img=..." and "photo=...;img=..." just in case
-  const parts = h.split(/[&;]/g).map(s => s.trim()).filter(Boolean);
-  const kv = {};
-  for (const part of parts) {
-    const eq = part.indexOf("=");
-    if (eq === -1) continue;
-    const k = part.slice(0, eq);
-    const v = part.slice(eq + 1);
-    kv[k] = v;
-  }
-  if (!kv.photo || !kv.img) return null;
-
-  try {
-    return {
-      folderPath: decodeURIComponent(kv.photo),
-      imageName: decodeURIComponent(kv.img)
-    };
-  } catch {
-    return null;
-  }
-}
-
-function setModalLinkText(url) {
-  const el = $("modalLinkText");
-  if (el) el.textContent = url || "—";
-}
-
-async function copyTextToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    showToast("Copied link");
-    return true;
-  } catch (e) {
-    try {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      showToast("Copied link");
-      return true;
-    } catch {
-      showToast("Unable to copy");
-      return false;
-    }
-  }
-}
-
-function updateUrlForCurrentPhoto(replace = true) {
-  const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-  if (!f || !f.images || !f.images.length) return;
-
-  const imgObj = f.images[HISTORY.activeImageIndex];
-  if (!imgObj) return;
-
-  const hash = makePhotoHash(f.path, imgObj.name);
-  const newUrl = window.location.origin + window.location.pathname + window.location.search + hash;
-
-  setModalLinkText(newUrl);
-
-  if (replace) {
-    history.replaceState({ type: "photo", folderPath: f.path, imageName: imgObj.name }, "", hash);
-  } else {
-    history.pushState({ type: "photo", folderPath: f.path, imageName: imgObj.name }, "", hash);
-  }
-}
-
-function clearPhotoHash() {
-  // Remove just the hash without reloading
-  history.replaceState({}, "", window.location.pathname + window.location.search);
-  setModalLinkText(window.location.href);
-}
-
-function findFolderIndexByPath(folderPath) {
-  const folders = HISTORY.folderItems || [];
-  const target = String(folderPath || "");
-  for (let i = 0; i < folders.length; i++) {
-    if (String(folders[i].path) === target) return i;
-  }
-  return -1;
-}
-
-function findImageIndexByName(folderIndex, imageName) {
-  const f = HISTORY.folderItems[folderIndex];
-  if (!f || !f.images) return -1;
-  const target = String(imageName || "");
-  for (let i = 0; i < f.images.length; i++) {
-    if (String(f.images[i].name) === target) return i;
-  }
-  return -1;
-}
 
     // ----------------------------
     // Populate UI
@@ -1703,12 +1529,10 @@ function findImageIndexByName(folderIndex, imageName) {
     // Uses GitHub Contents API (no directory listing needed)
     // ----------------------------
     const HISTORY = {
-  folderItems: [], // [{name, path, html_url, images:[{name, path, sha, url, cdn_fallback_url, html_url}]}]
-  activeFolderIndex: -1,
-  activeImageIndex: 0,
-  activeFolderKey: "",  // encoded folder path key for URL
-  activeImageName: ""   // image filename for URL
-};
+      folderItems: [], // [{name, path, html_url, images:[{name, download_url, html_url}]}]
+      activeFolderIndex: -1,
+      activeImageIndex: 0
+    };
 
     function ghApiBase() {
       const { owner, repo } = CONFIG.unitHistory;
@@ -1880,22 +1704,6 @@ function bestImageUrlForPath(filePath) {
 
   HISTORY.folderItems = out;
   renderHistoryGrid();
-  // If the page was opened with a deep link, open the modal to that photo
-const deep = parsePhotoHash();
-if (deep && deep.folderPath && deep.imageName) {
-  const fi = findFolderIndexByPath(deep.folderPath);
-  if (fi !== -1) {
-    openFolderModal(fi);
-    const ii = findImageIndexByName(fi, deep.imageName);
-    if (ii !== -1) {
-      HISTORY.activeImageIndex = ii;
-      showActiveImage();
-      // ensure URL bar shows the exact deep link
-      updateUrlForCurrentPhoto(true);
-    }
-  }
-}
-
   setHistoryStatus("");
 }
 
@@ -2014,7 +1822,7 @@ if (deep && deep.folderPath && deep.imageName) {
 
   buildThumbStrip();
   showActiveImage();
-  updateUrlForCurrentPhoto(false); 
+
   $("historyModal").classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -2028,7 +1836,6 @@ if (deep && deep.folderPath && deep.imageName) {
 
   const mainImg = $("modalMainImg");
   if (mainImg) mainImg.removeAttribute("src");
-  clearPhotoHash();
 }
 
 
@@ -2139,9 +1946,6 @@ if (deep && deep.folderPath && deep.imageName) {
 
   mainImg.onerror = () => tryLoad();
   tryLoad();
-      // Update the modal URL bar + page hash as user navigates
-  updateUrlForCurrentPhoto(true);
-
 }
     function nextImage() {
       const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
@@ -2159,13 +1963,6 @@ if (deep && deep.folderPath && deep.imageName) {
 
     // Modal event hooks
     $("modalCloseBtn").addEventListener("click", closeFolderModal);
-    // Copy link in modal header
-    $("modalCopyLinkBtn").addEventListener("click", async (e) => {
-      e.stopPropagation();
-      const text = $("modalLinkText") ? $("modalLinkText").textContent : "";
-      if (text && text !== "—") await copyTextToClipboard(text);
-    });
-
     $("modalNextBtn").addEventListener("click", nextImage);
     $("modalPrevBtn").addEventListener("click", prevImage);
 
