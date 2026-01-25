@@ -778,17 +778,6 @@
       fill: #fff;
     }
 
-    .modal-mainimg-wrap {
-      width: 100%;
-      height: min(58vh, 520px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 12px;
-      background: #0b1220;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
 
     .modal-mainimg {
       max-width: 100%;
@@ -802,6 +791,13 @@
       background: #fff;
       border-top: 1px solid rgba(0, 0, 0, 0.08);
     }
+    .modal-frame{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: transparent;
+}
 
     .thumb-strip {
       display: flex;
@@ -1178,8 +1174,15 @@
         </button>
 
         <div class="modal-mainimg-wrap">
-          <img class="modal-mainimg" id="modalMainImg" alt="Photo" />
-        </div>
+          <iframe
+            class="modal-frame"
+            id="modalFrame"
+            title="Photo viewer"
+            loading="eager"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>   
+
 
         <button class="nav-btn" id="modalNextBtn" type="button" aria-label="Next photo">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1877,12 +1880,11 @@ function bestImageUrlForPath(filePath) {
   HISTORY.activeImageIndex = idx;
 
   const imgObj = f.images[idx];
-  const imgEl = $("modalMainImg");
-  const wrapEl = imgEl ? imgEl.parentElement : null;
 
-  // Update counter + link right away
+  // Update counter + link
   $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
   $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
+  $("modalOpenRawLink").textContent = "Open image";
 
   // Highlight active thumb
   const strip = $("modalThumbStrip");
@@ -1890,88 +1892,63 @@ function bestImageUrlForPath(filePath) {
     const thumbs = strip.querySelectorAll(".thumb");
     thumbs.forEach((t, i) => (i === idx ? t.classList.add("active") : t.classList.remove("active")));
 
-    // Ensure active thumb stays visible
     const activeThumb = strip.querySelector(`.thumb[data-thumb-index="${idx}"]`);
     if (activeThumb) activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }
 
-  // Update nav buttons (wrap-around mode keeps them enabled; we'll still keep this clean)
-  updateNavButtons();
+  // Always show arrows; disable if only one image
+  const hasMany = f.images.length > 1;
+  $("modalPrevBtn").disabled = !hasMany;
+  $("modalNextBtn").disabled = !hasMany;
 
-  if (!imgEl || !wrapEl) return;
+  // --- Load the URL into the iframe ---
+  const frame = $("modalFrame");
+  if (!frame) return;
 
-  // --- Loading state (keeps center stable) ---
-  // Hide image while loading so we don't see old dimensions/paint
-  imgEl.style.opacity = "0";
-  imgEl.style.transition = "opacity 120ms ease";
-  imgEl.style.display = "block"; // ensure visible
-  imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+  // Clear first to force reload
+  frame.removeAttribute("src");
 
-  // Optional: show a lightweight loading label without changing layout
-  wrapEl.dataset.loading = "1";
-  wrapEl.setAttribute(
-    "aria-label",
-    `Loading photo ${idx + 1} of ${f.images.length}`
-  );
+  // Use a stable cache-buster so you don't thrash caching but you also avoid stale failures
+  const bust = imgObj.sha ? imgObj.sha : "1";
+  const primary = imgObj.url || "";
+  const fallback = imgObj.cdn_fallback_url || imgObj.raw_fallback_url || "";
 
-  // Reset handlers to avoid stale closures / multiple firing
-  imgEl.onload = null;
-  imgEl.onerror = null;
-
-  // Force browser to treat it as a new request
-  imgEl.removeAttribute("src");
-
-  // Build candidate URLs (CDN first, then raw, then raw with cache-buster)
+  // Candidate URLs
   const candidates = [];
-
-// Primary (GitHub download_url / raw)
-if (imgObj.url) candidates.push(imgObj.url);
-
-// Optional: jsDelivr fallback (sometimes faster, but less reliable)
-if (imgObj.cdn_fallback_url) candidates.push(imgObj.cdn_fallback_url);
-
-// Cache-busted final attempt using sha (stable, not Date.now)
-const bust = imgObj.sha ? imgObj.sha : String(Date.now());
-if (imgObj.url) candidates.push(`${imgObj.url}?v=${encodeURIComponent(bust)}`);
-if (imgObj.cdn_fallback_url) candidates.push(`${imgObj.cdn_fallback_url}?v=${encodeURIComponent(bust)}`);
+  if (primary) candidates.push(primary);
+  if (fallback && fallback !== primary) candidates.push(fallback);
+  if (primary) candidates.push(primary + (primary.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
+  if (fallback && fallback !== primary) candidates.push(fallback + (fallback.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
 
   let attempt = 0;
 
   const tryNext = () => {
     if (attempt >= candidates.length) {
-      // Give up gracefully: keep panel stable, show nothing but update link to folder
-      wrapEl.dataset.loading = "0";
-      imgEl.style.opacity = "0";
-      imgEl.removeAttribute("src");
-      imgEl.alt = "Image failed to load";
+      // Give up gracefully
+      frame.removeAttribute("src");
       $("modalOpenRawLink").href = imgObj.html_url || f.html_url || historyRepoUrl;
       $("modalOpenRawLink").textContent = "Open folder";
       return;
     }
-
-    const url = candidates[attempt++];
-    // Set handlers for this attempt only
-    imgEl.onload = () => {
-      // Loaded successfully
-      wrapEl.dataset.loading = "0";
-      $("modalOpenRawLink").textContent = "Open image";
-      imgEl.style.opacity = "1";
-    };
-
-    imgEl.onerror = () => {
-      // Try next candidate
-      imgEl.onload = null;
-      imgEl.onerror = null;
-      tryNext();
-    };
-
-    imgEl.src = url;
+    frame.src = candidates[attempt++];
   };
 
-  // Start loading
-  tryNext();
+  // Iframe doesn't give reliable "image load error" events across browsers for image documents.
+  // So we do a lightweight HEAD check before setting src (more reliable).
+  const urlToCheck = candidates[attempt];
+  fetch(urlToCheck, { method: "HEAD", cache: "no-store" })
+    .then((r) => {
+      if (r.ok) tryNext();
+      else {
+        attempt++;
+        tryNext();
+      }
+    })
+    .catch(() => {
+      attempt++;
+      tryNext();
+    });
 }
-
     function nextImage() {
       const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
       if (!f || !f.images || !f.images.length) return;
