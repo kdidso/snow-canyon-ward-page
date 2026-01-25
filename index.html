@@ -696,36 +696,72 @@
     }
 
     .modal-body {
-      background: #111827;
-      display: grid;
-      grid-template-columns: 56px 1fr 56px;
-      align-items: center;
-      gap: 8px;
-      padding: 10px;
-      min-height: 220px;
-    }
+  background: #111827;
+  position: relative;              /* NEW: anchor absolute arrows */
+  display: flex;                   /* NEW: simple centering model */
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  min-height: 220px;
+}
 
-    @media (max-width: 640px) {
-      .modal-body {
-        grid-template-columns: 44px 1fr 44px;
-      }
-    }
+/* Image viewing panel */
+.modal-mainimg-wrap {
+  width: 100%;
+  height: min(58vh, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #0b1220;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;              /* ok to keep */
+}
 
-    .nav-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-      position: relative;
-      z-index: 5;
-    }
+/* The main image */
+.modal-mainimg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Overlay nav buttons */
+.nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+
+  position: absolute;              /* NEW */
+  top: 50%;                        /* NEW */
+  transform: translateY(-50%);     /* NEW */
+  z-index: 30;                     /* NEW: always above image */
+}
+
+/* Left/right placement */
+#modalPrevBtn { left: 12px; }
+#modalNextBtn { right: 12px; }
+
+@media (max-width: 640px) {
+  .nav-btn { width: 40px; height: 40px; }
+  #modalPrevBtn { left: 8px; }
+  #modalNextBtn { right: 8px; }
+}
+
+/* Optional: disabled styling (we'll wire this in JS next) */
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
 
     .nav-btn:hover {
       background: rgba(255, 255, 255, 0.14);
@@ -1765,7 +1801,8 @@ function bestImageUrlForPath(filePath) {
 
       $("modalMainImg").style.display = "block";
       $("modalOpenRawLink").textContent = "Open image";
-
+      
+      updateNavButtons();
       buildThumbStrip();
       showActiveImage();
 
@@ -1806,57 +1843,118 @@ function bestImageUrlForPath(filePath) {
 
       strip.appendChild(frag);
     }
+    function updateNavButtons() {
+  const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+  const hasMany = !!(f && f.images && f.images.length > 1);
+
+  const prevBtn = $("modalPrevBtn");
+  const nextBtn = $("modalNextBtn");
+  if (!prevBtn || !nextBtn) return;
+
+  // You are using wrap-around navigation, so arrows should stay enabled when there are 2+ images.
+  // If only 0-1 images, disable for clarity (and to prevent confusion).
+  prevBtn.disabled = !hasMany;
+  nextBtn.disabled = !hasMany;
+
+  // Make sure they are always visible (CSS overlay keeps them in place)
+  prevBtn.style.display = "inline-flex";
+  nextBtn.style.display = "inline-flex";
+}
 
     function showActiveImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
+  const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
+  if (!f || !f.images || !f.images.length) return;
 
-      const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
-      HISTORY.activeImageIndex = idx;
+  const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
+  HISTORY.activeImageIndex = idx;
 
-      const imgObj = f.images[idx];
-      const imgEl = $("modalMainImg");
+  const imgObj = f.images[idx];
+  const imgEl = $("modalMainImg");
+  const wrapEl = imgEl ? imgEl.parentElement : null;
 
-      // Clear first to force a clean re-render in some browsers
-imgEl.removeAttribute("src");
-imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+  // Update counter + link right away
+  $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
+  $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
 
-// Try CDN first
-imgEl.src = imgObj.url;
+  // Highlight active thumb
+  const strip = $("modalThumbStrip");
+  if (strip) {
+    const thumbs = strip.querySelectorAll(".thumb");
+    thumbs.forEach((t, i) => (i === idx ? t.classList.add("active") : t.classList.remove("active")));
 
-// If CDN fails, fall back to raw.githubusercontent.com (no cache-buster needed, but ok if present)
-imgEl.onerror = () => {
-  // Avoid infinite loops
+    // Ensure active thumb stays visible
+    const activeThumb = strip.querySelector(`.thumb[data-thumb-index="${idx}"]`);
+    if (activeThumb) activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+  }
+
+  // Update nav buttons (wrap-around mode keeps them enabled; we'll still keep this clean)
+  updateNavButtons();
+
+  if (!imgEl || !wrapEl) return;
+
+  // --- Loading state (keeps center stable) ---
+  // Hide image while loading so we don't see old dimensions/paint
+  imgEl.style.opacity = "0";
+  imgEl.style.transition = "opacity 120ms ease";
+  imgEl.style.display = "block"; // ensure visible
+  imgEl.alt = imgObj.name || `Photo ${idx + 1}`;
+
+  // Optional: show a lightweight loading label without changing layout
+  wrapEl.dataset.loading = "1";
+  wrapEl.setAttribute(
+    "aria-label",
+    `Loading photo ${idx + 1} of ${f.images.length}`
+  );
+
+  // Reset handlers to avoid stale closures / multiple firing
+  imgEl.onload = null;
   imgEl.onerror = null;
 
-  // Try raw fallback
-  imgEl.src = imgObj.raw_fallback_url;
+  // Force browser to treat it as a new request
+  imgEl.removeAttribute("src");
 
-  // If raw also fails, try one last time with an explicit cache buster
-  imgEl.onerror = () => {
-    imgEl.onerror = null;
-    imgEl.src = `${imgObj.raw_fallback_url}?v=${Date.now()}`;
-  };
-};
+  // Build candidate URLs (CDN first, then raw, then raw with cache-buster)
+  const candidates = [];
+  if (imgObj.url) candidates.push(imgObj.url);
+  if (imgObj.raw_fallback_url) candidates.push(imgObj.raw_fallback_url);
+  if (imgObj.raw_fallback_url) candidates.push(`${imgObj.raw_fallback_url}?v=${Date.now()}`);
 
-      $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
+  let attempt = 0;
 
-      // Link opens the raw image (download_url) which is perfect for share/save
-      $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
-
-      // Highlight active thumb
-      const thumbs = $("modalThumbStrip").querySelectorAll(".thumb");
-      thumbs.forEach((t, i) => {
-        if (i === idx) t.classList.add("active");
-        else t.classList.remove("active");
-      });
-
-      // Ensure the active thumb stays visible
-      const activeThumb = $("modalThumbStrip").querySelector(`.thumb[data-thumb-index="${idx}"]`);
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
-      }
+  const tryNext = () => {
+    if (attempt >= candidates.length) {
+      // Give up gracefully: keep panel stable, show nothing but update link to folder
+      wrapEl.dataset.loading = "0";
+      imgEl.style.opacity = "0";
+      imgEl.removeAttribute("src");
+      imgEl.alt = "Image failed to load";
+      $("modalOpenRawLink").href = imgObj.html_url || f.html_url || historyRepoUrl;
+      $("modalOpenRawLink").textContent = "Open folder";
+      return;
     }
+
+    const url = candidates[attempt++];
+    // Set handlers for this attempt only
+    imgEl.onload = () => {
+      // Loaded successfully
+      wrapEl.dataset.loading = "0";
+      $("modalOpenRawLink").textContent = "Open image";
+      imgEl.style.opacity = "1";
+    };
+
+    imgEl.onerror = () => {
+      // Try next candidate
+      imgEl.onload = null;
+      imgEl.onerror = null;
+      tryNext();
+    };
+
+    imgEl.src = url;
+  };
+
+  // Start loading
+  tryNext();
+}
 
     function nextImage() {
       const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
