@@ -640,6 +640,7 @@
 
     .modal-head {
       display: flex;
+      modal-head: 91vw;
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
@@ -650,6 +651,10 @@
 
     .modal-titles {
       min-width: 0;
+    }
+
+    .modal-foot {
+      width: 91vw;
     }
 
     .modal-subtitle {
@@ -697,6 +702,7 @@
 
     .modal-body {
   background: #111827;
+  width: 91vw;
   position: relative;              /* NEW: anchor absolute arrows */
   display: flex;                   /* NEW: simple centering model */
   align-items: center;
@@ -750,6 +756,7 @@
 /* Left/right placement */
 #modalPrevBtn { left: 12px; }
 #modalNextBtn { right: 12px; }
+
 
 @media (max-width: 640px) {
   .nav-btn { width: 40px; height: 40px; }
