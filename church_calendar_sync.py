@@ -30,8 +30,8 @@ CHURCH_CALENDAR_BASE = "https://www.churchofjesuschrist.org"
 CHURCH_CALENDAR_PAGE = f"{CHURCH_CALENDAR_BASE}/calendar/month?lang=eng"
 CHURCH_TIMEZONE = ZoneInfo("America/Denver")
 
-USERNAME = os.getenv("LCR_USERNAME", "").strip()
-PASSWORD = os.getenv("LCR_PASSWORD", "").strip()
+USERNAME = os.getenv("LDS_USERNAME", "").strip()
+PASSWORD = os.getenv("LDS_PASSWORD", "").strip()
 
 GOOGLE_CALENDAR_ID = os.getenv("GOOGLE_CALENDAR_ID", "").strip()
 GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
@@ -109,7 +109,7 @@ def make_driver() -> webdriver.Chrome:
 
 def login(driver: webdriver.Chrome) -> None:
     if not USERNAME or not PASSWORD:
-        err("Missing env vars LCR_USERNAME and/or LCR_PASSWORD")
+        err("Missing env vars LDS_USERNAME and/or LDS_PASSWORD")
         sys.exit(1)
 
     log("Opening LCR login page")
@@ -380,7 +380,7 @@ def sync_events_to_google(service, calendar_id: str, church_events: List[Dict[st
 
 def main() -> int:
     if not USERNAME or not PASSWORD:
-        err("Missing LCR_USERNAME and/or LCR_PASSWORD environment variables.")
+        err("Missing LDS_USERNAME and/or LDS_PASSWORD environment variables.")
         return 1
 
     driver = make_driver()
