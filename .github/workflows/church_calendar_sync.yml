@@ -38,8 +38,8 @@ jobs:
 
       - name: Run church calendar sync
         env:
-          LCR_USERNAME: ${{ secrets.LCR_USERNAME }}
-          LCR_PASSWORD: ${{ secrets.LCR_PASSWORD }}
+          LDS_USERNAME: ${{ secrets.LDS_USERNAME }}
+          LDS_PASSWORD: ${{ secrets.LDS_PASSWORD }}
           GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           CHURCH_INCLUDE_HIDDEN: "false"
