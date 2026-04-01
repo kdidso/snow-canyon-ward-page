@@ -47,3 +47,10 @@ jobs:
           SYNC_DAYS_FORWARD: "180"
           HEADLESS: "true"
         run: python church_calendar_sync.py
+
+      - name: Upload debug artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: church-calendar-debug
+          path: debug/
