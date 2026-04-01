@@ -152,7 +152,6 @@ def login_to_calendar(driver: webdriver.Chrome) -> None:
         log(f"Page title: {driver.title}")
 
         if "id.churchofjesuschrist.org" in driver.current_url.lower():
-            # Give the redirect/callback flow more time to complete.
             WebDriverWait(driver, LONG_WAIT).until(
                 lambda d: "churchofjesuschrist.org/calendar" in d.current_url.lower()
             )
@@ -166,7 +165,6 @@ def login_to_calendar(driver: webdriver.Chrome) -> None:
             save_debug_artifacts(driver, "calendar_login_stuck")
             raise RuntimeError("Still not on calendar page after login attempt.")
     except Exception as ex:
-        # Save whatever page we are on before raising.
         try:
             save_debug_artifacts(driver, "calendar_login_exception")
         except Exception:
@@ -394,11 +392,41 @@ def get_existing_google_events(
     return existing
 
 
+def delete_missing_google_events(
+    service,
+    calendar_id: str,
+    existing_google_events: Dict[str, Dict[str, Any]],
+    church_source_ids: set[str],
+) -> int:
+    deleted = 0
+
+    for source_id, google_event in existing_google_events.items():
+        if source_id not in church_source_ids:
+            try:
+                service.events().delete(
+                    calendarId=calendar_id,
+                    eventId=google_event["id"],
+                ).execute()
+                deleted += 1
+                log(f"Deleted stale Google event for source ID: {source_id}")
+            except HttpError as ex:
+                err(f"Google API delete error for source {source_id}: {ex}")
+
+    return deleted
+
+
 def sync_events_to_google(service, calendar_id: str, church_events: List[Dict[str, Any]]) -> None:
     if not calendar_id:
         raise RuntimeError("Missing GOOGLE_CALENDAR_ID")
 
     existing = get_existing_google_events(service, calendar_id, SYNC_DAYS_BACK, SYNC_DAYS_FORWARD)
+
+    church_source_ids = {
+        str(evt.get("id") or "").strip()
+        for evt in church_events
+        if str(evt.get("id") or "").strip()
+    }
+
     created = 0
     updated = 0
     skipped = 0
@@ -429,8 +457,16 @@ def sync_events_to_google(service, calendar_id: str, church_events: List[Dict[st
         except HttpError as ex:
             err(f"Google API error for source {source_id}: {ex}")
 
+    deleted = delete_missing_google_events(
+        service=service,
+        calendar_id=calendar_id,
+        existing_google_events=existing,
+        church_source_ids=church_source_ids,
+    )
+
     log(f"Created: {created}")
     log(f"Updated: {updated}")
+    log(f"Deleted: {deleted}")
     log(f"Skipped: {skipped}")
 
 
