@@ -95,7 +95,23 @@ def make_driver() -> webdriver.Chrome:
     return webdriver.Chrome(options=opts)
 
 
-def login(driver: webdriver.Chrome) -> None:
+def submit_login_form(driver: webdriver.Chrome) -> None:
+    user_input = WebDriverWait(driver, LONG_WAIT).until(
+        EC.presence_of_element_located((By.ID, "username-input"))
+    )
+    user_input.clear()
+    user_input.send_keys(USERNAME)
+    user_input.send_keys(Keys.ENTER)
+
+    pwd_input = WebDriverWait(driver, LONG_WAIT).until(
+        EC.presence_of_element_located((By.ID, "password-input"))
+    )
+    pwd_input.clear()
+    pwd_input.send_keys(PASSWORD)
+    pwd_input.send_keys(Keys.ENTER)
+
+
+def login_to_lcr(driver: webdriver.Chrome) -> None:
     if not USERNAME or not PASSWORD:
         err("Missing env vars LDS_USERNAME and/or LDS_PASSWORD")
         sys.exit(1)
@@ -104,26 +120,53 @@ def login(driver: webdriver.Chrome) -> None:
     driver.get(LCR_BASE)
 
     try:
-        user_input = WebDriverWait(driver, LONG_WAIT).until(
-            EC.presence_of_element_located((By.ID, "username-input"))
-        )
-        user_input.clear()
-        user_input.send_keys(USERNAME)
-        user_input.send_keys(Keys.ENTER)
-
-        pwd_input = WebDriverWait(driver, LONG_WAIT).until(
-            EC.presence_of_element_located((By.ID, "password-input"))
-        )
-        pwd_input.clear()
-        pwd_input.send_keys(PASSWORD)
-        pwd_input.send_keys(Keys.ENTER)
-
+        submit_login_form(driver)
         WebDriverWait(driver, LONG_WAIT).until(
             EC.url_contains("churchofjesuschrist.org")
         )
-        log("Login submitted successfully")
+        log("LCR login submitted successfully")
     except Exception as ex:
-        raise RuntimeError("Automated login failed with the known username/password flow.") from ex
+        raise RuntimeError("Automated LCR login failed.") from ex
+
+
+def ensure_calendar_authenticated(driver: webdriver.Chrome) -> None:
+    log("Opening church calendar page")
+    driver.get(CHURCH_CALENDAR_PAGE)
+    WebDriverWait(driver, LONG_WAIT).until(
+        lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+
+    log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
+    log(f"Page title: {driver.title}")
+
+    if "id.churchofjesuschrist.org" in driver.current_url.lower():
+        log("Calendar redirected to sign-in page. Submitting login again for calendar auth.")
+        submit_login_form(driver)
+
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: "churchofjesuschrist.org/calendar" in d.current_url.lower()
+            or "churchofjesuschrist.org" in d.current_url.lower()
+        )
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
+
+        log(f"After calendar sign-in, current URL: {driver.current_url}")
+        log(f"Page title: {driver.title}")
+
+    # One more hit to the calendar page after auth completes
+    driver.get(CHURCH_CALENDAR_PAGE)
+    WebDriverWait(driver, LONG_WAIT).until(
+        lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+
+    log(f"Final calendar URL: {driver.current_url}")
+    log(f"Final page title: {driver.title}")
+
+    for c in driver.get_cookies():
+        domain = c.get("domain", "")
+        if "churchofjesuschrist.org" in domain:
+            log(f"Cookie loaded: {c.get('name')} | domain: {domain}")
 
 
 def build_requests_session_from_driver(driver: webdriver.Chrome) -> requests.Session:
@@ -377,29 +420,8 @@ def main() -> int:
 
     driver = make_driver()
     try:
-        login(driver)
-
-        # Warm the church domain first, then the calendar page.
-        driver.get(CHURCH_CALENDAR_BASE)
-        log(f"After CHURCH_CALENDAR_BASE, current URL: {driver.current_url}")
-        log(f"Page title: {driver.title}")
-
-        WebDriverWait(driver, LONG_WAIT).until(
-            lambda d: d.execute_script("return document.readyState") == "complete"
-        )
-
-        driver.get(CHURCH_CALENDAR_PAGE)
-        log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
-        log(f"Page title: {driver.title}")
-
-        WebDriverWait(driver, LONG_WAIT).until(
-            lambda d: d.execute_script("return document.readyState") == "complete"
-        )
-
-        for c in driver.get_cookies():
-            domain = c.get("domain", "")
-            if "churchofjesuschrist.org" in domain:
-                log(f"Cookie loaded: {c.get('name')} | domain: {domain}")
+        login_to_lcr(driver)
+        ensure_calendar_authenticated(driver)
 
         session = build_requests_session_from_driver(driver)
 
