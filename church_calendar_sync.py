@@ -1,10 +1,8 @@
-# church_calendar_sync.py
 from __future__ import annotations
 
 import json
 import os
 import sys
-from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
@@ -40,7 +38,6 @@ SYNC_DAYS_BACK = int(os.getenv("SYNC_DAYS_BACK", "14"))
 SYNC_DAYS_FORWARD = int(os.getenv("SYNC_DAYS_FORWARD", "180"))
 INCLUDE_HIDDEN_CALENDARS = os.getenv("CHURCH_INCLUDE_HIDDEN", "false").strip().lower() == "true"
 HEADLESS = os.getenv("HEADLESS", "true").strip().lower() != "false"
-DEFAULT_WAIT = 30
 LONG_WAIT = 60
 
 GOOGLE_SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -50,35 +47,28 @@ GOOGLE_SCOPES = ["https://www.googleapis.com/auth/calendar"]
 # HELPERS
 # ============================================================
 
-
 def log(msg: str) -> None:
     print(f"[INFO] {msg}")
-
 
 
 def err(msg: str) -> None:
     print(f"[ERROR] {msg}", file=sys.stderr)
 
 
-
 def now_local() -> datetime:
     return datetime.now(CHURCH_TIMEZONE)
-
 
 
 def to_epoch_ms(dt: datetime) -> int:
     return int(dt.timestamp() * 1000)
 
 
-
 def from_epoch_ms(ms: int) -> datetime:
     return datetime.fromtimestamp(ms / 1000, tz=timezone.utc).astimezone(CHURCH_TIMEZONE)
 
 
-
 def nonempty(values: List[Optional[str]]) -> List[str]:
     return [v.strip() for v in values if isinstance(v, str) and v.strip()]
-
 
 
 def build_date_range(days_back: int, days_forward: int) -> Tuple[int, int]:
@@ -92,7 +82,6 @@ def build_date_range(days_back: int, days_forward: int) -> Tuple[int, int]:
 # SELENIUM LOGIN
 # ============================================================
 
-
 def make_driver() -> webdriver.Chrome:
     opts = ChromeOptions()
     if HEADLESS or os.getenv("CI", "").lower() == "true":
@@ -104,7 +93,6 @@ def make_driver() -> webdriver.Chrome:
     opts.add_argument("--disable-blink-features=AutomationControlled")
     opts.add_argument("--lang=en-US")
     return webdriver.Chrome(options=opts)
-
 
 
 def login(driver: webdriver.Chrome) -> None:
@@ -130,11 +118,12 @@ def login(driver: webdriver.Chrome) -> None:
         pwd_input.send_keys(PASSWORD)
         pwd_input.send_keys(Keys.ENTER)
 
-        WebDriverWait(driver, LONG_WAIT).until(EC.url_contains("churchofjesuschrist.org"))
+        WebDriverWait(driver, LONG_WAIT).until(
+            EC.url_contains("churchofjesuschrist.org")
+        )
         log("Login submitted successfully")
     except Exception as ex:
         raise RuntimeError("Automated login failed with the known username/password flow.") from ex
-
 
 
 def build_requests_session_from_driver(driver: webdriver.Chrome) -> requests.Session:
@@ -163,7 +152,6 @@ def build_requests_session_from_driver(driver: webdriver.Chrome) -> requests.Ses
 # CHURCH EVENT FETCH
 # ============================================================
 
-
 def church_events_api_url(start_ms: int, end_ms: int, include_hidden_calendars: bool) -> str:
     hidden_value = "true" if include_hidden_calendars else "false"
     return (
@@ -172,15 +160,18 @@ def church_events_api_url(start_ms: int, end_ms: int, include_hidden_calendars: 
     )
 
 
-
 def fetch_json(session: requests.Session, url: str) -> dict | list:
     response = session.get(url, timeout=60)
     response.raise_for_status()
     return response.json()
 
 
-
-def fetch_church_events(session: requests.Session, days_back: int, days_forward: int, include_hidden_calendars: bool) -> List[Dict[str, Any]]:
+def fetch_church_events(
+    session: requests.Session,
+    days_back: int,
+    days_forward: int,
+    include_hidden_calendars: bool,
+) -> List[Dict[str, Any]]:
     start_ms, end_ms = build_date_range(days_back, days_forward)
     url = church_events_api_url(start_ms, end_ms, include_hidden_calendars)
     log(f"Fetching church events: {url}")
@@ -197,15 +188,16 @@ def fetch_church_events(session: requests.Session, days_back: int, days_forward:
 # GOOGLE CALENDAR API
 # ============================================================
 
-
 def build_google_service(service_account_json: str):
     if not service_account_json:
         raise RuntimeError("Missing GOOGLE_SERVICE_ACCOUNT_JSON")
 
     info = json.loads(service_account_json)
-    creds = service_account.Credentials.from_service_account_info(info, scopes=GOOGLE_SCOPES)
+    creds = service_account.Credentials.from_service_account_info(
+        info,
+        scopes=GOOGLE_SCOPES,
+    )
     return build("calendar", "v3", credentials=creds, cache_discovery=False)
-
 
 
 def build_google_location(evt: Dict[str, Any]) -> str:
@@ -218,7 +210,6 @@ def build_google_location(evt: Dict[str, Any]) -> str:
             evt.get("postalCode"),
         ])
     )
-
 
 
 def build_google_description(evt: Dict[str, Any]) -> str:
@@ -246,7 +237,6 @@ def build_google_description(evt: Dict[str, Any]) -> str:
         parts.append(f"Source-\n{source_id}")
 
     return "\n\n".join(parts).strip()
-
 
 
 def church_event_to_google_event(evt: Dict[str, Any]) -> Dict[str, Any]:
@@ -293,8 +283,12 @@ def church_event_to_google_event(evt: Dict[str, Any]) -> Dict[str, Any]:
     return body
 
 
-
-def get_existing_google_events(service, calendar_id: str, days_back: int, days_forward: int) -> Dict[str, Dict[str, Any]]:
+def get_existing_google_events(
+    service,
+    calendar_id: str,
+    days_back: int,
+    days_forward: int,
+) -> Dict[str, Dict[str, Any]]:
     now_dt = now_local()
     time_min = (now_dt - timedelta(days=days_back)).replace(hour=0, minute=0, second=0, microsecond=0)
     time_max = (now_dt + timedelta(days=days_forward)).replace(hour=23, minute=59, second=59, microsecond=999000)
@@ -330,7 +324,6 @@ def get_existing_google_events(service, calendar_id: str, days_back: int, days_f
             break
 
     return existing
-
 
 
 def sync_events_to_google(service, calendar_id: str, church_events: List[Dict[str, Any]]) -> None:
@@ -377,7 +370,6 @@ def sync_events_to_google(service, calendar_id: str, church_events: List[Dict[st
 # MAIN
 # ============================================================
 
-
 def main() -> int:
     if not USERNAME or not PASSWORD:
         err("Missing LDS_USERNAME and/or LDS_PASSWORD environment variables.")
@@ -385,8 +377,6 @@ def main() -> int:
 
     driver = make_driver()
     try:
-        login(driver)
-
         login(driver)
 
         # Warm the church domain first, then the calendar page.
@@ -414,11 +404,6 @@ def main() -> int:
         session = build_requests_session_from_driver(driver)
 
         church_events = fetch_church_events(
-            session=session,
-            days_back=SYNC_DAYS_BACK,
-            days_forward=SYNC_DAYS_FORWARD,
-            include_hidden_calendars=INCLUDE_HIDDEN_CALENDARS,
-        )
             session=session,
             days_back=SYNC_DAYS_BACK,
             days_forward=SYNC_DAYS_FORWARD,
