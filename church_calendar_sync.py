@@ -23,9 +23,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 # CONFIG
 # ============================================================
 
-LCR_BASE = "https://lcr.churchofjesuschrist.org"
 CHURCH_CALENDAR_BASE = "https://www.churchofjesuschrist.org"
-CHURCH_CALENDAR_PAGE = f"{CHURCH_CALENDAR_BASE}/calendar/month?lang=eng"
+CHURCH_CALENDAR_PAGE = "https://www.churchofjesuschrist.org/calendar/month?lang=eng&date=1775005468156"
 CHURCH_TIMEZONE = ZoneInfo("America/Denver")
 
 USERNAME = os.getenv("LDS_USERNAME", "").strip()
@@ -111,51 +110,30 @@ def submit_login_form(driver: webdriver.Chrome) -> None:
     pwd_input.send_keys(Keys.ENTER)
 
 
-def login_to_lcr(driver: webdriver.Chrome) -> None:
+def login_to_calendar(driver: webdriver.Chrome) -> None:
     if not USERNAME or not PASSWORD:
         err("Missing env vars LDS_USERNAME and/or LDS_PASSWORD")
         sys.exit(1)
 
-    log("Opening LCR login page")
-    driver.get(LCR_BASE)
+    log("Opening church calendar login page")
+    driver.get(CHURCH_CALENDAR_PAGE)
 
     try:
         submit_login_form(driver)
-        WebDriverWait(driver, LONG_WAIT).until(
-            EC.url_contains("churchofjesuschrist.org")
-        )
-        log("LCR login submitted successfully")
-    except Exception as ex:
-        raise RuntimeError("Automated LCR login failed.") from ex
 
-
-def ensure_calendar_authenticated(driver: webdriver.Chrome) -> None:
-    log("Opening church calendar page")
-    driver.get(CHURCH_CALENDAR_PAGE)
-    WebDriverWait(driver, LONG_WAIT).until(
-        lambda d: d.execute_script("return document.readyState") == "complete"
-    )
-
-    log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
-    log(f"Page title: {driver.title}")
-
-    if "id.churchofjesuschrist.org" in driver.current_url.lower():
-        log("Calendar redirected to sign-in page. Submitting login again for calendar auth.")
-        submit_login_form(driver)
-
-        WebDriverWait(driver, LONG_WAIT).until(
-            lambda d: "churchofjesuschrist.org/calendar" in d.current_url.lower()
-            or "churchofjesuschrist.org" in d.current_url.lower()
-        )
         WebDriverWait(driver, LONG_WAIT).until(
             lambda d: d.execute_script("return document.readyState") == "complete"
         )
 
-        log(f"After calendar sign-in, current URL: {driver.current_url}")
+        log(f"After login, current URL: {driver.current_url}")
         log(f"Page title: {driver.title}")
+    except Exception as ex:
+        raise RuntimeError("Automated calendar login failed.") from ex
 
-    # One more hit to the calendar page after auth completes
+
+def warm_calendar_page(driver: webdriver.Chrome) -> None:
     driver.get(CHURCH_CALENDAR_PAGE)
+
     WebDriverWait(driver, LONG_WAIT).until(
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
@@ -420,8 +398,8 @@ def main() -> int:
 
     driver = make_driver()
     try:
-        login_to_lcr(driver)
-        ensure_calendar_authenticated(driver)
+        login_to_calendar(driver)
+        warm_calendar_page(driver)
 
         session = build_requests_session_from_driver(driver)
 
