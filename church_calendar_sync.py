@@ -390,6 +390,15 @@ def main() -> int:
         # Open the calendar page to ensure the same auth/session context is warm.
         driver.get(CHURCH_CALENDAR_PAGE)
 
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: "churchofjesuschrist.org/calendar" in d.current_url
+        )
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: len(d.get_cookies()) > 0
+        )
+
+        log(f"Calendar page current URL: {driver.current_url}")
+
         session = build_requests_session_from_driver(driver)
         church_events = fetch_church_events(
             session=session,
