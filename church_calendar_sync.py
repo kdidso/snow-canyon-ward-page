@@ -1,6 +1,4 @@
 # church_calendar_sync.py
-
-```python
 from __future__ import annotations
 
 import json
