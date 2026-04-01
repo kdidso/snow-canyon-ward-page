@@ -29,7 +29,7 @@ DEBUG_DIR.mkdir(exist_ok=True)
 # ============================================================
 
 CHURCH_CALENDAR_BASE = "https://www.churchofjesuschrist.org"
-CHURCH_CALENDAR_PAGE = "https://www.churchofjesuschrist.org/calendar/month?lang=eng&date=1775005468156"
+CHURCH_CALENDAR_PAGE = "https://www.churchofjesuschrist.org/calendar/month?lang=eng"
 CHURCH_TIMEZONE = ZoneInfo("America/Denver")
 
 USERNAME = os.getenv("LDS_USERNAME", "").strip()
