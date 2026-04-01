@@ -4,6 +4,7 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
 
@@ -17,7 +18,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from pathlib import Path
+
 
 DEBUG_DIR = Path("debug")
 DEBUG_DIR.mkdir(exist_ok=True)
@@ -50,6 +51,14 @@ GOOGLE_SCOPES = ["https://www.googleapis.com/auth/calendar"]
 # HELPERS
 # ============================================================
 
+def log(msg: str) -> None:
+    print(f"[INFO] {msg}")
+
+
+def err(msg: str) -> None:
+    print(f"[ERROR] {msg}", file=sys.stderr)
+
+
 def save_debug_artifacts(driver: webdriver.Chrome, label: str) -> None:
     png_path = DEBUG_DIR / f"{label}.png"
     html_path = DEBUG_DIR / f"{label}.html"
@@ -61,16 +70,6 @@ def save_debug_artifacts(driver: webdriver.Chrome, label: str) -> None:
     log(f"Saved page source: {html_path}")
     log(f"Current URL: {driver.current_url}")
     log(f"Page title: {driver.title}")
-    if "id.churchofjesuschrist.org" in driver.current_url.lower():
-        save_debug_artifacts(driver, "calendar_login_stuck")
-        raise RuntimeError("Still on sign-in page after login attempt.")
-
-def log(msg: str) -> None:
-    print(f"[INFO] {msg}")
-
-
-def err(msg: str) -> None:
-    print(f"[ERROR] {msg}", file=sys.stderr)
 
 
 def now_local() -> datetime:
@@ -144,12 +143,34 @@ def login_to_calendar(driver: webdriver.Chrome) -> None:
             lambda d: d.execute_script("return document.readyState") == "complete"
         )
 
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: "churchofjesuschrist.org/calendar" in d.current_url.lower()
+            or "id.churchofjesuschrist.org" in d.current_url.lower()
+        )
+
         log(f"After login, current URL: {driver.current_url}")
         log(f"Page title: {driver.title}")
+
         if "id.churchofjesuschrist.org" in driver.current_url.lower():
+            # Give the redirect/callback flow more time to complete.
+            WebDriverWait(driver, LONG_WAIT).until(
+                lambda d: "churchofjesuschrist.org/calendar" in d.current_url.lower()
+            )
+            WebDriverWait(driver, LONG_WAIT).until(
+                lambda d: d.execute_script("return document.readyState") == "complete"
+            )
+            log(f"After extended wait, current URL: {driver.current_url}")
+            log(f"Page title: {driver.title}")
+
+        if "churchofjesuschrist.org/calendar" not in driver.current_url.lower():
             save_debug_artifacts(driver, "calendar_login_stuck")
-            raise RuntimeError("Still on sign-in page after login attempt.")
+            raise RuntimeError("Still not on calendar page after login attempt.")
     except Exception as ex:
+        # Save whatever page we are on before raising.
+        try:
+            save_debug_artifacts(driver, "calendar_login_exception")
+        except Exception:
+            pass
         raise RuntimeError("Automated calendar login failed.") from ex
 
 
@@ -162,9 +183,11 @@ def warm_calendar_page(driver: webdriver.Chrome) -> None:
 
     log(f"Final calendar URL: {driver.current_url}")
     log(f"Final page title: {driver.title}")
+
     if "id.churchofjesuschrist.org" in driver.current_url.lower():
         save_debug_artifacts(driver, "calendar_warm_stuck")
         raise RuntimeError("Still on sign-in page after warming calendar page.")
+
     for c in driver.get_cookies():
         domain = c.get("domain", "")
         if "churchofjesuschrist.org" in domain:
