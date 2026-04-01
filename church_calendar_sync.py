@@ -387,30 +387,38 @@ def main() -> int:
     try:
         login(driver)
 
+        login(driver)
+
         # Warm the church domain first, then the calendar page.
-driver.get(CHURCH_CALENDAR_BASE)
-log(f"After CHURCH_CALENDAR_BASE, current URL: {driver.current_url}")
-log(f"Page title: {driver.title}")
+        driver.get(CHURCH_CALENDAR_BASE)
+        log(f"After CHURCH_CALENDAR_BASE, current URL: {driver.current_url}")
+        log(f"Page title: {driver.title}")
 
-WebDriverWait(driver, LONG_WAIT).until(
-    lambda d: d.execute_script("return document.readyState") == "complete"
-)
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
 
-driver.get(CHURCH_CALENDAR_PAGE)
-log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
-log(f"Page title: {driver.title}")
+        driver.get(CHURCH_CALENDAR_PAGE)
+        log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
+        log(f"Page title: {driver.title}")
 
-WebDriverWait(driver, LONG_WAIT).until(
-    lambda d: d.execute_script("return document.readyState") == "complete"
-)
+        WebDriverWait(driver, LONG_WAIT).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
 
-for c in driver.get_cookies():
-    domain = c.get("domain", "")
-    if "churchofjesuschrist.org" in domain:
-        log(f"Cookie loaded: {c.get('name')} | domain: {domain}")
+        for c in driver.get_cookies():
+            domain = c.get("domain", "")
+            if "churchofjesuschrist.org" in domain:
+                log(f"Cookie loaded: {c.get('name')} | domain: {domain}")
 
-session = build_requests_session_from_driver(driver)
+        session = build_requests_session_from_driver(driver)
+
         church_events = fetch_church_events(
+            session=session,
+            days_back=SYNC_DAYS_BACK,
+            days_forward=SYNC_DAYS_FORWARD,
+            include_hidden_calendars=INCLUDE_HIDDEN_CALENDARS,
+        )
             session=session,
             days_back=SYNC_DAYS_BACK,
             days_forward=SYNC_DAYS_FORWARD,
