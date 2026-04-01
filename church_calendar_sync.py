@@ -508,8 +508,8 @@ def main() -> int:
             "calendarId": "TEST",
         }
 
-        church_events.append(fake_event)
-        log("Added test event for deletion test")
+        # church_events.append(fake_event)
+        # log("Added test event for deletion test")
 
         google_service = build_google_service(GOOGLE_SERVICE_ACCOUNT_JSON)
         sync_events_to_google(
