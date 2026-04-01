@@ -3,7 +3,8 @@ name: Sync Church Calendar to Google Calendar
 on:
   workflow_dispatch:
   schedule:
-    - cron: "23 */6 * * *"
+    - cron: "0 15 * * 3"
+    - cron: "0 18 * * 0"
 
 jobs:
   sync:
