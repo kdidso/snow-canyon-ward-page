@@ -492,6 +492,23 @@ def main() -> int:
             days_forward=SYNC_DAYS_FORWARD,
             include_hidden_calendars=INCLUDE_HIDDEN_CALENDARS,
         )
+        # TEMP TEST EVENT
+        fake_event = {
+            "id": "TEST_DELETE_12345",
+            "name": "Test Delete Event",
+            "startTime": to_epoch_ms(now_local() + timedelta(hours=1)),
+            "endTime": to_epoch_ms(now_local() + timedelta(hours=2)),
+            "allDayEvent": False,
+            "description": "Testing deletion logic",
+            "eventContact": {},
+            "owningUnitName": "Test Unit",
+            "calendarName": "Test Calendar",
+            "updatedDate": str(datetime.now().timestamp()),
+            "calendarId": "TEST"
+}
+
+church_events.append(fake_event)
+log("Added test event for deletion test")
 
         google_service = build_google_service(GOOGLE_SERVICE_ACCOUNT_JSON)
         sync_events_to_google(
