@@ -17,6 +17,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from pathlib import Path
+
+DEBUG_DIR = Path("debug")
+DEBUG_DIR.mkdir(exist_ok=True)
 
 
 # ============================================================
@@ -45,6 +49,21 @@ GOOGLE_SCOPES = ["https://www.googleapis.com/auth/calendar"]
 # ============================================================
 # HELPERS
 # ============================================================
+
+def save_debug_artifacts(driver: webdriver.Chrome, label: str) -> None:
+    png_path = DEBUG_DIR / f"{label}.png"
+    html_path = DEBUG_DIR / f"{label}.html"
+
+    driver.save_screenshot(str(png_path))
+    html_path.write_text(driver.page_source, encoding="utf-8")
+
+    log(f"Saved screenshot: {png_path}")
+    log(f"Saved page source: {html_path}")
+    log(f"Current URL: {driver.current_url}")
+    log(f"Page title: {driver.title}")
+    if "id.churchofjesuschrist.org" in driver.current_url.lower():
+        save_debug_artifacts(driver, "calendar_login_stuck")
+        raise RuntimeError("Still on sign-in page after login attempt.")
 
 def log(msg: str) -> None:
     print(f"[INFO] {msg}")
@@ -127,6 +146,9 @@ def login_to_calendar(driver: webdriver.Chrome) -> None:
 
         log(f"After login, current URL: {driver.current_url}")
         log(f"Page title: {driver.title}")
+        if "id.churchofjesuschrist.org" in driver.current_url.lower():
+            save_debug_artifacts(driver, "calendar_login_stuck")
+            raise RuntimeError("Still on sign-in page after login attempt.")
     except Exception as ex:
         raise RuntimeError("Automated calendar login failed.") from ex
 
@@ -140,7 +162,9 @@ def warm_calendar_page(driver: webdriver.Chrome) -> None:
 
     log(f"Final calendar URL: {driver.current_url}")
     log(f"Final page title: {driver.title}")
-
+    if "id.churchofjesuschrist.org" in driver.current_url.lower():
+        save_debug_artifacts(driver, "calendar_warm_stuck")
+        raise RuntimeError("Still on sign-in page after warming calendar page.")
     for c in driver.get_cookies():
         domain = c.get("domain", "")
         if "churchofjesuschrist.org" in domain:
