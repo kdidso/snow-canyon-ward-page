@@ -387,19 +387,29 @@ def main() -> int:
     try:
         login(driver)
 
-        # Open the calendar page to ensure the same auth/session context is warm.
-        driver.get(CHURCH_CALENDAR_PAGE)
+        # Warm the church domain first, then the calendar page.
+driver.get(CHURCH_CALENDAR_BASE)
+log(f"After CHURCH_CALENDAR_BASE, current URL: {driver.current_url}")
+log(f"Page title: {driver.title}")
 
-        WebDriverWait(driver, LONG_WAIT).until(
-            lambda d: "churchofjesuschrist.org/calendar" in d.current_url
-        )
-        WebDriverWait(driver, LONG_WAIT).until(
-            lambda d: len(d.get_cookies()) > 0
-        )
+WebDriverWait(driver, LONG_WAIT).until(
+    lambda d: d.execute_script("return document.readyState") == "complete"
+)
 
-        log(f"Calendar page current URL: {driver.current_url}")
+driver.get(CHURCH_CALENDAR_PAGE)
+log(f"After CHURCH_CALENDAR_PAGE, current URL: {driver.current_url}")
+log(f"Page title: {driver.title}")
 
-        session = build_requests_session_from_driver(driver)
+WebDriverWait(driver, LONG_WAIT).until(
+    lambda d: d.execute_script("return document.readyState") == "complete"
+)
+
+for c in driver.get_cookies():
+    domain = c.get("domain", "")
+    if "churchofjesuschrist.org" in domain:
+        log(f"Cookie loaded: {c.get('name')} | domain: {domain}")
+
+session = build_requests_session_from_driver(driver)
         church_events = fetch_church_events(
             session=session,
             days_back=SYNC_DAYS_BACK,
