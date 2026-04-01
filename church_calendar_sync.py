@@ -492,6 +492,7 @@ def main() -> int:
             days_forward=SYNC_DAYS_FORWARD,
             include_hidden_calendars=INCLUDE_HIDDEN_CALENDARS,
         )
+
         # TEMP TEST EVENT
         fake_event = {
             "id": "TEST_DELETE_12345",
@@ -504,11 +505,11 @@ def main() -> int:
             "owningUnitName": "Test Unit",
             "calendarName": "Test Calendar",
             "updatedDate": str(datetime.now().timestamp()),
-            "calendarId": "TEST"
-}
+            "calendarId": "TEST",
+        }
 
-church_events.append(fake_event)
-log("Added test event for deletion test")
+        church_events.append(fake_event)
+        log("Added test event for deletion test")
 
         google_service = build_google_service(GOOGLE_SERVICE_ACCOUNT_JSON)
         sync_events_to_google(
@@ -519,6 +520,7 @@ log("Added test event for deletion test")
 
         log("Church calendar sync completed successfully")
         return 0
+
     finally:
         try:
             driver.quit()
