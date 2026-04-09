@@ -1071,58 +1071,59 @@
         activities. Come join us! We welcome you to RSVP.
       </p>
 
-      <section class="panel" id="meeting" aria-label="Meeting info and map">
-<div class="meeting-line">
-  <span id="serviceTitle1">Sunday Service (West chapel)</span>
-  <span id="serviceTime1">10:30 AM</span>
-</div>
-
-<div class="meeting-line">
-  <span id="serviceTitle2">Gospel Study</span>
-  <span id="serviceTime2">11:45 AM</span>
-</div>
-
-<div class="address" aria-label="Meeting locations">
-  <div style="margin-bottom: 14px;">
-    <div style="font-weight: 700;">Sunday Service</div>
-    <div id="addrLine1">943 East 400 South</div>
-    <div>
-      <span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span>
-      <span id="addrZip">84770</span>
+<section class="panel" id="meeting" aria-label="Meeting info and map">
+  <div class="panel-left">
+    <div class="meeting-line">
+      <span id="serviceTitle1">Sunday Service (West chapel)</span>
+      <span id="serviceTime1">10:30 AM</span>
     </div>
+
+    <div class="meeting-line">
+      <span id="serviceTitle2">Gospel Study</span>
+      <span id="serviceTime2">11:45 AM</span>
+    </div>
+
+    <div class="address" aria-label="Meeting locations">
+      <div style="margin-bottom: 14px;">
+        <div style="font-weight: 700;">Sunday Service</div>
+        <div id="addrLine1">943 East 400 South</div>
+        <div>
+          <span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span>
+          <span id="addrZip">84770</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-weight: 700;">Gospel Study</div>
+        <div id="addrLine2">290 S 700 E</div>
+        <div>
+          <span id="addrCity2">St. George</span><span class="muted">, </span><span id="addrState2">UT</span>
+          <span id="addrZip2">84770</span>
+        </div>
+      </div>
+    </div>
+
+    <a
+      class="directions"
+      id="directionsLink"
+      href="#"
+      target="_blank"
+      rel="noopener"
+      aria-label="Directions to Sunday Service in Google Maps"
+    >
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path
+          d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"
+        ></path>
+      </svg>
+      <span>Directions to Sunday Service</span>
+    </a>
   </div>
 
-  <div>
-    <div style="font-weight: 700;">Gospel Study</div>
-    <div id="addrLine2">290 S 700 E</div>
-    <div>
-      <span id="addrCity2">St. George</span><span class="muted">, </span><span id="addrState2">UT</span>
-      <span id="addrZip2">84770</span>
-    </div>
+  <div class="panel-right">
+    <div id="map" aria-label="Map"></div>
   </div>
-</div>
-
-<a
-  class="directions"
-  id="directionsLink"
-  href="#"
-  target="_blank"
-  rel="noopener"
-  aria-label="Directions to Sunday Service in Google Maps"
->
-  <svg viewBox="0 0 20 20" aria-hidden="true">
-    <path
-      d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"
-    ></path>
-  </svg>
-  <span>Directions to Sunday Service</span>
-</a>
-        </div>
-
-        <div class="panel-right">
-          <div id="map" aria-label="Map"></div>
-        </div>
-      </section>
+</section>
 
       <!-- THIS WEEK'S COME FOLLOW ME STUDY -->
       <section class="cfm-card" aria-label="This week's Come Follow Me study">
