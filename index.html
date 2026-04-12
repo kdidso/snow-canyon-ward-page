@@ -450,7 +450,14 @@
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       position: relative;
-    }
+    }  
+   
+    /* Mobile fix */
+@media (max-width: 640px) {
+  .events-body {
+    height: 450px;
+  }
+}
 
     .events-iframe {
       width: 100%;
