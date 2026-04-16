@@ -35,11 +35,8 @@ jobs:
 
       - name: Sync Unit History into repo
         env:
-          # Auth options (username/password)
           LDS_USERNAME: ${{ secrets.LDS_USERNAME }}
           LDS_PASSWORD: ${{ secrets.LDS_PASSWORD }}
-
-          # Optional behavior toggles
           HEADLESS: "1"
           SKIP_EXISTING_FOLDERS: "1"
           OUT_DIR: "unit-history/events"
@@ -47,6 +44,10 @@ jobs:
           MANIFEST_PATH: "unit-history/manifest.json"
         run: |
           python scripts/unit_history_sync.py
+
+      - name: Build unit history index
+        run: |
+          python scripts/build_unit_history_index.py
 
       - name: Upload run artifact (optional)
         uses: actions/upload-artifact@v4
@@ -59,16 +60,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add unit-history/events unit-history/manifest.json unit-history/unit_history_export.zip || true
+          git add unit-history/events \
+                  unit-history/manifest.json \
+                  unit-history/unit_history_export.zip \
+                  data/unit_history_index.json || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "Update Unit History events"
+          git commit -m "Update Unit History events and index"
           git push
-      
+
       - name: Upload debug artifacts
         if: failure()
         uses: actions/upload-artifact@v4
