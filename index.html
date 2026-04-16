@@ -1757,119 +1757,37 @@ async function loadUnitHistoryWidget() {
   setHistoryStatus("Loading folders…");
   clearHistoryGrid();
 
-  const { path, branch } = CONFIG.unitHistory;
-
-  const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
-
-  let items;
   try {
-    items = await ghFetchJson(listUrl);
+    const res = await fetch("./data/unit_history_index.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to load unit_history_index.json (${res.status})`);
+
+    const data = await res.json();
+    const folders = Array.isArray(data.folders) ? data.folders : [];
+
+    HISTORY.folderItems = folders.map((f) => ({
+      name: f.folder_name || "",
+      path: f.folder || "",
+      html_url: f.folder || "",
+      manifestDateText: f.date_text || "",
+      sortDateKey: f.sort_date || null,
+      thumbnail_url: f.thumbnail_url || "",
+      images: Array.isArray(f.images)
+        ? f.images.map((img) => ({
+            name: img.name || "",
+            path: img.path || "",
+            url: img.url || "",
+            cdn_fallback_url: "",
+            html_url: img.url || ""
+          }))
+        : []
+    }));
+
+    renderHistoryGrid();
+    setHistoryStatus("");
   } catch (err) {
     console.error(err);
-    setHistoryStatus(
-      "Unable to load folders right now (GitHub API). If you refresh and it still fails, you may be rate-limited."
-    );
-    return;
+    setHistoryStatus("Unable to load folders right now.");
   }
-
-  if (!Array.isArray(items)) {
-    setHistoryStatus("No folders found (unexpected GitHub response).");
-    return;
-  }
-
-  const folders = items.filter((it) => it && it.type === "dir");
-  if (folders.length === 0) {
-    setHistoryStatus("No event photo folders found yet.");
-    return;
-  }
-
-  const out = [];
-
-  for (let i = 0; i < folders.length; i++) {
-    const f = folders[i];
-    setHistoryStatus(`Loading folders… (${i + 1}/${folders.length})`);
-
-    const folderApiUrl = `${ghApiBase()}/contents/${encodeURIComponent(f.path)}?ref=${encodeURIComponent(branch)}`;
-
-    let children = [];
-    try {
-      children = await ghFetchJson(folderApiUrl);
-    } catch (err) {
-      console.error(err);
-      out.push({
-        name: f.name,
-        path: f.path,
-        html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-        images: [],
-        manifestDateText: "",
-        sortDateKey: null
-      });
-      continue;
-    }
-
-    const childArray = Array.isArray(children) ? children : [];
-
-    const images = childArray
-      .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
-      .map((ch) => {
-        const download = ch.download_url || "";
-        const sha = ch.sha || "";
-        const primary = download || rawUrlForPath(ch.path);
-
-        return {
-          name: ch.name,
-          path: ch.path,
-          sha,
-          url: primary,
-          cdn_fallback_url: cdnUrlForPath(ch.path),
-          html_url: ch.html_url || ""
-        };
-      });
-
-    let manifestDateText = "";
-    let sortDateKey = null;
-
-    const manifestFile = childArray.find(
-      (ch) => ch && ch.type === "file" && String(ch.name).toLowerCase() === "manifest.json"
-    );
-
-    if (manifestFile && manifestFile.download_url) {
-      try {
-        const manifestRes = await fetch(manifestFile.download_url, { cache: "no-store" });
-        if (manifestRes.ok) {
-          const manifest = await manifestRes.json();
-          manifestDateText = String(manifest.date_text || "").trim();
-          sortDateKey = parseManifestDateText(manifestDateText);
-        }
-      } catch (err) {
-        console.error("Manifest load failed for folder:", f.name, err);
-      }
-    }
-
-    out.push({
-      name: f.name,
-      path: f.path,
-      html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-      images,
-      manifestDateText,
-      sortDateKey
-    });
-  }
-
-  out.sort((a, b) => {
-    const ka = a.sortDateKey;
-    const kb = b.sortDateKey;
-
-    if (ka !== null && kb !== null) return kb - ka; // newest first
-    if (ka !== null && kb === null) return -1;
-    if (ka === null && kb !== null) return 1;
-
-    return String(a.name).localeCompare(String(b.name));
-  });
-
-  HISTORY.folderItems = out;
-  renderHistoryGrid();
-  setHistoryStatus("");
 }
 
     function renderHistoryGrid() {
@@ -1890,7 +1808,7 @@ async function loadUnitHistoryWidget() {
         const { title, subtitle } = splitFolderName(f.name);
         const dateLine = f.manifestDateText || prettyDateFromPrefix(f.name);
 
-        const thumb = (f.images && f.images.length ? f.images[0].url : "");
+        const thumb = f.thumbnail_url || (f.images && f.images.length ? f.images[0].url : "");
         const count = f.images && f.images.length ? f.images.length : 0;
 
         const card = document.createElement("div");
