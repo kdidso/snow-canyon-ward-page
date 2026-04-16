@@ -49,7 +49,10 @@ def parse_folder_name_date(folder_name: str) -> str | None:
     """
     raw = (folder_name or "").strip()
 
-    if raw.lower() == "march stake conference saturday evening - march stake conference saturday evening":
+    # Normalize spacing for safer matching
+    normalized = re.sub(r"\s+", " ", raw).strip().lower()
+
+    if normalized == "march stake conference saturday evening - march stake conference saturday evening":
         return "2025-03-01"
 
     m = re.search(
