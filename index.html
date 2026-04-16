@@ -1660,7 +1660,7 @@ function sortFoldersSmart(folders) {
   // "March stake conference Saturday evening" => March 2025
 
   const specialDateMap = {
-    "March stake conference Saturday evening".toLowerCase(): Date.UTC(2025, 2, 1) // March 1, 2025
+    "march stake conference saturday evening": Date.UTC(2025, 2, 1) // March 1, 2025
   };
 
   function toKey(name) {
@@ -1714,12 +1714,10 @@ function sortFoldersSmart(folders) {
     const ka = toKey(a.name);
     const kb = toKey(b.name);
 
-    // Dated folders first, newest to oldest
     if (ka !== null && kb !== null) return kb - ka;
     if (ka !== null && kb === null) return -1;
     if (ka === null && kb !== null) return 1;
 
-    // Non-dated folders at the bottom, alphabetical
     return String(a.name).localeCompare(String(b.name));
   });
 }
