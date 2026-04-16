@@ -1379,6 +1379,20 @@
       });
       return fmt.format(dt);
     }
+function parseManifestDateText(dateText) {
+  const raw = String(dateText || "").trim();
+  if (!raw) return null;
+
+  // Examples:
+  // "Apr 6, 2026"
+  // "Nov 10, 2025"
+  // "Mar 1, 2026"
+
+  const parsed = Date.parse(raw);
+  if (!Number.isNaN(parsed)) return parsed;
+
+  return null;
+}
 
     // ----------------------------
     // Populate UI
@@ -1739,13 +1753,12 @@ function sortFoldersSmart(folders) {
       return res.json();
     }
 
-    async function loadUnitHistoryWidget() {
+async function loadUnitHistoryWidget() {
   setHistoryStatus("Loading folders…");
   clearHistoryGrid();
 
   const { path, branch } = CONFIG.unitHistory;
 
-  // List folder entries under unit-history/events
   const listUrl = `${ghApiBase()}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
 
   let items;
@@ -1764,13 +1777,12 @@ function sortFoldersSmart(folders) {
     return;
   }
 
-  const folders = sortFoldersSmart(items.filter((it) => it && it.type === "dir"));
+  const folders = items.filter((it) => it && it.type === "dir");
   if (folders.length === 0) {
     setHistoryStatus("No event photo folders found yet.");
     return;
   }
 
-  // Load images for each folder (sequential)
   const out = [];
 
   for (let i = 0; i < folders.length; i++) {
@@ -1788,12 +1800,16 @@ function sortFoldersSmart(folders) {
         name: f.name,
         path: f.path,
         html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-        images: []
+        images: [],
+        manifestDateText: "",
+        sortDateKey: null
       });
       continue;
     }
 
-    const images = (Array.isArray(children) ? children : [])
+    const childArray = Array.isArray(children) ? children : [];
+
+    const images = childArray
       .filter((ch) => ch && ch.type === "file" && isImageFile(ch.name))
       .map((ch) => {
         const download = ch.download_url || "";
@@ -1810,14 +1826,46 @@ function sortFoldersSmart(folders) {
         };
       });
 
-    // ✅ THIS was missing before (and it also closes the loop correctly)
+    let manifestDateText = "";
+    let sortDateKey = null;
+
+    const manifestFile = childArray.find(
+      (ch) => ch && ch.type === "file" && String(ch.name).toLowerCase() === "manifest.json"
+    );
+
+    if (manifestFile && manifestFile.download_url) {
+      try {
+        const manifestRes = await fetch(manifestFile.download_url, { cache: "no-store" });
+        if (manifestRes.ok) {
+          const manifest = await manifestRes.json();
+          manifestDateText = String(manifest.date_text || "").trim();
+          sortDateKey = parseManifestDateText(manifestDateText);
+        }
+      } catch (err) {
+        console.error("Manifest load failed for folder:", f.name, err);
+      }
+    }
+
     out.push({
       name: f.name,
       path: f.path,
       html_url: f.html_url || `${ghRepoWebBase()}/tree/${branch}/${f.path}`,
-      images
+      images,
+      manifestDateText,
+      sortDateKey
     });
   }
+
+  out.sort((a, b) => {
+    const ka = a.sortDateKey;
+    const kb = b.sortDateKey;
+
+    if (ka !== null && kb !== null) return kb - ka; // newest first
+    if (ka !== null && kb === null) return -1;
+    if (ka === null && kb !== null) return 1;
+
+    return String(a.name).localeCompare(String(b.name));
+  });
 
   HISTORY.folderItems = out;
   renderHistoryGrid();
@@ -1840,7 +1888,7 @@ function sortFoldersSmart(folders) {
       for (let i = 0; i < folders.length; i++) {
         const f = folders[i];
         const { title, subtitle } = splitFolderName(f.name);
-        const dateLine = prettyDateFromPrefix(f.name);
+        const dateLine = f.manifestDateText || prettyDateFromPrefix(f.name);
 
         const thumb = (f.images && f.images.length ? f.images[0].url : "");
         const count = f.images && f.images.length ? f.images.length : 0;
