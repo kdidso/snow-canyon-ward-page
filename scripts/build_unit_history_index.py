@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from datetime import datetime
 
@@ -34,6 +35,37 @@ def parse_manifest_date_text(date_text: str) -> str | None:
     return None
 
 
+def parse_folder_name_date(folder_name: str) -> str | None:
+    """
+    Pull a date out of the folder name.
+
+    Examples:
+      'Combined easter egg hunt - Apr 6, 2026'
+      'Paint night - Jan 12, 2026'
+
+    Special case:
+      'March stake conference Saturday evening - March stake conference Saturday evening'
+      => 2025-03-01
+    """
+    raw = (folder_name or "").strip()
+
+    if raw.lower() == "march stake conference saturday evening - march stake conference saturday evening":
+        return "2025-03-01"
+
+    m = re.search(
+        r"\b("
+        r"Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|"
+        r"Jul|July|Aug|August|Sep|Sept|September|Oct|October|Nov|November|Dec|December"
+        r")\s+\d{1,2},\s+\d{4}\b",
+        raw,
+        re.IGNORECASE,
+    )
+    if not m:
+        return None
+
+    return parse_manifest_date_text(m.group(0))
+
+
 def build_folder_record(folder: Path) -> dict:
     manifest_path = folder / "manifest.json"
     manifest = {}
@@ -51,7 +83,9 @@ def build_folder_record(folder: Path) -> dict:
 
     title = manifest.get("title") or folder.name
     date_text = (manifest.get("date_text") or "").strip()
-    sort_date = parse_manifest_date_text(date_text)
+
+    # Prefer manifest date; fall back to folder name date
+    sort_date = parse_manifest_date_text(date_text) or parse_folder_name_date(folder.name)
 
     # Use manifest thumbnail if present; otherwise first image
     thumb_name = (manifest.get("thumbnail") or "").strip()
