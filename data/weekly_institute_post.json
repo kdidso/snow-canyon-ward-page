@@ -2,7 +2,7 @@
   "page_url": "https://www.facebook.com/stginstitute",
   "post_url": "https://www.facebook.com/stginstitute/posts/pfbid02L8ZYMyBLqkR8bTKJ4QqSKRcmDYSF8Z2mNP7RW1TJ8LZ2P3gG4xEyPHhyAuKoYLhml",
   "embed_html_desktop": "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fstginstitute%2Fposts%2Fpfbid02L8ZYMyBLqkR8bTKJ4QqSKRcmDYSF8Z2mNP7RW1TJ8LZ2P3gG4xEyPHhyAuKoYLhml&show_text=true&width=500\" width=\"500\" height=\"601\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
-  "embed_html_mobile": "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fstginstitute%2Fposts%2Fpfbid02L8ZYMyBLqkR8bTKJ4QqSKRcmDYSF8Z2mNP7RW1TJ8LZ2P3gG4xEyPHhyAuKoYLhml&show_text=true&width=350\" width=\"350\" height=\"601\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
+  "embed_html_mobile": "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fstginstitute%2Fposts%2Fpfbid02L8ZYMyBLqkR8bTKJ4QqSKRcmDYSF8Z2mNP7RW1TJ8LZ2P3gG4xEyPHhyAuKoYLhml&show_text=true&width=300\" width=\"300\" height=\"601\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
   "fallback_text": "Here are this week's institute activities.",
   "updated_at": "2026-04-17T00:00:00-06:00"
 }
