@@ -1457,10 +1457,10 @@
   </div>  
 
    <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
-    <script async src="//www.instagram.com/embed.js"></script>
-  </script>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
+</script>
+<script async src="//www.instagram.com/embed.js"></script>
 
   <script>
     // ----------------------------
@@ -1504,7 +1504,7 @@
     "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver",
   
   instituteWeeklyJsonUrl: "./data/weekly_institute_post.json",
-  instituteFacebookPageUrl: "https://www.facebook.com/stginstitute",
+  instituteFacebookPageUrl: "https://www.instagram.com/stginstitute/",
 
   unitHistory: {
     owner: "kdidso",
@@ -1834,96 +1834,92 @@ gospelMarker.bindPopup(`
       }
     }
 
-    async function loadWeeklyInstituteWidget() {
-      const statusEl = $("instituteStatus");
-      const embedWrap = $("instituteEmbedWrap");
-      const mobileCardEl = $("instituteMobileCard");
-      const mobileImageEl = $("instituteMobileImage");
-      const mobileTextEl = $("instituteMobileText");
-      const mobileLinkEl = $("instituteMobileLink");
-      const fallbackEl = $("instituteFallback");
-      const fallbackTextEl = $("instituteFallbackText");
-      const fallbackLinkEl = $("instituteFallbackLink");
-      const openPageLinkEl = $("openInstitutePageLink");
+async function loadWeeklyInstituteWidget() {
+  const statusEl = $("instituteStatus");
+  const embedWrap = $("instituteEmbedWrap");
+  const mobileCardEl = $("instituteMobileCard");
+  const mobileImageEl = $("instituteMobileImage");
+  const mobileTextEl = $("instituteMobileText");
+  const mobileLinkEl = $("instituteMobileLink");
+  const fallbackEl = $("instituteFallback");
+  const fallbackTextEl = $("instituteFallbackText");
+  const fallbackLinkEl = $("instituteFallbackLink");
+  const openPageLinkEl = $("openInstitutePageLink");
 
-      if (openPageLinkEl) {
-        openPageLinkEl.href = CONFIG.instituteFacebookPageUrl;
-      }
-
-      try {
-        const res = await fetch(CONFIG.instituteWeeklyJsonUrl, { cache: "no-store" });
-        if (!res.ok) {
-          throw new Error(`Failed to load ${CONFIG.instituteWeeklyJsonUrl} (${res.status})`);
-        }
-
-        const data = await res.json();
-
-        const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
-        const postUrl = data.post_url || pageUrl;
-        const embedHtml = data.embed_html || "";
-        const mobileImageUrl = data.mobile_image_url || "";
-        const mobileText =
-          data.mobile_text ||
-          data.fallback_text ||
-          "Open this week’s institute activities post on Facebook.";
-        const fallbackText =
-          data.fallback_text ||
-          "Open this week’s institute activities post on Facebook.";
-
-        if (openPageLinkEl) openPageLinkEl.href = pageUrl;
-        if (fallbackLinkEl) fallbackLinkEl.href = postUrl;
-        if (fallbackTextEl) fallbackTextEl.textContent = fallbackText;
-        if (mobileLinkEl) mobileLinkEl.href = postUrl;
-        if (mobileTextEl) mobileTextEl.textContent = mobileText;
-
-        embedWrap.innerHTML = "";
-        embedWrap.style.display = "none";
-        mobileCardEl.style.display = "none";
-        fallbackEl.style.display = "none";
-        statusEl.style.display = "none";
-
-if (embedHtml.trim()) {
-  embedWrap.innerHTML = embedHtml;
-  embedWrap.style.display = "block";
-
-  if (window.instgrm && window.instgrm.Embeds?.process) {
-    window.instgrm.Embeds.process();
+  if (openPageLinkEl) {
+    openPageLinkEl.href = CONFIG.instituteFacebookPageUrl;
   }
 
-  return;
-}
-
-if (mobileImageUrl) {
-  if (mobileImageEl) {
-    mobileImageEl.src = mobileImageUrl;
-    mobileImageEl.alt = mobileText || "Institute weekly activities";
-  }
-  mobileCardEl.style.display = "block";
-  return;
-}
-
-fallbackEl.style.display = "block";
-          return;
-        }
-
-        fallbackEl.style.display = "block";
-      } catch (err) {
-        console.error(err);
-
-        embedWrap.innerHTML = "";
-        embedWrap.style.display = "none";
-        mobileCardEl.style.display = "none";
-
-        if (fallbackLinkEl) fallbackLinkEl.href = CONFIG.instituteFacebookPageUrl;
-        if (fallbackTextEl) {
-          fallbackTextEl.textContent =
-            "Unable to load the institute post right now. You can still open the institute Facebook page.";
-        }
-
-        fallbackEl.style.display = "block";
-        statusEl.style.display = "none";
-      }
+  try {
+    const res = await fetch(CONFIG.instituteWeeklyJsonUrl, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error(`Failed to load ${CONFIG.instituteWeeklyJsonUrl} (${res.status})`);
     }
+
+    const data = await res.json();
+
+    const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
+    const postUrl = data.post_url || pageUrl;
+    const embedHtml = data.embed_html || "";
+    const mobileImageUrl = data.mobile_image_url || "";
+    const mobileText =
+      data.mobile_text ||
+      data.fallback_text ||
+      "Open this week’s institute activities post.";
+    const fallbackText =
+      data.fallback_text ||
+      "Open this week’s institute activities post.";
+
+    if (openPageLinkEl) openPageLinkEl.href = pageUrl;
+    if (fallbackLinkEl) fallbackLinkEl.href = postUrl;
+    if (fallbackTextEl) fallbackTextEl.textContent = fallbackText;
+    if (mobileLinkEl) mobileLinkEl.href = postUrl;
+    if (mobileTextEl) mobileTextEl.textContent = mobileText;
+
+    embedWrap.innerHTML = "";
+    embedWrap.style.display = "none";
+    mobileCardEl.style.display = "none";
+    fallbackEl.style.display = "none";
+    statusEl.style.display = "none";
+
+    if (embedHtml.trim()) {
+      embedWrap.innerHTML = embedHtml;
+      embedWrap.style.display = "block";
+
+      if (window.instgrm && window.instgrm.Embeds?.process) {
+        window.instgrm.Embeds.process();
+      }
+
+      return;
+    }
+
+    if (mobileImageUrl) {
+      if (mobileImageEl) {
+        mobileImageEl.src = mobileImageUrl;
+        mobileImageEl.alt = mobileText || "Institute weekly activities";
+      }
+      mobileCardEl.style.display = "block";
+      return;
+    }
+
+    fallbackEl.style.display = "block";
+  } catch (err) {
+    console.error(err);
+
+    embedWrap.innerHTML = "";
+    embedWrap.style.display = "none";
+    mobileCardEl.style.display = "none";
+
+    if (fallbackLinkEl) fallbackLinkEl.href = CONFIG.instituteFacebookPageUrl;
+    if (fallbackTextEl) {
+      fallbackTextEl.textContent =
+        "Unable to load the institute post right now. You can still open the post page.";
+    }
+
+    fallbackEl.style.display = "block";
+    statusEl.style.display = "none";
+  }
+}
 
     loadComeFollowMeWidget();
     loadWeeklyInstituteWidget();
