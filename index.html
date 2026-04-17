@@ -1241,7 +1241,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Open on Facebook
+                  Open post
                 </a>
               </div>
             </div>
@@ -1258,7 +1258,7 @@
                 target="_blank"
                 rel="noopener"
               >
-                Open on Facebook
+                Open post
               </a>
             </div>
           </div>
@@ -1459,6 +1459,7 @@
    <div id="fb-root"></div>
   <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
+    <script async src="//www.instagram.com/embed.js"></script>
   </script>
 
   <script>
@@ -1857,11 +1858,9 @@ gospelMarker.bindPopup(`
 
         const data = await res.json();
 
-        const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
         const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
         const postUrl = data.post_url || pageUrl;
-        const embedHtmlDesktop = data.embed_html_desktop || "";
+        const embedHtml = data.embed_html || "";
         const mobileImageUrl = data.mobile_image_url || "";
         const mobileText =
           data.mobile_text ||
@@ -1883,22 +1882,27 @@ gospelMarker.bindPopup(`
         fallbackEl.style.display = "none";
         statusEl.style.display = "none";
 
-        if (!isMobile && embedHtmlDesktop.trim()) {
-          embedWrap.innerHTML = embedHtmlDesktop;
-          embedWrap.style.display = "block";
+if (embedHtml.trim()) {
+  embedWrap.innerHTML = embedHtml;
+  embedWrap.style.display = "block";
 
-          if (window.FB && typeof window.FB.XFBML?.parse === "function") {
-            window.FB.XFBML.parse(embedWrap);
-          }
-          return;
-        }
+  if (window.instgrm && window.instgrm.Embeds?.process) {
+    window.instgrm.Embeds.process();
+  }
 
-        if (isMobile && mobileImageUrl) {
-          if (mobileImageEl) {
-            mobileImageEl.src = mobileImageUrl;
-            mobileImageEl.alt = mobileText || "Institute weekly activities";
-          }
-          mobileCardEl.style.display = "block";
+  return;
+}
+
+if (mobileImageUrl) {
+  if (mobileImageEl) {
+    mobileImageEl.src = mobileImageUrl;
+    mobileImageEl.alt = mobileText || "Institute weekly activities";
+  }
+  mobileCardEl.style.display = "block";
+  return;
+}
+
+fallbackEl.style.display = "block";
           return;
         }
 
