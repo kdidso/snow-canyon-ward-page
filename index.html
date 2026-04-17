@@ -1792,7 +1792,10 @@ gospelMarker.bindPopup(`
 
         const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
         const postUrl = data.post_url || pageUrl;
-        const embedHtml = data.embed_html || "";
+        const isMobile = window.matchMedia("(max-width: 640px)").matches;
+        const embedHtml = isMobile
+          ? (data.embed_html_mobile || data.embed_html_desktop || "")
+          : (data.embed_html_desktop || data.embed_html_mobile || "");
         const fallbackText =
           data.fallback_text ||
           "Open this week’s institute activities post on Facebook.";
