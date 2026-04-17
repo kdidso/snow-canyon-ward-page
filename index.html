@@ -479,6 +479,106 @@
       border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
+    /* Weekly Institute Events widget */
+    .institute-wrap {
+      margin-top: 22px;
+    }
+
+    .institute-card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .institute-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      gap: 12px;
+    }
+
+    .institute-head h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .institute-head .hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      text-align: right;
+      line-height: 1.2;
+    }
+
+    .institute-head .hint a {
+      color: var(--brand);
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    .institute-body {
+      background: #fff;
+      min-height: 220px;
+      padding: 16px;
+    }
+
+    .institute-status {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .institute-embed-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .institute-fallback {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .institute-fallback-title {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .institute-fallback-text {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .institute-fallback-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--brand);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .institute-footer {
+      padding: 10px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.55);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
     /* ----------------------------
        UNIT HISTORY (PHOTO FOLDERS) WIDGET
        ---------------------------- */
@@ -1051,6 +1151,50 @@
         </div>
       </div>
 
+      <!-- WEEKLY INSTITUTE EVENTS WIDGET -->
+      <div class="institute-wrap" aria-label="Weekly institute events">
+        <div class="institute-card">
+          <div class="institute-head">
+            <h3>Weekly Institute Events</h3>
+            <div class="hint">
+              Updated Sundays •
+              <a
+                id="openInstitutePageLink"
+                href="https://www.facebook.com/stginstitute"
+                target="_blank"
+                rel="noopener"
+              >
+                Open institute page
+              </a>
+            </div>
+          </div>
+
+          <div class="institute-body">
+            <div id="instituteStatus" class="institute-status">Loading this week’s institute post…</div>
+            <div id="instituteEmbedWrap" class="institute-embed-wrap" style="display:none;"></div>
+            <div id="instituteFallback" class="institute-fallback" style="display:none;">
+              <p class="institute-fallback-title">This week’s institute post</p>
+              <p class="institute-fallback-text" id="instituteFallbackText">
+                Open this week’s institute activities post on Facebook.
+              </p>
+              <a
+                id="instituteFallbackLink"
+                class="institute-fallback-link"
+                href="https://www.facebook.com/stginstitute"
+                target="_blank"
+                rel="noopener"
+              >
+                Open on Facebook
+              </a>
+            </div>
+          </div>
+
+          <div class="institute-footer">
+            This widget shows the institute’s weekly Sunday activities post when available.
+          </div>
+        </div>
+      </div>
+
       <!-- UNIT HISTORY (PHOTO FOLDERS) WIDGET -->
       <div class="history-wrap" aria-label="Unit history photo folders">
         <div class="history-card">
@@ -1236,7 +1380,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>  
+
+   <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
+  </script>
 
   <script>
     // ----------------------------
@@ -1278,6 +1427,9 @@
 
   calendarFullEmbedUrl:
     "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver",
+  
+  instituteWeeklyJsonUrl: "./data/weekly_institute_post.json",
+  instituteFacebookPageUrl: "https://www.facebook.com/stginstitute",
 
   unitHistory: {
     owner: "kdidso",
@@ -1607,7 +1759,70 @@ gospelMarker.bindPopup(`
       }
     }
 
+    async function loadWeeklyInstituteWidget() {
+      const statusEl = $("instituteStatus");
+      const embedWrap = $("instituteEmbedWrap");
+      const fallbackEl = $("instituteFallback");
+      const fallbackTextEl = $("instituteFallbackText");
+      const fallbackLinkEl = $("instituteFallbackLink");
+      const openPageLinkEl = $("openInstitutePageLink");
+
+      if (openPageLinkEl) {
+        openPageLinkEl.href = CONFIG.instituteFacebookPageUrl;
+      }
+
+      try {
+        const res = await fetch(CONFIG.instituteWeeklyJsonUrl, { cache: "no-store" });
+        if (!res.ok) {
+          throw new Error(`Failed to load ${CONFIG.instituteWeeklyJsonUrl} (${res.status})`);
+        }
+
+        const data = await res.json();
+
+        const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
+        const postUrl = data.post_url || pageUrl;
+        const embedHtml = data.embed_html || "";
+        const fallbackText =
+          data.fallback_text ||
+          "Open this week’s institute activities post on Facebook.";
+
+        if (fallbackLinkEl) fallbackLinkEl.href = postUrl;
+        if (fallbackTextEl) fallbackTextEl.textContent = fallbackText;
+        if (openPageLinkEl) openPageLinkEl.href = pageUrl;
+
+        if (embedHtml && embedHtml.trim()) {
+          embedWrap.innerHTML = embedHtml;
+          embedWrap.style.display = "block";
+          fallbackEl.style.display = "none";
+          statusEl.style.display = "none";
+
+          if (window.FB && typeof window.FB.XFBML?.parse === "function") {
+            window.FB.XFBML.parse(embedWrap);
+          }
+        } else {
+          embedWrap.innerHTML = "";
+          embedWrap.style.display = "none";
+          fallbackEl.style.display = "block";
+          statusEl.style.display = "none";
+        }
+      } catch (err) {
+        console.error(err);
+
+        if (fallbackLinkEl) fallbackLinkEl.href = CONFIG.instituteFacebookPageUrl;
+        if (fallbackTextEl) {
+          fallbackTextEl.textContent =
+            "Unable to load the embedded institute post right now. You can still open the institute Facebook page.";
+        }
+
+        embedWrap.innerHTML = "";
+        embedWrap.style.display = "none";
+        fallbackEl.style.display = "block";
+        statusEl.style.display = "none";
+      }
+    }
+
     loadComeFollowMeWidget();
+    loadWeeklyInstituteWidget();
 
     // ----------------------------
     // Unit history widget (loads folders + thumbnails from GitHub)
@@ -2064,6 +2279,5 @@ async function loadUnitHistoryWidget() {
 
     // Kick it off
     loadUnitHistoryWidget();
-  </script>
 </body>
 </html>
