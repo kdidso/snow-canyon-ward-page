@@ -551,6 +551,52 @@
     padding: 8px;
   }
 }
+    .institute-mobile-card {
+      display: none;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .institute-mobile-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+
+    .institute-mobile-card-body {
+      padding: 14px;
+    }
+
+    .institute-mobile-card-title {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .institute-mobile-card-text {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .institute-mobile-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--brand);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    
     .institute-fallback {
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 10px;
@@ -1183,6 +1229,23 @@
           <div class="institute-body">
             <div id="instituteStatus" class="institute-status">Loading this week’s institute post…</div>
             <div id="instituteEmbedWrap" class="institute-embed-wrap" style="display:none;"></div>
+            <div id="instituteMobileCard" class="institute-mobile-card" style="display:none;">
+              <img id="instituteMobileImage" alt="Institute weekly activities" loading="lazy" />
+              <div class="institute-mobile-card-body">
+                <p class="institute-mobile-card-title">This week’s institute activities</p>
+                <p class="institute-mobile-card-text" id="instituteMobileText"></p>
+                <a
+                  id="instituteMobileLink"
+                  class="institute-mobile-card-link"
+                  href="https://www.facebook.com/stginstitute"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Open on Facebook
+                </a>
+              </div>
+            </div>
+            
             <div id="instituteFallback" class="institute-fallback" style="display:none;">
               <p class="institute-fallback-title">This week’s institute post</p>
               <p class="institute-fallback-text" id="instituteFallbackText">
@@ -1773,6 +1836,10 @@ gospelMarker.bindPopup(`
     async function loadWeeklyInstituteWidget() {
       const statusEl = $("instituteStatus");
       const embedWrap = $("instituteEmbedWrap");
+      const mobileCardEl = $("instituteMobileCard");
+      const mobileImageEl = $("instituteMobileImage");
+      const mobileTextEl = $("instituteMobileText");
+      const mobileLinkEl = $("instituteMobileLink");
       const fallbackEl = $("instituteFallback");
       const fallbackTextEl = $("instituteFallbackText");
       const fallbackLinkEl = $("instituteFallbackLink");
@@ -1790,46 +1857,65 @@ gospelMarker.bindPopup(`
 
         const data = await res.json();
 
+        const isMobile = window.matchMedia("(max-width: 640px)").matches;
+
         const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
         const postUrl = data.post_url || pageUrl;
-        const isMobile = window.matchMedia("(max-width: 640px)").matches;
-        const embedHtml = isMobile
-          ? (data.embed_html_mobile || data.embed_html_desktop || "")
-          : (data.embed_html_desktop || data.embed_html_mobile || "");
+        const embedHtmlDesktop = data.embed_html_desktop || "";
+        const mobileImageUrl = data.mobile_image_url || "";
+        const mobileText =
+          data.mobile_text ||
+          data.fallback_text ||
+          "Open this week’s institute activities post on Facebook.";
         const fallbackText =
           data.fallback_text ||
           "Open this week’s institute activities post on Facebook.";
 
+        if (openPageLinkEl) openPageLinkEl.href = pageUrl;
         if (fallbackLinkEl) fallbackLinkEl.href = postUrl;
         if (fallbackTextEl) fallbackTextEl.textContent = fallbackText;
-        if (openPageLinkEl) openPageLinkEl.href = pageUrl;
+        if (mobileLinkEl) mobileLinkEl.href = postUrl;
+        if (mobileTextEl) mobileTextEl.textContent = mobileText;
 
-        if (embedHtml && embedHtml.trim()) {
-          embedWrap.innerHTML = embedHtml;
+        embedWrap.innerHTML = "";
+        embedWrap.style.display = "none";
+        mobileCardEl.style.display = "none";
+        fallbackEl.style.display = "none";
+        statusEl.style.display = "none";
+
+        if (!isMobile && embedHtmlDesktop.trim()) {
+          embedWrap.innerHTML = embedHtmlDesktop;
           embedWrap.style.display = "block";
-          fallbackEl.style.display = "none";
-          statusEl.style.display = "none";
 
           if (window.FB && typeof window.FB.XFBML?.parse === "function") {
             window.FB.XFBML.parse(embedWrap);
           }
-        } else {
-          embedWrap.innerHTML = "";
-          embedWrap.style.display = "none";
-          fallbackEl.style.display = "block";
-          statusEl.style.display = "none";
+          return;
         }
+
+        if (isMobile && mobileImageUrl) {
+          if (mobileImageEl) {
+            mobileImageEl.src = mobileImageUrl;
+            mobileImageEl.alt = mobileText || "Institute weekly activities";
+          }
+          mobileCardEl.style.display = "block";
+          return;
+        }
+
+        fallbackEl.style.display = "block";
       } catch (err) {
         console.error(err);
+
+        embedWrap.innerHTML = "";
+        embedWrap.style.display = "none";
+        mobileCardEl.style.display = "none";
 
         if (fallbackLinkEl) fallbackLinkEl.href = CONFIG.instituteFacebookPageUrl;
         if (fallbackTextEl) {
           fallbackTextEl.textContent =
-            "Unable to load the embedded institute post right now. You can still open the institute Facebook page.";
+            "Unable to load the institute post right now. You can still open the institute Facebook page.";
         }
 
-        embedWrap.innerHTML = "";
-        embedWrap.style.display = "none";
         fallbackEl.style.display = "block";
         statusEl.style.display = "none";
       }
