@@ -18,7 +18,6 @@ from selenium.common.exceptions import (
     TimeoutException,
 )
 from selenium.webdriver import ChromeOptions
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -47,6 +46,7 @@ class MatchResult:
     fallback_text: str
     updated_at: str
 
+
 def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
     try:
         driver.save_screenshot(str(path))
@@ -54,12 +54,14 @@ def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
     except Exception as exc:
         print(f"Could not save screenshot: {exc}", file=sys.stderr)
 
+
 def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
     try:
         path.write_text(driver.page_source, encoding="utf-8")
         print(f"Saved page source to {path}")
     except Exception as exc:
         print(f"Could not save page source: {exc}", file=sys.stderr)
+
 
 def build_driver() -> webdriver.Chrome:
     options = ChromeOptions()
@@ -93,42 +95,32 @@ def safe_click(driver: webdriver.Chrome, element: WebElement) -> None:
         driver.execute_script("arguments[0].click();", element)
 
 
-def try_dismiss_login_popup(driver: webdriver.Chrome) -> None:
+def try_dismiss_login_popup(driver: webdriver.Chrome) -> bool:
     """
-    Dismiss Instagram sign-up/login modal if it appears.
+    Dismiss Instagram sign-up/login modal by targeting the actual Close SVG/button.
+    Returns True if something was clicked, else False.
     """
-    xpaths = [
-        "//div[@role='dialog']//button//*[name()='svg']/ancestor::button[1]",
-        "//div[@role='dialog']//button",
-        "//button//*[name()='svg']/ancestor::button[1]",
+    close_xpaths = [
+        "//svg[@aria-label='Close']/ancestor::button[1]",
+        "//div[@role='dialog']//svg[@aria-label='Close']/ancestor::button[1]",
+        "//svg[.//title[normalize-space()='Close']]/ancestor::button[1]",
+        "//div[@role='dialog']//svg[.//title[normalize-space()='Close']]/ancestor::button[1]",
     ]
 
-    for xpath in xpaths:
+    for xpath in close_xpaths:
         try:
-            buttons = driver.find_elements(By.XPATH, xpath)
-            for btn in buttons:
-                try:
-                    aria = (btn.get_attribute("aria-label") or "").strip().lower()
-                    text = (btn.text or "").strip().lower()
-
-                    # Prefer obvious close buttons
-                    if aria in {"close", "dismiss"} or text in {"", "close"}:
-                        driver.execute_script("arguments[0].click();", btn)
-                        time.sleep(1)
-                        return
-                except Exception:
-                    continue
+            btn = WebDriverWait(driver, 3).until(
+                EC.element_to_be_clickable((By.XPATH, xpath))
+            )
+            driver.execute_script("arguments[0].click();", btn)
+            time.sleep(1)
+            print(f"Clicked popup close button using xpath: {xpath}")
+            return True
         except Exception:
             continue
 
-    # Last resort: ESC key
-    try:
-        from selenium.webdriver.common.keys import Keys
-        body = driver.find_element(By.TAG_NAME, "body")
-        body.send_keys(Keys.ESCAPE)
-        time.sleep(1)
-    except Exception:
-        pass
+    print("No popup close button found.")
+    return False
 
 
 def normalize_post_url(url: str) -> str:
@@ -169,7 +161,6 @@ def split_into_sentences(text: str) -> list[str]:
     cleaned = re.sub(r"\s+", " ", text).strip()
     if not cleaned:
         return []
-    # Split on punctuation/newlines while keeping it simple and robust.
     parts = re.split(r"[.!?\n]+", cleaned)
     return [p.strip() for p in parts if p.strip()]
 
@@ -179,7 +170,6 @@ def extract_caption_text(driver: webdriver.Chrome) -> str:
     Try several selectors for caption text on an Instagram post page.
     """
     candidate_selectors = [
-        # Main article text blocks
         (By.XPATH, "//article//h1"),
         (By.XPATH, "//article//div[contains(@class,'_a9zs')]"),
         (By.XPATH, "//article//ul//span"),
@@ -202,9 +192,7 @@ def extract_caption_text(driver: webdriver.Chrome) -> str:
             if txt and txt not in texts:
                 texts.append(txt)
 
-    # Join distinct text fragments and let sentence matching sort it out.
-    joined = "\n".join(texts).strip()
-    return joined
+    return "\n".join(texts).strip()
 
 
 def extract_og_image(driver: webdriver.Chrome) -> str:
@@ -218,44 +206,50 @@ def extract_og_image(driver: webdriver.Chrome) -> str:
 
 def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
     """
-    Collect Instagram post/reel links from the profile page.
-    More tolerant than the first version.
+    Collect post links by manually searching the visible Instagram profile tiles.
     """
     links: list[str] = []
     seen: set[str] = set()
 
-    # Give the page a moment and try to dismiss popup again
     time.sleep(2)
     try_dismiss_login_popup(driver)
 
-    end_time = time.time() + 35
-    while time.time() < end_time and len(links) < max_posts:
-        anchors = driver.find_elements(By.TAG_NAME, "a")
+    for attempt in range(8):
+        print(f"Collect attempt {attempt + 1}")
 
-        for a in anchors:
+        xpaths = [
+            "//main//a[contains(@href, '/p/')]",
+            "//main//a[contains(@href, '/reel/')]",
+            "//article//a[contains(@href, '/p/')]",
+            "//article//a[contains(@href, '/reel/')]",
+        ]
+
+        for xpath in xpaths:
             try:
-                href = (a.get_attribute("href") or "").strip()
-            except StaleElementReferenceException:
-                continue
+                anchors = driver.find_elements(By.XPATH, xpath)
+            except Exception:
+                anchors = []
 
-            if not href:
-                continue
+            for a in anchors:
+                try:
+                    href = (a.get_attribute("href") or "").strip()
+                except StaleElementReferenceException:
+                    continue
 
-            if "/p/" not in href and "/reel/" not in href and "/tv/" not in href:
-                continue
+                if not href:
+                    continue
 
-            href = normalize_post_url(href)
+                href = normalize_post_url(href)
 
-            if href not in seen:
-                seen.add(href)
-                links.append(href)
-                if len(links) >= max_posts:
-                    break
+                if href not in seen:
+                    seen.add(href)
+                    links.append(href)
+                    print(f"Found post link: {href}")
 
-        if len(links) >= max_posts:
-            break
+                    if len(links) >= max_posts:
+                        return links[:max_posts]
 
-        driver.execute_script("window.scrollBy(0, 900);")
+        driver.execute_script("window.scrollBy(0, 1200);")
         time.sleep(1.5)
         try_dismiss_login_popup(driver)
 
@@ -265,12 +259,16 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
 def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     driver.get(INSTAGRAM_PROFILE_URL)
     time.sleep(3)
-    print("Current URL after load:", driver.current_url)
-    print("Page title:", driver.title)
-    print("Page source snippet:", driver.page_source[:1000])
+
+    print("URL before page-ready wait:", driver.current_url)
+
     wait_for_page_ready(driver)
     time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
-    try_dismiss_login_popup(driver)
+
+    print("URL before dismiss attempt:", driver.current_url)
+    dismissed = try_dismiss_login_popup(driver)
+    print("Dismiss attempted:", dismissed)
+    print("URL after dismiss attempt:", driver.current_url)
 
     post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
     if not post_links:
@@ -283,6 +281,7 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
         driver.get(post_url)
         wait_for_page_ready(driver)
         time.sleep(SLEEP_BETWEEN_ACTIONS)
+
         try_dismiss_login_popup(driver)
 
         current_url = normalize_post_url(driver.current_url)
@@ -328,7 +327,10 @@ def write_output(result: MatchResult, output_path: Path) -> None:
         "updated_at": result.updated_at,
     }
 
-    output_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    output_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
     print(f"Wrote {output_path}")
 
 
