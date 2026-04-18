@@ -80,30 +80,40 @@ def safe_click(driver: webdriver.Chrome, element: WebElement) -> None:
 
 def try_dismiss_login_popup(driver: webdriver.Chrome) -> None:
     """
-    Instagram sometimes shows a sign-up / log-in modal immediately.
-    We try a few selectors and continue if it is not present.
+    Dismiss Instagram sign-up/login modal if it appears.
     """
-    selectors = [
-        # Generic dialog close buttons
-        (By.XPATH, "//div[@role='dialog']//button//*[name()='svg' and @aria-label='Close']/ancestor::button[1]"),
-        (By.XPATH, "//div[@role='dialog']//button[@aria-label='Close']"),
-        # Top-right "X" button variants
-        (By.XPATH, "//button//*[name()='svg' and @aria-label='Close']/ancestor::button[1]"),
-        (By.XPATH, "//div[@role='dialog']//button"),
+    xpaths = [
+        "//div[@role='dialog']//button//*[name()='svg']/ancestor::button[1]",
+        "//div[@role='dialog']//button",
+        "//button//*[name()='svg']/ancestor::button[1]",
     ]
 
-    for by, selector in selectors:
+    for xpath in xpaths:
         try:
-            btn = WebDriverWait(driver, SHORT_WAIT).until(
-                EC.element_to_be_clickable((by, selector))
-            )
-            safe_click(driver, btn)
-            time.sleep(SLEEP_BETWEEN_ACTIONS)
-            return
-        except TimeoutException:
-            continue
+            buttons = driver.find_elements(By.XPATH, xpath)
+            for btn in buttons:
+                try:
+                    aria = (btn.get_attribute("aria-label") or "").strip().lower()
+                    text = (btn.text or "").strip().lower()
+
+                    # Prefer obvious close buttons
+                    if aria in {"close", "dismiss"} or text in {"", "close"}:
+                        driver.execute_script("arguments[0].click();", btn)
+                        time.sleep(1)
+                        return
+                except Exception:
+                    continue
         except Exception:
             continue
+
+    # Last resort: ESC key
+    try:
+        from selenium.webdriver.common.keys import Keys
+        body = driver.find_element(By.TAG_NAME, "body")
+        body.send_keys(Keys.ESCAPE)
+        time.sleep(1)
+    except Exception:
+        pass
 
 
 def normalize_post_url(url: str) -> str:
@@ -193,22 +203,34 @@ def extract_og_image(driver: webdriver.Chrome) -> str:
 
 def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
     """
-    Collect post links from the profile grid.
+    Collect Instagram post/reel links from the profile page.
+    More tolerant than the first version.
     """
     links: list[str] = []
     seen: set[str] = set()
 
-    end_time = time.time() + 25
+    # Give the page a moment and try to dismiss popup again
+    time.sleep(2)
+    try_dismiss_login_popup(driver)
+
+    end_time = time.time() + 35
     while time.time() < end_time and len(links) < max_posts:
-        anchors = driver.find_elements(By.XPATH, "//a[contains(@href,'/p/') or contains(@href,'/reel/')]")
+        anchors = driver.find_elements(By.TAG_NAME, "a")
+
         for a in anchors:
             try:
                 href = (a.get_attribute("href") or "").strip()
             except StaleElementReferenceException:
                 continue
+
             if not href:
                 continue
+
+            if "/p/" not in href and "/reel/" not in href and "/tv/" not in href:
+                continue
+
             href = normalize_post_url(href)
+
             if href not in seen:
                 seen.add(href)
                 links.append(href)
@@ -218,15 +240,19 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
         if len(links) >= max_posts:
             break
 
-        # Small scroll in case the initial page did not expose enough anchors.
-        driver.execute_script("window.scrollBy(0, 800);")
-        time.sleep(1.25)
+        driver.execute_script("window.scrollBy(0, 900);")
+        time.sleep(1.5)
+        try_dismiss_login_popup(driver)
 
     return links[:max_posts]
 
 
 def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     driver.get(INSTAGRAM_PROFILE_URL)
+    time.sleep(3)
+    print("Current URL after load:", driver.current_url)
+    print("Page title:", driver.title)
+    print("Page source snippet:", driver.page_source[:1000])
     wait_for_page_ready(driver)
     time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
     try_dismiss_login_popup(driver)
