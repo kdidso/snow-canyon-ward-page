@@ -344,12 +344,12 @@ def main() -> int:
         print(f"Matched text: {result.mobile_text}")
         return 0
 
-except Exception as exc:
-    print(f"ERROR: {exc}", file=sys.stderr)
-    if driver is not None:
-        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
-        save_failure_html(driver, FAILURE_HTML)
-    return 1
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        if driver is not None:
+            save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+            save_failure_html(driver, FAILURE_HTML)
+        return 1
 
     finally:
         if driver is not None:
