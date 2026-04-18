@@ -50,6 +50,15 @@ jobs:
         run: |
           python scripts/update_weekly_institute_post.py
 
+      - name: Upload debug artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-debug
+          path: |
+            debug_instagram_failure.png
+            debug_instagram_failure.html
+
       - name: Commit and push changes
         run: |
           git config user.name "github-actions"
