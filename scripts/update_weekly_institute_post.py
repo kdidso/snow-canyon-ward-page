@@ -27,6 +27,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
 OUTPUT_JSON = Path("data/weekly_institute_post.json")
+FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
+FAILURE_HTML = Path("debug_instagram_failure.html")
 
 MAX_POSTS_TO_CHECK = 20
 PAGE_LOAD_TIMEOUT = 30
@@ -45,6 +47,19 @@ class MatchResult:
     fallback_text: str
     updated_at: str
 
+def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
+    try:
+        driver.save_screenshot(str(path))
+        print(f"Saved screenshot to {path}")
+    except Exception as exc:
+        print(f"Could not save screenshot: {exc}", file=sys.stderr)
+
+def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
+    try:
+        path.write_text(driver.page_source, encoding="utf-8")
+        print(f"Saved page source to {path}")
+    except Exception as exc:
+        print(f"Could not save page source: {exc}", file=sys.stderr)
 
 def build_driver() -> webdriver.Chrome:
     options = ChromeOptions()
@@ -329,9 +344,12 @@ def main() -> int:
         print(f"Matched text: {result.mobile_text}")
         return 0
 
-    except Exception as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
+except Exception as exc:
+    print(f"ERROR: {exc}", file=sys.stderr)
+    if driver is not None:
+        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+        save_failure_html(driver, FAILURE_HTML)
+    return 1
 
     finally:
         if driver is not None:
