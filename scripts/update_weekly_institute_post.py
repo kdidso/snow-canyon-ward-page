@@ -198,6 +198,12 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     print("Login page detected. Beginning Instagram login flow.")
     print("Current URL before login:", driver.current_url)
 
+    page_source_lower = driver.page_source.lower()
+    if "http error 429" in page_source_lower or "too many requests" in page_source_lower:
+        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+        save_failure_html(driver, FAILURE_HTML)
+        raise RuntimeError("Instagram returned HTTP 429 before login fields could be used.")
+
     username_selectors = [
         (By.NAME, "username"),
         (By.NAME, "email"),
@@ -255,7 +261,11 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     debug_selector_matches(driver, login_button_selectors, "login button before click")
 
     login_button = find_first_clickable(driver, login_button_selectors, timeout=20)
+
+    url_before_click = driver.current_url
     print("About to click Log in button.")
+    print("URL just before click:", url_before_click)
+
     safe_click(driver, login_button)
 
     print("Clicked Log in button.")
@@ -263,26 +273,70 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
 
     save_failure_screenshot(driver, LOGIN_CLICKED_SCREENSHOT)
 
-    time.sleep(5)
+    # Give the browser a moment to react.
+    time.sleep(2)
+
+    def login_transition_detected(d: webdriver.Chrome) -> bool:
+        url = d.current_url.lower()
+        html = d.page_source.lower()
+
+        if "http error 429" in html or "too many requests" in html:
+            return True
+
+        if "/accounts/onetap/" in url:
+            return True
+
+        if "/accounts/login" not in url:
+            return True
+
+        if d.current_url != url_before_click:
+            return True
+
+        return False
 
     try:
-        WebDriverWait(driver, 25).until(
-            lambda d: "/accounts/login" not in d.current_url.lower()
-        )
+        WebDriverWait(driver, 30).until(login_transition_detected)
     except TimeoutException:
-        print("Still appears to be on login page after click.")
-        print("URL after login wait:", driver.current_url)
+        print("Timed out waiting for post-login transition.")
+        print("URL after waiting:", driver.current_url)
+
+        if driver.current_url == url_before_click:
+            print("URL did not change after clicking Log in.")
+        else:
+            print("URL changed, but script did not recognize it as a valid transition.")
+
         save_failure_screenshot(driver, FAILURE_SCREENSHOT)
         save_failure_html(driver, FAILURE_HTML)
         raise RuntimeError(
-            "Instagram login did not complete successfully. "
-            "Still on login page or redirected to a challenge page."
+            "Login button was pressed, but no recognized transition occurred."
         )
 
-    print("Login appears successful.")
-    print("URL after login:", driver.current_url)
+    current_url = driver.current_url
+    current_html = driver.page_source.lower()
 
-    time.sleep(3)
+    print("URL after login wait:", current_url)
+
+    save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+    save_failure_html(driver, FAILURE_HTML)
+
+    if "http error 429" in current_html or "too many requests" in current_html:
+        raise RuntimeError("Instagram returned HTTP 429 after login click.")
+
+    if "/accounts/onetap/" in current_url.lower():
+        print("Login appears successful: reached Instagram one-tap page.")
+        return
+
+    if "/accounts/login" not in current_url.lower():
+        print("Login appears successful: left Instagram login page.")
+        return
+
+    if current_url == url_before_click:
+        raise RuntimeError("Login button was clicked, but the URL did not change.")
+
+    raise RuntimeError(
+        f"Login button was clicked, URL changed to {current_url}, "
+        "but script still considers it unresolved."
+    )
 
 
 def normalize_post_url(url: str) -> str:
