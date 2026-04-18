@@ -141,22 +141,16 @@ def is_login_page(driver: webdriver.Chrome) -> bool:
     if "/accounts/login" in url:
         return True
 
-    username_selectors = [
-        (By.NAME, "username"),
-        (By.XPATH, "//input[@name='username']"),
-        (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
-    ]
-
-    password_selectors = [
-        (By.NAME, "password"),
-        (By.XPATH, "//input[@name='password']"),
-        (By.CSS_SELECTOR, "input[type='password']"),
-    ]
-
     try:
-        find_first_present(driver, username_selectors, timeout=3)
-        find_first_present(driver, password_selectors, timeout=3)
-        return True
+        has_user = bool(
+            driver.find_elements(By.NAME, "username")
+            or driver.find_elements(By.NAME, "email")
+        )
+        has_pass = bool(
+            driver.find_elements(By.NAME, "password")
+            or driver.find_elements(By.NAME, "pass")
+        )
+        return has_user and has_pass
     except Exception:
         return False
 
@@ -175,20 +169,25 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
 
     username_selectors = [
         (By.NAME, "username"),
+        (By.NAME, "email"),
         (By.XPATH, "//input[@name='username']"),
+        (By.XPATH, "//input[@name='email']"),
         (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
     ]
 
     password_selectors = [
         (By.NAME, "password"),
+        (By.NAME, "pass"),
         (By.XPATH, "//input[@name='password']"),
+        (By.XPATH, "//input[@name='pass']"),
         (By.CSS_SELECTOR, "input[type='password']"),
     ]
 
     login_button_selectors = [
         (By.XPATH, "//button[@type='submit']"),
-        (By.XPATH, "//button[.//div[text()='Log in']]"),
+        (By.XPATH, "//*[@id='login_form']//button[@type='submit']"),
         (By.XPATH, "//button[normalize-space()='Log in']"),
+        (By.XPATH, "//button[.//div[normalize-space()='Log in']]"),
         (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
     ]
 
