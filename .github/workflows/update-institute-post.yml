@@ -1,4 +1,4 @@
-do you mind giving me this fully updated as well?  name: Update Weekly Institute Post
+name: Update Weekly Institute Post
 
 on:
   workflow_dispatch:
@@ -47,6 +47,9 @@ jobs:
           pip install selenium
 
       - name: Run script
+        env:
+          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
         run: |
           python scripts/update_weekly_institute_post.py
 
@@ -58,6 +61,8 @@ jobs:
           path: |
             debug_instagram_failure.png
             debug_instagram_failure.html
+            debug_instagram_login_filled.png
+            debug_instagram_login_clicked.png
 
       - name: Commit and push changes
         run: |
