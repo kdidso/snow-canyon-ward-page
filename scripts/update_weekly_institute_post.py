@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import time
@@ -28,6 +29,8 @@ INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
 OUTPUT_JSON = Path("data/weekly_institute_post.json")
 FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
 FAILURE_HTML = Path("debug_instagram_failure.html")
+LOGIN_FILLED_SCREENSHOT = Path("debug_instagram_login_filled.png")
+LOGIN_CLICKED_SCREENSHOT = Path("debug_instagram_login_clicked.png")
 
 MAX_POSTS_TO_CHECK = 20
 PAGE_LOAD_TIMEOUT = 30
@@ -95,6 +98,44 @@ def safe_click(driver: webdriver.Chrome, element: WebElement) -> None:
         driver.execute_script("arguments[0].click();", element)
 
 
+def find_first_present(
+    driver: webdriver.Chrome,
+    selectors: list[tuple[str, str]],
+    timeout: int = 10,
+) -> WebElement:
+    last_exc = None
+    for by, selector in selectors:
+        try:
+            element = WebDriverWait(driver, timeout).until(
+                EC.presence_of_element_located((by, selector))
+            )
+            print(f"Found element using selector: {by} | {selector}")
+            return element
+        except Exception as exc:
+            last_exc = exc
+            continue
+    raise last_exc or RuntimeError("No matching element found.")
+
+
+def find_first_clickable(
+    driver: webdriver.Chrome,
+    selectors: list[tuple[str, str]],
+    timeout: int = 10,
+) -> WebElement:
+    last_exc = None
+    for by, selector in selectors:
+        try:
+            element = WebDriverWait(driver, timeout).until(
+                EC.element_to_be_clickable((by, selector))
+            )
+            print(f"Found clickable element using selector: {by} | {selector}")
+            return element
+        except Exception as exc:
+            last_exc = exc
+            continue
+    raise last_exc or RuntimeError("No matching clickable element found.")
+
+
 def try_dismiss_login_popup(driver: webdriver.Chrome) -> bool:
     """
     Dismiss Instagram sign-up/login modal by targeting the actual Close SVG/button.
@@ -121,6 +162,101 @@ def try_dismiss_login_popup(driver: webdriver.Chrome) -> bool:
 
     print("No popup close button found.")
     return False
+
+
+def is_login_page(driver: webdriver.Chrome) -> bool:
+    url = driver.current_url.lower()
+    if "/accounts/login" in url:
+        return True
+
+    try:
+        driver.find_element(By.XPATH, "//input[@name='email']")
+        driver.find_element(By.XPATH, "//input[@name='pass']")
+        return True
+    except Exception:
+        return False
+
+
+def login_to_instagram(driver: webdriver.Chrome) -> None:
+    username = os.environ.get("INSTAGRAM_USERNAME", "").strip()
+    password = os.environ.get("INSTAGRAM_PASSWORD", "").strip()
+
+    if not username or not password:
+        raise RuntimeError(
+            "Missing INSTAGRAM_USERNAME or INSTAGRAM_PASSWORD environment variables."
+        )
+
+    print("Login page detected. Beginning Instagram login flow.")
+    print("Current URL before login:", driver.current_url)
+
+    username_selectors = [
+        (By.NAME, "email"),
+        (By.XPATH, "//input[@name='email']"),
+        (By.ID, "_r_4_"),
+    ]
+
+    password_selectors = [
+        (By.NAME, "pass"),
+        (By.XPATH, "//input[@name='pass']"),
+        (By.ID, "_r_7_"),
+    ]
+
+    login_button_selectors = [
+        (By.XPATH, "//button[@type='submit']"),
+        (By.XPATH, "//button[normalize-space()='Log in']"),
+        (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
+        (
+            By.XPATH,
+            "//div[@role='none' and @data-visualcompletion='ignore']/ancestor::button[1]",
+        ),
+    ]
+
+    username_input = find_first_present(driver, username_selectors, timeout=15)
+    password_input = find_first_present(driver, password_selectors, timeout=15)
+
+    username_input.clear()
+    username_input.send_keys(username)
+
+    password_input.clear()
+    password_input.send_keys(password)
+
+    entered_username = username_input.get_attribute("value") or ""
+    entered_password = password_input.get_attribute("value") or ""
+
+    print(f"Username entered? {bool(entered_username)}")
+    print(f"Username length entered: {len(entered_username)}")
+    print(f"Password entered? {bool(entered_password)}")
+    print(f"Password length entered: {len(entered_password)}")
+
+    save_failure_screenshot(driver, LOGIN_FILLED_SCREENSHOT)
+
+    login_button = find_first_clickable(driver, login_button_selectors, timeout=15)
+    print("About to click Log in button.")
+    safe_click(driver, login_button)
+
+    print("Clicked Log in button.")
+    print("URL immediately after click:", driver.current_url)
+
+    save_failure_screenshot(driver, LOGIN_CLICKED_SCREENSHOT)
+
+    time.sleep(5)
+
+    try:
+        WebDriverWait(driver, 20).until(
+            lambda d: "/accounts/login" not in d.current_url.lower()
+        )
+    except TimeoutException:
+        print("Still appears to be on login page after click.")
+        print("URL after login wait:", driver.current_url)
+        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+        save_failure_html(driver, FAILURE_HTML)
+        raise RuntimeError(
+            "Instagram login did not complete successfully. "
+            "Still on login page or redirected to a challenge page."
+        )
+
+    print("Login appears successful.")
+    print("URL after login:", driver.current_url)
 
 
 def normalize_post_url(url: str) -> str:
@@ -270,6 +406,19 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     print("Dismiss attempted:", dismissed)
     print("URL after dismiss attempt:", driver.current_url)
 
+    if is_login_page(driver):
+        login_to_instagram(driver)
+
+        driver.get(INSTAGRAM_PROFILE_URL)
+        wait_for_page_ready(driver)
+        time.sleep(3)
+
+        print("URL after returning to profile post-login:", driver.current_url)
+
+        dismissed = try_dismiss_login_popup(driver)
+        print("Dismiss attempted after login:", dismissed)
+        print("URL after dismiss post-login:", driver.current_url)
+
     post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
     if not post_links:
         raise RuntimeError("No Instagram post links were found on the profile page.")
@@ -329,7 +478,7 @@ def write_output(result: MatchResult, output_path: Path) -> None:
 
     output_path.write_text(
         json.dumps(payload, indent=2, ensure_ascii=False),
-        encoding="utf-8"
+        encoding="utf-8",
     )
     print(f"Wrote {output_path}")
 
