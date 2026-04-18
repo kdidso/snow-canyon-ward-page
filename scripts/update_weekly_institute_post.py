@@ -117,6 +117,34 @@ def find_first_present(
     raise last_exc or RuntimeError("No matching element found.")
 
 
+def debug_selector_matches(
+    driver: webdriver.Chrome,
+    selectors: list[tuple[str, str]],
+    label: str,
+) -> None:
+    print(f"Debugging selector matches for: {label}")
+    for by, selector in selectors:
+        try:
+            elements = driver.find_elements(by, selector)
+            print(f"  Selector {by} | {selector} -> {len(elements)} match(es)")
+            for i, el in enumerate(elements[:3], start=1):
+                try:
+                    text = (el.text or "").strip()
+                    aria = el.get_attribute("aria-label")
+                    role = el.get_attribute("role")
+                    tag = el.tag_name
+                    enabled = el.is_enabled()
+                    displayed = el.is_displayed()
+                    print(
+                        f"    [{i}] tag={tag} role={role} aria={aria} "
+                        f"displayed={displayed} enabled={enabled} text={text!r}"
+                    )
+                except Exception as inner_exc:
+                    print(f"    [{i}] Could not inspect element: {inner_exc}")
+        except Exception as exc:
+            print(f"  Selector {by} | {selector} raised: {exc}")
+
+
 def find_first_clickable(
     driver: webdriver.Chrome,
     selectors: list[tuple[str, str]],
@@ -131,8 +159,11 @@ def find_first_clickable(
             print(f"Found clickable element using selector: {by} | {selector}")
             return element
         except Exception as exc:
+            print(f"Clickable lookup failed for selector: {by} | {selector} | {exc}")
             last_exc = exc
             continue
+
+    debug_selector_matches(driver, selectors, "clickable target")
     raise last_exc or RuntimeError("No matching clickable element found.")
 
 
@@ -173,6 +204,7 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
         (By.XPATH, "//input[@name='username']"),
         (By.XPATH, "//input[@name='email']"),
         (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
+        (By.CSS_SELECTOR, "input[type='text']"),
     ]
 
     password_selectors = [
@@ -187,8 +219,17 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
         (By.XPATH, "//button[@type='submit']"),
         (By.XPATH, "//*[@id='login_form']//button[@type='submit']"),
         (By.XPATH, "//button[normalize-space()='Log in']"),
+        (By.XPATH, "//button[normalize-space()='Log In']"),
         (By.XPATH, "//button[.//div[normalize-space()='Log in']]"),
+        (By.XPATH, "//button[.//div[normalize-space()='Log In']]"),
         (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
+        (By.XPATH, "//*[normalize-space()='Log In']/ancestor::button[1]"),
+        (By.XPATH, "//*[@id='login_form']//*[@role='button' and @aria-label='Log In']"),
+        (By.XPATH, "//*[@role='button' and @aria-label='Log In']"),
+        (By.XPATH, "//*[@role='button' and @tabindex='0' and @aria-label='Log In']"),
+        (By.XPATH, "//div[@role='button'][.//span[normalize-space()='Log In']]"),
+        (By.XPATH, "//div[@role='button'][.//div[normalize-space()='Log In']]"),
+        (By.XPATH, "//*[@id='login_form']//*[@role='button']"),
     ]
 
     username_input = find_first_present(driver, username_selectors, timeout=20)
@@ -209,6 +250,9 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     print(f"Password length entered: {len(entered_password)}")
 
     save_failure_screenshot(driver, LOGIN_FILLED_SCREENSHOT)
+
+    print("Attempting to identify Log in button...")
+    debug_selector_matches(driver, login_button_selectors, "login button before click")
 
     login_button = find_first_clickable(driver, login_button_selectors, timeout=20)
     print("About to click Log in button.")
