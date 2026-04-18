@@ -48,7 +48,7 @@ jobs:
 
       - name: Run script
         run: |
-          python update_weekly_institute_post.py
+          python scripts/update_weekly_institute_post.py
 
       - name: Commit and push changes
         run: |
