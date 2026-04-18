@@ -1,2394 +1,485 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=5"
-  />
-  <title>Snow Canyon YSA Ward (26-35) - Unit Page</title>
-  <meta
-    name="description"
-    content="Snow Canyon YSA Ward (26-35) — local unit page with meeting times, address, map, and upcoming events."
-  />
-
-  <!-- Social preview -->
-  <meta property="og:title" content="Snow Canyon YSA Ward (26-35) - Unit Page" />
-  <meta
-    property="og:description"
-    content="Meeting times, address, map, and upcoming ward events."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta
-    property="og:image"
-    content="https://kdidso.github.io/snow-canyon-ward-page/images/ward-preview.pngauto=format&fit=crop&w=1400&q=80"
-  />
-
-  <!-- Favicon (simple) -->
-  <link
-    rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9B%AA%3C/text%3E%3C/svg%3E"
-  />
-
-  <!-- Leaflet (map) -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-
-  <style>
-    :root {
-      --brand: #157493;
-      --brand-dark: #0f5f76;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --panel: #f3f4f6;
-      --white: #ffffff;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      --maxw: 952px;
-      --radius: 10px;
-      --radius-sm: 6px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: #fff;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 212px;
-      overflow: visible;
-      background: #111;
-    }
-
-    @media (min-width: 640px) {
-      .hero {
-        height: 452px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .hero {
-        height: 519px;
-      }
-    }
-
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      filter: saturate(1.05);
-    }
-
-    .hero .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.62),
-        rgba(0, 0, 0, 0) 72%
-      );
-      pointer-events: none;
-    }
-
-    /* Hero actions (Share / More) */
-    .hero-actions {
-      position: absolute;
-      right: 14px;
-      bottom: 14px;
-      display: flex;
-      gap: 10px;
-      z-index: 3;
-    }
-
-    @media (min-width: 640px) {
-      .hero-actions {
-        right: 24px;
-        bottom: 24px;
-      }
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: var(--white);
-      color: var(--brand);
-      height: 40px;
-      padding: 0 12px;
-      border-radius: 4px;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .btn:focus {
-      outline: 3px solid rgba(21, 116, 147, 0.28);
-      outline-offset: 2px;
-    }
-
-    .btn.icon-only {
-      width: 40px;
-      justify-content: center;
-      padding: 0;
-    }
-
-    .btn .label {
-      display: none;
-      font-size: 14px;
-    }
-
-    @media (min-width: 1024px) {
-      .btn .label {
-        display: inline;
-      }
-    }
-
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--brand);
-    }
-
-    /* Title block (bottom-left) */
-    .hero-title {
-      position: absolute;
-      left: 14px;
-      bottom: 14px;
-      width: 75%;
-      z-index: 3;
-      color: #fff;
-      text-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
-    }
-
-    @media (min-width: 640px) {
-      .hero-title {
-        left: 36px;
-        bottom: 24px;
-        width: 66%;
-      }
-    }
-
-    .hero-title h1 {
-      margin: 0 0 6px 0;
-      font-weight: 700;
-      line-height: 1.06;
-      font-size: 28px;
-    }
-
-    @media (min-width: 640px) {
-      .hero-title h1 {
-        font-size: 44px;
-      }
-    }
-
-    .hero-title .sub {
-      font-weight: 300;
-      opacity: 0.98;
-      font-size: 18px;
-    }
-
-    @media (min-width: 640px) {
-      .hero-title .sub {
-        font-size: 22px;
-      }
-    }
-
-    /* Page content */
-    .page {
-      padding: 18px 14px 36px;
-    }
-
-    @media (min-width: 640px) {
-      .page {
-        padding: 28px 18px 50px;
-      }
-    }
-
-    .section-title {
-      margin: 0 0 12px 0;
-      font-weight: 800;
-      font-size: 18px;
-    }
-
-    .welcome {
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.55;
-      margin: 0 0 22px 0;
-      color: var(--text);
-    }
-
-    /* Info + Map panel */
-    .panel {
-      background: var(--panel);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr;
-      box-shadow: var(--shadow);
-    }
-
-    @media (min-width: 640px) {
-      .panel {
-        grid-template-columns: 1.15fr 1fr;
-        min-height: 320px;
-      }
-    }
-
-    .panel-left {
-      padding: 18px 16px;
-    }
-
-    @media (min-width: 768px) {
-      .panel-left {
-        padding: 22px 22px;
-      }
-    }
-
-    .meeting-line {
-      margin: 0 0 10px 0;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .address {
-      margin-top: 14px;
-      font-size: 16px;
-      line-height: 1.4;
-      color: var(--text);
-    }
-
-    .address .muted {
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .directions {
-      margin-top: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--brand);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .directions:hover {
-      text-decoration: underline;
-    }
-
-    .directions svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--brand);
-    }
-
-    .panel-right {
-      position: relative;
-      min-height: 180px;
-    }
-
-    @media (min-width: 640px) {
-      .panel-right {
-        min-height: auto;
-      }
-    }
-
-    #map {
-      width: 100%;
-      height: 180px;
-      background: #e5e7eb;
-    }
-
-    @media (min-width: 640px) {
-      #map {
-        height: 100%;
-        min-height: 320px;
-      }
-    }
-
-    
-
-    /* Dropdown */
-    .dropdown {
-      position: absolute;
-      right: 0;
-      top: 52px;
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      min-width: 240px;
-      overflow: hidden;
-      display: none;
-      z-index: 50;
-    }
-
-    .dropdown.open {
-      display: block;
-    }
-
-    .dropdown a,
-    .dropdown button {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 12px;
-      font-size: 14px;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      text-align: left;
-      color: var(--text);
-    }
-
-    .dropdown a:hover,
-    .dropdown button:hover {
-      background: rgba(21, 116, 147, 0.08);
-    }
-
-    .dropdown .small {
-      font-size: 12px;
-      color: var(--muted);
-      padding: 10px 12px;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      background: rgba(17, 24, 39, 0.95);
-      color: #fff;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 14px;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 160ms ease;
-      z-index: 999;
-    }
-
-    .toast.show {
-      opacity: 1;
-    }
-
-    /* Events widget */
-    .events-wrap {
-      margin-top: 22px;
-    }
-
-    .events-card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .events-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.55);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .events-head h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .events-head .hint {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .events-body {
-      background: #fff;
-      height: 350px;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      position: relative;
-    }  
-   
-    /* Mobile fix */
-@media (max-width: 640px) {
-  .events-body {
-    height: 450px;
-  }
-}
-
-    .events-iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-      pointer-events: auto;
-    }
-
-    .events-overlay-link {
-      display: none;
-    }
-
-    .events-footer {
-      padding: 10px 16px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.55);
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    /* Weekly Institute Events widget */
-    .institute-wrap {
-      margin-top: 22px;
-    }
-
-    .institute-card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .institute-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.55);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      gap: 12px;
-    }
-
-    .institute-head h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .institute-head .hint {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-      text-align: right;
-      line-height: 1.2;
-    }
-
-    .institute-head .hint a {
-      color: var(--brand);
-      text-decoration: underline;
-      white-space: nowrap;
-    }
-
-    .institute-body {
-      background: #fff;
-      min-height: 220px;
-      padding: 16px;
-    }
-
-    .institute-status {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .institute-embed-wrap {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-.institute-embed-wrap iframe {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-@media (max-width: 640px) {
-  .institute-body {
-    padding: 8px;
-  }
-} 
-.institute-embed-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.institute-embed-wrap blockquote.instagram-media {
-  width: 440px !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-}
-    .institute-mobile-card {
-      display: none;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-
-    .institute-mobile-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 420px;
-      object-fit: cover;
-      background: #e5e7eb;
-    }
-
-    .institute-mobile-card-body {
-      padding: 14px;
-    }
-
-    .institute-mobile-card-title {
-      margin: 0 0 8px 0;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .institute-mobile-card-text {
-      margin: 0 0 12px 0;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--text);
-    }
-
-    .institute-mobile-card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--brand);
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: underline;
-    }
-    
-    .institute-fallback {
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 10px;
-      padding: 14px;
-      background: #fff;
-    }
-
-    .institute-fallback-title {
-      margin: 0 0 8px 0;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .institute-fallback-text {
-      margin: 0 0 12px 0;
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--text);
-    }
-
-    .institute-fallback-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--brand);
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: underline;
-    }
-
-    .institute-footer {
-      padding: 10px 16px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.55);
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    /* ----------------------------
-       UNIT HISTORY (PHOTO FOLDERS) WIDGET
-       ---------------------------- */
-    .history-wrap {
-      margin-top: 22px;
-    }
-
-    .history-card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .history-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.55);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .history-head h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .history-head .hint {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-      text-align: right;
-      line-height: 1.2;
-    }
-
-    .history-head .hint a {
-      color: var(--brand);
-      text-decoration: underline;
-      white-space: nowrap;
-    }
-
-    /* Fixed-height scroll area */
-    .history-body {
-      background: #fff;
-      height: 360px;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 14px;
-    }
-
-    /* Responsive grid: fill across, wrap to rows */
-    .history-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 14px;
-      align-items: start;
-    }
-
-    /* Folder “card” styled like your screenshot tile */
-    .folder-card {
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: transform 120ms ease, box-shadow 120ms ease;
-      display: flex;
-      flex-direction: column;
-      min-height: 268px;
-    }
-
-    .folder-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
-    }
-
-    .folder-thumb {
-      width: 100%;
-      height: 150px;
-      background: #e5e7eb;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .folder-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .folder-meta {
-      padding: 12px 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    /* small headline ABOVE the big bold title (as you asked) */
-    .folder-subtitle {
-      font-size: 12px;
-      font-weight: 800;
-      color: #b45309;
-      letter-spacing: 0.2px;
-      line-height: 1.15;
-      text-transform: none;
-      margin: 0;
-    }
-
-    .folder-title {
-      font-size: 18px;
-      font-weight: 900;
-      line-height: 1.1;
-      margin: 0;
-    }
-
-    .folder-date {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .folder-count {
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .history-status {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-      padding: 10px 2px;
-    }
-
-    /* Modal (folder gallery) */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.62);
-      display: none;
-      z-index: 2000;
-      padding: 18px;
-    }
-
-    .modal.open {
-      display: flex;
-    }
-
-    .modal-panel {
-      width: 91vw;
-      margin: auto;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      max-height: calc(100vh - 36px);
-    }
-
-    .modal-head {
-      display: flex;
-      width: 91vw;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 14px 10px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(243, 244, 246, 0.55);
-    }
-
-    .modal-titles {
-      min-width: 0;
-    }
-
-    .modal-subtitle {
-      margin: 0 0 6px 0;
-      font-size: 12px;
-      font-weight: 900;
-      color: #b45309;
-      line-height: 1.2;
-    }
-
-    .modal-title {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--text);
-      line-height: 1.2;
-      word-break: break-word;
-    }
-
-    .modal-close {
-      border: 0;
-      background: #fff;
-      border-radius: 10px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-    }
-
-    .modal-close:focus {
-      outline: 3px solid rgba(21, 116, 147, 0.28);
-      outline-offset: 2px;
-    }
-
-    .modal-close svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--text);
-    }
-
-    .modal-body {
-  background: #111827;
-  width: 91vw;
-  position: relative;              /* NEW: anchor absolute arrows */
-  display: flex;                   /* NEW: simple centering model */
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  min-height: 220px;
-}
-
-/* Image viewing panel */
-.modal-mainimg-wrap {
-  width: 100%;
-  height: min(58vh, 520px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #0b1220;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;              /* ok to keep */
-}
-
-/* The main image */
-.modal-mainimg {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-/* Overlay nav buttons */
-.nav-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(100, 100, 100, 0.5);
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-
-  position: absolute;              /* NEW */
-  top: 50%;                        /* NEW */
-  transform: translateY(-50%);     /* NEW */
-  z-index: 30;                     /* NEW: always above image */
-}
-
-/* Left/right placement */
-#modalPrevBtn { left: 12px; }
-#modalNextBtn { right: 12px; }
-
-
-@media (max-width: 640px) {
-  .nav-btn { width: 40px; height: 40px; }
-  #modalPrevBtn { left: 8px; }
-  #modalNextBtn { right: 8px; }
-}
-
-/* Optional: disabled styling (we'll wire this in JS next) */
-.nav-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-    .nav-btn:hover {
-      background: rgba(100, 100, 100, 0.6);
-    }
-
-    .nav-btn:focus {
-      outline: 3px solid rgba(21, 116, 147, 0.55);
-      outline-offset: 2px;
-    }
-
-    .nav-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #fff;
-    }
-
-
-    .modal-mainimg {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .modal-foot {
-      width: 91vw;
-      padding: 10px 12px 12px;
-      background: #fff;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .thumb-strip {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .thumb {
-      width: 66px;
-      height: 52px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #e5e7eb;
-      border: 2px solid transparent;
-      flex: 0 0 auto;
-      cursor: pointer;
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .thumb.active {
-      border-color: var(--brand);
-    }
-
-    .modal-caption {
-      margin-top: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .modal-caption a {
-      color: var(--brand);
-      text-decoration: underline;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    /* Footer-ish disclaimer */
-    .disclaimer {
-      margin-top: 18px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    /* Come Follow Me widget */
-    .cfm-card {
-      margin-top: 22px;
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .cfm-head {
-      display: flex;
-      gap: 14px;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 16px 16px 10px;
-    }
-
-    .cfm-title {
-      margin: 0 0 8px 0;
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .cfm-sub {
-      margin: 0 0 6px 0;
-      font-size: 13px;
-      font-weight: 700;
-      color: #b45309;
-    }
-
-    .cfm-big {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--brand);
-      line-height: 1.2;
-    }
-
-    .cfm-link {
-      white-space: nowrap;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--brand);
-      padding: 8px 10px;
-      border-radius: 8px;
-    }
-
-    .cfm-link:hover {
-      text-decoration: underline;
-    }
-
-    .cfm-imageWrap {
-      display: block;
-      padding: 0 16px 16px;
-    }
-
-    #cfmImg {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-      background: #e5e7eb;
-      display: block;
-    }
-
-    @media (min-width: 640px) {
-      #cfmImg {
-        height: 300px;
-      }
-    }
-    
-  </style>
-</head>
-
-<body>
-  <!-- HERO -->
-  <header class="hero">
-    <img
-      src="https://brightspotcdn.byu.edu/dims4/default/4e9a448/2147483647/strip/true/crop/6000x4000+0+0/resize/840x560!/quality/90/?url=https%3A%2F%2Fbrigham-young-brightspot-us-east-2.s3.us-east-2.amazonaws.com%2Feb%2F24%2Fdaa9ccbc527807e884b8bedd86cd%2F01-north-elevation-annex-rendering-1.jpg"
-      alt="St. George Utah Temple"
-      loading="eager"
-    />
-    <div class="overlay"></div>
-
-    <!-- Title bottom-left -->
-    <div class="hero-title">
-      <h1 id="unitName">Snow Canyon YSA Ward (26-35)</h1>
-      <div class="sub" id="unitCity">Events &amp; Meeting Times</div>
-    </div>
-
-    <!-- Buttons bottom-right -->
-    <div class="hero-actions">
-      <div style="position: relative;">
-        <button class="btn" id="shareBtn" type="button" aria-label="Share this page">
-          <svg viewBox="0 0 17 20" aria-hidden="true">
-            <path
-              d="M4.18231 11.85C3.82397 12.1759 3.37868 12.3907 2.90056 12.4683C2.42244 12.5458 1.93208 12.4828 1.4891 12.2869C1.04611 12.091 0.669579 11.7706 0.405266 11.3647C0.140953 10.9588 0.000244141 10.4849 0.000244141 10.0005C0.000244141 9.51616 0.140953 9.04222 0.405266 8.63632C0.669579 8.23042 1.04611 7.91005 1.4891 7.71414C1.93208 7.51823 2.42244 7.45523 2.90056 7.53279C3.37868 7.61035 3.82397 7.82513 4.18231 8.15103L12.0623 3.55403C11.9297 2.97162 12.0101 2.36098 12.2888 1.83267C12.5675 1.30436 13.0261 0.893298 13.5817 0.673899C14.1372 0.454499 14.753 0.441265 15.3175 0.636592C15.8819 0.831918 16.3578 1.2229 16.659 1.73874C16.9601 2.25459 17.0666 2.86121 16.9592 3.44878C16.8518 4.03636 16.5375 4.56605 16.0733 4.94197C15.6091 5.31788 15.0257 5.51517 14.4286 5.49813C13.8315 5.48108 13.2603 5.25082 12.8183 4.84903L4.93831 9.44603C5.02092 9.81075 5.02092 10.1893 4.93831 10.554L12.8183 15.151C13.2603 14.7492 13.8315 14.519 14.4286 14.5019C15.0257 14.4849 15.6091 14.6822 16.0733 15.0581C16.5375 15.434 16.8518 15.9637 16.9592 16.5513C17.0666 17.1389 16.9601 17.7455 16.659 18.2613C16.3578 18.7772 15.8819 19.1681 15.3175 19.3635C14.753 19.5588 14.1372 19.5456 13.5817 19.3262C13.0261 19.1068 12.5675 18.6957 12.2888 18.1674C12.0101 17.6391 11.9297 17.0284 12.0623 16.446L4.18231 11.849V11.85Z"
-            ></path>
-          </svg>
-          <span class="label">Share</span>
-        </button>
-
-        <div class="dropdown" id="shareMenu" role="menu" aria-label="Share menu">
-          <button type="button" id="copyLinkBtn" role="menuitem">Copy link</button>
-          <a id="smsLink" href="#" role="menuitem">Text</a>
-          <a id="emailLink" href="#" role="menuitem">Email</a>
-          <div class="small">
-            Tip: On mobile, “Share” may open your device share sheet.
-          </div>
-        </div>
-      </div>
-
-      <div style="position: relative;">
-        <button class="btn icon-only" id="moreBtn" type="button" aria-label="More options">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16C10.9 16 10 16.9 10 18ZM10 6C10 7.1 10.9 8 12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6ZM10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10C10.9 10 10 10.9 10 12Z"
-            ></path>
-          </svg>
-        </button>
-
-        <div class="dropdown" id="moreMenu" role="menu" aria-label="More options menu">
-          <a
-            href="https://docs.google.com/document/d/1-yZTVTa_TsHkZfCy6rNLFnZhErk0HeQ9QPoO3urSoW8/edit?usp=drive_link"
-            target="_blank"
-            rel="noopener"
-            role="menuitem"
-          >
-            Ward Bulletin
-          </a>
-
-          <a
-            href="https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global"
-            target="_blank"
-            rel="noopener"
-            role="menuitem"
-          >
-            Visit official ward page
-          </a>
-
-          <button type="button" id="printBtn" role="menuitem">Print</button>
-
-          <div class="small">
-            These are simple local actions for your GitHub Pages version.
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <main class="page">
-    <div class="container">
-      <!-- UPCOMING EVENTS WIDGET -->
-      <div class="events-wrap" aria-label="Upcoming events">
-        <div class="events-card">
-          <div class="events-head">
-            <h3>Upcoming events</h3>
-            <div class="hint">
-              Scroll to see more •
-              <a
-                id="openCalendarHeaderLink"
-                href="#"
-                target="_blank"
-                rel="noopener"
-                style="color: var(--brand); text-decoration: underline;"
-              >
-                Open full calendar
-              </a>
-            </div>
-          </div>
-
-          <div class="events-body">
-            <iframe
-              id="eventsIframe"
-              class="events-iframe"
-              title="Ward events (week view)"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src=""
-            ></iframe>
-          </div>
-
-          <div class="events-footer">
-            Tip: This is a scrollable preview. Use “Open full calendar” for details and RSVPs.
-          </div>
-        </div>
-      </div>
-
-      <!-- WEEKLY INSTITUTE EVENTS WIDGET -->
-      <div class="institute-wrap" aria-label="Weekly institute events">
-        <div class="institute-card">
-          <div class="institute-head">
-            <h3>Weekly Institute Events</h3>
-            <div class="hint">
-              Updated Sundays •
-              <a
-                id="openInstitutePageLink"
-                href="https://www.facebook.com/stginstitute"
-                target="_blank"
-                rel="noopener"
-              >
-                Open institute page
-              </a>
-            </div>
-          </div>
-
-          <div class="institute-body">
-            <div id="instituteStatus" class="institute-status">Loading this week’s institute post…</div>
-            <div id="instituteEmbedWrap" class="institute-embed-wrap" style="display:none;"></div>
-            <div id="instituteMobileCard" class="institute-mobile-card" style="display:none;">
-              <img id="instituteMobileImage" alt="Institute weekly activities" loading="lazy" />
-              <div class="institute-mobile-card-body">
-                <p class="institute-mobile-card-title">This week’s institute activities</p>
-                <p class="institute-mobile-card-text" id="instituteMobileText"></p>
-                <a
-                  id="instituteMobileLink"
-                  class="institute-mobile-card-link"
-                  href="https://www.facebook.com/stginstitute"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Open post
-                </a>
-              </div>
-            </div>
-            
-            <div id="instituteFallback" class="institute-fallback" style="display:none;">
-              <p class="institute-fallback-title">This week’s institute post</p>
-              <p class="institute-fallback-text" id="instituteFallbackText">
-                Open this week’s institute activities post on Facebook.
-              </p>
-              <a
-                id="instituteFallbackLink"
-                class="institute-fallback-link"
-                href="https://www.facebook.com/stginstitute"
-                target="_blank"
-                rel="noopener"
-              >
-                Open post
-              </a>
-            </div>
-          </div>
-
-          <div class="institute-footer">
-            This widget shows the institute’s weekly Sunday activities post when available.
-          </div>
-        </div>
-      </div>
-
-      <!-- UNIT HISTORY (PHOTO FOLDERS) WIDGET -->
-      <div class="history-wrap" aria-label="Unit history photo folders">
-        <div class="history-card">
-          <div class="history-head">
-            <h3>Unit history (photos)</h3>
-            <div class="hint">
-              Scroll to see more •
-              <a id="openHistoryRepoLink" href="#" target="_blank" rel="noopener">Open on Ward History Page</a>
-            </div>
-          </div>
-
-          <div class="history-body">
-            <div id="historyStatus" class="history-status">Loading folders…</div>
-            <div id="historyGrid" class="history-grid" aria-label="Unit history folders"></div>
-          </div>
-        </div>
-      </div>
-
-      <span style="display: flex; height: 20px;"></span>
-
-      <h2 class="section-title" id="welcome">Welcome</h2>
-      <p class="welcome" id="welcomeText">
-        The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a
-        variety of faith-based activities. This website is regularly updated with Sunday worship services and
-        activities. Come join us! We welcome you to RSVP.
-      </p>
-
-<section class="panel" id="meeting" aria-label="Meeting info and map">
-  <div class="panel-left">
-    <div class="meeting-line">
-      <span id="serviceTitle1">Sunday Service (West chapel)</span>
-      <span id="serviceTime1">10:30 AM</span>
-    </div>
-
-    <div class="meeting-line">
-      <span id="serviceTitle2">Gospel Study</span>
-      <span id="serviceTime2">11:45 AM</span>
-    </div>
-
-    <div class="address" aria-label="Meeting locations">
-      <div style="margin-bottom: 14px;">
-        <div style="font-weight: 700;">Sunday Service</div>
-        <div id="addrLine1">943 East 400 South</div>
-        <div>
-          <span id="addrCity">St. George</span><span class="muted">, </span><span id="addrState">UT</span>
-          <span id="addrZip">84770</span>
-        </div>
-      </div>
-
-      <div>
-        <div style="font-weight: 700;">Gospel Study</div>
-        <div id="addrLine2">290 S 700 E</div>
-        <div>
-          <span id="addrCity2">St. George</span><span class="muted">, </span><span id="addrState2">UT</span>
-          <span id="addrZip2">84770</span>
-        </div>
-      </div>
-    </div>
-
-    <a
-      class="directions"
-      id="directionsLink"
-      href="#"
-      target="_blank"
-      rel="noopener"
-      aria-label="Directions to Sunday Service in Google Maps"
-    >
-      <svg viewBox="0 0 20 20" aria-hidden="true">
-        <path
-          d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"
-        ></path>
-      </svg>
-      <span>Directions to Sunday Service</span>
-    </a>  
-<a
-  class="directions"
-  id="gospelDirectionsLink"
-  href="#"
-  target="_blank"
-  rel="noopener"
-  aria-label="Directions to Gospel Study in Google Maps"
-  style="display:block; margin-top: 6px;"
->
-  <svg viewBox="0 0 20 20" aria-hidden="true">
-    <path
-      d="M15.4059 9.4343L12.9439 11.8963C12.8743 11.9669 12.7915 12.0231 12.7002 12.0617C12.6088 12.1002 12.5108 12.1204 12.4116 12.1209C12.3125 12.1215 12.2142 12.1024 12.1225 12.0649C12.0307 12.0274 11.9472 11.9721 11.8769 11.9023C11.8064 11.8323 11.7506 11.7489 11.7127 11.6571C11.6748 11.5652 11.6556 11.4667 11.6562 11.3673C11.6569 11.268 11.6774 11.1697 11.7165 11.0784C11.7555 10.987 11.8125 10.9044 11.8839 10.8353L13.0719 9.6473H8.64189C7.70789 9.6473 6.95689 10.4213 6.95689 11.3973V12.8973C6.95689 13.0962 6.87788 13.287 6.73722 13.4276C6.59657 13.5683 6.40581 13.6473 6.20689 13.6473C6.00798 13.6473 5.81722 13.5683 5.67656 13.4276C5.53591 13.287 5.45689 13.0962 5.45689 12.8973V11.3973C5.45689 9.6023 6.86889 8.1473 8.64289 8.1473H13.0719L11.8719 6.9483C11.7353 6.80679 11.6598 6.6173 11.6616 6.42065C11.6634 6.22401 11.7424 6.03593 11.8815 5.89694C12.0206 5.75795 12.2088 5.67916 12.4054 5.67755C12.6021 5.67593 12.7915 5.75162 12.9329 5.8883L15.3459 8.3003C15.3568 8.31139 15.3675 8.32272 15.3779 8.3343L15.4129 8.3673C15.4833 8.43739 15.539 8.52079 15.5768 8.61264C15.6146 8.70449 15.6338 8.80295 15.6331 8.90227C15.6325 9.0016 15.612 9.0998 15.573 9.19114C15.534 9.28249 15.4772 9.36515 15.4059 9.4343ZM19.5219 9.1973L10.6169 0.293304C10.4283 0.105466 10.173 0 9.90689 0C9.64075 0 9.38544 0.105466 9.19689 0.293304L0.292893 9.1973C0.105299 9.38598 0 9.64124 0 9.9073C0 10.1734 0.105299 10.4286 0.292893 10.6173L9.19789 19.5213C9.58689 19.9113 10.2249 19.9133 10.6169 19.5213L19.5219 10.6173C19.7095 10.4286 19.8148 10.1734 19.8148 9.9073C19.8148 9.64124 19.7095 9.38598 19.5219 9.1973Z"
-    ></path>
-  </svg>
-  <span>Directions to Gospel Study</span>
-</a>
-  </div>
-
-  <div class="panel-right">
-    <div id="map" aria-label="Map"></div>
-  </div>
-</section>
-
-      <!-- THIS WEEK'S COME FOLLOW ME STUDY -->
-      <section class="cfm-card" aria-label="This week's Come Follow Me study">
-        <div class="cfm-head">
-          <div>
-            <h2 class="cfm-title">This Week’s Come Follow Me Study</h2>
-            <p class="cfm-sub" id="cfmSmallHeading"></p>
-            <p class="cfm-big" id="cfmBigHeading"></p>
-          </div>
-
-          <a class="cfm-link" id="cfmOpenLink" href="#" target="_blank" rel="noopener">
-            View full lesson →
-          </a>
-        </div>
-
-        <a
-          class="cfm-imageWrap"
-          id="cfmImageLink"
-          href="#"
-          target="_blank"
-          rel="noopener"
-          aria-label="Open lesson page"
-        >
-          <img id="cfmImg" alt="Come Follow Me image" loading="lazy" />
-        </a>
-      </section>
-
-      <div class="disclaimer">
-        <strong>Disclaimer:</strong> This is an independent, GitHub Pages–hosted layout inspired by a common “unit page”
-        design. It is not an official Church website and should not use official trademarks/logos without permission.
-      </div>
-    </div>
-  </main>
-
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <!-- Unit history modal -->
-  <div class="modal" id="historyModal" role="dialog" aria-modal="true" aria-label="Photo folder viewer">
-    <div class="modal-panel">
-      <div class="modal-head">
-        <div class="modal-titles">
-          <p class="modal-subtitle" id="modalSubtitle"></p>
-          <h3 class="modal-title" id="modalTitle"></h3>
-        </div>
-
-        <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z"
-            ></path>
-          </svg>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <button class="nav-btn" id="modalPrevBtn" type="button" aria-label="Previous photo">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-          </svg>
-        </button>
-
-        <div class="modal-mainimg-wrap">
-          <img
-            class="modal-mainimg"
-            id="modalMainImg"
-            alt="Photo"
-            loading="eager"
-            referrerpolicy="no-referrer"
-          />
-        </div>
-  
-
-
-        <button class="nav-btn" id="modalNextBtn" type="button" aria-label="Next photo">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m8.59 16.59 1.41 1.41 6-6-6-6-1.41 1.41L13.17 12z"></path>
-          </svg>
-        </button>
-      </div>
-
-      <div class="modal-foot">
-        <div class="thumb-strip" id="modalThumbStrip" aria-label="Thumbnails"></div>
-        <div class="modal-caption">
-          <div id="modalCounter">—</div>
-          <a id="modalOpenRawLink" href="#" target="_blank" rel="noopener">Open image</a>
-        </div>
-      </div>
-    </div>
-  </div>  
-
-   <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
-</script>
-<script async src="//www.instagram.com/embed.js"></script>
-
-  <script>
-    // ----------------------------
-    // CONFIG (edit these)
-    // ----------------------------
-    const CONFIG = {
-  unitName: "Snow Canyon YSA Ward (26-35)",
-  unitCityLine: "Events & Meeting Times",
-  welcomeText:
-    "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
-
-  service1: { title: "Sunday Service (West chapel)", time: "10:30 AM" },
-  service2: { title: "Gospel Study", time: "11:45 AM" },
-
-  sundayService: {
-    title: "Sunday Service",
-    line1: "943 East 400 South",
-    city: "St. George",
-    state: "UT",
-    zip: "84770",
-    lat: 37.101707,
-    lng: -113.563324
-  },
-
-  gospelStudy: {
-    title: "Gospel Study",
-    line1: "290 S 700 E",
-    city: "St. George",
-    state: "UT",
-    zip: "84770",
-    lat: 37.10344364482818,
-    lng: -113.56911127567194
-  },
-
-  zoom: 16,
-
-  officialWardUrl:
-    "https://local.churchofjesuschrist.org/en/units/us/ut/snow-canyon-ysa-ward-26-35?icid=actsh|uwm|web|mis|global|global",
-
-  calendarFullEmbedUrl:
-    "https://calendar.google.com/calendar/embed?src=ff28b467e8f4848fe351a83f327c53f5aefaf745a55b9a47dcd4f9c7f08dd7a5%40group.calendar.google.com&ctz=America%2FDenver",
-  
-  instituteWeeklyJsonUrl: "./data/weekly_institute_post.json",
-  instituteFacebookPageUrl: "https://www.instagram.com/stginstitute/",
-
-  unitHistory: {
-    owner: "kdidso",
-    repo: "snow-canyon-ward-page",
-    path: "unit-history/events",
-    branch: "main"
-  }
-};
-
-    // ----------------------------
-    // Helpers
-    // ----------------------------
-    function $(id) {
-      return document.getElementById(id);
-    }
-
-function buildGoogleMapsQuery(locationObj) {
-  const q = `${locationObj.line1}, ${locationObj.city}, ${locationObj.state} ${locationObj.zip}, US`;
-  return `https://maps.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-}
-
-    function showToast(message) {
-      const el = $("toast");
-      el.textContent = message;
-      el.classList.add("show");
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => el.classList.remove("show"), 1400);
-    }
-
-    function closeAllMenus() {
-      $("shareMenu").classList.remove("open");
-      $("moreMenu").classList.remove("open");
-    }
-
-    function buildWeekEmbedFromFullEmbed(fullEmbedUrl) {
-      // Force AGENDA view with minimal chrome.
-      const u = new URL(fullEmbedUrl);
-      u.searchParams.set("mode", "AGENDA");
-      u.searchParams.set("showTitle", "0");
-      u.searchParams.set("showNav", "0");
-      u.searchParams.set("showDate", "0");
-      u.searchParams.set("showPrint", "0");
-      u.searchParams.set("showTabs", "0");
-      u.searchParams.set("showCalendars", "0");
-      u.searchParams.set("showTz", "0");
-      u.searchParams.set("wkst", "1");
-      return u.toString();
-    }
-
-    function escapeHtml(s) {
-      return String(s)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function isImageFile(name) {
-      const n = String(name || "").toLowerCase();
-      return (
-        n.endsWith(".jpg") ||
-        n.endsWith(".jpeg") ||
-        n.endsWith(".png") ||
-        n.endsWith(".webp") ||
-        n.endsWith(".gif")
-      );
-    }
-
-    function splitFolderName(folderName) {
-      // Split at the FIRST dash, but tolerate " - " and multiple dashes
-      // Example: "Fall scavenger hunt - FHE" => { title: "Fall scavenger hunt", subtitle: "FHE" }
-      const raw = String(folderName || "").trim();
-      const idx = raw.indexOf("-");
-      if (idx === -1) {
-        return { title: raw, subtitle: "" };
-      }
-      const left = raw.slice(0, idx).trim();
-      const right = raw.slice(idx + 1).trim();
-      return { title: left || raw, subtitle: right || "" };
-    }
-
-    function prettyDateFromPrefix(s) {
-      // If folder starts with an ISO-ish date like "2025-11-10 ..." show "10 November 2025"
-      // Works for: YYYY-MM-DD, YYYY_MM_DD, YYYY.MM.DD
-      const raw = String(s || "").trim();
-      const m = raw.match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
-      if (!m) return "";
-      const y = Number(m[1]);
-      const mo = Number(m[2]);
-      const d = Number(m[3]);
-      if (!y || mo < 1 || mo > 12 || d < 1 || d > 31) return "";
-      const dt = new Date(Date.UTC(y, mo - 1, d));
-      const fmt = new Intl.DateTimeFormat("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-        timeZone: "UTC"
-      });
-      return fmt.format(dt);
-    }
-function parseManifestDateText(dateText) {
-  const raw = String(dateText || "").trim();
-  if (!raw) return null;
-
-  // Examples:
-  // "Apr 6, 2026"
-  // "Nov 10, 2025"
-  // "Mar 1, 2026"
-
-  const parsed = Date.parse(raw);
-  if (!Number.isNaN(parsed)) return parsed;
-
-  return null;
-}
-
-    // ----------------------------
-    // Populate UI
-    // ----------------------------
-    $("unitName").textContent = CONFIG.unitName;
-    $("unitCity").textContent = CONFIG.unitCityLine;
-    $("welcomeText").textContent = CONFIG.welcomeText;
-
-$("serviceTitle1").textContent = CONFIG.service1.title;
-$("serviceTime1").textContent = CONFIG.service1.time;
-
-$("serviceTitle2").textContent = CONFIG.service2.title;
-$("serviceTime2").textContent = CONFIG.service2.time;
-
-$("addrLine1").textContent = CONFIG.sundayService.line1;
-$("addrCity").textContent = CONFIG.sundayService.city;
-$("addrState").textContent = CONFIG.sundayService.state;
-$("addrZip").textContent = CONFIG.sundayService.zip;
-
-$("addrLine2").textContent = CONFIG.gospelStudy.line1;
-$("addrCity2").textContent = CONFIG.gospelStudy.city;
-$("addrState2").textContent = CONFIG.gospelStudy.state;
-$("addrZip2").textContent = CONFIG.gospelStudy.zip;
-
-const sundayMapsUrl = buildGoogleMapsQuery(CONFIG.sundayService);
-const gospelMapsUrl = buildGoogleMapsQuery(CONFIG.gospelStudy);
-
-$("directionsLink").href = sundayMapsUrl;
-$("gospelDirectionsLink").href = gospelMapsUrl;
-
-    // Social share fallback links
-    const pageUrl = window.location.href;
-    const shareText = `Check out ${CONFIG.unitName}`;
-    $("smsLink").href = `sms:?&body=${encodeURIComponent(shareText + " " + pageUrl)}`;
-    $("emailLink").href = `mailto:?subject=${encodeURIComponent(CONFIG.unitName)}&body=${encodeURIComponent(
-      shareText + "\n\n" + pageUrl
-    )}`;
-
-    // Events embed (AGENDA view) + header link to full calendar
-    const weekUrl = buildWeekEmbedFromFullEmbed(CONFIG.calendarFullEmbedUrl);
-    $("eventsIframe").src = weekUrl;
-    $("openCalendarHeaderLink").href = CONFIG.calendarFullEmbedUrl;
-
-    // Unit history "Open on GitHub" link
-    // const historyRepoUrl = `https://github.com/${CONFIG.unitHistory.owner}/${CONFIG.unitHistory.repo}/tree/${CONFIG.unitHistory.branch}/${CONFIG.unitHistory.path}`;
-    const historyRepoUrl = `https://unithistory.churchofjesuschrist.org`;
-    $("openHistoryRepoLink").href = historyRepoUrl;
-
-    // ----------------------------
-    // Map (Leaflet + OSM)
-    // ----------------------------
-const map = L.map("map", {
-  scrollWheelZoom: true,
-  touchZoom: true,
-  dragging: true,
-  tap: true
-}).setView([CONFIG.sundayService.lat, CONFIG.sundayService.lng], CONFIG.zoom);
-
-map.options.wheelPxPerZoomLevel = 120;
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors"
-}).addTo(map);
-
-    // Ward boundary overlay (GeoJSON)
-    const WARD_BOUNDARY_GEOJSON_URL =
-      "https://kdidso.github.io/snow-canyon-map/ward_boundaries_JSO.geojson";
-
-    fetch(WARD_BOUNDARY_GEOJSON_URL)
-      .then((r) => {
-        if (!r.ok) throw new Error(`Failed to load boundary GeoJSON (${r.status})`);
-        return r.json();
-      })
-      .then((geojson) => {
-        const boundaryLayer = L.geoJSON(geojson, {
-          interactive: false,
-          style: () => ({
-            color: "#157493",
-            weight: 3,
-            opacity: 0.95,
-            fill: false
-          })
-        }).addTo(map);
-
-        map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
-      })
-      .catch((err) => console.error(err));
-
-const sundayMarker = L.marker([CONFIG.sundayService.lat, CONFIG.sundayService.lng]).addTo(map);
-const gospelMarker = L.marker([CONFIG.gospelStudy.lat, CONFIG.gospelStudy.lng]).addTo(map);
-
-sundayMarker.bindPopup(`
-  <strong>${escapeHtml(CONFIG.unitName)}</strong><br>
-  Sunday Service<br>
-  ${escapeHtml(CONFIG.sundayService.line1)}<br>
-  ${escapeHtml(CONFIG.sundayService.city)}, ${escapeHtml(CONFIG.sundayService.state)} ${escapeHtml(CONFIG.sundayService.zip)}<br><br>
-  <a href="${sundayMapsUrl}" target="_blank" rel="noopener">Open directions</a>
-`);
-
-gospelMarker.bindPopup(`
-  <strong>${escapeHtml(CONFIG.unitName)}</strong><br>
-  Gospel Study<br>
-  ${escapeHtml(CONFIG.gospelStudy.line1)}<br>
-  ${escapeHtml(CONFIG.gospelStudy.city)}, ${escapeHtml(CONFIG.gospelStudy.state)} ${escapeHtml(CONFIG.gospelStudy.zip)}<br><br>
-  <a href="${gospelMapsUrl}" target="_blank" rel="noopener">Open directions</a>
-`);
-
-    // ----------------------------
-    // Share button logic
-    // ----------------------------
-    $("shareBtn").addEventListener("click", async (e) => {
-      e.stopPropagation();
-
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: CONFIG.unitName,
-            text: shareText,
-            url: pageUrl
-          });
-          return;
-        } catch (err) {
-          // fall through to dropdown
-        }
-      }
-
-      const menu = $("shareMenu");
-      const willOpen = !menu.classList.contains("open");
-      closeAllMenus();
-      if (willOpen) menu.classList.add("open");
-    });
-
-    $("copyLinkBtn").addEventListener("click", async (e) => {
-      e.stopPropagation();
-
-      try {
-        await navigator.clipboard.writeText(pageUrl);
-        showToast("Copied link");
-      } catch (err) {
-        const ta = document.createElement("textarea");
-        ta.value = pageUrl;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        showToast("Copied link");
-      }
-
-      closeAllMenus();
-    });
-
-    // ----------------------------
-    // More options menu
-    // ----------------------------
-    $("moreBtn").addEventListener("click", (e) => {
-      e.stopPropagation();
-      const menu = $("moreMenu");
-      const willOpen = !menu.classList.contains("open");
-      closeAllMenus();
-      if (willOpen) menu.classList.add("open");
-    });
-
-    $("printBtn").addEventListener("click", (e) => {
-      e.stopPropagation();
-      closeAllMenus();
-      window.print();
-    });
-
-    // Close menus on outside click / escape
-    document.addEventListener("click", () => closeAllMenus());
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeAllMenus();
-    });
-
-    // Prevent menu clicks from closing immediately
-    $("shareMenu").addEventListener("click", (e) => e.stopPropagation());
-    $("moreMenu").addEventListener("click", (e) => e.stopPropagation());
-
-    // ----------------------------
-    // Come Follow Me widget (loads local JSON produced by GitHub Action)
-    // ----------------------------
-    async function loadComeFollowMeWidget() {
-      const jsonUrl = "./data/come_follow_me_this_week.json";
-
-      try {
-        const res = await fetch(jsonUrl, { cache: "no-store" });
-        if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
-        const data = await res.json();
-
-        const small = document.getElementById("cfmSmallHeading");
-        const big = document.getElementById("cfmBigHeading");
-        const img = document.getElementById("cfmImg");
-        const open = document.getElementById("cfmOpenLink");
-        const imgLink = document.getElementById("cfmImageLink");
-
-        if (small) small.textContent = data.small_heading || "";
-        if (big) big.textContent = data.big_heading || "";
-
-        if (img) {
-          img.src = data.image_url || "";
-          img.alt = data.big_heading ? `Come Follow Me: ${data.big_heading}` : "Come Follow Me image";
-        }
-
-        const lessonUrl = data.source_url || "#";
-        if (open) open.href = lessonUrl;
-        if (imgLink) imgLink.href = lessonUrl;
-      } catch (err) {
-        console.error(err);
-        const big = document.getElementById("cfmBigHeading");
-        if (big) big.textContent = "Unable to load this week’s lesson right now.";
-      }
-    }
-
-async function loadWeeklyInstituteWidget() {
-  const statusEl = $("instituteStatus");
-  const embedWrap = $("instituteEmbedWrap");
-  const mobileCardEl = $("instituteMobileCard");
-  const mobileImageEl = $("instituteMobileImage");
-  const mobileTextEl = $("instituteMobileText");
-  const mobileLinkEl = $("instituteMobileLink");
-  const fallbackEl = $("instituteFallback");
-  const fallbackTextEl = $("instituteFallbackText");
-  const fallbackLinkEl = $("instituteFallbackLink");
-  const openPageLinkEl = $("openInstitutePageLink");
-
-  if (openPageLinkEl) {
-    openPageLinkEl.href = CONFIG.instituteFacebookPageUrl;
-  }
-
-  try {
-    const res = await fetch(CONFIG.instituteWeeklyJsonUrl, { cache: "no-store" });
-    if (!res.ok) {
-      throw new Error(`Failed to load ${CONFIG.instituteWeeklyJsonUrl} (${res.status})`);
-    }
-
-    const data = await res.json();
-
-    const pageUrl = data.page_url || CONFIG.instituteFacebookPageUrl;
-    const postUrl = data.post_url || pageUrl;
-    const embedHtml = data.embed_html || "";
-    const mobileImageUrl = data.mobile_image_url || "";
-    const mobileText =
-      data.mobile_text ||
-      data.fallback_text ||
-      "Open this week’s institute activities post.";
-    const fallbackText =
-      data.fallback_text ||
-      "Open this week’s institute activities post.";
-
-    if (openPageLinkEl) openPageLinkEl.href = pageUrl;
-    if (fallbackLinkEl) fallbackLinkEl.href = postUrl;
-    if (fallbackTextEl) fallbackTextEl.textContent = fallbackText;
-    if (mobileLinkEl) mobileLinkEl.href = postUrl;
-    if (mobileTextEl) mobileTextEl.textContent = mobileText;
-
-    embedWrap.innerHTML = "";
-    embedWrap.style.display = "none";
-    mobileCardEl.style.display = "none";
-    fallbackEl.style.display = "none";
-    statusEl.style.display = "none";
-
-    if (embedHtml.trim()) {
-      embedWrap.innerHTML = embedHtml;
-      embedWrap.style.display = "flex";
-
-      if (window.instgrm && window.instgrm.Embeds?.process) {
-        window.instgrm.Embeds.process();
-      }
-
-      return;
-    }
-
-    if (mobileImageUrl) {
-      if (mobileImageEl) {
-        mobileImageEl.src = mobileImageUrl;
-        mobileImageEl.alt = mobileText || "Institute weekly activities";
-      }
-      mobileCardEl.style.display = "block";
-      return;
-    }
-
-    fallbackEl.style.display = "block";
-  } catch (err) {
-    console.error(err);
-
-    embedWrap.innerHTML = "";
-    embedWrap.style.display = "none";
-    mobileCardEl.style.display = "none";
-
-    if (fallbackLinkEl) fallbackLinkEl.href = CONFIG.instituteFacebookPageUrl;
-    if (fallbackTextEl) {
-      fallbackTextEl.textContent =
-        "Unable to load the institute post right now. You can still open the post page.";
-    }
-
-    fallbackEl.style.display = "block";
-    statusEl.style.display = "none";
-  }
-}
-
-    loadComeFollowMeWidget();
-    loadWeeklyInstituteWidget();
-
-    // ----------------------------
-    // Unit history widget (loads folders + thumbnails from GitHub)
-    // Uses GitHub Contents API (no directory listing needed)
-    // ----------------------------
-    const HISTORY = {
-      folderItems: [], // [{name, path, html_url, images:[{name, download_url, html_url}]}]
-      activeFolderIndex: -1,
-      activeImageIndex: 0
-    };
-
-    function ghApiBase() {
-      const { owner, repo } = CONFIG.unitHistory;
-      return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
-    }
-
-    function ghRepoWebBase() {
-      const { owner, repo } = CONFIG.unitHistory;
-      return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
-    }
-    function encodePathPreserveSlashes(p) {
-  // Encode each path segment safely (spaces, commas, etc.)
-  return String(p || "")
-    .split("/")
-    .map(seg => encodeURIComponent(seg))
-    .join("/");
-}
-
-function cdnUrlForPath(filePath) {
-  // jsDelivr is very reliable for public GitHub assets
-  const { owner, repo, branch } = CONFIG.unitHistory;
-  const p = encodePathPreserveSlashes(filePath);
-  return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${p}`;
-}
-
-function rawUrlForPath(filePath) {
-  const { owner, repo, branch } = CONFIG.unitHistory;
-  const p = encodePathPreserveSlashes(filePath);
-  return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p}`;
-}
-
-function bestImageUrlForPath(filePath) {
-  // Prefer CDN; add a tiny cache-buster so a previous failed cache doesn't stick.
-  const v = Date.now();
-  return `${cdnUrlForPath(filePath)}?v=${v}`;
-}
-
-
-    function setHistoryStatus(text) {
-      const el = $("historyStatus");
-      if (!el) return;
-      el.textContent = text;
-      el.style.display = text ? "block" : "none";
-    }
-
-    function clearHistoryGrid() {
-      const grid = $("historyGrid");
-      if (grid) grid.innerHTML = "";
-    }
-
-function sortFoldersSmart(folders) {
-  // Sort by event date, newest first.
-  // Special case:
-  // "March stake conference Saturday evening" => March 2025
-
-  const specialDateMap = {
-    "march stake conference saturday evening": Date.UTC(2025, 2, 1) // March 1, 2025
-  };
-
-  function toKey(name) {
-    const raw = String(name || "").trim();
-
-    // 1) Explicit special-case names
-    const special = specialDateMap[raw.toLowerCase()];
-    if (special !== undefined) return special;
-
-    // 2) ISO-style date prefix: YYYY-MM-DD / YYYY_MM_DD / YYYY.MM.DD
-    let m = raw.match(/^(\d{4})[-_.](\d{2})[-_.](\d{2})/);
-    if (m) {
-      const y = Number(m[1]);
-      const mo = Number(m[2]);
-      const d = Number(m[3]);
-      if (y && mo >= 1 && mo <= 12 && d >= 1 && d <= 31) {
-        return Date.UTC(y, mo - 1, d);
-      }
-    }
-
-    // 3) Month name + year anywhere in folder name, e.g. "March 2025 ..."
-    m = raw.match(
-      /\b(January|February|March|April|May|June|July|August|September|October|November|December)\b\s+(\d{4})/i
-    );
-    if (m) {
-      const monthNames = {
-        january: 0,
-        february: 1,
-        march: 2,
-        april: 3,
-        may: 4,
-        june: 5,
-        july: 6,
-        august: 7,
-        september: 8,
-        october: 9,
-        november: 10,
-        december: 11
-      };
-      const monthIndex = monthNames[m[1].toLowerCase()];
-      const year = Number(m[2]);
-      if (!Number.isNaN(year) && monthIndex !== undefined) {
-        return Date.UTC(year, monthIndex, 1);
-      }
-    }
-
-    return null;
-  }
-
-  return folders.slice().sort((a, b) => {
-    const ka = toKey(a.name);
-    const kb = toKey(b.name);
-
-    if (ka !== null && kb !== null) return kb - ka;
-    if (ka !== null && kb === null) return -1;
-    if (ka === null && kb !== null) return 1;
-
-    return String(a.name).localeCompare(String(b.name));
-  });
-}
-
-    async function ghFetchJson(url) {
-      const res = await fetch(url, {
-        headers: { Accept: "application/vnd.github+json" },
-        cache: "no-store"
-      });
-
-      if (!res.ok) {
-        const txt = await res.text().catch(() => "");
-        const msg = `GitHub request failed (${res.status}). ${
-          txt ? txt.slice(0, 120) : ""
-        }`.trim();
-        throw new Error(msg);
-      }
-
-      return res.json();
-    }
-
-async function loadUnitHistoryWidget() {
-  setHistoryStatus("Loading folders…");
-  clearHistoryGrid();
-
-  try {
-    const res = await fetch("./data/unit_history_index.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`Failed to load unit_history_index.json (${res.status})`);
-
-    const data = await res.json();
-    const folders = Array.isArray(data.folders) ? data.folders : [];
-
-    HISTORY.folderItems = folders.map((f) => ({
-      name: f.folder_name || "",
-      path: f.folder || "",
-      html_url: f.folder || "",
-      manifestDateText: f.date_text || "",
-      sortDateKey: f.sort_date || null,
-      thumbnail_url: f.thumbnail_url || "",
-      images: Array.isArray(f.images)
-        ? f.images.map((img) => ({
-            name: img.name || "",
-            path: img.path || "",
-            url: img.url || "",
-            cdn_fallback_url: "",
-            html_url: img.url || ""
-          }))
-        : []
-    }));
-
-    renderHistoryGrid();
-    setHistoryStatus("");
-  } catch (err) {
-    console.error(err);
-    setHistoryStatus("Unable to load folders right now.");
-  }
-}
-
-    function renderHistoryGrid() {
-      const grid = $("historyGrid");
-      if (!grid) return;
-      grid.innerHTML = "";
-
-      const folders = HISTORY.folderItems || [];
-      if (!folders.length) {
-        setHistoryStatus("No folders to show.");
-        return;
-      }
-
-      const frag = document.createDocumentFragment();
-
-      for (let i = 0; i < folders.length; i++) {
-        const f = folders[i];
-        const { title, subtitle } = splitFolderName(f.name);
-        const dateLine = f.manifestDateText || prettyDateFromPrefix(f.name);
-
-        const thumb = f.thumbnail_url || (f.images && f.images.length ? f.images[0].url : "");
-        const count = f.images && f.images.length ? f.images.length : 0;
-
-        const card = document.createElement("div");
-        card.className = "folder-card";
-        card.setAttribute("role", "button");
-        card.setAttribute("tabindex", "0");
-        card.setAttribute("aria-label", `Open folder ${f.name}`);
-        card.dataset.folderIndex = String(i);
-
-        const thumbHtml = thumb
-          ? `<img src="${escapeHtml(thumb)}" alt="${escapeHtml(f.name)} thumbnail" loading="lazy">`
-          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#6b7280;font-weight:800;font-size:12px;">No image</div>`;
-
-        card.innerHTML = `
-          <div class="folder-thumb">${thumbHtml}</div>
-          <div class="folder-meta">
-            ${
-              subtitle
-                ? `<p class="folder-subtitle">${escapeHtml(subtitle)}</p>`
-                : `<p class="folder-subtitle" style="visibility:hidden;">&nbsp;</p>`
-            }
-            <p class="folder-title">${escapeHtml(title)}</p>
-            ${
-              dateLine
-                ? `<div class="folder-date">${escapeHtml(dateLine)}</div>`
-                : `<div class="folder-date" style="visibility:hidden;">&nbsp;</div>`
-            }
-            <div class="folder-count">${
-              count ? `${count} photo${count === 1 ? "" : "s"}` : "No photos found"
-            }</div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => openFolderModal(i));
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openFolderModal(i);
-          }
-        });
-
-        frag.appendChild(card);
-      }
-
-      grid.appendChild(frag);
-    }
-
-    // ----------------------------
-    // Modal / gallery logic
-    // ----------------------------
-    function openFolderModal(folderIndex) {
-  const folders = HISTORY.folderItems || [];
-  const f = folders[folderIndex];
-  if (!f) return;
-
-  HISTORY.activeFolderIndex = folderIndex;
-  HISTORY.activeImageIndex = 0;
-
-  const { title, subtitle } = splitFolderName(f.name);
-  $("modalTitle").textContent = title || f.name;
-  $("modalSubtitle").textContent = subtitle || "";
-
-  // Clear viewer + thumbs
-  const mainImg = $("modalMainImg");
-  if (mainImg) {
-    mainImg.removeAttribute("src");
-    mainImg.style.display = "block";
-  }
-  $("modalThumbStrip").innerHTML = "";
-
-  // Empty folder
-  if (!f.images || f.images.length === 0) {
-    if (mainImg) mainImg.style.display = "none";
-
-    $("modalCounter").textContent = "No photos in this folder.";
-    $("modalOpenRawLink").href = f.html_url || historyRepoUrl;
-    $("modalOpenRawLink").textContent = "Open folder";
-
-    $("modalPrevBtn").disabled = true;
-    $("modalNextBtn").disabled = true;
-    $("modalPrevBtn").style.display = "none";
-    $("modalNextBtn").style.display = "none";
-
-    $("historyModal").classList.add("open");
-    document.body.style.overflow = "hidden";
-    return;
-  }
-
-  $("modalPrevBtn").style.display = "inline-flex";
-  $("modalNextBtn").style.display = "inline-flex";
-  updateNavButtons();
-
-  $("modalOpenRawLink").textContent = "Open image";
-
-  buildThumbStrip();
-  showActiveImage();
-
-  $("historyModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-
-    function closeFolderModal() {
-  $("historyModal").classList.remove("open");
-  document.body.style.overflow = "";
-  HISTORY.activeFolderIndex = -1;
-  HISTORY.activeImageIndex = 0;
-
-  const mainImg = $("modalMainImg");
-  if (mainImg) mainImg.removeAttribute("src");
-}
-
-
-    function buildThumbStrip() {
-      const strip = $("modalThumbStrip");
-      strip.innerHTML = "";
-
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
-
-      const frag = document.createDocumentFragment();
-
-      for (let i = 0; i < f.images.length; i++) {
-        const img = f.images[i];
-        const t = document.createElement("div");
-        t.className = "thumb";
-        t.dataset.thumbIndex = String(i);
-        t.innerHTML = `<img src="${escapeHtml(img.url)}" alt="Thumbnail ${i + 1}" loading="lazy">`;
-
-        t.addEventListener("click", () => {
-          HISTORY.activeImageIndex = i;
-          showActiveImage();
-        });
-
-        frag.appendChild(t);
-      }
-
-      strip.appendChild(frag);
-    }
-    function updateNavButtons() {
-  const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-  const hasMany = !!(f && f.images && f.images.length > 1);
-
-  const prevBtn = $("modalPrevBtn");
-  const nextBtn = $("modalNextBtn");
-  if (!prevBtn || !nextBtn) return;
-
-  // You are using wrap-around navigation, so arrows should stay enabled when there are 2+ images.
-  // If only 0-1 images, disable for clarity (and to prevent confusion).
-  prevBtn.disabled = !hasMany;
-  nextBtn.disabled = !hasMany;
-
-  // Make sure they are always visible (CSS overlay keeps them in place)
-  prevBtn.style.display = "inline-flex";
-  nextBtn.style.display = "inline-flex";
-}
-
-    function showActiveImage() {
-  const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-  if (!f || !f.images || !f.images.length) return;
-
-  const idx = Math.max(0, Math.min(HISTORY.activeImageIndex, f.images.length - 1));
-  HISTORY.activeImageIndex = idx;
-
-  const imgObj = f.images[idx];
-
-  $("modalCounter").textContent = `${idx + 1} / ${f.images.length}`;
-  $("modalOpenRawLink").href = imgObj.url || (imgObj.html_url || f.html_url || historyRepoUrl);
-  $("modalOpenRawLink").textContent = "Open image";
-
-  // Highlight active thumb
-  const strip = $("modalThumbStrip");
-  if (strip) {
-    const thumbs = strip.querySelectorAll(".thumb");
-    thumbs.forEach((t, i) => (i === idx ? t.classList.add("active") : t.classList.remove("active")));
-
-    const activeThumb = strip.querySelector(`.thumb[data-thumb-index="${idx}"]`);
-    if (activeThumb) activeThumb.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
-  }
-
-  // Arrows enabled only if 2+ images (you still wrap around in next/prev)
-  const hasMany = f.images.length > 1;
-  $("modalPrevBtn").disabled = !hasMany;
-  $("modalNextBtn").disabled = !hasMany;
-
-  // Load main image with fallback
-  const mainImg = $("modalMainImg");
-  if (!mainImg) return;
-
-  // Build candidates (primary + CDN + raw) with a stable cache buster
-  const bust = imgObj.sha ? imgObj.sha : String(Date.now());
-  const primary = imgObj.url || "";
-  const cdn = imgObj.cdn_fallback_url || "";
-  const raw = imgObj.path ? rawUrlForPath(imgObj.path) : "";
-
-  const candidates = [];
-  if (primary) candidates.push(primary);
-  if (cdn && cdn !== primary) candidates.push(cdn);
-  if (raw && raw !== primary && raw !== cdn) candidates.push(raw);
-
-  // add cache-busted versions (last resort)
-  if (primary) candidates.push(primary + (primary.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
-  if (cdn && cdn !== primary) candidates.push(cdn + (cdn.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
-  if (raw && raw !== primary && raw !== cdn) candidates.push(raw + (raw.includes("?") ? "&" : "?") + "v=" + encodeURIComponent(bust));
-
-  let attempt = 0;
-
-  const tryLoad = () => {
-    if (attempt >= candidates.length) {
-      // graceful failure: at least give them a clickable link
-      mainImg.removeAttribute("src");
-      $("modalOpenRawLink").href = imgObj.html_url || f.html_url || historyRepoUrl;
-      $("modalOpenRawLink").textContent = "Open folder";
-      return;
-    }
-    mainImg.src = candidates[attempt++];
-  };
-
-  mainImg.onerror = () => tryLoad();
-  tryLoad();
-}
-    function nextImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
-      HISTORY.activeImageIndex = (HISTORY.activeImageIndex + 1) % f.images.length;
-      showActiveImage();
-    }
-
-    function prevImage() {
-      const f = HISTORY.folderItems[HISTORY.activeFolderIndex];
-      if (!f || !f.images || !f.images.length) return;
-      HISTORY.activeImageIndex = (HISTORY.activeImageIndex - 1 + f.images.length) % f.images.length;
-      showActiveImage();
-    }
-
-    // Modal event hooks
-    $("modalCloseBtn").addEventListener("click", closeFolderModal);
-    $("modalNextBtn").addEventListener("click", nextImage);
-    $("modalPrevBtn").addEventListener("click", prevImage);
-
-    // Close modal when clicking backdrop
-    $("historyModal").addEventListener("click", (e) => {
-      if (e.target === $("historyModal")) closeFolderModal();
-    });
-
-    // Keyboard controls (only when modal is open)
-    document.addEventListener("keydown", (e) => {
-      if (!$("historyModal").classList.contains("open")) return;
-      if (e.key === "Escape") closeFolderModal();
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-    });
-
-    // Kick it off
-    loadUnitHistoryWidget();
-  </script>
-</body>
-</html>
+from __future__ import annotations
+
+import json
+import os
+import re
+import sys
+import time
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Iterable
+from urllib.parse import urlparse
+
+from selenium import webdriver
+from selenium.common.exceptions import (
+    ElementClickInterceptedException,
+    NoSuchElementException,
+    StaleElementReferenceException,
+    TimeoutException,
+)
+from selenium.webdriver import ChromeOptions
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+
+INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
+OUTPUT_JSON = Path("data/weekly_institute_post.json")
+FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
+FAILURE_HTML = Path("debug_instagram_failure.html")
+LOGIN_FILLED_SCREENSHOT = Path("debug_instagram_login_filled.png")
+LOGIN_CLICKED_SCREENSHOT = Path("debug_instagram_login_clicked.png")
+
+MAX_POSTS_TO_CHECK = 20
+PAGE_LOAD_TIMEOUT = 30
+SHORT_WAIT = 5
+MEDIUM_WAIT = 10
+SLEEP_BETWEEN_ACTIONS = 1.0
+
+
+@dataclass
+class MatchResult:
+    page_url: str
+    post_url: str
+    embed_html: str
+    mobile_image_url: str
+    mobile_text: str
+    fallback_text: str
+    updated_at: str
+
+
+def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
+    try:
+        driver.save_screenshot(str(path))
+        print(f"Saved screenshot to {path}")
+    except Exception as exc:
+        print(f"Could not save screenshot: {exc}", file=sys.stderr)
+
+
+def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
+    try:
+        path.write_text(driver.page_source, encoding="utf-8")
+        print(f"Saved page source to {path}")
+    except Exception as exc:
+        print(f"Could not save page source: {exc}", file=sys.stderr)
+
+
+def build_driver() -> webdriver.Chrome:
+    options = ChromeOptions()
+    options.add_argument("--headless=new")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1400,2200")
+    options.add_argument("--lang=en-US")
+    options.add_argument(
+        "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    )
+
+    driver = webdriver.Chrome(options=options)
+    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
+    return driver
+
+
+def wait_for_page_ready(driver: webdriver.Chrome, timeout: int = MEDIUM_WAIT) -> None:
+    WebDriverWait(driver, timeout).until(
+        lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+
+
+def safe_click(driver: webdriver.Chrome, element: WebElement) -> None:
+    try:
+        element.click()
+    except ElementClickInterceptedException:
+        driver.execute_script("arguments[0].click();", element)
+
+
+def find_first_present(
+    driver: webdriver.Chrome,
+    selectors: list[tuple[str, str]],
+    timeout: int = 10,
+) -> WebElement:
+    last_exc = None
+    for by, selector in selectors:
+        try:
+            element = WebDriverWait(driver, timeout).until(
+                EC.presence_of_element_located((by, selector))
+            )
+            print(f"Found element using selector: {by} | {selector}")
+            return element
+        except Exception as exc:
+            last_exc = exc
+            continue
+    raise last_exc or RuntimeError("No matching element found.")
+
+
+def find_first_clickable(
+    driver: webdriver.Chrome,
+    selectors: list[tuple[str, str]],
+    timeout: int = 10,
+) -> WebElement:
+    last_exc = None
+    for by, selector in selectors:
+        try:
+            element = WebDriverWait(driver, timeout).until(
+                EC.element_to_be_clickable((by, selector))
+            )
+            print(f"Found clickable element using selector: {by} | {selector}")
+            return element
+        except Exception as exc:
+            last_exc = exc
+            continue
+    raise last_exc or RuntimeError("No matching clickable element found.")
+
+
+def is_login_page(driver: webdriver.Chrome) -> bool:
+    url = driver.current_url.lower()
+    if "/accounts/login" in url:
+        return True
+
+    try:
+        has_user = bool(
+            driver.find_elements(By.NAME, "username")
+            or driver.find_elements(By.NAME, "email")
+        )
+        has_pass = bool(
+            driver.find_elements(By.NAME, "password")
+            or driver.find_elements(By.NAME, "pass")
+        )
+        return has_user and has_pass
+    except Exception:
+        return False
+
+
+def login_to_instagram(driver: webdriver.Chrome) -> None:
+    username = os.environ.get("INSTAGRAM_USERNAME", "").strip()
+    password = os.environ.get("INSTAGRAM_PASSWORD", "").strip()
+
+    if not username or not password:
+        raise RuntimeError(
+            "Missing INSTAGRAM_USERNAME or INSTAGRAM_PASSWORD environment variables."
+        )
+
+    print("Login page detected. Beginning Instagram login flow.")
+    print("Current URL before login:", driver.current_url)
+
+    username_selectors = [
+        (By.NAME, "username"),
+        (By.NAME, "email"),
+        (By.XPATH, "//input[@name='username']"),
+        (By.XPATH, "//input[@name='email']"),
+        (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
+    ]
+
+    password_selectors = [
+        (By.NAME, "password"),
+        (By.NAME, "pass"),
+        (By.XPATH, "//input[@name='password']"),
+        (By.XPATH, "//input[@name='pass']"),
+        (By.CSS_SELECTOR, "input[type='password']"),
+    ]
+
+    login_button_selectors = [
+        (By.XPATH, "//button[@type='submit']"),
+        (By.XPATH, "//*[@id='login_form']//button[@type='submit']"),
+        (By.XPATH, "//button[normalize-space()='Log in']"),
+        (By.XPATH, "//button[.//div[normalize-space()='Log in']]"),
+        (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
+    ]
+
+    username_input = find_first_present(driver, username_selectors, timeout=20)
+    password_input = find_first_present(driver, password_selectors, timeout=20)
+
+    username_input.clear()
+    username_input.send_keys(username)
+
+    password_input.clear()
+    password_input.send_keys(password)
+
+    entered_username = username_input.get_attribute("value") or ""
+    entered_password = password_input.get_attribute("value") or ""
+
+    print(f"Username entered? {bool(entered_username)}")
+    print(f"Username length entered: {len(entered_username)}")
+    print(f"Password entered? {bool(entered_password)}")
+    print(f"Password length entered: {len(entered_password)}")
+
+    save_failure_screenshot(driver, LOGIN_FILLED_SCREENSHOT)
+
+    login_button = find_first_clickable(driver, login_button_selectors, timeout=20)
+    print("About to click Log in button.")
+    safe_click(driver, login_button)
+
+    print("Clicked Log in button.")
+    print("URL immediately after click:", driver.current_url)
+
+    save_failure_screenshot(driver, LOGIN_CLICKED_SCREENSHOT)
+
+    time.sleep(5)
+
+    try:
+        WebDriverWait(driver, 25).until(
+            lambda d: "/accounts/login" not in d.current_url.lower()
+        )
+    except TimeoutException:
+        print("Still appears to be on login page after click.")
+        print("URL after login wait:", driver.current_url)
+        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+        save_failure_html(driver, FAILURE_HTML)
+        raise RuntimeError(
+            "Instagram login did not complete successfully. "
+            "Still on login page or redirected to a challenge page."
+        )
+
+    print("Login appears successful.")
+    print("URL after login:", driver.current_url)
+
+    time.sleep(3)
+
+
+def normalize_post_url(url: str) -> str:
+    """
+    Normalize Instagram post URL to:
+    https://www.instagram.com/p/<code>/
+    """
+    parsed = urlparse(url)
+    path = parsed.path.rstrip("/")
+    m = re.match(r"^/(p|reel|tv)/([^/]+)$", path)
+    if not m:
+        return url
+    post_type = m.group(1)
+    code = m.group(2)
+    return f"https://www.instagram.com/{post_type}/{code}/"
+
+
+def build_embed_html(post_url: str) -> str:
+    permalink = f"{post_url}?utm_source=ig_embed&amp;utm_campaign=loading"
+    return (
+        f'<blockquote class="instagram-media" '
+        f'data-instgrm-captioned '
+        f'data-instgrm-permalink="{permalink}" '
+        f'data-instgrm-version="14" '
+        f'style="background:#FFF; border:0; border-radius:3px; '
+        f'box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); '
+        f'margin:1px; max-width:540px; min-width:326px; width:99.375%;">'
+        f"</blockquote>"
+    )
+
+
+def sentence_contains_keywords(sentence: str, keywords: Iterable[str]) -> bool:
+    s = sentence.lower()
+    return all(word.lower() in s for word in keywords)
+
+
+def split_into_sentences(text: str) -> list[str]:
+    cleaned = re.sub(r"\s+", " ", text).strip()
+    if not cleaned:
+        return []
+    parts = re.split(r"[.!?\n]+", cleaned)
+    return [p.strip() for p in parts if p.strip()]
+
+
+def extract_caption_text(driver: webdriver.Chrome) -> str:
+    """
+    Try several selectors for caption text on an Instagram post page.
+    """
+    candidate_selectors = [
+        (By.XPATH, "//article//h1"),
+        (By.XPATH, "//article//div[contains(@class,'_a9zs')]"),
+        (By.XPATH, "//article//ul//span"),
+        (By.XPATH, "//article//div[@role='button']/following::span[1]"),
+    ]
+
+    texts: list[str] = []
+
+    for by, selector in candidate_selectors:
+        try:
+            elements = driver.find_elements(by, selector)
+        except Exception:
+            elements = []
+
+        for el in elements:
+            try:
+                txt = el.text.strip()
+            except StaleElementReferenceException:
+                continue
+            if txt and txt not in texts:
+                texts.append(txt)
+
+    return "\n".join(texts).strip()
+
+
+def extract_og_image(driver: webdriver.Chrome) -> str:
+    try:
+        meta = driver.find_element(By.XPATH, "//meta[@property='og:image']")
+        content = meta.get_attribute("content") or ""
+        return content.strip()
+    except NoSuchElementException:
+        return ""
+
+
+def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
+    """
+    Collect post links by manually searching the visible Instagram profile tiles.
+    """
+    links: list[str] = []
+    seen: set[str] = set()
+
+    time.sleep(2)
+
+    for attempt in range(8):
+        print(f"Collect attempt {attempt + 1}")
+
+        xpaths = [
+            "//main//a[contains(@href, '/p/')]",
+            "//main//a[contains(@href, '/reel/')]",
+            "//article//a[contains(@href, '/p/')]",
+            "//article//a[contains(@href, '/reel/')]",
+        ]
+
+        for xpath in xpaths:
+            try:
+                anchors = driver.find_elements(By.XPATH, xpath)
+            except Exception:
+                anchors = []
+
+            for a in anchors:
+                try:
+                    href = (a.get_attribute("href") or "").strip()
+                except StaleElementReferenceException:
+                    continue
+
+                if not href:
+                    continue
+
+                href = normalize_post_url(href)
+
+                if href not in seen:
+                    seen.add(href)
+                    links.append(href)
+                    print(f"Found post link: {href}")
+
+                    if len(links) >= max_posts:
+                        return links[:max_posts]
+
+        driver.execute_script("window.scrollBy(0, 1200);")
+        time.sleep(1.5)
+
+    return links[:max_posts]
+
+
+def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
+    driver.get(INSTAGRAM_PROFILE_URL)
+    time.sleep(3)
+
+    print("URL before page-ready wait:", driver.current_url)
+
+    wait_for_page_ready(driver)
+    time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
+
+    if is_login_page(driver):
+        login_to_instagram(driver)
+
+        driver.get(INSTAGRAM_PROFILE_URL)
+        wait_for_page_ready(driver)
+        time.sleep(3)
+
+        print("URL after returning to profile post-login:", driver.current_url)
+
+        if is_login_page(driver):
+            raise RuntimeError(
+                "Still on Instagram login page after attempting login."
+            )
+
+    post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
+    if not post_links:
+        raise RuntimeError("No Instagram post links were found on the profile page.")
+
+    keywords = ("activities", "week")
+
+    for index, post_url in enumerate(post_links, start=1):
+        print(f"Checking post {index}/{len(post_links)}: {post_url}")
+        driver.get(post_url)
+        wait_for_page_ready(driver)
+        time.sleep(SLEEP_BETWEEN_ACTIONS)
+
+        current_url = normalize_post_url(driver.current_url)
+        caption_text = extract_caption_text(driver)
+        sentences = split_into_sentences(caption_text)
+
+        matched_sentence = None
+        for sentence in sentences:
+            if sentence_contains_keywords(sentence, keywords):
+                matched_sentence = sentence
+                break
+
+        if matched_sentence:
+            og_image = extract_og_image(driver)
+            updated_at = datetime.now(timezone.utc).isoformat()
+
+            return MatchResult(
+                page_url=INSTAGRAM_PROFILE_URL,
+                post_url=current_url,
+                embed_html=build_embed_html(current_url),
+                mobile_image_url=og_image,
+                mobile_text=matched_sentence,
+                fallback_text="Open this week's institute activities post.",
+                updated_at=updated_at,
+            )
+
+    raise RuntimeError(
+        f"No matching post found in the first {len(post_links)} posts. "
+        f"Expected a sentence containing both 'activities' and 'week'."
+    )
+
+
+def write_output(result: MatchResult, output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    payload = {
+        "page_url": result.page_url,
+        "post_url": result.post_url,
+        "embed_html": result.embed_html,
+        "mobile_image_url": result.mobile_image_url,
+        "mobile_text": result.mobile_text,
+        "fallback_text": result.fallback_text,
+        "updated_at": result.updated_at,
+    }
+
+    output_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(f"Wrote {output_path}")
+
+
+def main() -> int:
+    driver = None
+    try:
+        driver = build_driver()
+        result = find_matching_post(driver)
+        write_output(result, OUTPUT_JSON)
+
+        print("Success.")
+        print(f"Post URL: {result.post_url}")
+        print(f"Matched text: {result.mobile_text}")
+        return 0
+
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        if driver is not None:
+            save_failure_screenshot(driver, FAILURE_SCREENSHOT)
+            save_failure_html(driver, FAILURE_HTML)
+        return 1
+
+    finally:
+        if driver is not None:
+            driver.quit()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
