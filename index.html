@@ -1894,7 +1894,7 @@ async function loadWeeklyInstituteWidget() {
 
     if (embedHtml.trim()) {
       embedWrap.innerHTML = embedHtml;
-      embedWrap.style.display = "block";
+      embedWrap.style.display = "flex";
 
       if (window.instgrm && window.instgrm.Embeds?.process) {
         window.instgrm.Embeds.process();
