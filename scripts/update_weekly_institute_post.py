@@ -136,42 +136,26 @@ def find_first_clickable(
     raise last_exc or RuntimeError("No matching clickable element found.")
 
 
-def try_dismiss_login_popup(driver: webdriver.Chrome) -> bool:
-    """
-    Dismiss Instagram sign-up/login modal by targeting the actual Close SVG/button.
-    Returns True if something was clicked, else False.
-    """
-    close_xpaths = [
-        "//svg[@aria-label='Close']/ancestor::button[1]",
-        "//div[@role='dialog']//svg[@aria-label='Close']/ancestor::button[1]",
-        "//svg[.//title[normalize-space()='Close']]/ancestor::button[1]",
-        "//div[@role='dialog']//svg[.//title[normalize-space()='Close']]/ancestor::button[1]",
-    ]
-
-    for xpath in close_xpaths:
-        try:
-            btn = WebDriverWait(driver, 3).until(
-                EC.element_to_be_clickable((By.XPATH, xpath))
-            )
-            driver.execute_script("arguments[0].click();", btn)
-            time.sleep(1)
-            print(f"Clicked popup close button using xpath: {xpath}")
-            return True
-        except Exception:
-            continue
-
-    print("No popup close button found.")
-    return False
-
-
 def is_login_page(driver: webdriver.Chrome) -> bool:
     url = driver.current_url.lower()
     if "/accounts/login" in url:
         return True
 
+    username_selectors = [
+        (By.NAME, "username"),
+        (By.XPATH, "//input[@name='username']"),
+        (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
+    ]
+
+    password_selectors = [
+        (By.NAME, "password"),
+        (By.XPATH, "//input[@name='password']"),
+        (By.CSS_SELECTOR, "input[type='password']"),
+    ]
+
     try:
-        driver.find_element(By.XPATH, "//input[@name='email']")
-        driver.find_element(By.XPATH, "//input[@name='pass']")
+        find_first_present(driver, username_selectors, timeout=3)
+        find_first_present(driver, password_selectors, timeout=3)
         return True
     except Exception:
         return False
@@ -190,29 +174,26 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     print("Current URL before login:", driver.current_url)
 
     username_selectors = [
-        (By.NAME, "email"),
-        (By.XPATH, "//input[@name='email']"),
-        (By.ID, "_r_4_"),
+        (By.NAME, "username"),
+        (By.XPATH, "//input[@name='username']"),
+        (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
     ]
 
     password_selectors = [
-        (By.NAME, "pass"),
-        (By.XPATH, "//input[@name='pass']"),
-        (By.ID, "_r_7_"),
+        (By.NAME, "password"),
+        (By.XPATH, "//input[@name='password']"),
+        (By.CSS_SELECTOR, "input[type='password']"),
     ]
 
     login_button_selectors = [
         (By.XPATH, "//button[@type='submit']"),
+        (By.XPATH, "//button[.//div[text()='Log in']]"),
         (By.XPATH, "//button[normalize-space()='Log in']"),
         (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
-        (
-            By.XPATH,
-            "//div[@role='none' and @data-visualcompletion='ignore']/ancestor::button[1]",
-        ),
     ]
 
-    username_input = find_first_present(driver, username_selectors, timeout=15)
-    password_input = find_first_present(driver, password_selectors, timeout=15)
+    username_input = find_first_present(driver, username_selectors, timeout=20)
+    password_input = find_first_present(driver, password_selectors, timeout=20)
 
     username_input.clear()
     username_input.send_keys(username)
@@ -230,7 +211,7 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
 
     save_failure_screenshot(driver, LOGIN_FILLED_SCREENSHOT)
 
-    login_button = find_first_clickable(driver, login_button_selectors, timeout=15)
+    login_button = find_first_clickable(driver, login_button_selectors, timeout=20)
     print("About to click Log in button.")
     safe_click(driver, login_button)
 
@@ -242,7 +223,7 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     time.sleep(5)
 
     try:
-        WebDriverWait(driver, 20).until(
+        WebDriverWait(driver, 25).until(
             lambda d: "/accounts/login" not in d.current_url.lower()
         )
     except TimeoutException:
@@ -257,6 +238,8 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
 
     print("Login appears successful.")
     print("URL after login:", driver.current_url)
+
+    time.sleep(3)
 
 
 def normalize_post_url(url: str) -> str:
@@ -348,7 +331,6 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
     seen: set[str] = set()
 
     time.sleep(2)
-    try_dismiss_login_popup(driver)
 
     for attempt in range(8):
         print(f"Collect attempt {attempt + 1}")
@@ -387,7 +369,6 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
 
         driver.execute_script("window.scrollBy(0, 1200);")
         time.sleep(1.5)
-        try_dismiss_login_popup(driver)
 
     return links[:max_posts]
 
@@ -401,11 +382,6 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     wait_for_page_ready(driver)
     time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
 
-    print("URL before dismiss attempt:", driver.current_url)
-    dismissed = try_dismiss_login_popup(driver)
-    print("Dismiss attempted:", dismissed)
-    print("URL after dismiss attempt:", driver.current_url)
-
     if is_login_page(driver):
         login_to_instagram(driver)
 
@@ -415,9 +391,10 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
 
         print("URL after returning to profile post-login:", driver.current_url)
 
-        dismissed = try_dismiss_login_popup(driver)
-        print("Dismiss attempted after login:", dismissed)
-        print("URL after dismiss post-login:", driver.current_url)
+        if is_login_page(driver):
+            raise RuntimeError(
+                "Still on Instagram login page after attempting login."
+            )
 
     post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
     if not post_links:
@@ -430,8 +407,6 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
         driver.get(post_url)
         wait_for_page_ready(driver)
         time.sleep(SLEEP_BETWEEN_ACTIONS)
-
-        try_dismiss_login_popup(driver)
 
         current_url = normalize_post_url(driver.current_url)
         caption_text = extract_caption_text(driver)
