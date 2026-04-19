@@ -34,6 +34,13 @@ jobs:
           python -m playwright install chromium
           python -m playwright install-deps chromium
 
+      - name: Write Instagram storage state
+        run: |
+          mkdir -p data
+          cat > data/instagram_state.json <<'EOF'
+          ${{ secrets.INSTAGRAM_STORAGE_STATE }}
+          EOF
+
       - name: Run script
         run: |
           python scripts/update_weekly_institute_post.py
