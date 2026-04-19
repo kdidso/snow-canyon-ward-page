@@ -222,20 +222,7 @@ def login_to_instagram(driver: webdriver.Chrome) -> None:
     ]
 
     login_button_selectors = [
-        (By.XPATH, "//button[@type='submit']"),
-        (By.XPATH, "//*[@id='login_form']//button[@type='submit']"),
-        (By.XPATH, "//button[normalize-space()='Log in']"),
-        (By.XPATH, "//button[normalize-space()='Log In']"),
-        (By.XPATH, "//button[.//div[normalize-space()='Log in']]"),
-        (By.XPATH, "//button[.//div[normalize-space()='Log In']]"),
-        (By.XPATH, "//*[normalize-space()='Log in']/ancestor::button[1]"),
-        (By.XPATH, "//*[normalize-space()='Log In']/ancestor::button[1]"),
         (By.XPATH, "//*[@id='login_form']//*[@role='button' and @aria-label='Log In']"),
-        (By.XPATH, "//*[@role='button' and @aria-label='Log In']"),
-        (By.XPATH, "//*[@role='button' and @tabindex='0' and @aria-label='Log In']"),
-        (By.XPATH, "//div[@role='button'][.//span[normalize-space()='Log In']]"),
-        (By.XPATH, "//div[@role='button'][.//div[normalize-space()='Log In']]"),
-        (By.XPATH, "//*[@id='login_form']//*[@role='button']"),
     ]
 
     username_input = find_first_present(driver, username_selectors, timeout=20)
