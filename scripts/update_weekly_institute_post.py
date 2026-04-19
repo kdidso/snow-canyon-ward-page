@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import re
 import sys
-import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,12 +15,16 @@ from playwright.sync_api import sync_playwright
 
 INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
 OUTPUT_JSON = Path("data/weekly_institute_post.json")
+
 FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
 FAILURE_HTML = Path("debug_instagram_failure.html")
 
+DEBUG_SHOT_1 = Path("debug_instagram_step1_after_goto.png")
+DEBUG_SHOT_2 = Path("debug_instagram_step2_after_3s.png")
+DEBUG_SHOT_3 = Path("debug_instagram_step3_after_8s.png")
+
 MAX_POSTS_TO_CHECK = 12
 PAGE_LOAD_TIMEOUT_MS = 30_000
-WAIT_BETWEEN_ACTIONS_MS = 1500
 
 
 @dataclass
@@ -35,19 +38,15 @@ class MatchResult:
     updated_at: str
 
 
-def save_failure_html(html: str, path: Path) -> None:
+def save_html(path: Path, html: str) -> None:
     try:
         path.write_text(html, encoding="utf-8")
         print(f"Saved page source to {path}")
     except Exception as exc:
-        print(f"Could not save page source: {exc}", file=sys.stderr)
+        print(f"Could not save page source to {path}: {exc}", file=sys.stderr)
 
 
 def normalize_post_url(url: str) -> str:
-    """
-    Normalize Instagram post URL to:
-    https://www.instagram.com/p/<code>/
-    """
     parsed = urlparse(url)
     path = parsed.path.rstrip("/")
     m = re.match(r"^/(p|reel|tv)/([^/]+)$", path)
@@ -152,6 +151,23 @@ def is_login_page_url(url: str) -> bool:
     return "/accounts/login" in url.lower()
 
 
+def log_page_state(page, label: str) -> None:
+    html = page.content()
+    text = strip_html_text(html)
+    post_link_count = page.locator("a[href*='/p/']").count()
+    reel_link_count = page.locator("a[href*='/reel/']").count()
+
+    print(f"--- PAGE STATE: {label} ---")
+    print(f"URL: {page.url}")
+    print(f"HTML length: {len(html)}")
+    print(f"Visible text length: {len(text)}")
+    print(f"Post link count: {post_link_count}")
+    print(f"Reel link count: {reel_link_count}")
+    print(f"Rate-limited HTML? {is_rate_limited_html(html)}")
+    print(f"Login URL? {is_login_page_url(page.url)}")
+    print(f"HTML empty/minimal? {len(html.strip()) < 100 or html.strip() in ('<html><head></head><body></body></html>', '<html><head></head><body></body></html>')}")
+
+
 def collect_post_links_from_profile(page) -> list[str]:
     links: list[str] = []
     seen: set[str] = set()
@@ -163,7 +179,7 @@ def collect_post_links_from_profile(page) -> list[str]:
     ]
 
     for attempt in range(8):
-        print(f"Playwright collect attempt {attempt + 1}")
+        print(f"Collect attempt {attempt + 1}")
 
         for selector in selectors:
             hrefs = page.locator(selector).evaluate_all(
@@ -190,7 +206,6 @@ def find_matching_post() -> MatchResult:
         browser = p.chromium.launch(
             headless=True,
             args=[
-                "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
             ],
@@ -211,22 +226,35 @@ def find_matching_post() -> MatchResult:
 
         try:
             print(f"Opening profile: {INSTAGRAM_PROFILE_URL}")
-            page.goto(INSTAGRAM_PROFILE_URL, wait_until="domcontentloaded")
-            page.wait_for_timeout(WAIT_BETWEEN_ACTIONS_MS)
+            response = page.goto(INSTAGRAM_PROFILE_URL, wait_until="domcontentloaded")
 
-            current_url = page.url
+            if response is None:
+                print("Initial navigation response: None")
+            else:
+                print(f"Initial navigation response URL: {response.url}")
+                print(f"Initial navigation response status: {response.status}")
+
+            page.screenshot(path=str(DEBUG_SHOT_1), full_page=True)
+            log_page_state(page, "immediately after goto")
+
+            page.wait_for_timeout(3000)
+            page.screenshot(path=str(DEBUG_SHOT_2), full_page=True)
+            log_page_state(page, "after 3 seconds")
+
+            page.wait_for_timeout(5000)
+            page.screenshot(path=str(DEBUG_SHOT_3), full_page=True)
+            log_page_state(page, "after 8 seconds total")
+
             html = page.content()
-
-            print(f"Initial URL: {current_url}")
 
             if is_rate_limited_html(html):
                 page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                save_failure_html(html, FAILURE_HTML)
+                save_html(FAILURE_HTML, html)
                 raise RuntimeError("Instagram returned HTTP 429 on the Playwright profile request.")
 
-            if is_login_page_url(current_url):
+            if is_login_page_url(page.url):
                 page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                save_failure_html(html, FAILURE_HTML)
+                save_html(FAILURE_HTML, html)
                 raise RuntimeError(
                     "Instagram redirected the headless Playwright browser to the login page."
                 )
@@ -234,28 +262,33 @@ def find_matching_post() -> MatchResult:
             post_links = collect_post_links_from_profile(page)
             if not post_links:
                 page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                save_failure_html(page.content(), FAILURE_HTML)
+                save_html(FAILURE_HTML, page.content())
                 raise RuntimeError("No Instagram post links were found on the public profile page.")
 
             keywords = ("activities", "week")
 
             for index, post_url in enumerate(post_links, start=1):
                 print(f"Checking post {index}/{len(post_links)}: {post_url}")
+                response = page.goto(post_url, wait_until="domcontentloaded")
 
-                page.goto(post_url, wait_until="domcontentloaded")
-                page.wait_for_timeout(WAIT_BETWEEN_ACTIONS_MS)
+                if response is None:
+                    print("Post navigation response: None")
+                else:
+                    print(f"Post navigation response URL: {response.url}")
+                    print(f"Post navigation response status: {response.status}")
 
-                current_url = normalize_post_url(page.url)
+                page.wait_for_timeout(1500)
+
                 html = page.content()
 
                 if is_rate_limited_html(html):
                     page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                    save_failure_html(html, FAILURE_HTML)
+                    save_html(FAILURE_HTML, html)
                     raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
 
                 if is_login_page_url(page.url):
                     page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                    save_failure_html(html, FAILURE_HTML)
+                    save_html(FAILURE_HTML, html)
                     raise RuntimeError(
                         f"Instagram redirected to login while opening post: {post_url}"
                     )
@@ -275,8 +308,8 @@ def find_matching_post() -> MatchResult:
 
                     return MatchResult(
                         page_url=INSTAGRAM_PROFILE_URL,
-                        post_url=current_url,
-                        embed_html=build_embed_html(current_url),
+                        post_url=normalize_post_url(page.url),
+                        embed_html=build_embed_html(normalize_post_url(page.url)),
                         mobile_image_url=og_image,
                         mobile_text=matched_sentence,
                         fallback_text="Open this week's institute activities post.",
@@ -284,7 +317,7 @@ def find_matching_post() -> MatchResult:
                     )
 
             page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-            save_failure_html(page.content(), FAILURE_HTML)
+            save_html(FAILURE_HTML, page.content())
             raise RuntimeError(
                 f"No matching post found in the first {len(post_links)} posts. "
                 f"Expected a sentence containing both 'activities' and 'week'."
@@ -293,7 +326,7 @@ def find_matching_post() -> MatchResult:
         except PlaywrightTimeoutError as exc:
             try:
                 page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
-                save_failure_html(page.content(), FAILURE_HTML)
+                save_html(FAILURE_HTML, page.content())
             except Exception:
                 pass
             raise RuntimeError(f"Playwright timed out: {exc}") from exc
