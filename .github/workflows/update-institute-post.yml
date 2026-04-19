@@ -37,9 +37,23 @@ jobs:
       - name: Write Instagram storage state
         run: |
           mkdir -p data
-          cat > data/instagram_state.json <<'EOF'
-          ${{ secrets.INSTAGRAM_STORAGE_STATE }}
-          EOF
+          printf '%s' '${{ secrets.INSTAGRAM_STORAGE_STATE }}' > data/instagram_state.json
+
+      - name: Validate Instagram storage state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("data/instagram_state.json")
+          print("Exists:", p.exists())
+          text = p.read_text(encoding="utf-8")
+          print("Length:", len(text))
+          print("First 120 chars:", repr(text[:120]))
+          print("Last 120 chars:", repr(text[-120:]))
+          json.loads(text)
+          print("JSON is valid")
+          PY
 
       - name: Run script
         run: |
