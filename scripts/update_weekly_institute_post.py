@@ -334,7 +334,7 @@ def find_matching_post() -> MatchResult:
 
         finally:
             context.close()
-            browser.close())
+            browser.close()
 
 
 def write_output(result: MatchResult, output_path: Path) -> None:
