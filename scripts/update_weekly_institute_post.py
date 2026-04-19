@@ -49,7 +49,33 @@ class MatchResult:
     fallback_text: str
     updated_at: str
 
+def is_rate_limited_page(driver: webdriver.Chrome) -> bool:
+    html = driver.page_source.lower()
+    return "http error 429" in html or "too many requests" in html
 
+
+def profile_posts_visible(driver: webdriver.Chrome) -> bool:
+    """
+    Returns True if the public profile page appears to have loaded with visible post links.
+    """
+    xpaths = [
+        "//main//a[contains(@href, '/p/')]",
+        "//main//a[contains(@href, '/reel/')]",
+        "//article//a[contains(@href, '/p/')]",
+        "//article//a[contains(@href, '/reel/')]",
+    ]
+
+    for xpath in xpaths:
+        try:
+            elements = driver.find_elements(By.XPATH, xpath)
+            if elements:
+                print(f"Profile posts visible using xpath: {xpath} ({len(elements)} found)")
+                return True
+        except Exception:
+            continue
+
+    return False
+    
 def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
     try:
         driver.save_screenshot(str(path))
@@ -466,18 +492,54 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     wait_for_page_ready(driver)
     time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
 
-    if is_login_page(driver):
-        login_to_instagram(driver)
+    if is_rate_limited_page(driver):
+        raise RuntimeError("Instagram returned HTTP 429 on the initial profile request.")
 
-        driver.get(INSTAGRAM_PROFILE_URL)
-        wait_for_page_ready(driver)
-        time.sleep(3)
-
-        print("URL after returning to profile post-login:", driver.current_url)
+    # First priority: if the public profile is already visible, do NOT log in.
+    if profile_posts_visible(driver):
+        print("Public Instagram profile loaded successfully. No login needed.")
+    else:
+        print("Public profile posts were not visible on first load.")
 
         if is_login_page(driver):
+            print("Instagram redirected to a login page. Retrying profile once before logging in.")
+            driver.get(INSTAGRAM_PROFILE_URL)
+            time.sleep(3)
+            wait_for_page_ready(driver)
+            time.sleep(2)
+
+            if is_rate_limited_page(driver):
+                raise RuntimeError("Instagram returned HTTP 429 after retrying the profile page.")
+
+            if profile_posts_visible(driver):
+                print("Public profile became visible after retry. No login needed.")
+            else:
+                print("Still no visible public posts after retry.")
+
+                if is_login_page(driver):
+                    print("Still on login page after retry. Attempting login as fallback.")
+                    login_to_instagram(driver)
+
+                    driver.get(INSTAGRAM_PROFILE_URL)
+                    wait_for_page_ready(driver)
+                    time.sleep(3)
+
+                    print("URL after returning to profile post-login:", driver.current_url)
+
+                    if is_rate_limited_page(driver):
+                        raise RuntimeError("Instagram returned HTTP 429 after login.")
+
+                    if is_login_page(driver) and not profile_posts_visible(driver):
+                        raise RuntimeError(
+                            "Still on Instagram login page after attempting login."
+                        )
+                else:
+                    raise RuntimeError(
+                        "Profile posts were not visible, but page was not clearly a login page."
+                    )
+        else:
             raise RuntimeError(
-                "Still on Instagram login page after attempting login."
+                "Profile posts were not visible, and page was not clearly a login page."
             )
 
     post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
@@ -491,6 +553,9 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
         driver.get(post_url)
         wait_for_page_ready(driver)
         time.sleep(SLEEP_BETWEEN_ACTIONS)
+
+        if is_rate_limited_page(driver):
+            raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
 
         current_url = normalize_post_url(driver.current_url)
         caption_text = extract_caption_text(driver)
