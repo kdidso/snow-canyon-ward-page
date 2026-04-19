@@ -8,19 +8,10 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
 
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.common.exceptions import (
-    NoSuchElementException,
-    StaleElementReferenceException,
-    TimeoutException,
-)
-from selenium.webdriver import ChromeOptions
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import sync_playwright
 
 
 INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
@@ -28,19 +19,9 @@ OUTPUT_JSON = Path("data/weekly_institute_post.json")
 FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
 FAILURE_HTML = Path("debug_instagram_failure.html")
 
-MAX_POSTS_TO_CHECK = 20
-PAGE_LOAD_TIMEOUT = 30
-MEDIUM_WAIT = 10
-SLEEP_BETWEEN_ACTIONS = 1.0
-
-REQUEST_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept-Language": "en-US,en;q=0.9",
-}
+MAX_POSTS_TO_CHECK = 12
+PAGE_LOAD_TIMEOUT_MS = 30_000
+WAIT_BETWEEN_ACTIONS_MS = 1500
 
 
 @dataclass
@@ -54,15 +35,7 @@ class MatchResult:
     updated_at: str
 
 
-def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
-    try:
-        driver.save_screenshot(str(path))
-        print(f"Saved screenshot to {path}")
-    except Exception as exc:
-        print(f"Could not save screenshot: {exc}", file=sys.stderr)
-
-
-def save_failure_html_text(html: str, path: Path) -> None:
+def save_failure_html(html: str, path: Path) -> None:
     try:
         path.write_text(html, encoding="utf-8")
         print(f"Saved page source to {path}")
@@ -70,37 +43,11 @@ def save_failure_html_text(html: str, path: Path) -> None:
         print(f"Could not save page source: {exc}", file=sys.stderr)
 
 
-def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
-    save_failure_html_text(driver.page_source, path)
-
-
-def build_driver() -> webdriver.Chrome:
-    options = ChromeOptions()
-    options.add_argument("--headless=new")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--window-size=1400,2200")
-    options.add_argument("--lang=en-US")
-    options.add_argument(f"--user-agent={REQUEST_HEADERS['User-Agent']}")
-
-    driver = webdriver.Chrome(options=options)
-    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
-    return driver
-
-
-def wait_for_page_ready(driver: webdriver.Chrome, timeout: int = MEDIUM_WAIT) -> None:
-    WebDriverWait(driver, timeout).until(
-        lambda d: d.execute_script("return document.readyState") == "complete"
-    )
-
-
-def is_rate_limited_html(html: str) -> bool:
-    lowered = html.lower()
-    return "http error 429" in lowered or "too many requests" in lowered
-
-
 def normalize_post_url(url: str) -> str:
+    """
+    Normalize Instagram post URL to:
+    https://www.instagram.com/p/<code>/
+    """
     parsed = urlparse(url)
     path = parsed.path.rstrip("/")
     m = re.match(r"^/(p|reel|tv)/([^/]+)$", path)
@@ -139,276 +86,221 @@ def split_into_sentences(text: str) -> list[str]:
 
 
 def extract_og_image_from_html(html: str) -> str:
-    soup = BeautifulSoup(html, "html.parser")
-    tag = soup.find("meta", attrs={"property": "og:image"})
-    if not tag:
+    m = re.search(
+        r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+        html,
+        re.IGNORECASE,
+    )
+    return m.group(1).strip() if m else ""
+
+
+def extract_meta_content(html: str, attr_name: str, attr_value: str) -> str:
+    patterns = [
+        rf'<meta[^>]+{attr_name}=["\']{re.escape(attr_value)}["\'][^>]+content=["\']([^"\']*)["\']',
+        rf'<meta[^>]+content=["\']([^"\']*)["\'][^>]+{attr_name}=["\']{re.escape(attr_value)}["\']',
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, html, re.IGNORECASE)
+        if m:
+            return m.group(1).strip()
+    return ""
+
+
+def extract_title_text(html: str) -> str:
+    m = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
+    if not m:
         return ""
-    return (tag.get("content") or "").strip()
+    return re.sub(r"\s+", " ", m.group(1)).strip()
+
+
+def strip_html_text(html: str) -> str:
+    text = re.sub(r"<script\b[^>]*>.*?</script>", " ", html, flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<style\b[^>]*>.*?</style>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
 
 def extract_caption_text_from_html(html: str) -> str:
-    soup = BeautifulSoup(html, "html.parser")
-
     texts: list[str] = []
 
-    meta_desc = soup.find("meta", attrs={"name": "description"})
-    if meta_desc:
-        content = (meta_desc.get("content") or "").strip()
-        if content:
-            texts.append(content)
+    desc = extract_meta_content(html, "name", "description")
+    if desc:
+        texts.append(desc)
 
-    og_desc = soup.find("meta", attrs={"property": "og:description"})
-    if og_desc:
-        content = (og_desc.get("content") or "").strip()
-        if content and content not in texts:
-            texts.append(content)
+    og_desc = extract_meta_content(html, "property", "og:description")
+    if og_desc and og_desc not in texts:
+        texts.append(og_desc)
 
-    title_tag = soup.find("title")
-    if title_tag:
-        title_text = title_tag.get_text(" ", strip=True)
-        if title_text and title_text not in texts:
-            texts.append(title_text)
+    title = extract_title_text(html)
+    if title and title not in texts:
+        texts.append(title)
 
-    body_text = soup.get_text(" ", strip=True)
-    if body_text:
-        shortened = re.sub(r"\s+", " ", body_text).strip()
-        if shortened and shortened not in texts:
-            texts.append(shortened)
+    body_text = strip_html_text(html)
+    if body_text and body_text not in texts:
+        texts.append(body_text)
 
     return "\n".join(texts).strip()
 
 
-def extract_caption_text(driver: webdriver.Chrome) -> str:
-    candidate_selectors = [
-        (By.XPATH, "//article//h1"),
-        (By.XPATH, "//article//div[contains(@class,'_a9zs')]"),
-        (By.XPATH, "//article//ul//span"),
-        (By.XPATH, "//article//div[@role='button']/following::span[1]"),
+def is_rate_limited_html(html: str) -> bool:
+    lowered = html.lower()
+    return "http error 429" in lowered or "too many requests" in lowered
+
+
+def is_login_page_url(url: str) -> bool:
+    return "/accounts/login" in url.lower()
+
+
+def collect_post_links_from_profile(page) -> list[str]:
+    links: list[str] = []
+    seen: set[str] = set()
+
+    selectors = [
+        "a[href*='/p/']",
+        "a[href*='/reel/']",
+        "a[href*='/tv/']",
     ]
 
-    texts: list[str] = []
-
-    for by, selector in candidate_selectors:
-        try:
-            elements = driver.find_elements(by, selector)
-        except Exception:
-            elements = []
-
-        for el in elements:
-            try:
-                txt = el.text.strip()
-            except StaleElementReferenceException:
-                continue
-            if txt and txt not in texts:
-                texts.append(txt)
-
-    if texts:
-        return "\n".join(texts).strip()
-
-    return extract_caption_text_from_html(driver.page_source)
-
-
-def extract_og_image(driver: webdriver.Chrome) -> str:
-    try:
-        meta = driver.find_element(By.XPATH, "//meta[@property='og:image']")
-        content = meta.get_attribute("content") or ""
-        return content.strip()
-    except NoSuchElementException:
-        return extract_og_image_from_html(driver.page_source)
-
-
-def collect_post_links_requests(session: requests.Session, max_posts: int) -> list[str]:
-    print("Trying requests-based profile scrape...")
-    resp = session.get(INSTAGRAM_PROFILE_URL, timeout=30)
-    print(f"Requests profile status: {resp.status_code}")
-
-    if resp.status_code == 429 or is_rate_limited_html(resp.text):
-        raise RuntimeError("Instagram returned HTTP 429 on requests profile fetch.")
-
-    soup = BeautifulSoup(resp.text, "html.parser")
-    links: list[str] = []
-    seen: set[str] = set()
-
-    for a in soup.find_all("a", href=True):
-        href = a["href"].strip()
-        if not href:
-            continue
-        if not ("/p/" in href or "/reel/" in href or "/tv/" in href):
-            continue
-
-        full_url = normalize_post_url(urljoin("https://www.instagram.com", href))
-        if full_url not in seen:
-            seen.add(full_url)
-            links.append(full_url)
-            print(f"Requests found post link: {full_url}")
-            if len(links) >= max_posts:
-                break
-
-    return links[:max_posts]
-
-
-def collect_post_links_selenium(driver: webdriver.Chrome, max_posts: int) -> list[str]:
-    print("Trying Selenium-based public profile scrape...")
-    links: list[str] = []
-    seen: set[str] = set()
-
     for attempt in range(8):
-        print(f"Selenium collect attempt {attempt + 1}")
+        print(f"Playwright collect attempt {attempt + 1}")
 
-        xpaths = [
-            "//main//a[contains(@href, '/p/')]",
-            "//main//a[contains(@href, '/reel/')]",
-            "//article//a[contains(@href, '/p/')]",
-            "//article//a[contains(@href, '/reel/')]",
-        ]
-
-        for xpath in xpaths:
-            try:
-                anchors = driver.find_elements(By.XPATH, xpath)
-            except Exception:
-                anchors = []
-
-            for a in anchors:
-                try:
-                    href = (a.get_attribute("href") or "").strip()
-                except StaleElementReferenceException:
-                    continue
-
-                if not href:
-                    continue
-
-                href = normalize_post_url(href)
-
-                if href not in seen:
-                    seen.add(href)
-                    links.append(href)
-                    print(f"Selenium found post link: {href}")
-
-                    if len(links) >= max_posts:
-                        return links[:max_posts]
-
-        driver.execute_script("window.scrollBy(0, 1200);")
-        time.sleep(1.5)
-
-    return links[:max_posts]
-
-
-def find_matching_post_requests(session: requests.Session, post_links: list[str]) -> MatchResult | None:
-    keywords = ("activities", "week")
-
-    for index, post_url in enumerate(post_links, start=1):
-        print(f"Requests checking post {index}/{len(post_links)}: {post_url}")
-        resp = session.get(post_url, timeout=30)
-        print(f"Requests post status: {resp.status_code}")
-
-        if resp.status_code == 429 or is_rate_limited_html(resp.text):
-            raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
-
-        caption_text = extract_caption_text_from_html(resp.text)
-        sentences = split_into_sentences(caption_text)
-
-        matched_sentence = None
-        for sentence in sentences:
-            if sentence_contains_keywords(sentence, keywords):
-                matched_sentence = sentence
-                break
-
-        if matched_sentence:
-            og_image = extract_og_image_from_html(resp.text)
-            updated_at = datetime.now(timezone.utc).isoformat()
-
-            return MatchResult(
-                page_url=INSTAGRAM_PROFILE_URL,
-                post_url=normalize_post_url(post_url),
-                embed_html=build_embed_html(normalize_post_url(post_url)),
-                mobile_image_url=og_image,
-                mobile_text=matched_sentence,
-                fallback_text="Open this week's institute activities post.",
-                updated_at=updated_at,
+        for selector in selectors:
+            hrefs = page.locator(selector).evaluate_all(
+                "(els) => els.map(e => e.href).filter(Boolean)"
             )
 
-    return None
+            for href in hrefs:
+                normalized = normalize_post_url(href.strip())
+                if normalized not in seen:
+                    seen.add(normalized)
+                    links.append(normalized)
+                    print(f"Found post link: {normalized}")
+                    if len(links) >= MAX_POSTS_TO_CHECK:
+                        return links[:MAX_POSTS_TO_CHECK]
 
+        page.mouse.wheel(0, 1600)
+        page.wait_for_timeout(1200)
 
-def find_matching_post_selenium(driver: webdriver.Chrome) -> MatchResult:
-    keywords = ("activities", "week")
-
-    driver.get(INSTAGRAM_PROFILE_URL)
-    time.sleep(3)
-    wait_for_page_ready(driver)
-    time.sleep(2)
-
-    if is_rate_limited_html(driver.page_source):
-        raise RuntimeError("Instagram returned HTTP 429 on the Selenium profile request.")
-
-    post_links = collect_post_links_selenium(driver, MAX_POSTS_TO_CHECK)
-    if not post_links:
-        raise RuntimeError("No Instagram post links were found on the public profile page.")
-
-    for index, post_url in enumerate(post_links, start=1):
-        print(f"Selenium checking post {index}/{len(post_links)}: {post_url}")
-        driver.get(post_url)
-        wait_for_page_ready(driver)
-        time.sleep(SLEEP_BETWEEN_ACTIONS)
-
-        if is_rate_limited_html(driver.page_source):
-            raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
-
-        current_url = normalize_post_url(driver.current_url)
-        caption_text = extract_caption_text(driver)
-        sentences = split_into_sentences(caption_text)
-
-        matched_sentence = None
-        for sentence in sentences:
-            if sentence_contains_keywords(sentence, keywords):
-                matched_sentence = sentence
-                break
-
-        if matched_sentence:
-            og_image = extract_og_image(driver)
-            updated_at = datetime.now(timezone.utc).isoformat()
-
-            return MatchResult(
-                page_url=INSTAGRAM_PROFILE_URL,
-                post_url=current_url,
-                embed_html=build_embed_html(current_url),
-                mobile_image_url=og_image,
-                mobile_text=matched_sentence,
-                fallback_text="Open this week's institute activities post.",
-                updated_at=updated_at,
-            )
-
-    raise RuntimeError(
-        f"No matching post found in the first {len(post_links)} posts. "
-        f"Expected a sentence containing both 'activities' and 'week'."
-    )
+    return links[:MAX_POSTS_TO_CHECK]
 
 
 def find_matching_post() -> MatchResult:
-    session = requests.Session()
-    session.headers.update(REQUEST_HEADERS)
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ],
+        )
 
-    try:
-        request_links = collect_post_links_requests(session, MAX_POSTS_TO_CHECK)
-        if request_links:
-            result = find_matching_post_requests(session, request_links)
-            if result is not None:
-                print("Success via requests-only scrape.")
-                return result
-            print("Requests found links but did not find a matching post.")
-        else:
-            print("Requests did not find any post links on the profile page.")
-    except Exception as exc:
-        print(f"Requests path failed: {exc}")
+        context = browser.new_context(
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+            viewport={"width": 1400, "height": 2200},
+            locale="en-US",
+        )
 
-    print("Falling back to Selenium public scrape...")
-    driver = None
-    try:
-        driver = build_driver()
-        return find_matching_post_selenium(driver)
-    finally:
-        if driver is not None:
-            driver.quit()
+        page = context.new_page()
+        page.set_default_timeout(PAGE_LOAD_TIMEOUT_MS)
+
+        try:
+            print(f"Opening profile: {INSTAGRAM_PROFILE_URL}")
+            page.goto(INSTAGRAM_PROFILE_URL, wait_until="domcontentloaded")
+            page.wait_for_timeout(WAIT_BETWEEN_ACTIONS_MS)
+
+            current_url = page.url
+            html = page.content()
+
+            print(f"Initial URL: {current_url}")
+
+            if is_rate_limited_html(html):
+                page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                save_failure_html(html, FAILURE_HTML)
+                raise RuntimeError("Instagram returned HTTP 429 on the Playwright profile request.")
+
+            if is_login_page_url(current_url):
+                page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                save_failure_html(html, FAILURE_HTML)
+                raise RuntimeError(
+                    "Instagram redirected the headless Playwright browser to the login page."
+                )
+
+            post_links = collect_post_links_from_profile(page)
+            if not post_links:
+                page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                save_failure_html(page.content(), FAILURE_HTML)
+                raise RuntimeError("No Instagram post links were found on the public profile page.")
+
+            keywords = ("activities", "week")
+
+            for index, post_url in enumerate(post_links, start=1):
+                print(f"Checking post {index}/{len(post_links)}: {post_url}")
+
+                page.goto(post_url, wait_until="domcontentloaded")
+                page.wait_for_timeout(WAIT_BETWEEN_ACTIONS_MS)
+
+                current_url = normalize_post_url(page.url)
+                html = page.content()
+
+                if is_rate_limited_html(html):
+                    page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                    save_failure_html(html, FAILURE_HTML)
+                    raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
+
+                if is_login_page_url(page.url):
+                    page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                    save_failure_html(html, FAILURE_HTML)
+                    raise RuntimeError(
+                        f"Instagram redirected to login while opening post: {post_url}"
+                    )
+
+                caption_text = extract_caption_text_from_html(html)
+                sentences = split_into_sentences(caption_text)
+
+                matched_sentence = None
+                for sentence in sentences:
+                    if sentence_contains_keywords(sentence, keywords):
+                        matched_sentence = sentence
+                        break
+
+                if matched_sentence:
+                    og_image = extract_og_image_from_html(html)
+                    updated_at = datetime.now(timezone.utc).isoformat()
+
+                    return MatchResult(
+                        page_url=INSTAGRAM_PROFILE_URL,
+                        post_url=current_url,
+                        embed_html=build_embed_html(current_url),
+                        mobile_image_url=og_image,
+                        mobile_text=matched_sentence,
+                        fallback_text="Open this week's institute activities post.",
+                        updated_at=updated_at,
+                    )
+
+            page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+            save_failure_html(page.content(), FAILURE_HTML)
+            raise RuntimeError(
+                f"No matching post found in the first {len(post_links)} posts. "
+                f"Expected a sentence containing both 'activities' and 'week'."
+            )
+
+        except PlaywrightTimeoutError as exc:
+            try:
+                page.screenshot(path=str(FAILURE_SCREENSHOT), full_page=True)
+                save_failure_html(page.content(), FAILURE_HTML)
+            except Exception:
+                pass
+            raise RuntimeError(f"Playwright timed out: {exc}") from exc
+
+        finally:
+            context.close()
+            browser.close()
 
 
 def write_output(result: MatchResult, output_path: Path) -> None:
