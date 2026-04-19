@@ -211,16 +211,16 @@ def find_matching_post() -> MatchResult:
             ],
         )
 
-context = browser.new_context(
-    storage_state="data/instagram_state.json",
-    user_agent=(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    viewport={"width": 1400, "height": 2200},
-    locale="en-US",
-)
+        context = browser.new_context(
+            storage_state="data/instagram_state.json",
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+            viewport={"width": 1400, "height": 2200},
+            locale="en-US",
+        )
 
         page = context.new_page()
         page.set_default_timeout(PAGE_LOAD_TIMEOUT_MS)
@@ -334,7 +334,7 @@ context = browser.new_context(
 
         finally:
             context.close()
-            browser.close()
+            browser.close())
 
 
 def write_output(result: MatchResult, output_path: Path) -> None:
