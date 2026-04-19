@@ -46,6 +46,9 @@ jobs:
           path: |
             debug_instagram_failure.png
             debug_instagram_failure.html
+            debug_instagram_step1_after_goto.png
+            debug_instagram_step2_after_3s.png
+            debug_instagram_step3_after_8s.png
           if-no-files-found: warn
 
       - name: Commit and push changes
