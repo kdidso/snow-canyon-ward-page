@@ -1,8 +1,6 @@
-{
-  "page_url": "https://www.instagram.com/stginstitute/",
-  "post_url": "https://www.instagram.com/p/DXCS8YBDVU8/",
-  "embed_html": "<blockquote class=\"instagram-media\" data-instgrm-captioned data-instgrm-permalink=\"https://www.instagram.com/p/DXCS8YBDVU8/?utm_source=ig_embed&amp;utm_campaign=loading\" data-instgrm-version=\"14\" style=\"background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:540px; min-width:326px; width:99.375%;\"></blockquote>",
-  "mobile_text": "Here are our activities for the week! 😜",
-  "fallback_text": "Here are this week's institute activities.",
-  "updated_at": "2026-04-18T22:08:31.878098-06:00"
-}
+ "page_url": "test",
+  "post_url": "test",
+  "embed_html": "",
+  "mobile_text": "Testing fallback",
+  "fallback_text": "Testing fallback",
+  "updated_at": "test"
