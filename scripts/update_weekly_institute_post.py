@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 import sys
 import time
@@ -9,19 +8,18 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
+import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import (
-    ElementClickInterceptedException,
     NoSuchElementException,
     StaleElementReferenceException,
     TimeoutException,
 )
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -29,14 +27,20 @@ INSTAGRAM_PROFILE_URL = "https://www.instagram.com/stginstitute/"
 OUTPUT_JSON = Path("data/weekly_institute_post.json")
 FAILURE_SCREENSHOT = Path("debug_instagram_failure.png")
 FAILURE_HTML = Path("debug_instagram_failure.html")
-LOGIN_FILLED_SCREENSHOT = Path("debug_instagram_login_filled.png")
-LOGIN_CLICKED_SCREENSHOT = Path("debug_instagram_login_clicked.png")
 
 MAX_POSTS_TO_CHECK = 20
 PAGE_LOAD_TIMEOUT = 30
-SHORT_WAIT = 5
 MEDIUM_WAIT = 10
 SLEEP_BETWEEN_ACTIONS = 1.0
+
+REQUEST_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
 @dataclass
@@ -49,33 +53,7 @@ class MatchResult:
     fallback_text: str
     updated_at: str
 
-def is_rate_limited_page(driver: webdriver.Chrome) -> bool:
-    html = driver.page_source.lower()
-    return "http error 429" in html or "too many requests" in html
 
-
-def profile_posts_visible(driver: webdriver.Chrome) -> bool:
-    """
-    Returns True if the public profile page appears to have loaded with visible post links.
-    """
-    xpaths = [
-        "//main//a[contains(@href, '/p/')]",
-        "//main//a[contains(@href, '/reel/')]",
-        "//article//a[contains(@href, '/p/')]",
-        "//article//a[contains(@href, '/reel/')]",
-    ]
-
-    for xpath in xpaths:
-        try:
-            elements = driver.find_elements(By.XPATH, xpath)
-            if elements:
-                print(f"Profile posts visible using xpath: {xpath} ({len(elements)} found)")
-                return True
-        except Exception:
-            continue
-
-    return False
-    
 def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
     try:
         driver.save_screenshot(str(path))
@@ -84,12 +62,16 @@ def save_failure_screenshot(driver: webdriver.Chrome, path: Path) -> None:
         print(f"Could not save screenshot: {exc}", file=sys.stderr)
 
 
-def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
+def save_failure_html_text(html: str, path: Path) -> None:
     try:
-        path.write_text(driver.page_source, encoding="utf-8")
+        path.write_text(html, encoding="utf-8")
         print(f"Saved page source to {path}")
     except Exception as exc:
         print(f"Could not save page source: {exc}", file=sys.stderr)
+
+
+def save_failure_html(driver: webdriver.Chrome, path: Path) -> None:
+    save_failure_html_text(driver.page_source, path)
 
 
 def build_driver() -> webdriver.Chrome:
@@ -100,11 +82,7 @@ def build_driver() -> webdriver.Chrome:
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1400,2200")
     options.add_argument("--lang=en-US")
-    options.add_argument(
-        "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    )
+    options.add_argument(f"--user-agent={REQUEST_HEADERS['User-Agent']}")
 
     driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
@@ -117,246 +95,12 @@ def wait_for_page_ready(driver: webdriver.Chrome, timeout: int = MEDIUM_WAIT) ->
     )
 
 
-def safe_click(driver: webdriver.Chrome, element: WebElement) -> None:
-    try:
-        element.click()
-    except ElementClickInterceptedException:
-        driver.execute_script("arguments[0].click();", element)
-
-
-def find_first_present(
-    driver: webdriver.Chrome,
-    selectors: list[tuple[str, str]],
-    timeout: int = 10,
-) -> WebElement:
-    last_exc = None
-    for by, selector in selectors:
-        try:
-            element = WebDriverWait(driver, timeout).until(
-                EC.presence_of_element_located((by, selector))
-            )
-            print(f"Found element using selector: {by} | {selector}")
-            return element
-        except Exception as exc:
-            last_exc = exc
-            continue
-    raise last_exc or RuntimeError("No matching element found.")
-
-
-def debug_selector_matches(
-    driver: webdriver.Chrome,
-    selectors: list[tuple[str, str]],
-    label: str,
-) -> None:
-    print(f"Debugging selector matches for: {label}")
-    for by, selector in selectors:
-        try:
-            elements = driver.find_elements(by, selector)
-            print(f"  Selector {by} | {selector} -> {len(elements)} match(es)")
-            for i, el in enumerate(elements[:3], start=1):
-                try:
-                    text = (el.text or "").strip()
-                    aria = el.get_attribute("aria-label")
-                    role = el.get_attribute("role")
-                    tag = el.tag_name
-                    enabled = el.is_enabled()
-                    displayed = el.is_displayed()
-                    print(
-                        f"    [{i}] tag={tag} role={role} aria={aria} "
-                        f"displayed={displayed} enabled={enabled} text={text!r}"
-                    )
-                except Exception as inner_exc:
-                    print(f"    [{i}] Could not inspect element: {inner_exc}")
-        except Exception as exc:
-            print(f"  Selector {by} | {selector} raised: {exc}")
-
-
-def find_first_clickable(
-    driver: webdriver.Chrome,
-    selectors: list[tuple[str, str]],
-    timeout: int = 10,
-) -> WebElement:
-    last_exc = None
-    for by, selector in selectors:
-        try:
-            element = WebDriverWait(driver, timeout).until(
-                EC.element_to_be_clickable((by, selector))
-            )
-            print(f"Found clickable element using selector: {by} | {selector}")
-            return element
-        except Exception as exc:
-            print(f"Clickable lookup failed for selector: {by} | {selector} | {exc}")
-            last_exc = exc
-            continue
-
-    debug_selector_matches(driver, selectors, "clickable target")
-    raise last_exc or RuntimeError("No matching clickable element found.")
-
-
-def is_login_page(driver: webdriver.Chrome) -> bool:
-    url = driver.current_url.lower()
-    if "/accounts/login" in url:
-        return True
-
-    try:
-        has_user = bool(
-            driver.find_elements(By.NAME, "username")
-            or driver.find_elements(By.NAME, "email")
-        )
-        has_pass = bool(
-            driver.find_elements(By.NAME, "password")
-            or driver.find_elements(By.NAME, "pass")
-        )
-        return has_user and has_pass
-    except Exception:
-        return False
-
-
-def login_to_instagram(driver: webdriver.Chrome) -> None:
-    username = os.environ.get("INSTAGRAM_USERNAME", "").strip()
-    password = os.environ.get("INSTAGRAM_PASSWORD", "").strip()
-
-    if not username or not password:
-        raise RuntimeError(
-            "Missing INSTAGRAM_USERNAME or INSTAGRAM_PASSWORD environment variables."
-        )
-
-    print("Login page detected. Beginning Instagram login flow.")
-    print("Current URL before login:", driver.current_url)
-
-    page_source_lower = driver.page_source.lower()
-    if "http error 429" in page_source_lower or "too many requests" in page_source_lower:
-        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
-        save_failure_html(driver, FAILURE_HTML)
-        raise RuntimeError("Instagram returned HTTP 429 before login fields could be used.")
-
-    username_selectors = [
-        (By.NAME, "username"),
-        (By.NAME, "email"),
-        (By.XPATH, "//input[@name='username']"),
-        (By.XPATH, "//input[@name='email']"),
-        (By.CSS_SELECTOR, "input[aria-label='Phone number, username, or email']"),
-        (By.CSS_SELECTOR, "input[type='text']"),
-    ]
-
-    password_selectors = [
-        (By.NAME, "password"),
-        (By.NAME, "pass"),
-        (By.XPATH, "//input[@name='password']"),
-        (By.XPATH, "//input[@name='pass']"),
-        (By.CSS_SELECTOR, "input[type='password']"),
-    ]
-
-    login_button_selectors = [
-        (By.XPATH, "//*[@id='login_form']//*[@role='button' and @aria-label='Log In']"),
-    ]
-
-    username_input = find_first_present(driver, username_selectors, timeout=20)
-    password_input = find_first_present(driver, password_selectors, timeout=20)
-
-    username_input.clear()
-    username_input.send_keys(username)
-
-    password_input.clear()
-    password_input.send_keys(password)
-
-    entered_username = username_input.get_attribute("value") or ""
-    entered_password = password_input.get_attribute("value") or ""
-
-    print(f"Username entered? {bool(entered_username)}")
-    print(f"Username length entered: {len(entered_username)}")
-    print(f"Password entered? {bool(entered_password)}")
-    print(f"Password length entered: {len(entered_password)}")
-
-    save_failure_screenshot(driver, LOGIN_FILLED_SCREENSHOT)
-
-    print("Attempting to identify Log in button...")
-    debug_selector_matches(driver, login_button_selectors, "login button before click")
-
-    login_button = find_first_clickable(driver, login_button_selectors, timeout=20)
-
-    url_before_click = driver.current_url
-    print("About to click Log in button.")
-    print("URL just before click:", url_before_click)
-
-    safe_click(driver, login_button)
-
-    print("Clicked Log in button.")
-    print("URL immediately after click:", driver.current_url)
-
-    save_failure_screenshot(driver, LOGIN_CLICKED_SCREENSHOT)
-
-    # Give the browser a moment to react.
-    time.sleep(2)
-
-    def login_transition_detected(d: webdriver.Chrome) -> bool:
-        url = d.current_url.lower()
-        html = d.page_source.lower()
-
-        if "http error 429" in html or "too many requests" in html:
-            return True
-
-        if "/accounts/onetap/" in url:
-            return True
-
-        if "/accounts/login" not in url:
-            return True
-
-        if d.current_url != url_before_click:
-            return True
-
-        return False
-
-    try:
-        WebDriverWait(driver, 30).until(login_transition_detected)
-    except TimeoutException:
-        print("Timed out waiting for post-login transition.")
-        print("URL after waiting:", driver.current_url)
-
-        if driver.current_url == url_before_click:
-            print("URL did not change after clicking Log in.")
-        else:
-            print("URL changed, but script did not recognize it as a valid transition.")
-
-        save_failure_screenshot(driver, FAILURE_SCREENSHOT)
-        save_failure_html(driver, FAILURE_HTML)
-        raise RuntimeError(
-            "Login button was pressed, but no recognized transition occurred."
-        )
-
-    current_url = driver.current_url
-    current_html = driver.page_source.lower()
-
-    print("URL after login wait:", current_url)
-
-    save_failure_screenshot(driver, FAILURE_SCREENSHOT)
-    save_failure_html(driver, FAILURE_HTML)
-
-    if "http error 429" in current_html or "too many requests" in current_html:
-        raise RuntimeError("Instagram returned HTTP 429 after login click.")
-
-    if "/accounts/onetap/" in current_url.lower():
-        print("Login appears successful: reached Instagram one-tap page.")
-        return
-
-    if "/accounts/login" not in current_url.lower():
-        print("Login appears successful: left Instagram login page.")
-        return
-
-    if current_url == url_before_click:
-        raise RuntimeError("Login button was clicked, but the URL did not change.")
-
-    raise RuntimeError(
-        f"Login button was clicked, URL changed to {current_url}, "
-        "but script still considers it unresolved."
-    )
+def is_rate_limited_html(html: str) -> bool:
+    lowered = html.lower()
+    return "http error 429" in lowered or "too many requests" in lowered
 
 
 def normalize_post_url(url: str) -> str:
-    """
-    Normalize Instagram post URL to:
-    https://www.instagram.com/p/<code>/
-    """
     parsed = urlparse(url)
     path = parsed.path.rstrip("/")
     m = re.match(r"^/(p|reel|tv)/([^/]+)$", path)
@@ -394,10 +138,47 @@ def split_into_sentences(text: str) -> list[str]:
     return [p.strip() for p in parts if p.strip()]
 
 
+def extract_og_image_from_html(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    tag = soup.find("meta", attrs={"property": "og:image"})
+    if not tag:
+        return ""
+    return (tag.get("content") or "").strip()
+
+
+def extract_caption_text_from_html(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    texts: list[str] = []
+
+    meta_desc = soup.find("meta", attrs={"name": "description"})
+    if meta_desc:
+        content = (meta_desc.get("content") or "").strip()
+        if content:
+            texts.append(content)
+
+    og_desc = soup.find("meta", attrs={"property": "og:description"})
+    if og_desc:
+        content = (og_desc.get("content") or "").strip()
+        if content and content not in texts:
+            texts.append(content)
+
+    title_tag = soup.find("title")
+    if title_tag:
+        title_text = title_tag.get_text(" ", strip=True)
+        if title_text and title_text not in texts:
+            texts.append(title_text)
+
+    body_text = soup.get_text(" ", strip=True)
+    if body_text:
+        shortened = re.sub(r"\s+", " ", body_text).strip()
+        if shortened and shortened not in texts:
+            texts.append(shortened)
+
+    return "\n".join(texts).strip()
+
+
 def extract_caption_text(driver: webdriver.Chrome) -> str:
-    """
-    Try several selectors for caption text on an Instagram post page.
-    """
     candidate_selectors = [
         (By.XPATH, "//article//h1"),
         (By.XPATH, "//article//div[contains(@class,'_a9zs')]"),
@@ -421,7 +202,10 @@ def extract_caption_text(driver: webdriver.Chrome) -> str:
             if txt and txt not in texts:
                 texts.append(txt)
 
-    return "\n".join(texts).strip()
+    if texts:
+        return "\n".join(texts).strip()
+
+    return extract_caption_text_from_html(driver.page_source)
 
 
 def extract_og_image(driver: webdriver.Chrome) -> str:
@@ -430,20 +214,46 @@ def extract_og_image(driver: webdriver.Chrome) -> str:
         content = meta.get_attribute("content") or ""
         return content.strip()
     except NoSuchElementException:
-        return ""
+        return extract_og_image_from_html(driver.page_source)
 
 
-def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
-    """
-    Collect post links by manually searching the visible Instagram profile tiles.
-    """
+def collect_post_links_requests(session: requests.Session, max_posts: int) -> list[str]:
+    print("Trying requests-based profile scrape...")
+    resp = session.get(INSTAGRAM_PROFILE_URL, timeout=30)
+    print(f"Requests profile status: {resp.status_code}")
+
+    if resp.status_code == 429 or is_rate_limited_html(resp.text):
+        raise RuntimeError("Instagram returned HTTP 429 on requests profile fetch.")
+
+    soup = BeautifulSoup(resp.text, "html.parser")
     links: list[str] = []
     seen: set[str] = set()
 
-    time.sleep(2)
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if not href:
+            continue
+        if not ("/p/" in href or "/reel/" in href or "/tv/" in href):
+            continue
+
+        full_url = normalize_post_url(urljoin("https://www.instagram.com", href))
+        if full_url not in seen:
+            seen.add(full_url)
+            links.append(full_url)
+            print(f"Requests found post link: {full_url}")
+            if len(links) >= max_posts:
+                break
+
+    return links[:max_posts]
+
+
+def collect_post_links_selenium(driver: webdriver.Chrome, max_posts: int) -> list[str]:
+    print("Trying Selenium-based public profile scrape...")
+    links: list[str] = []
+    seen: set[str] = set()
 
     for attempt in range(8):
-        print(f"Collect attempt {attempt + 1}")
+        print(f"Selenium collect attempt {attempt + 1}")
 
         xpaths = [
             "//main//a[contains(@href, '/p/')]",
@@ -472,7 +282,7 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
                 if href not in seen:
                     seen.add(href)
                     links.append(href)
-                    print(f"Found post link: {href}")
+                    print(f"Selenium found post link: {href}")
 
                     if len(links) >= max_posts:
                         return links[:max_posts]
@@ -483,78 +293,65 @@ def collect_post_links(driver: webdriver.Chrome, max_posts: int) -> list[str]:
     return links[:max_posts]
 
 
-def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
-    driver.get(INSTAGRAM_PROFILE_URL)
-    time.sleep(3)
-
-    print("URL before page-ready wait:", driver.current_url)
-
-    wait_for_page_ready(driver)
-    time.sleep(SLEEP_BETWEEN_ACTIONS * 2)
-
-    if is_rate_limited_page(driver):
-        raise RuntimeError("Instagram returned HTTP 429 on the initial profile request.")
-
-    # First priority: if the public profile is already visible, do NOT log in.
-    if profile_posts_visible(driver):
-        print("Public Instagram profile loaded successfully. No login needed.")
-    else:
-        print("Public profile posts were not visible on first load.")
-
-        if is_login_page(driver):
-            print("Instagram redirected to a login page. Retrying profile once before logging in.")
-            driver.get(INSTAGRAM_PROFILE_URL)
-            time.sleep(3)
-            wait_for_page_ready(driver)
-            time.sleep(2)
-
-            if is_rate_limited_page(driver):
-                raise RuntimeError("Instagram returned HTTP 429 after retrying the profile page.")
-
-            if profile_posts_visible(driver):
-                print("Public profile became visible after retry. No login needed.")
-            else:
-                print("Still no visible public posts after retry.")
-
-                if is_login_page(driver):
-                    print("Still on login page after retry. Attempting login as fallback.")
-                    login_to_instagram(driver)
-
-                    driver.get(INSTAGRAM_PROFILE_URL)
-                    wait_for_page_ready(driver)
-                    time.sleep(3)
-
-                    print("URL after returning to profile post-login:", driver.current_url)
-
-                    if is_rate_limited_page(driver):
-                        raise RuntimeError("Instagram returned HTTP 429 after login.")
-
-                    if is_login_page(driver) and not profile_posts_visible(driver):
-                        raise RuntimeError(
-                            "Still on Instagram login page after attempting login."
-                        )
-                else:
-                    raise RuntimeError(
-                        "Profile posts were not visible, but page was not clearly a login page."
-                    )
-        else:
-            raise RuntimeError(
-                "Profile posts were not visible, and page was not clearly a login page."
-            )
-
-    post_links = collect_post_links(driver, MAX_POSTS_TO_CHECK)
-    if not post_links:
-        raise RuntimeError("No Instagram post links were found on the profile page.")
-
+def find_matching_post_requests(session: requests.Session, post_links: list[str]) -> MatchResult | None:
     keywords = ("activities", "week")
 
     for index, post_url in enumerate(post_links, start=1):
-        print(f"Checking post {index}/{len(post_links)}: {post_url}")
+        print(f"Requests checking post {index}/{len(post_links)}: {post_url}")
+        resp = session.get(post_url, timeout=30)
+        print(f"Requests post status: {resp.status_code}")
+
+        if resp.status_code == 429 or is_rate_limited_html(resp.text):
+            raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
+
+        caption_text = extract_caption_text_from_html(resp.text)
+        sentences = split_into_sentences(caption_text)
+
+        matched_sentence = None
+        for sentence in sentences:
+            if sentence_contains_keywords(sentence, keywords):
+                matched_sentence = sentence
+                break
+
+        if matched_sentence:
+            og_image = extract_og_image_from_html(resp.text)
+            updated_at = datetime.now(timezone.utc).isoformat()
+
+            return MatchResult(
+                page_url=INSTAGRAM_PROFILE_URL,
+                post_url=normalize_post_url(post_url),
+                embed_html=build_embed_html(normalize_post_url(post_url)),
+                mobile_image_url=og_image,
+                mobile_text=matched_sentence,
+                fallback_text="Open this week's institute activities post.",
+                updated_at=updated_at,
+            )
+
+    return None
+
+
+def find_matching_post_selenium(driver: webdriver.Chrome) -> MatchResult:
+    keywords = ("activities", "week")
+
+    driver.get(INSTAGRAM_PROFILE_URL)
+    time.sleep(3)
+    wait_for_page_ready(driver)
+    time.sleep(2)
+
+    if is_rate_limited_html(driver.page_source):
+        raise RuntimeError("Instagram returned HTTP 429 on the Selenium profile request.")
+
+    post_links = collect_post_links_selenium(driver, MAX_POSTS_TO_CHECK)
+    if not post_links:
+        raise RuntimeError("No Instagram post links were found on the public profile page.")
+
+    for index, post_url in enumerate(post_links, start=1):
+        print(f"Selenium checking post {index}/{len(post_links)}: {post_url}")
         driver.get(post_url)
         wait_for_page_ready(driver)
         time.sleep(SLEEP_BETWEEN_ACTIONS)
 
-        if is_rate_limited_page(driver):
+        if is_rate_limited_html(driver.page_source):
             raise RuntimeError(f"Instagram returned HTTP 429 while opening post: {post_url}")
 
         current_url = normalize_post_url(driver.current_url)
@@ -587,6 +384,33 @@ def find_matching_post(driver: webdriver.Chrome) -> MatchResult:
     )
 
 
+def find_matching_post() -> MatchResult:
+    session = requests.Session()
+    session.headers.update(REQUEST_HEADERS)
+
+    try:
+        request_links = collect_post_links_requests(session, MAX_POSTS_TO_CHECK)
+        if request_links:
+            result = find_matching_post_requests(session, request_links)
+            if result is not None:
+                print("Success via requests-only scrape.")
+                return result
+            print("Requests found links but did not find a matching post.")
+        else:
+            print("Requests did not find any post links on the profile page.")
+    except Exception as exc:
+        print(f"Requests path failed: {exc}")
+
+    print("Falling back to Selenium public scrape...")
+    driver = None
+    try:
+        driver = build_driver()
+        return find_matching_post_selenium(driver)
+    finally:
+        if driver is not None:
+            driver.quit()
+
+
 def write_output(result: MatchResult, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -608,10 +432,8 @@ def write_output(result: MatchResult, output_path: Path) -> None:
 
 
 def main() -> int:
-    driver = None
     try:
-        driver = build_driver()
-        result = find_matching_post(driver)
+        result = find_matching_post()
         write_output(result, OUTPUT_JSON)
 
         print("Success.")
@@ -621,14 +443,7 @@ def main() -> int:
 
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
-        if driver is not None:
-            save_failure_screenshot(driver, FAILURE_SCREENSHOT)
-            save_failure_html(driver, FAILURE_HTML)
         return 1
-
-    finally:
-        if driver is not None:
-            driver.quit()
 
 
 if __name__ == "__main__":
