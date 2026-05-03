@@ -1454,8 +1454,8 @@
   welcomeText:
     "The Church of Jesus Christ of Latter-day Saints welcomes neighbors, families, and friends to join us for a variety of faith-based activities. This website is regularly updated with Sunday worship services and activities. Come join us! We welcome you to RSVP.",
 
-  service1: { title: "Sunday Service", time: "10:30 AM (East Chapel)" },
-  service2: { title: "Gospel Study", time: "11:30 AM" },
+  service1: { title: "Sunday Service", time: "10:30 AM" },
+  service2: { title: "Gospel Study", time: "11:45 AM" },
 
   meetingLocation: {
     line1: "943 East 400 South",
@@ -1787,6 +1787,68 @@ meetingMarker.bindPopup(`
       }
     }
 
+
+function ensureInstagramEmbedScriptLoaded() {
+  return new Promise((resolve) => {
+    if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+      resolve(true);
+      return;
+    }
+
+    let script = document.querySelector('script[src*="instagram.com/embed.js"]');
+
+    if (!script) {
+      script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.instagram.com/embed.js";
+      document.body.appendChild(script);
+    }
+
+    const done = () => resolve(!!(window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function"));
+    script.addEventListener("load", done, { once: true });
+    script.addEventListener("error", () => resolve(false), { once: true });
+
+    // If the script was already in the DOM and loaded before this listener was attached,
+    // this polling catches it without requiring the visitor to refresh.
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+      if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+        clearInterval(timer);
+        resolve(true);
+      } else if (tries >= 20) {
+        clearInterval(timer);
+        resolve(false);
+      }
+    }, 250);
+  });
+}
+
+async function processInstagramEmbedsWithRetry(containerEl) {
+  if (!containerEl) return false;
+
+  const ready = await ensureInstagramEmbedScriptLoaded();
+  if (!ready) return false;
+
+  // Instagram's embed script can be timing-sensitive on first page load.
+  // Processing now, then again shortly after layout settles, makes the widget much more reliable.
+  const delays = [0, 350, 900, 1800, 3000];
+
+  delays.forEach((delay) => {
+    setTimeout(() => {
+      try {
+        if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+          window.instgrm.Embeds.process(containerEl);
+        }
+      } catch (err) {
+        console.warn("Instagram embed processing failed:", err);
+      }
+    }, delay);
+  });
+
+  return true;
+}
+
 async function loadWeeklyInstituteWidget() {
   const statusEl = $("instituteStatus");
   const embedWrap = $("instituteEmbedWrap");
@@ -1839,9 +1901,19 @@ async function loadWeeklyInstituteWidget() {
       embedWrap.innerHTML = embedHtml;
       embedWrap.style.display = "flex";
 
-      if (window.instgrm && window.instgrm.Embeds?.process) {
-        window.instgrm.Embeds.process();
-      }
+      await processInstagramEmbedsWithRetry(embedWrap);
+
+      // If Instagram still does not replace the blockquote with an iframe, keep a usable backup visible.
+      setTimeout(() => {
+        const hasIframe = !!embedWrap.querySelector("iframe");
+        if (!hasIframe && mobileImageUrl) {
+          if (mobileImageEl) {
+            mobileImageEl.src = mobileImageUrl;
+            mobileImageEl.alt = mobileText || "Institute weekly activities";
+          }
+          mobileCardEl.style.display = "block";
+        }
+      }, 4500);
 
       return;
     }
