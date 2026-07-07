@@ -1,5 +1,5 @@
 {
-  "exported_at_utc": "2026-04-15 03:48:32",
+  "exported_at_utc": "2026-07-07 15:04:27",
   "base": "https://unithistory.churchofjesuschrist.org",
   "start_url": "https://unithistory.churchofjesuschrist.org/",
   "headless": true,
@@ -9,401 +9,229 @@
   "story_count_skipped_existing": 10,
   "stories": [
     {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/069de7ec-ac32-f111-88b4-7ced8d6f46cd?page=home_page",
-      "title": "Combined easter egg hunt",
-      "date_text": "Apr 6, 2026",
-      "folder": "unit-history/events/Combined easter egg hunt - Apr 6, 2026",
-      "image_count_found": 54,
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/5279d764-3274-f111-ab0e-002248069d9b?page=home_page",
+      "title": "FHE rock painting then placing them at Aspiration Trail",
+      "date_text": "Jun 29, 2026",
+      "folder": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026",
+      "image_count_found": 20,
       "images": [
         {
           "index": 1,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9914.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/001.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6131.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/001.jpeg",
           "downloaded": true
         },
         {
           "index": 2,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9915.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/002.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6132.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/002.jpeg",
           "downloaded": true
         },
         {
           "index": 3,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9916.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/003.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6133.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/003.jpeg",
           "downloaded": true
         },
         {
           "index": 4,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9917.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/004.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6134.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/004.jpeg",
           "downloaded": true
         },
         {
           "index": 5,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9918.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/005.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6135.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/005.jpeg",
           "downloaded": true
         },
         {
           "index": 6,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9919.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/006.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6136.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/006.jpeg",
           "downloaded": true
         },
         {
           "index": 7,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9920.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/007.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6137.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/007.jpeg",
           "downloaded": true
         },
         {
           "index": 8,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9921.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/008.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6138.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/008.jpeg",
           "downloaded": true
         },
         {
           "index": 9,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9922.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/009.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6139.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/009.jpeg",
           "downloaded": true
         },
         {
           "index": 10,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9923.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/010.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6140.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/010.jpeg",
           "downloaded": true
         },
         {
           "index": 11,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9924.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/011.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6141.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/011.jpeg",
           "downloaded": true
         },
         {
           "index": 12,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9925.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/012.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6142.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/012.jpeg",
           "downloaded": true
         },
         {
           "index": 13,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9926.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/013.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6143.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/013.jpeg",
           "downloaded": true
         },
         {
           "index": 14,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9927.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/014.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6144.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/014.jpeg",
           "downloaded": true
         },
         {
           "index": 15,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9928.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/015.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6145.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/015.jpeg",
           "downloaded": true
         },
         {
           "index": 16,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9929.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/016.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6146.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/016.jpeg",
           "downloaded": true
         },
         {
           "index": 17,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9930.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/017.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6147.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/017.jpeg",
           "downloaded": true
         },
         {
           "index": 18,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9931.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/018.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6148.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/018.jpeg",
           "downloaded": true
         },
         {
           "index": 19,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9933.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/019.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6149.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/019.jpeg",
           "downloaded": true
         },
         {
           "index": 20,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9934.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/020.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 21,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9935.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/021.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 22,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9938.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/022.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 23,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9939.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/023.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 24,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9940.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/024.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 25,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9941.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/025.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 26,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9942.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/026.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 27,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9943.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/027.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 28,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9944.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/028.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 29,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9945.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/029.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 30,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9946.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/030.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 31,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9947.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/031.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 32,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9948.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/032.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 33,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9949.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/033.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 34,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9950.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/034.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 35,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9951.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/035.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 36,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9952.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/036.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 37,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9953.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/037.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 38,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9954.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/038.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 39,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9955.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/039.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 40,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9956.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/040.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 41,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9957.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/041.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 42,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9958.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/042.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 43,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9959.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/043.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 44,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9960.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/044.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 45,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9961.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/045.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 46,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9962.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/046.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 47,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9963.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/047.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 48,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9964.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/048.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 49,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9965.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/049.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 50,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9966.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/050.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 51,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9967.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/051.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 52,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9968.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/052.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 53,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9969.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/053.jpg",
-          "downloaded": true
-        },
-        {
-          "index": 54,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/069de7ec-ac32-f111-88b4-7ced8d6f46cd/IMG_9970.JPG",
-          "file": "unit-history/events/Combined easter egg hunt - Apr 6, 2026/054.jpg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6150.jpeg",
+          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/020.jpeg",
           "downloaded": true
         }
       ],
       "grid_title_guess": "Untitled"
     },
     {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/91fce6d8-200c-f111-8406-7ced8d6f48ab?page=home_page",
-      "title": "Senior home visits and socializing",
-      "date_text": "Feb 16, 2026",
-      "folder": "unit-history/events/Senior home visits and socializing - Feb 16, 2026",
-      "image_count_found": 9,
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/60581a6c-636d-f111-ab0d-7ced8d6f46ee?page=home_page",
+      "title": "Summer kickoff 2026",
+      "date_text": "Jun 20, 2026",
+      "folder": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026",
+      "image_count_found": 11,
       "images": [
         {
           "index": 1,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4920.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/001.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6032.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/001.jpeg",
           "downloaded": true
         },
         {
           "index": 2,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4921.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/002.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6033.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/002.jpeg",
           "downloaded": true
         },
         {
           "index": 3,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4922.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/003.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6034.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/003.jpeg",
           "downloaded": true
         },
         {
           "index": 4,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4923.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/004.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6035.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/004.jpeg",
           "downloaded": true
         },
         {
           "index": 5,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4924.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/005.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6036.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/005.jpeg",
           "downloaded": true
         },
         {
           "index": 6,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4925.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/006.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6037.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/006.jpeg",
           "downloaded": true
         },
         {
           "index": 7,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4926.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/007.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6038.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/007.jpeg",
           "downloaded": true
         },
         {
           "index": 8,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4927.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/008.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6039.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/008.jpeg",
           "downloaded": true
         },
         {
           "index": 9,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/91fce6d8-200c-f111-8406-7ced8d6f48ab/IMG_4928.jpeg",
-          "file": "unit-history/events/Senior home visits and socializing - Feb 16, 2026/009.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6040.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/009.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6041.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/010.jpeg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6042.jpeg",
+          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/011.jpeg",
           "downloaded": true
         }
       ],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/069de7ec-ac32-f111-88b4-7ced8d6f46cd?page=home_page",
+      "title": "Combined easter egg hunt",
+      "date_text": "Apr 6, 2026",
+      "skipped_existing_folder": true,
+      "folder": "unit-history/events/Combined easter egg hunt - Apr 6, 2026",
+      "image_count_found": 0,
+      "images": [],
+      "grid_title_guess": "Untitled"
+    },
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/91fce6d8-200c-f111-8406-7ced8d6f48ab?page=home_page",
+      "title": "Senior home visits and socializing",
+      "date_text": "Feb 16, 2026",
+      "skipped_existing_folder": true,
+      "folder": "unit-history/events/Senior home visits and socializing - Feb 16, 2026",
+      "image_count_found": 0,
+      "images": [],
       "grid_title_guess": "Untitled"
     },
     {
@@ -482,26 +310,6 @@
       "date_text": "Dec 8, 2025",
       "skipped_existing_folder": true,
       "folder": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025",
-      "image_count_found": 0,
-      "images": [],
-      "grid_title_guess": "Untitled"
-    },
-    {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/f86370f3-94bd-f011-bbd3-6045bd030b91?page=home_page",
-      "title": "Special Needs Prom - service project",
-      "date_text": "Nov 6, 2025",
-      "skipped_existing_folder": true,
-      "folder": "unit-history/events/Special Needs Prom - service project - Nov 6, 2025",
-      "image_count_found": 0,
-      "images": [],
-      "grid_title_guess": "Untitled"
-    },
-    {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/fcaf25e8-abbe-f011-bbd3-6045bd05b362?page=home_page",
-      "title": "Fall scavenger hunt FHE",
-      "date_text": "Nov 10, 2025",
-      "skipped_existing_folder": true,
-      "folder": "unit-history/events/Fall scavenger hunt FHE - Nov 10, 2025",
       "image_count_found": 0,
       "images": [],
       "grid_title_guess": "Untitled"
