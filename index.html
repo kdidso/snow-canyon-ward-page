@@ -1442,7 +1442,7 @@
 <script async defer crossorigin="anonymous"
   src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
 </script>
-<script async src="//www.instagram.com/embed.js"></script>
+<script async defer src="https://www.instagram.com/embed.js"></script>
 
   <script>
     // ----------------------------
@@ -1790,7 +1790,15 @@ meetingMarker.bindPopup(`
 
 function ensureInstagramEmbedScriptLoaded() {
   return new Promise((resolve) => {
-    if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+    function isReady() {
+      return !!(
+        window.instgrm &&
+        window.instgrm.Embeds &&
+        typeof window.instgrm.Embeds.process === "function"
+      );
+    }
+
+    if (isReady()) {
       resolve(true);
       return;
     }
@@ -1800,27 +1808,31 @@ function ensureInstagramEmbedScriptLoaded() {
     if (!script) {
       script = document.createElement("script");
       script.async = true;
+      script.defer = true;
       script.src = "https://www.instagram.com/embed.js";
       document.body.appendChild(script);
     }
 
-    const done = () => resolve(!!(window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function"));
-    script.addEventListener("load", done, { once: true });
-    script.addEventListener("error", () => resolve(false), { once: true });
-
-    // If the script was already in the DOM and loaded before this listener was attached,
-    // this polling catches it without requiring the visitor to refresh.
     let tries = 0;
     const timer = setInterval(() => {
       tries += 1;
-      if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+
+      if (isReady()) {
         clearInterval(timer);
         resolve(true);
-      } else if (tries >= 20) {
+      }
+
+      if (tries >= 60) {
         clearInterval(timer);
         resolve(false);
       }
     }, 250);
+
+    script.addEventListener("load", () => {
+      setTimeout(() => {
+        if (isReady()) resolve(true);
+      }, 250);
+    });
   });
 }
 
@@ -1830,21 +1842,17 @@ async function processInstagramEmbedsWithRetry(containerEl) {
   const ready = await ensureInstagramEmbedScriptLoaded();
   if (!ready) return false;
 
-  // Instagram's embed script can be timing-sensitive on first page load.
-  // Processing now, then again shortly after layout settles, makes the widget much more reliable.
-  const delays = [0, 350, 900, 1800, 3000];
+  const delays = [0, 500, 1200, 2500, 4500, 7000];
 
-  delays.forEach((delay) => {
+  for (const delay of delays) {
     setTimeout(() => {
       try {
-        if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
-          window.instgrm.Embeds.process(containerEl);
-        }
+        window.instgrm.Embeds.process();
       } catch (err) {
         console.warn("Instagram embed processing failed:", err);
       }
     }, delay);
-  });
+  }
 
   return true;
 }
