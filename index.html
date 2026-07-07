@@ -1227,7 +1227,7 @@
               Updated Sundays •
               <a
                 id="openInstitutePageLink"
-                href="https://www.facebook.com/stginstitute"
+                href="https://www.instagram.com/stginstitute/"
                 target="_blank"
                 rel="noopener"
               >
@@ -1247,7 +1247,7 @@
                 <a
                   id="instituteMobileLink"
                   class="institute-mobile-card-link"
-                  href="https://www.facebook.com/stginstitute"
+                  href="https://www.instagram.com/stginstitute/"
                   target="_blank"
                   rel="noopener"
                 >
@@ -1259,12 +1259,12 @@
             <div id="instituteFallback" class="institute-fallback" style="display:none;">
               <p class="institute-fallback-title">This week’s institute post</p>
               <p class="institute-fallback-text" id="instituteFallbackText">
-                Open this week’s institute activities post on Facebook.
+                Open this week’s institute activities post on Instagram.
               </p>
               <a
                 id="instituteFallbackLink"
                 class="institute-fallback-link"
-                href="https://www.facebook.com/stginstitute"
+                href="https://www.instagram.com/stginstitute/"
                 target="_blank"
                 rel="noopener"
               >
@@ -1438,12 +1438,9 @@
     </div>
   </div>  
 
-   <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
-</script>
+<script async src="https://www.instagram.com/embed.js"></script>
 
-  <script>
+<script>
     // ----------------------------
     // CONFIG (edit these)
     // ----------------------------
@@ -1787,64 +1784,76 @@ meetingMarker.bindPopup(`
     }
 
 
-function unloadInstagramEmbedScript() {
-  const oldScripts = document.querySelectorAll('script[src*="instagram.com/embed.js"]');
-  oldScripts.forEach((s) => s.remove());
-
-  try {
-    delete window.instgrm;
-  } catch (err) {
-    window.instgrm = undefined;
-  }
-}
-
-function loadInstagramEmbedScriptFresh() {
+function ensureInstagramEmbedScriptLoaded() {
   return new Promise((resolve) => {
-    unloadInstagramEmbedScript();
+    function ready() {
+      return !!(
+        window.instgrm &&
+        window.instgrm.Embeds &&
+        typeof window.instgrm.Embeds.process === "function"
+      );
+    }
 
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://www.instagram.com/embed.js";
+    if (ready()) {
+      resolve(true);
+      return;
+    }
 
-    script.onload = () => {
-      let tries = 0;
-      const timer = setInterval(() => {
-        tries += 1;
+    let script = document.querySelector('script[src*="instagram.com/embed.js"]');
 
-        if (
-          window.instgrm &&
-          window.instgrm.Embeds &&
-          typeof window.instgrm.Embeds.process === "function"
-        ) {
-          clearInterval(timer);
-          resolve(true);
-        }
+    if (!script) {
+      script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.instagram.com/embed.js";
+      document.body.appendChild(script);
+    }
 
-        if (tries >= 40) {
-          clearInterval(timer);
-          resolve(false);
-        }
-      }, 250);
-    };
+    let done = false;
+    function finish(value) {
+      if (done) return;
+      done = true;
+      resolve(value);
+    }
 
-    script.onerror = () => resolve(false);
+    script.addEventListener("load", () => {
+      setTimeout(() => finish(ready()), 250);
+    }, { once: true });
 
-    document.body.appendChild(script);
+    script.addEventListener("error", () => finish(false), { once: true });
+
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+
+      if (ready()) {
+        clearInterval(timer);
+        finish(true);
+      } else if (tries >= 60) {
+        clearInterval(timer);
+        finish(false);
+      }
+    }, 250);
   });
 }
 
 async function processInstagramEmbedsWithRetry(containerEl) {
   if (!containerEl) return false;
 
-  const ready = await loadInstagramEmbedScriptFresh();
+  const ready = await ensureInstagramEmbedScriptLoaded();
   if (!ready) return false;
 
-  const delays = [0, 500, 1200, 2500, 4000];
+  const delays = [0, 500, 1200, 2500, 4500, 7000];
 
   delays.forEach((delay) => {
     setTimeout(() => {
       try {
-        window.instgrm.Embeds.process();
+        if (
+          window.instgrm &&
+          window.instgrm.Embeds &&
+          typeof window.instgrm.Embeds.process === "function"
+        ) {
+          window.instgrm.Embeds.process(containerEl);
+        }
       } catch (err) {
         console.warn("Instagram embed processing failed:", err);
       }
@@ -1918,7 +1927,7 @@ async function loadWeeklyInstituteWidget() {
           }
           mobileCardEl.style.display = "block";
         }
-      }, 4500);
+      }, 8000);
 
       return;
     }
