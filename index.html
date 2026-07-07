@@ -1442,7 +1442,6 @@
 <script async defer crossorigin="anonymous"
   src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0">
 </script>
-<script async defer src="https://www.instagram.com/embed.js"></script>
 
   <script>
     // ----------------------------
@@ -1788,63 +1787,61 @@ meetingMarker.bindPopup(`
     }
 
 
-function ensureInstagramEmbedScriptLoaded() {
+function unloadInstagramEmbedScript() {
+  const oldScripts = document.querySelectorAll('script[src*="instagram.com/embed.js"]');
+  oldScripts.forEach((s) => s.remove());
+
+  try {
+    delete window.instgrm;
+  } catch (err) {
+    window.instgrm = undefined;
+  }
+}
+
+function loadInstagramEmbedScriptFresh() {
   return new Promise((resolve) => {
-    function isReady() {
-      return !!(
-        window.instgrm &&
-        window.instgrm.Embeds &&
-        typeof window.instgrm.Embeds.process === "function"
-      );
-    }
+    unloadInstagramEmbedScript();
 
-    if (isReady()) {
-      resolve(true);
-      return;
-    }
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.instagram.com/embed.js";
 
-    let script = document.querySelector('script[src*="instagram.com/embed.js"]');
+    script.onload = () => {
+      let tries = 0;
+      const timer = setInterval(() => {
+        tries += 1;
 
-    if (!script) {
-      script = document.createElement("script");
-      script.async = true;
-      script.defer = true;
-      script.src = "https://www.instagram.com/embed.js";
-      document.body.appendChild(script);
-    }
+        if (
+          window.instgrm &&
+          window.instgrm.Embeds &&
+          typeof window.instgrm.Embeds.process === "function"
+        ) {
+          clearInterval(timer);
+          resolve(true);
+        }
 
-    let tries = 0;
-    const timer = setInterval(() => {
-      tries += 1;
-
-      if (isReady()) {
-        clearInterval(timer);
-        resolve(true);
-      }
-
-      if (tries >= 60) {
-        clearInterval(timer);
-        resolve(false);
-      }
-    }, 250);
-
-    script.addEventListener("load", () => {
-      setTimeout(() => {
-        if (isReady()) resolve(true);
+        if (tries >= 40) {
+          clearInterval(timer);
+          resolve(false);
+        }
       }, 250);
-    });
+    };
+
+    script.onerror = () => resolve(false);
+
+    document.body.appendChild(script);
   });
 }
 
 async function processInstagramEmbedsWithRetry(containerEl) {
   if (!containerEl) return false;
 
-  const ready = await ensureInstagramEmbedScriptLoaded();
+  const ready = await loadInstagramEmbedScriptFresh();
   if (!ready) return false;
 
-  const delays = [0, 500, 1200, 2500, 4500, 7000];
+  const delays = [0, 500, 1200, 2500, 4000];
 
-  for (const delay of delays) {
+  delays.forEach((delay) => {
     setTimeout(() => {
       try {
         window.instgrm.Embeds.process();
@@ -1852,7 +1849,7 @@ async function processInstagramEmbedsWithRetry(containerEl) {
         console.warn("Instagram embed processing failed:", err);
       }
     }, delay);
-  }
+  });
 
   return true;
 }
