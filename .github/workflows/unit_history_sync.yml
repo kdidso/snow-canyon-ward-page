@@ -3,6 +3,7 @@ name: Unit History Sync
 on:
   workflow_dispatch:
   schedule:
+    # Every Monday at 3:25am America/Denver-ish (GitHub schedules are UTC; adjust as needed)
     - cron: "25 10 * * 1"
 
 permissions:
@@ -37,53 +38,24 @@ jobs:
           LDS_USERNAME: ${{ secrets.LDS_USERNAME }}
           LDS_PASSWORD: ${{ secrets.LDS_PASSWORD }}
           HEADLESS: "1"
-          SKIP_EXISTING_FOLDERS: "0"
+          SKIP_EXISTING_FOLDERS: "1"
           OUT_DIR: "unit-history/events"
           ZIP_NAME: "unit-history/unit_history_export.zip"
           MANIFEST_PATH: "unit-history/manifest.json"
         run: |
           python scripts/unit_history_sync.py
 
-          echo "Git changes after sync:"
-          git status --short
-
-          echo "Event folders after sync:"
-          find unit-history/events -maxdepth 1 -type d | sort
-
-          echo "Manifest after sync:"
-          cat unit-history/manifest.json || true
-
-          echo "Zip file info:"
-          ls -lh unit-history/unit_history_export.zip || true
-
-          echo "Zip contents preview:"
-          unzip -l unit-history/unit_history_export.zip | head -150 || true
-
       - name: Build unit history index
         run: |
           python scripts/build_unit_history_index.py
 
-          echo "Index file after build:"
-          ls -lh data/unit_history_index.json || true
-
-          echo "Index preview:"
-          head -80 data/unit_history_index.json || true
-
-          echo "Git changes after index build:"
-          git status --short
-
-      - name: Upload run artifact
+      - name: Upload run artifact (optional)
         uses: actions/upload-artifact@v4
         with:
           name: unit-history-events
-          path: |
-            unit-history/events
-            unit-history/manifest.json
-            unit-history/unit_history_export.zip
-            data/unit_history_index.json
-          if-no-files-found: warn
+          path: unit-history/events
 
-      - name: Commit & push changes
+      - name: Commit & push changes (if any)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -92,9 +64,6 @@ jobs:
                   unit-history/manifest.json \
                   unit-history/unit_history_export.zip \
                   data/unit_history_index.json || true
-
-          echo "Files staged for commit:"
-          git diff --cached --name-status || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
@@ -105,13 +74,8 @@ jobs:
           git push
 
       - name: Upload debug artifacts
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-history-debug
-          path: |
-            debug/
-            unit-history/manifest.json
-            unit-history/unit_history_export.zip
-            data/unit_history_index.json
-          if-no-files-found: ignore
+          name: church-calendar-debug
+          path: debug/
