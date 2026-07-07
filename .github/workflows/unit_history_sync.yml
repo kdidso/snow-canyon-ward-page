@@ -3,8 +3,6 @@ name: Unit History Sync
 on:
   workflow_dispatch:
   schedule:
-    # Every Monday at 3:25am America/Denver-ish
-    # GitHub schedules are UTC
     - cron: "25 10 * * 1"
 
 permissions:
@@ -50,7 +48,16 @@ jobs:
           git status --short
 
           echo "Event folders after sync:"
-          find unit-history/events -maxdepth 1 -type d | sort | tail -40
+          find unit-history/events -maxdepth 1 -type d | sort
+
+          echo "Manifest after sync:"
+          cat unit-history/manifest.json || true
+
+          echo "Zip file info:"
+          ls -lh unit-history/unit_history_export.zip || true
+
+          echo "Zip contents preview:"
+          unzip -l unit-history/unit_history_export.zip | head -150 || true
 
       - name: Build unit history index
         run: |
@@ -59,17 +66,24 @@ jobs:
           echo "Index file after build:"
           ls -lh data/unit_history_index.json || true
 
+          echo "Index preview:"
+          head -80 data/unit_history_index.json || true
+
           echo "Git changes after index build:"
           git status --short
 
-      - name: Upload run artifact (optional)
+      - name: Upload run artifact
         uses: actions/upload-artifact@v4
         with:
           name: unit-history-events
-          path: unit-history/events
+          path: |
+            unit-history/events
+            unit-history/manifest.json
+            unit-history/unit_history_export.zip
+            data/unit_history_index.json
           if-no-files-found: warn
 
-      - name: Commit & push changes (if any)
+      - name: Commit & push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -91,9 +105,13 @@ jobs:
           git push
 
       - name: Upload debug artifacts
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: church-calendar-debug
-          path: debug/
+          name: unit-history-debug
+          path: |
+            debug/
+            unit-history/manifest.json
+            unit-history/unit_history_export.zip
+            data/unit_history_index.json
           if-no-files-found: ignore
