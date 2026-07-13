@@ -1,217 +1,119 @@
 {
-  "exported_at_utc": "2026-07-07 15:04:27",
+  "exported_at_utc": "2026-07-13 12:47:03",
   "base": "https://unithistory.churchofjesuschrist.org",
   "start_url": "https://unithistory.churchofjesuschrist.org/",
   "headless": true,
   "skip_existing_folders": true,
   "story_count_found_on_grid": 12,
-  "story_count_downloaded_new": 2,
-  "story_count_skipped_existing": 10,
+  "story_count_downloaded_new": 1,
+  "story_count_skipped_existing": 11,
   "stories": [
     {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/5279d764-3274-f111-ab0e-002248069d9b?page=home_page",
-      "title": "FHE rock painting then placing them at Aspiration Trail",
-      "date_text": "Jun 29, 2026",
-      "folder": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026",
-      "image_count_found": 20,
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/fa16a532-517e-f111-ab0e-0022480691b6?page=home_page",
+      "title": "Fire lake heat retreat FHE",
+      "date_text": "Jul 6, 2026",
+      "folder": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026",
+      "image_count_found": 13,
       "images": [
         {
           "index": 1,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6131.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/001.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6288.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/001.jpeg",
           "downloaded": true
         },
         {
           "index": 2,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6132.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/002.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6289.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/002.jpeg",
           "downloaded": true
         },
         {
           "index": 3,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6133.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/003.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6290.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/003.jpeg",
           "downloaded": true
         },
         {
           "index": 4,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6134.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/004.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6291.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/004.jpeg",
           "downloaded": true
         },
         {
           "index": 5,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6135.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/005.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6292.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/005.jpeg",
           "downloaded": true
         },
         {
           "index": 6,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6136.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/006.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6293.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/006.jpeg",
           "downloaded": true
         },
         {
           "index": 7,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6137.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/007.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6294.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/007.jpeg",
           "downloaded": true
         },
         {
           "index": 8,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6138.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/008.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6295.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/008.jpeg",
           "downloaded": true
         },
         {
           "index": 9,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6139.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/009.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6296.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/009.jpeg",
           "downloaded": true
         },
         {
           "index": 10,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6140.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/010.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6297.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/010.jpeg",
           "downloaded": true
         },
         {
           "index": 11,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6141.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/011.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6298.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/011.jpeg",
           "downloaded": true
         },
         {
           "index": 12,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6142.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/012.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6299.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/012.jpeg",
           "downloaded": true
         },
         {
           "index": 13,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6143.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/013.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 14,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6144.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/014.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 15,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6145.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/015.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 16,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6146.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/016.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 17,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6147.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/017.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 18,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6148.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/018.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 19,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6149.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/019.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 20,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/5279d764-3274-f111-ab0e-002248069d9b/IMG_6150.jpeg",
-          "file": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026/020.jpeg",
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/fa16a532-517e-f111-ab0e-0022480691b6/IMG_6300.jpeg",
+          "file": "unit-history/events/Fire lake heat retreat FHE - Jul 6, 2026/013.jpeg",
           "downloaded": true
         }
       ],
       "grid_title_guess": "Untitled"
     },
     {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/5279d764-3274-f111-ab0e-002248069d9b?page=home_page",
+      "title": "FHE rock painting then placing them at Aspiration Trail",
+      "date_text": "Jun 29, 2026",
+      "skipped_existing_folder": true,
+      "folder": "unit-history/events/FHE rock painting then placing them at Aspiration Trail - Jun 29, 2026",
+      "image_count_found": 0,
+      "images": [],
+      "grid_title_guess": "Untitled"
+    },
+    {
       "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/60581a6c-636d-f111-ab0d-7ced8d6f46ee?page=home_page",
       "title": "Summer kickoff 2026",
       "date_text": "Jun 20, 2026",
+      "skipped_existing_folder": true,
       "folder": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026",
-      "image_count_found": 11,
-      "images": [
-        {
-          "index": 1,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6032.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/001.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 2,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6033.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/002.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 3,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6034.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/003.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 4,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6035.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/004.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 5,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6036.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/005.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 6,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6037.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/006.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 7,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6038.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/007.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 8,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6039.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/008.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 9,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6040.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/009.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 10,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6041.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/010.jpeg",
-          "downloaded": true
-        },
-        {
-          "index": 11,
-          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/60581a6c-636d-f111-ab0d-7ced8d6f46ee/IMG_6042.jpeg",
-          "file": "unit-history/events/Summer kickoff 2026 - Jun 20, 2026/011.jpeg",
-          "downloaded": true
-        }
-      ],
+      "image_count_found": 0,
+      "images": [],
       "grid_title_guess": "Untitled"
     },
     {
@@ -300,16 +202,6 @@
       "date_text": "Dec 15, 2025",
       "skipped_existing_folder": true,
       "folder": "unit-history/events/FHE gingerbread house making - Dec 15, 2025",
-      "image_count_found": 0,
-      "images": [],
-      "grid_title_guess": "Untitled"
-    },
-    {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/e131ed9c-b4d4-f011-8544-0022480a7055?page=home_page",
-      "title": "Ward Christmas Dinner",
-      "date_text": "Dec 8, 2025",
-      "skipped_existing_folder": true,
-      "folder": "unit-history/events/Ward Christmas Dinner - Dec 8, 2025",
       "image_count_found": 0,
       "images": [],
       "grid_title_guess": "Untitled"
