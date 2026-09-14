@@ -1,13 +1,659 @@
 {
-  "exported_at_utc": "2026-09-07 16:00:29",
+  "exported_at_utc": "2026-09-14 16:31:39",
   "base": "https://unithistory.churchofjesuschrist.org",
   "start_url": "https://unithistory.churchofjesuschrist.org/",
   "headless": true,
   "skip_existing_folders": true,
   "story_count_found_on_grid": 12,
-  "story_count_downloaded_new": 0,
-  "story_count_skipped_existing": 12,
+  "story_count_downloaded_new": 1,
+  "story_count_skipped_existing": 11,
   "stories": [
+    {
+      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/36081086-28af-f111-aaac-70a8a59b4cb6?page=home_page",
+      "title": "Washington Rec 4 wards social/swim activity",
+      "date_text": "Sep 12, 2026",
+      "folder": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026",
+      "image_count_found": 106,
+      "images": [
+        {
+          "index": 1,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1896.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/001.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 2,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1897.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/002.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 3,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1898.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/003.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 4,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1899.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/004.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 5,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1900.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/005.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 6,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1901.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/006.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 7,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1902.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/007.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 8,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1903.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/008.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 9,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1904.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/009.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 10,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1905.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/010.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 11,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1906.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/011.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 12,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1907.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/012.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 13,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1908.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/013.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 14,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1910.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/014.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 15,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1911.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/015.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 16,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1913.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/016.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 17,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1914.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/017.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 18,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1916.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/018.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 19,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1919.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/019.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 20,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1920.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/020.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 21,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1922.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/021.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 22,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1923.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/022.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 23,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1924.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/023.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 24,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1925.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/024.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 25,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1927.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/025.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 26,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1929.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/026.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 27,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1931.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/027.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 28,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1933.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/028.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 29,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1934.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/029.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 30,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1935.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/030.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 31,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1936.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/031.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 32,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1937.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/032.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 33,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1939.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/033.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 34,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1940.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/034.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 35,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1941.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/035.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 36,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1942.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/036.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 37,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1944.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/037.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 38,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1946.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/038.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 39,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1947.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/039.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 40,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1948.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/040.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 41,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1949.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/041.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 42,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1950.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/042.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 43,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1951.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/043.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 44,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1952.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/044.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 45,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1953.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/045.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 46,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1954.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/046.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 47,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1957.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/047.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 48,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1958.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/048.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 49,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1959.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/049.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 50,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1960.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/050.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 51,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1961.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/051.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 52,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1963.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/052.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 53,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1970.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/053.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 54,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1971.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/054.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 55,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1972.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/055.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 56,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1973.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/056.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 57,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1974.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/057.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 58,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1975.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/058.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 59,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1976.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/059.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 60,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1978.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/060.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 61,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1979.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/061.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 62,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1980.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/062.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 63,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1981.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/063.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 64,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1982.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/064.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 65,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1983.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/065.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 66,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1984.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/066.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 67,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1985.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/067.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 68,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1986.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/068.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 69,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1987.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/069.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 70,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1988.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/070.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 71,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1989.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/071.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 72,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1990.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/072.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 73,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1993.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/073.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 74,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1996.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/074.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 75,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A1997.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/075.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 76,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2003.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/076.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 77,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2005.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/077.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 78,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2006.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/078.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 79,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2008.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/079.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 80,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2009.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/080.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 81,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2010.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/081.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 82,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2016.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/082.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 83,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2017.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/083.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 84,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2018.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/084.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 85,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2020.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/085.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 86,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2021.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/086.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 87,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2023.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/087.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 88,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2025.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/088.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 89,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2031.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/089.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 90,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2033.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/090.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 91,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2035.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/091.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 92,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2036.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/092.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 93,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2038.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/093.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 94,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2040.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/094.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 95,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2041.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/095.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 96,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2042.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/096.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 97,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2043.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/097.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 98,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2044.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/098.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 99,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2045.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/099.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 100,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2046.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/100.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 101,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2047.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/101.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 102,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2049.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/102.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 103,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2050.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/103.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 104,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2051.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/104.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 105,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2052.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/105.jpg",
+          "downloaded": true
+        },
+        {
+          "index": 106,
+          "url": "https://unithistory.churchofjesuschrist.org/api/images/unithistorythumbnails/36081086-28af-f111-aaac-70a8a59b4cb6/724A2053.JPG",
+          "file": "unit-history/events/Washington Rec 4 wards social-swim activity - Sep 12, 2026/106.jpg",
+          "downloaded": true
+        }
+      ],
+      "grid_title_guess": "Untitled"
+    },
     {
       "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/e7dc3374-2f95-f111-8076-70a8a5b31749?page=home_page",
       "title": "Capture the flag / duck duck goose in the sand dunes",
@@ -114,16 +760,6 @@
       "date_text": "Jan 5, 2026",
       "skipped_existing_folder": true,
       "folder": "unit-history/events/Bear paw cafe - pancake FHE - Jan 5, 2026",
-      "image_count_found": 0,
-      "images": [],
-      "grid_title_guess": "Untitled"
-    },
-    {
-      "final_url": "https://unithistory.churchofjesuschrist.org/admin/view/e01ced66-2bef-f011-8407-6045bd00c1c3?page=home_page",
-      "title": "Special Needs Prom part 2",
-      "date_text": "Nov 6, 2025",
-      "skipped_existing_folder": true,
-      "folder": "unit-history/events/Special Needs Prom part 2 - Nov 6, 2025",
       "image_count_found": 0,
       "images": [],
       "grid_title_guess": "Untitled"
