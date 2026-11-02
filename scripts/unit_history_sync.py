@@ -227,135 +227,139 @@ def _fill_like_human(page, selector: str, value: str, timeout_ms: int = 60_000):
         loc.type(value, delay=35, timeout=20_000)
 
 
+def wait_for_history_home(page, timeout_ms=90000):
+    """Recognize the actual authenticated application, independent of CSS hashes."""
+    try:
+        page.get_by_text("Unit History", exact=True).first.wait_for(state="visible", timeout=timeout_ms)
+        page.get_by_text("Choose Unit", exact=False).first.wait_for(state="visible", timeout=30000)
+        return True
+    except Exception:
+        return False
+
+
 def attempt_headless_login(page, story_selector: str = STORY_CARD_SELECTOR):
-    """
-    Headless login using your confirmed elements:
-      - input#username-input
-      - button#button-primary  (Next / Continue)
-      - input#password-input
-      - button#button-primary  (Sign In)
-    Determine success by presence of story grid, not URL.
-    """
     if not LDS_USERNAME or not LDS_PASSWORD:
         raise RuntimeError("LDS_USERNAME/LDS_PASSWORD are not set (GitHub Secrets).")
-
-    print("🔐 Attempting headless login with LDS_USERNAME/LDS_PASSWORD...")
-
+    print("🔐 Opening Unit History and checking authentication...")
     page.goto(START_URL, wait_until="domcontentloaded", timeout=120_000)
-    page.wait_for_timeout(1200)
-
-    # If already authenticated, the grid should be reachable
-    try:
-        if page.locator(story_selector).count() > 0:
-            print("✅ Story grid already visible; authenticated.")
-            return
-    except Exception:
-        pass
-
-    # If no login indicators, try navigating once more
+    if wait_for_history_home(page, timeout_ms=15000):
+        print("✅ Already authenticated (Unit History application visible).")
+        return
     if not is_login_page(page):
-        page.goto(START_URL, wait_until="networkidle", timeout=120_000)
-        page.wait_for_timeout(1200)
-
-    # If still not a login page and still can't see story selector, we may have a loading issue
-    if not is_login_page(page) and page.locator(story_selector).count() == 0:
+        page.wait_for_timeout(3000)
+        if wait_for_history_home(page, timeout_ms=15000):
+            print("✅ Authenticated (Unit History application visible).")
+            return
+    if not is_login_page(page):
         save_debug(page, tag="login_unknown_state")
-        raise RuntimeError("Could not determine login state (not on login UI, but story grid not present).")
+        raise RuntimeError("Neither the Unit History application nor the login form appeared.")
 
-    # --- Step 1: username (your exact selector) ---
+    print("🔐 Signing in with LDS_USERNAME/LDS_PASSWORD...")
     try:
-        page.wait_for_selector("#username-input", timeout=60_000)
+        page.wait_for_selector("#username-input", timeout=60000)
     except PWTimeoutError:
-        # Sometimes an interstitial loads first; dump debug
         save_debug(page, tag="login_no_username_input")
-        raise RuntimeError("Could not find #username-input on login page (possible interstitial/challenge).")
-
+        raise RuntimeError("Could not find the username field.")
     _fill_like_human(page, "#username-input", LDS_USERNAME)
-
-    # Click primary button (this is what your Selenium used)
-    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20_000):
-        # fallback
-        try:
-            page.locator("#username-input").first.press("Enter", timeout=5_000)
-        except Exception:
-            save_debug(page, tag="login_cant_submit_username")
-            raise RuntimeError("Could not submit username (no #button-primary and Enter failed).")
-
-    # --- Step 2: password ---
+    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20000):
+        page.locator("#username-input").first.press("Enter")
     try:
-        page.wait_for_selector("#password-input", timeout=60_000)
+        page.wait_for_selector("#password-input", timeout=60000)
     except PWTimeoutError:
         save_debug(page, tag="login_no_password_input_after_next")
-        raise RuntimeError(
-            "After clicking Next, could not find #password-input. "
-            "This is usually a verification/challenge/interstitial in GitHub Actions."
-        )
-
+        raise RuntimeError("Password field not found after username submission; check for verification.")
     _fill_like_human(page, "#password-input", LDS_PASSWORD)
-
-    # Click primary button again (Sign In)
-    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20_000):
-        try:
-            page.locator("#password-input").first.press("Enter", timeout=5_000)
-        except Exception:
-            save_debug(page, tag="login_cant_submit_password")
-            raise RuntimeError("Could not submit password (no #button-primary and Enter failed).")
-
-    # Wait for either: story grid (success) OR login inputs/challenge (fail)
-    # Give the redirect time to happen.
-    page.wait_for_timeout(1500)
-
-    success = False
-    try:
-        page.wait_for_selector(story_selector, timeout=90_000)
-        success = True
-    except Exception:
-        success = False
-
-    if success:
-        print("✅ Headless login appears successful (story grid detected).")
+    if not _click_first_that_exists(page, ["#button-primary", "button#button-primary"], timeout_ms=20000):
+        page.locator("#password-input").first.press("Enter")
+    if wait_for_history_home(page, timeout_ms=90000):
+        print("✅ Signed in; Unit History application is visible.")
         return
-
-    # If we didn't get the grid, see if we're still in login/challenge state
-    if is_login_page(page):
-        save_debug(page, tag="login_still_required_or_challenge")
-        raise RuntimeError(
-            "Login still appears required after submitting password (story grid not detected). "
-            "In GitHub Actions this is commonly a verification/challenge screen or bot-detection."
-        )
-
-    # Not login UI, but still no grid
-    save_debug(page, tag="login_post_submit_no_grid")
-    raise RuntimeError(
-        "After submitting password, we did not detect the story grid and did not detect the login UI. "
-        "Page may be stuck, blocked, or loading differently in GitHub Actions."
-    )
+    save_debug(page, tag="login_post_submit_no_home")
+    raise RuntimeError("Sign-in submitted, but the Unit History application was not detected.")
 
 
 # ---------------------------
 # Grid interactions
 # ---------------------------
-def open_story_grid(page):
-    print(f"➡️  Opening: {START_URL}")
-    page.goto(START_URL, wait_until="domcontentloaded", timeout=120_000)
-    page.wait_for_timeout(1200)
+# Cards are marked after examining the rendered page, rather than relying on
+# generated styled-components CSS class names which change between deployments.
+CARD_MARKER = "data-uh-export-card"
 
-    if is_login_page(page):
-        save_debug(page, tag="redirected_to_login")
-        raise RuntimeError("Redirected to login. Authentication was not valid.")
 
-    print(f"⏳ Waiting for story cards: {STORY_CARD_SELECTOR}")
-    try:
-        page.wait_for_selector(STORY_CARD_SELECTOR, timeout=60_000)
-    except PWTimeoutError:
-        save_debug(page, tag="story_cards_not_found")
-        raise RuntimeError(f"Could not find story cards using selector: {STORY_CARD_SELECTOR}")
-
-    page.wait_for_timeout(800)
+def mark_story_cards(page):
+    """Find cards by their visible Ward badge, image, and date/title content."""
+    return page.evaluate(r"""() => {
+      document.querySelectorAll('[data-uh-export-card]').forEach(e => e.removeAttribute('data-uh-export-card'));
+      const badges = [...document.querySelectorAll('body *')].filter(e =>
+        e.children.length === 0 && (e.textContent || '').trim() === 'Ward');
+      const cards = [];
+      for (const badge of badges) {
+        let node = badge;
+        for (let i = 0; i < 8 && node && node !== document.body; i++, node = node.parentElement) {
+          const text = (node.innerText || '').trim();
+          const imgs = node.querySelectorAll('img');
+          const wardBadges = [...node.querySelectorAll('*')].filter(x =>
+            x.children.length === 0 && (x.textContent || '').trim() === 'Ward');
+          if (imgs.length >= 1 && wardBadges.length === 1 && text.length > 15 && text.length < 1000) {
+            if (!cards.includes(node)) cards.push(node);
+            break;
+          }
+        }
+      }
+      cards.forEach((e,i) => e.setAttribute('data-uh-export-card', String(i)));
+      return cards.length;
+    }""")
 
 
 def get_story_card_count(page) -> int:
+    count = mark_story_cards(page)
+    if count:
+        return count
+    # Legacy fallback in case the page layout has changed differently.
     return page.locator(STORY_CARD_SELECTOR).count()
+
+
+def story_cards(page):
+    count = mark_story_cards(page)
+    if count:
+        return page.locator(f"[{CARD_MARKER}]")
+    return page.locator(STORY_CARD_SELECTOR)
+
+
+def open_story_grid(page):
+    print(f"➡️  Opening: {START_URL}")
+    page.goto(START_URL, wait_until="domcontentloaded", timeout=120000)
+    if not wait_for_history_home(page, timeout_ms=60000):
+        save_debug(page, tag="grid_home_not_found")
+        raise RuntimeError("Unit History home screen not detected; login may have expired.")
+    # Cards load asynchronously after the application shell appears.
+    for _ in range(40):
+        if get_story_card_count(page):
+            return
+        page.wait_for_timeout(1000)
+    save_debug(page, tag="story_cards_not_found")
+    raise RuntimeError("Authenticated Unit History page detected, but no story cards were recognized.")
+
+
+def choose_results_page(page, number):
+    """Click the numbered paginator without selecting other numeric text."""
+    if number == 1:
+        return True
+    candidates = page.get_by_role("button", name=str(number), exact=True)
+    if candidates.count() == 0:
+        candidates = page.get_by_text(str(number), exact=True)
+    for i in range(candidates.count()):
+        target = candidates.nth(i)
+        try:
+            if target.is_visible():
+                target.click(timeout=5000)
+                for _ in range(20):
+                    page.wait_for_timeout(500)
+                    if get_story_card_count(page):
+                        return True
+        except Exception:
+            continue
+    return False
 
 
 def get_card_title(card_locator) -> str:
@@ -725,64 +729,74 @@ def main():
         context = browser.new_context(storage_state=storage_state_path)
         page = context.new_page()
 
-        # Open grid
+        # Open grid and discover numbered result pages.
         open_story_grid(page)
-        total = get_story_card_count(page)
-        print(f"✅ Found {total} story cards using {STORY_CARD_SELECTOR}")
-
-        if total <= 0:
-            save_debug(page, tag="zero_cards")
-            raise RuntimeError("Found zero cards; selector is wrong or page didn't load.")
-
+        first_page_count = get_story_card_count(page)
+        print(f"✅ Found {first_page_count} cards on the first results page")
         all_meta = []
         processed = 0
         skipped = 0
+        seen = set()
+        page_number = 1
+        max_pages = int(os.getenv("MAX_HISTORY_PAGES", "20"))
+        total = 0
 
-        for i in range(total):
-            print(f"\n=== [{i+1}/{total}] ===")
-
+        while page_number <= max_pages:
             open_story_grid(page)
-
-            cards = page.locator(STORY_CARD_SELECTOR)
-            if i >= cards.count():
-                print("⚠️  Card count changed after reload; stopping.")
+            if not choose_results_page(page, page_number):
+                print(f"ℹ️ No numbered results page {page_number}; pagination complete.")
                 break
-
-            card = cards.nth(i)
-            card_title = get_card_title(card)
-            print(f"📌 Clicking card: {card_title}")
-
-            clicked = False
-            try:
-                card.click(timeout=20_000)
-                clicked = True
-            except Exception:
-                pass
-
-            if not clicked:
-                try:
-                    card.locator("a").first.click(timeout=20_000)
-                    clicked = True
-                except Exception:
-                    pass
-
-            if not clicked:
-                save_debug(page, tag=f"cannot_click_card_{i+1}")
-                print("❌ Could not click card; skipping.")
-                continue
-
-            if is_login_page(page):
-                save_debug(page, tag=f"login_bounce_story_{i+1}")
-                raise RuntimeError("Bounced to login mid-run. Auth is not valid (or challenge/verification triggered).")
-
-            meta = download_current_story(page, context, out_root)
-            meta["grid_title_guess"] = card_title
-            all_meta.append(meta)
-
-            if meta.get("skipped_existing_folder"):
-                skipped += 1
-            else:
-                processed += 1
+            count = get_story_card_count(page)
+            print(f"📄 Results page {page_number}: {count} cards")
+            if count == 0:
+                break
+            page_new = 0
+            for i in range(count):
+                open_story_grid(page)
+                if not choose_results_page(page, page_number):
+                    raise RuntimeError(f"Could not return to results page {page_number}")
+                cards = story_cards(page)
+                if i >= cards.count():
+                    save_debug(page, tag="card_count_changed")
+                    break
+                card = cards.nth(i)
+                card_title = get_card_title(card)
+                card_text = card.inner_text(timeout=5000).strip()
+                # Use full card text to distinguish entries with similar titles.
+                identifier = re.sub(r"\s+", " ", card_text).strip()
+                if identifier in seen:
+                    continue
+                seen.add(identifier)
+                page_new += 1
+                total += 1
+                print(f"📌 [{page_number}:{i+1}] {card_title}")
+                clicked = False
+                for target in [card, card.locator("a").first]:
+                    try:
+                        target.click(timeout=10000)
+                        clicked = True
+                        break
+                    except Exception:
+                        pass
+                if not clicked:
+                    save_debug(page, tag=f"cannot_click_card_{page_number}_{i+1}")
+                    print("⚠️ Could not open this card; skipping.")
+                    continue
+                if is_login_page(page):
+                    save_debug(page, tag="login_bounce_story")
+                    raise RuntimeError("Authentication expired while opening a story.")
+                meta = download_current_story(page, context, out_root)
+                meta["grid_title_guess"] = card_title
+                meta["results_page"] = page_number
+                all_meta.append(meta)
+                if meta.get("skipped_existing_folder"):
+                    skipped += 1
+                else:
+                    processed += 1
+            if page_new == 0:
+                print("ℹ️ No new stories on this page; stopping.")
+                break
+            page_number += 1
 
         manifest = {
             "exported_at_utc": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
@@ -791,6 +805,7 @@ def main():
             "headless": bool(HEADLESS),
             "skip_existing_folders": bool(SKIP_EXISTING_FOLDERS),
             "story_count_found_on_grid": total,
+            "results_pages_visited": page_number if page_number <= max_pages else max_pages,
             "story_count_downloaded_new": processed,
             "story_count_skipped_existing": skipped,
             "stories": all_meta,
