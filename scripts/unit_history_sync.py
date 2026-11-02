@@ -348,6 +348,7 @@ def choose_results_page(page, number):
     candidates = page.get_by_role("button", name=str(number), exact=True)
     if candidates.count() == 0:
         candidates = page.get_by_text(str(number), exact=True)
+    before = page.locator(f'[{CARD_MARKER}="0"]').first.inner_text(timeout=3000) if get_story_card_count(page) else ""
     for i in range(candidates.count()):
         target = candidates.nth(i)
         try:
@@ -356,7 +357,14 @@ def choose_results_page(page, number):
                 for _ in range(20):
                     page.wait_for_timeout(500)
                     if get_story_card_count(page):
-                        return True
+                        first = page.locator(f'[{CARD_MARKER}="0"]').first
+                        try:
+                            after = first.inner_text(timeout=1000)
+                            if after != before:
+                                page.wait_for_timeout(400)
+                                return True
+                        except Exception:
+                            pass
         except Exception:
             continue
     return False
@@ -759,9 +767,24 @@ def main():
                 if i >= cards.count():
                     save_debug(page, tag="card_count_changed")
                     break
-                card = cards.nth(i)
+                # React can replace the card DOM after pagination. Re-mark and
+                # resolve the current card immediately before reading it.
+                card_text = None
+                for attempt in range(8):
+                    try:
+                        mark_story_cards(page)
+                        card = page.locator(f'[{CARD_MARKER}="{i}"]')
+                        if card.count():
+                            card_text = card.inner_text(timeout=1500).strip()
+                            if card_text:
+                                break
+                    except Exception:
+                        pass
+                    page.wait_for_timeout(750)
+                if not card_text:
+                    save_debug(page, tag=f"card_missing_page_{page_number}_item_{i+1}")
+                    raise RuntimeError(f"Card {i+1} on results page {page_number} disappeared after pagination; diagnostic screenshot saved.")
                 card_title = get_card_title(card)
-                card_text = card.inner_text(timeout=5000).strip()
                 # Use full card text to distinguish entries with similar titles.
                 identifier = re.sub(r"\s+", " ", card_text).strip()
                 if identifier in seen:
@@ -773,6 +796,8 @@ def main():
                 clicked = False
                 for target in [card, card.locator("a").first]:
                     try:
+                        # Refresh the marker if React replaced the DOM.
+                        mark_story_cards(page)
                         target.click(timeout=10000)
                         clicked = True
                         break
