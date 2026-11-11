@@ -186,12 +186,28 @@ def ensure_dir(p: pathlib.Path):
 
 
 def zip_folder(root: pathlib.Path, zip_name: str):
-    ensure_dir(pathlib.Path(zip_name).parent)
-    with zipfile.ZipFile(zip_name, "w", compression=zipfile.ZIP_DEFLATED) as z:
-        for p in root.rglob("*"):
-            if p.is_file():
-                z.write(p, p.relative_to(root))
-    print(f"📦 Wrote zip: {zip_name}")
+    """Build an optional archive atomically, capped below large-file limits."""
+    destination = pathlib.Path(zip_name)
+    temporary = destination.with_name(destination.name + ".tmp")
+    ensure_dir(destination.parent)
+    limit = int(os.getenv("MAX_ZIP_BYTES", "95000000"))
+    if limit <= 0:
+        raise ValueError("MAX_ZIP_BYTES must be positive")
+    try:
+        with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED) as z:
+            for item in root.rglob("*"):
+                if item.is_file() and item.resolve() not in {destination.resolve(), temporary.resolve()}:
+                    z.write(item, item.relative_to(root))
+                    if temporary.stat().st_size > limit:
+                        print("Archive exceeds MAX_ZIP_BYTES; optional ZIP not published.")
+                        return
+        if temporary.stat().st_size > limit:
+            print("Archive exceeds MAX_ZIP_BYTES; optional ZIP not published.")
+            return
+        temporary.replace(destination)
+        print(f"Wrote zip: {zip_name}")
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 # ---------------------------
@@ -341,33 +357,104 @@ def open_story_grid(page):
     raise RuntimeError("Authenticated Unit History page detected, but no story cards were recognized.")
 
 
-def choose_results_page(page, number):
-    """Click the numbered paginator without selecting other numeric text."""
-    if number == 1:
-        return True
-    candidates = page.get_by_role("button", name=str(number), exact=True)
-    if candidates.count() == 0:
-        candidates = page.get_by_text(str(number), exact=True)
-    before = page.locator(f'[{CARD_MARKER}="0"]').first.inner_text(timeout=3000) if get_story_card_count(page) else ""
-    for i in range(candidates.count()):
-        target = candidates.nth(i)
+def grid_signature(page):
+    """Use every card, with the same legacy fallback used by card detection."""
+    return tuple(re.sub(r"\s+", " ", t).strip()
+                 for t in story_cards(page).all_inner_texts())
+
+
+def wait_for_grid(page, expected=None, different_from=None, timeout_ms=30000):
+    deadline = time.monotonic() + timeout_ms / 1000
+    previous = None
+    stable = 0
+    while time.monotonic() < deadline:
         try:
-            if target.is_visible():
-                target.click(timeout=5000)
-                for _ in range(20):
-                    page.wait_for_timeout(500)
-                    if get_story_card_count(page):
-                        first = page.locator(f'[{CARD_MARKER}="0"]').first
-                        try:
-                            after = first.inner_text(timeout=1000)
-                            if after != before:
-                                page.wait_for_timeout(400)
-                                return True
-                        except Exception:
-                            pass
+            signature = grid_signature(page)
+            valid = bool(signature) and (expected is None or signature == expected)
+            valid = valid and (different_from is None or signature != different_from)
+            stable = stable + 1 if valid and signature == previous else 0
+            if valid and stable >= 3:
+                return signature
+            previous = signature
         except Exception:
-            continue
+            stable = 0
+        page.wait_for_timeout(500)
+    return None
+
+
+def page_controls(page, number):
+    # Prefer semantic controls. Text fallback retains compatibility with the
+    # site's custom paginator, and never force-clicks hidden elements.
+    return [page.get_by_role("button", name=str(number), exact=True),
+            page.get_by_role("link", name=str(number), exact=True),
+            page.get_by_text(str(number), exact=True)]
+
+
+def has_results_page(page, number):
+    return any(loc.nth(i).is_visible()
+               for loc in page_controls(page, number) for i in range(loc.count()))
+
+
+def choose_results_page(page, number, expected=None):
+    if expected is not None and wait_for_grid(page, expected=expected, timeout_ms=2500):
+        return True
+    before = wait_for_grid(page)
+    if not before:
+        return False
+    for candidates in page_controls(page, number):
+        for i in range(candidates.count()):
+            try:
+                target = candidates.nth(i)
+                if not target.is_visible():
+                    continue
+                target.scroll_into_view_if_needed(timeout=5000)
+                target.click(timeout=8000)
+                if wait_for_grid(page, expected=expected,
+                                 different_from=before if expected is None else None):
+                    return True
+            except Exception:
+                continue
     return False
+
+
+def recover_results_page(page, number, known_pages, try_back=False):
+    """Verify history restoration first; otherwise replay known pages from home."""
+    expected = known_pages[number]
+    if try_back:
+        try:
+            page.go_back(wait_until="domcontentloaded", timeout=30000)
+            if wait_for_grid(page, expected=expected, timeout_ms=12000):
+                return
+        except Exception:
+            pass
+    for attempt in range(1, 5):
+        print(f"Recovering results page {number} (attempt {attempt}/4)")
+        try:
+            open_story_grid(page)
+            # A reload may preserve the paginator state. Accept only an exact
+            # match; otherwise establish page one before replaying navigation.
+            if wait_for_grid(page, expected=expected, timeout_ms=2500):
+                return
+            if not wait_for_grid(page, expected=known_pages[1], timeout_ms=2500):
+                if not choose_results_page(page, 1, expected=known_pages[1]):
+                    raise RuntimeError("Could not establish results page 1")
+            for step in range(2, number + 1):
+                if not choose_results_page(page, step, expected=known_pages[step]):
+                    raise RuntimeError(f"Could not verify results page {step}")
+            return
+        except Exception as exc:
+            print(f"Navigation recovery: {exc}")
+            page.wait_for_timeout(attempt * 1000)
+    save_debug(page, tag=f"results_page_{number}_recovery_failed")
+    raise RuntimeError(f"Could not recover verified results page {number} after 4 attempts")
+
+
+def write_manifest(manifest):
+    path = pathlib.Path(MANIFEST_PATH)
+    ensure_dir(path.parent)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(path)
 
 
 def get_card_title(card_locator) -> str:
@@ -742,6 +829,27 @@ def main():
         first_page_count = get_story_card_count(page)
         print(f"✅ Found {first_page_count} cards on the first results page")
         all_meta = []
+        known_pages = {1: wait_for_grid(page)}
+        if not known_pages[1]:
+            raise RuntimeError("First results page did not stabilize")
+        manifest = {
+            "base": BASE, "start_url": START_URL,
+            "headless": bool(HEADLESS),
+            "skip_existing_folders": bool(SKIP_EXISTING_FOLDERS),
+            "stories": all_meta,
+        }
+
+        def checkpoint(complete=False):
+            manifest.update({
+                "exported_at_utc": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+                "sync_complete": complete,
+                "story_count_found_on_grid": total,
+                "results_pages_visited": max(known_pages),
+                "story_count_downloaded_new": processed,
+                "story_count_skipped_existing": skipped,
+            })
+            write_manifest(manifest)
+
         processed = 0
         skipped = 0
         seen = set()
@@ -750,19 +858,15 @@ def main():
         total = 0
 
         while page_number <= max_pages:
-            open_story_grid(page)
-            if not choose_results_page(page, page_number):
-                print(f"ℹ️ No numbered results page {page_number}; pagination complete.")
-                break
+            recover_results_page(page, page_number, known_pages)
             count = get_story_card_count(page)
             print(f"📄 Results page {page_number}: {count} cards")
             if count == 0:
                 break
             page_new = 0
             for i in range(count):
-                open_story_grid(page)
-                if not choose_results_page(page, page_number):
-                    raise RuntimeError(f"Could not return to results page {page_number}")
+                if i:
+                    recover_results_page(page, page_number, known_pages, try_back=True)
                 cards = story_cards(page)
                 if i >= cards.count():
                     save_debug(page, tag="card_count_changed")
@@ -773,7 +877,7 @@ def main():
                 for attempt in range(8):
                     try:
                         mark_story_cards(page)
-                        card = page.locator(f'[{CARD_MARKER}="{i}"]')
+                        card = story_cards(page).nth(i)
                         if card.count():
                             card_text = card.inner_text(timeout=1500).strip()
                             if card_text:
@@ -789,7 +893,6 @@ def main():
                 identifier = re.sub(r"\s+", " ", card_text).strip()
                 if identifier in seen:
                     continue
-                seen.add(identifier)
                 page_new += 1
                 total += 1
                 print(f"📌 [{page_number}:{i+1}] {card_title}")
@@ -805,8 +908,7 @@ def main():
                         pass
                 if not clicked:
                     save_debug(page, tag=f"cannot_click_card_{page_number}_{i+1}")
-                    print("⚠️ Could not open this card; skipping.")
-                    continue
+                    raise RuntimeError("Could not open story card; checkpoint retained.")
                 if is_login_page(page):
                     save_debug(page, tag="login_bounce_story")
                     raise RuntimeError("Authentication expired while opening a story.")
@@ -818,30 +920,39 @@ def main():
                     skipped += 1
                 else:
                     processed += 1
+                seen.add(identifier)
+                checkpoint()
             if page_new == 0:
-                print("ℹ️ No new stories on this page; stopping.")
-                break
-            page_number += 1
+                raise RuntimeError("Results repeated an already processed page; sync incomplete")
+            recover_results_page(page, page_number, known_pages, try_back=True)
+            next_number = page_number + 1
+            if not has_results_page(page, next_number):
+                # Allow delayed paginator rendering before declaring completion.
+                page.wait_for_timeout(3000)
+                if not has_results_page(page, next_number):
+                    checkpoint(complete=True)
+                    break
+            if next_number > max_pages:
+                checkpoint()
+                raise RuntimeError("MAX_HISTORY_PAGES reached with more results available")
+            advanced = False
+            for attempt in range(3):
+                if choose_results_page(page, next_number):
+                    signature = wait_for_grid(page)
+                    if signature and signature not in known_pages.values():
+                        known_pages[next_number] = signature
+                        advanced = True
+                        break
+                recover_results_page(page, page_number, known_pages)
+            if not advanced:
+                save_debug(page, tag=f"advance_page_{next_number}_failed")
+                raise RuntimeError(f"Results page {next_number} exists but could not be loaded")
+            page_number = next_number
 
-        manifest = {
-            "exported_at_utc": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-            "base": BASE,
-            "start_url": START_URL,
-            "headless": bool(HEADLESS),
-            "skip_existing_folders": bool(SKIP_EXISTING_FOLDERS),
-            "story_count_found_on_grid": total,
-            "results_pages_visited": page_number if page_number <= max_pages else max_pages,
-            "story_count_downloaded_new": processed,
-            "story_count_skipped_existing": skipped,
-            "stories": all_meta,
-        }
-
-        ensure_dir(pathlib.Path(MANIFEST_PATH).parent)
-        with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
-            json.dump(manifest, f, ensure_ascii=False, indent=2)
-
-        # Optional zip (handy for manual download too)
-        zip_folder(out_root, ZIP_NAME)
+        if os.getenv("CREATE_ZIP", "0").strip().lower() in ("1", "true", "yes"):
+            zip_folder(out_root, ZIP_NAME)
+        else:
+            print("ZIP creation disabled (set CREATE_ZIP=1 for a manual archive).")
 
         context.close()
         browser.close()
