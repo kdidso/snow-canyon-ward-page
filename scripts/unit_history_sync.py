@@ -5,6 +5,8 @@ import json
 import time
 import zipfile
 import pathlib
+import unicodedata
+from datetime import datetime
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
 
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeoutError
@@ -41,6 +43,71 @@ def safe_name(name: str, max_len: int = 90) -> str:
     if len(name) > max_len:
         name = name[:max_len].rstrip()
     return name
+
+
+# Compare event identity rather than relying on exact directory spelling.
+# Existing folders are never renamed or deleted automatically.
+_MONTHS = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+           "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
+_DATE_RE = re.compile(
+    r"\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
+    r"jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|"
+    r"dec(?:ember)?)\.?\s+(\d{1,2})(?:st|nd|rd|th)?[,]?\s+(20\d{2})\b",
+    re.IGNORECASE,
+)
+
+
+def event_identity(title: str, date_text: str):
+    """Return (ISO event date, normalized title) or None if date is uncertain."""
+    date_match = _DATE_RE.search(date_text or "")
+    if not date_match:
+        return None
+    try:
+        month = _MONTHS[date_match.group(1)[:3].lower()]
+        day = int(date_match.group(2))
+        year = int(date_match.group(3))
+        iso = datetime(year, month, day).date().isoformat()
+    except (KeyError, ValueError):
+        return None
+    title = unicodedata.normalize("NFKD", title or "").casefold()
+    title = "".join(c for c in title if not unicodedata.combining(c))
+    title = title.replace("&", " and ")
+    title = re.sub(r"[^a-z0-9]+", " ", title)
+    normalized = " ".join(title.split())
+    return (iso, normalized) if normalized else None
+
+
+def identity_from_folder(folder: pathlib.Path):
+    """Handle 'Title - Nov 06, 2025' and legacy 'Title - Nov 6, 2025'."""
+    match = _DATE_RE.search(folder.name)
+    if not match:
+        return None
+    title = folder.name[:match.start()].strip(" -_.,")
+    return event_identity(title, match.group(0))
+
+
+def find_existing_event_folder(out_root: pathlib.Path, title: str, date_text: str,
+                               proposed: pathlib.Path):
+    if proposed.is_dir():
+        return proposed
+    target = event_identity(title, date_text)
+    if target is None:
+        return None  # No reliable date: don't guess that unrelated stories match.
+    for folder in out_root.iterdir():
+        if not folder.is_dir() or folder.name.startswith("."):
+            continue
+        if identity_from_folder(folder) == target:
+            return folder
+        # Older story.json files may contain the canonical title and date.
+        metadata = folder / "story.json"
+        if metadata.is_file():
+            try:
+                data = json.loads(metadata.read_text(encoding="utf-8"))
+                if event_identity(data.get("title", ""), data.get("date_text", "")) == target:
+                    return folder
+            except (OSError, ValueError, TypeError):
+                pass
+    return None
 
 
 def save_debug(page, tag="debug"):
@@ -728,15 +795,17 @@ def download_current_story(page, context, out_root: pathlib.Path) -> dict:
 
     story_folder = out_root / folder_base
 
-    # Skip rule: if already exists, skip entirely
-    if SKIP_EXISTING_FOLDERS and story_folder.exists():
-        print(f"⏭️  Skipping (folder already exists): {story_folder}")
+    # Skip any existing event with the same canonical title and event date,
+    # even when its folder uses a different spelling or date format.
+    existing_folder = find_existing_event_folder(out_root, title, date_str, story_folder)
+    if SKIP_EXISTING_FOLDERS and existing_folder is not None:
+        print(f"⏭️  Skipping (matching event already exists): {existing_folder}")
         return {
             "final_url": page.url,
             "title": title,
             "date_text": date_str,
             "skipped_existing_folder": True,
-            "folder": str(story_folder),
+            "folder": str(existing_folder),
             "image_count_found": 0,
             "images": [],
         }
